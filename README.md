@@ -1,12 +1,15 @@
-# UW_quals
+# 2018 UW AMATH Qualification Exam Preparation Materials
 
 
+
+The repository is structured as below. 
 ```
 .
+├── past_exams
+│   └── all past qualification exams
 ├── numerics
 │   ├── notes
 │   └── practice_problems
-├── past_exams
 ├── stochastics
 │   ├── code_examples
 │   ├── notes
