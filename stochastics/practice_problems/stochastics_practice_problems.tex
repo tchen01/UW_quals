@@ -1,0 +1,316 @@
+\documentclass[12pt]{article}
+\usepackage[T1]{fontenc}
+
+% Document Details
+\newcommand{\CLASS}{Stochastics}
+\newcommand{\assigmentnum}{Methods and Problems}
+
+
+\usepackage[margin = 1.3in, top = 1.25in, bottom = 1.in]{geometry}
+\input{../../TeX_headers/title.tex} % Title Styling
+\input{../../TeX_headers/sfftoc.tex} % ToC Styling
+\input{../../TeX_headers/styling.tex} % General Styling
+\input{../../TeX_headers/section.tex} % Section Styling
+\input{../../TeX_headers/code.tex} % Code Display Setup
+\input{../../TeX_headers/math.tex} % Math shortcuts
+\input{../../TeX_headers/problem.tex} % Math shortcuts
+\input{../../TeX_headers/proof.tex} % Math shortcuts
+
+
+\hypersetup{
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=violet,          % color of internal links (change box color with linkbordercolor)
+    citecolor=green,        % color of links to bibliography
+    filecolor=magenta,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+
+\setlength{\headheight}{15pt}
+\newcommand{\note}[1]{\textcolor{red}{\textit{Note:} #1}}
+
+% overwrite old problem class to be able to add to ToC
+\let\savedprob=\problem%
+\def\problem[#1]{\phantomsection\addcontentsline{toc}{subsection}{#1}\savedprob[#1]\label{#1}}
+
+
+\begin{document}
+\maketitle
+
+\pagebreak
+\tableofcontents
+
+
+\pagebreak
+\section{Generating and Characteristic functions}
+
+\include{ch3}
+
+\section{Discrete Time Markov Chains}
+\subsection{Transition Matrix}
+\textit{Sample Problems}: 
+\begin{itemize}[nolistsep]
+    \item \hyperref[Exercise 4.1]{Exercise 4.1}: Write down transition matrices for processes based on rolling a dice
+    \item \hyperref[Exercise 4.2]{Exercise 4.2}: Write down transition matrices for \( Y_n = X_{2n} \)
+    \item \hyperref[Exercise 4.7]{Exercise 4.7}: Give example of transition matrix with multiple stationary distributions
+\end{itemize}
+
+\subsection{Classification of States}
+
+
+\textit{Sample Problems}: 
+\begin{itemize}[nolistsep]
+    \item \hyperref[Exercise 4.3]{Exercise 4.3}: Show if all states communicate with an absorbing state they must all be transient
+\end{itemize}
+
+\subsection{Mean Recurence Time}
+
+\textit{Sample Problems}: 
+\begin{itemize}[nolistsep]
+    \item \hyperref[Exercise 4.4]{Exercise 4.4}: Find expected visits to a state given some properties
+    \item \hyperref[Exercise 4.5]{Exercise 4.5}: Find mean-recurrence times using invariant distribution
+\end{itemize}
+
+\subsection{Reversibility}
+\textit{Sample Problems}: 
+\begin{itemize}[nolistsep]
+    \item \hyperref[Exercise 4.8]{Exercise 4.8}: Show process is reversible in equilibrium
+\end{itemize}
+
+
+\subsection{Stationary/Invariant distribution}
+\textit{Sample Problems}: 
+\begin{itemize}[nolistsep]
+    \item \hyperref[Exercise 4.5]{Exercise 4.5}: Find invariant distribution
+    \item \hyperref[Exercise 4.6]{Exercise 4.6}: Find invariant distribution of mistakes in editions of a book by computing limit of generating function
+    \item \hyperref[Exercise 4.7]{Exercise 4.7}: Give example of transition matrix with multiple stationary distributions
+\end{itemize}
+
+\subsection{Generating Functions}
+\textit{Sample Problems}: 
+\begin{itemize}[nolistsep]
+    \item \hyperref[Exercise 4.6]{Exercise 4.6}: Find invariant distribution of mistakes in editions of a book by computing limit of generating function
+\end{itemize}
+
+
+
+
+\include{ch4}
+
+\section{Continuous Time Markov Chains}
+
+\subsection{Transition Matrix}
+
+
+\subsection{Stationary/Invariant distribution}
+
+\textit{Sample Problems}: 
+\begin{itemize}[nolistsep]
+    \item \hyperref[Exercise 5.1]{Exercise 5.1}: Find invariant distribution and conditions for existence
+    \item \hyperref[Exercise 5.2]{Exercise 5.2}: Show two processes have the same stationary distribution 
+    \item \hyperref[Exercise 5.3]{Exercise 5.3}: Indirectly find stationary distribution by solving KFE, finding generating function for the chain, and computing the distribution of \( X_t \) as \( t\to\infty \)
+\end{itemize}
+
+\subsection{Generator}
+\textit{Sample Problems}: 
+\begin{itemize}[nolistsep]
+    \item \hyperref[Exercise 5.1]{Exercise 5.1}: Write down generator
+    \item \hyperref[Exercise 5.3]{Exercise 5.3}: Given generator solve KFE
+    \item \hyperref[Exercise 5.4]{Exercise 5.4}: Write down generator and solve KFE/KBE
+\end{itemize}
+
+\subsection{Generating Functions}
+\textit{Sample Problems}: 
+\begin{itemize}[nolistsep]
+    \item \hyperref[Exercise 5.3]{Exercise 5.3}: Use KBE to find PDE for generating function of \( X \)
+    \item \hyperref[Exercise 5.4]{Exercise 5.4}: Use KBE to find PDE for generating function of \( X \)
+    \item \hyperref[Exercise 5.5]{Exercise 5.5}: Compute generating function of Poisson process with random intensity. Use generating function to compute mean and variance.
+\end{itemize}
+
+
+
+\subsection{KFE AND KBE}
+\textit{Sample Problems}: 
+\begin{itemize}[nolistsep]
+    \item \hyperref[Exercise 5.3]{Exercise 5.3}: Given generator solve KFE
+    \item \hyperref[Exercise 5.4]{Exercise 5.4}: Write down KFE and KBE and solve
+\end{itemize}
+
+
+
+\subsection{Birth Death Processes}
+
+General description of birth death processes
+
+\subsubsection{General Form for infinite queue}
+\textit{Description}:
+\begin{itemize}[nolistsep]
+    \item Process either jumps up one or down one or stay the same
+    \item Expected wait time in state \( i \) is exponentially distributed \( \tau \sim \cE( \lambda_i + \mu_i) \)
+    \item When the process does jump, the probability of an up jump is \( \lambda_i / (\lambda_i+\mu_i) \), and the probability of a down jump is \( \mu_i / (\lambda_i+\mu_i) \).
+    \item if \( \lambda_0 > 0 \) the chain is irreducible.
+\end{itemize}
+
+
+\textit{State space}: \( S = \{1,2,3\ldots\}  \).
+
+\textit{Generator}:
+\begin{align*}
+    G = \left[\begin{array}{cccccc}
+        -\lambda_0 & \lambda_0 \\
+        \mu_1 & -(\mu_1+\lambda_1) & \lambda_1 \\
+        & \mu_2 & -(\mu_2+\lambda_2) & \lambda_2 \\
+        && \mu_3 & -(\mu_3+\lambda_3) & \lambda_3 \\
+        &&&  & \ddots &  
+    \end{array}\right]
+\end{align*}
+
+
+\textit{Invariant distribution}:
+\begin{align*}
+    \pi(k) = \frac{\lambda_0 \lambda_1 \cdots \lambda_{k-1}}{\mu_1 \mu_2 \cdots \mu_k} \pi(0), 
+    && \pi(0) = \left( 1+ \sum_{k=1}^{\infty}   \frac{\lambda_0 \lambda_1 \cdots \lambda_{k-1}}{\mu_1 \mu_2 \cdots \mu_k}  \right)^{-1}
+\end{align*}
+
+
+\textit{Sample Problems}: Example 5.2.9
+
+
+
+\subsubsection{M/M/1 queue}
+\textit{Description}:
+\begin{itemize}[nolistsep]
+\item Models infinite queue. 
+\item Arrivals occur at a rate \( \lambda \) according to a Poisson process. 
+\item Service times have exponential distribution with rate parameter \( \mu \), where \( 1/\mu \) is the mean service time.
+\item A single server serves customers one at a time from front of queue, first come first serve
+\end{itemize}
+
+
+\textit{State space}: \( S = \{1,2,3\ldots\}  \).
+
+\textit{Generator}:
+\begin{align*}
+    G = \left[\begin{array}{ccccc}
+        -\lambda & \lambda \\
+        \mu & -(\mu+\lambda) & \lambda \\
+        & \mu & -(\mu+\lambda) & \lambda \\
+        &&  & \ddots &  
+    \end{array}\right]
+\end{align*}
+
+
+\textit{Invariant distribution}:
+\begin{align*}
+    \pi(k) = (1-\lambda/\mu)(\lambda/\mu)^k
+\end{align*}
+
+\textit{Expected Response Time}:
+For customers who arrive and find the queue as a stationary process, the response time (sum of waiting and services times) has density function,
+\begin{align*}
+    f(t) = \begin{cases}
+        (\mu-\lambda)e^{-(\mu-\lambda)t}, & t > 0 \\ 0 & \text{ow.}
+    \end{cases} 
+\end{align*}
+This has mean,
+\begin{align*}
+    \int_0^\infty tf(t)\d t = \frac{1}{\mu - \lambda}
+\end{align*}
+
+
+\textit{Sample Problems}: \hyperref[Exercise 5.1]{Exercise 5.1}
+
+
+\subsubsection{M/M/\(\infty\)}
+\textit{Description}:
+\begin{itemize}[nolistsep]
+\item Arrivals occur at a rate \( \lambda \) according to a Poisson process. 
+\item Service times have exponential distribution with rate parameter \( \mu \), where \( 1/\mu \) is the mean service time.
+\item There are always enough servers that every arriving job is serviced immediately.
+\end{itemize}
+
+
+\textit{State space}: \( S = \{1,2,3,\ldots\} \).
+
+\textit{Generator}:
+\begin{align*}
+    G = \left[\begin{array}{cccccc}
+        -\lambda & \lambda \\
+        \mu & -(\mu+\lambda) & \lambda \\
+        & 2\mu & -(2\mu+\lambda) & \lambda \\
+        & & 3\mu & -(3\mu+\lambda) & \lambda \\
+        && & & \ddots 
+    \end{array}\right]
+\end{align*}
+
+\textit{Invariant Distribution}:
+\begin{align*}
+    \pi(k) = \frac{(\lambda/\mu)^ke^{-\lambda/\mu}}{k!}
+\end{align*}
+
+
+\textit{Sample Problems}: \hyperref[Exercise 5.3]{Exercise 5.3}, Final Problem ??, Practice Exam \#? Problem 1
+
+
+\subsubsection{M/M/1/K queue}
+
+\textit{State space}: \( S = \{1,2,\ldots, n\} \).
+
+\textit{Generator}:
+\begin{align*}
+    G = \left[\begin{array}{cccccc}
+        -\lambda & \lambda \\
+        \mu & -(\mu+\lambda) & \lambda \\
+        & \mu & -(\mu+\lambda) & \lambda \\
+        \\
+        && \ddots & \ddots & \ddots \\
+        \\
+        &&& \mu & -(\mu+\lambda) & \lambda \\
+        &&&& \mu & -\mu
+    \end{array}\right]
+\end{align*}
+
+
+\include{ch5}
+
+\section{Brownian Motion}
+\note{add examples from class notes}
+
+\subsection{Martingale}
+\textit{Sample Problems}: 
+\begin{itemize}[nolistsep]
+    \item \hyperref[Exercise 7.1]{Exercise 7.1}: Show a process is a Martingale using definition
+    \item \hyperref[Exercise 7.4]{Exercise 7.4}: Show a process is a Martingale using definition
+\end{itemize}
+
+\subsection{Characteristic Functions}
+\textit{Sample Problems}: 
+\begin{itemize}[nolistsep]
+    \item \hyperref[Exercise 7.2]{Exercise 7.2}: Compute characteristic function of \( W(N(t)) \), where \( N\sim \operatorname{Pois}(\lambda) \)
+\end{itemize}
+
+7.3: n-th variation time
+
+
+\subsection{Laplace Transform}
+\textit{Sample Problems}: 
+\begin{itemize}[nolistsep]
+    \item \note{Example ???} from book
+    \item \hyperref[Exercise 7.4]{Exercise 7.4}: Compute Laplace transform of first hitting time.
+\end{itemize}
+
+\include{ch7}
+
+\section{Stochastic Calculus}
+
+
+\include{ch8}
+
+\section{SDEs and PDEs}
+\include{ch9}
+
+\section{Jump Diffusions}
+\include{ch10}
+
+
+
+\end{document}

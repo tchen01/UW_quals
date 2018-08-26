@@ -1,0 +1,2337 @@
+\documentclass[12pt]{article}
+\usepackage[T1]{fontenc}
+
+% Document Details
+\newcommand{\CLASS}{Quals Revision Notes}
+\newcommand{\assigmentnum}{Numerics Sequence}
+
+\usepackage[margin = 1.3in, top = 1in, bottom = 2in]{geometry}
+\input{../../TeX_headers/title.tex} % Title Styling
+\input{../../TeX_headers/sfftoc.tex} % ToC Styling
+\input{../../TeX_headers/styling.tex} % General Styling
+\input{../../TeX_headers/section.tex} % Section Styling
+\input{../../TeX_headers/code.tex} % Code Display Setup
+\input{../../TeX_headers/math.tex} % Math shortcuts
+\input{../../TeX_headers/proof.tex} % Proof shortcuts
+\input{../../TeX_headers/problem.tex} % Math shortcuts
+
+
+\setlength{\headheight}{15pt}
+
+\newcommand{\note}[1]{\textcolor{red}{\textbf{Note:} #1}}
+
+
+\begin{document}
+\maketitle
+
+\pagebreak
+\section{Introduction}
+This document contains personal revision notes for the 2018 Numerics Qualification Exam in the Applied Mathematics department at the University of Washington. These notes are heavily based on the textbooks \cite{trefethen, leveque, greenbaum} used in the AMATH 584/585/586 courses.
+
+For notational convenience any result which was determined to be worth memorizing was marked as a ``Theorem'' even if the result is not usually classified as a Theorem.
+
+\tableofcontents
+
+\pagebreak
+\section{Fundamentals}
+\subsection{Matrix Vector Multiplication}
+
+
+\begin{definition}[Vector Vector]
+\end{definition}
+
+\begin{definition}[Matrix Vector]
+\end{definition}
+
+\begin{definition}[Matrix Matrix]
+\end{definition}
+
+\note{Add different ways to think of matrix multiplication in terms of rows and columns. I.e. projectors as sum of rank one outer products?? are there analogous general forms.}
+
+
+\begin{definition}[Range]
+\end{definition}
+
+\begin{definition}[Nullspace]
+\end{definition}
+
+\begin{theorem}
+    The range of \( A \) is the space spanned by the columns of \( A \).
+\end{theorem}
+
+
+\begin{definition}[Rank]
+\end{definition}
+
+\begin{theorem}
+    A matrix \( A\in \CC^{m\times n} \) with \( m\geq n \) has full rank if and only if it maps no two distinct vectors to the same vector.
+\end{theorem}
+
+\begin{definition}[Inverse]
+\end{definition}
+
+\begin{theorem}
+    For \( A\in\CC^{m\times m} \) the following are equivalent:
+    \begin{itemize}[nolistsep]
+        \item \( A \) has an inverse
+        \item \( \operatorname{rank}(A) = m \)
+        \item \( \operatorname{range}(A) = \CC^{m} \)
+        \item \( \operatorname{null}(A) = \{0\} \)
+        \item 0 is not an eigenvalue of \( A \)
+        \item 0 is not a singular value of \( A \)
+        \item \( \operatorname{det}(A) \neq 0 \)
+    \end{itemize}
+\end{theorem}
+
+\subsection{Orthogonal Vectors and Matrices}
+
+\begin{definition}[Hermetian Conjugate]
+\end{definition}
+
+\begin{definition}[Hermetian Matrix]
+\end{definition}
+
+\begin{definition}[Inner Product]
+\end{definition}
+
+\begin{definition}[bilinear]
+\end{definition}
+
+\begin{definition}[orthogonal]
+\end{definition}
+
+\begin{theorem}
+    The vectors in an orthogonal set \( S \) are linearly independent.
+\end{theorem}
+
+%\( Q^*b \) is the vector of coefficients of the expansion of \( b \) in the basis of columns of \( Q \).
+
+\subsubsection{Components of a Vector}
+
+\begin{definition}[Unitary Matrix]
+\end{definition}
+
+\subsubsection{Multiplication by a Unitary Matrix}
+
+\subsection{Norms}
+
+\subsubsection{Vector Norms}
+\begin{definition}[vector norm]
+    A vector norm is a function \( \norm{\cdot}:\CC^m\to\RR \) satisfying:
+    \begin{enumerate}[label=(\roman*), nolistsep]
+        \item \( \norm{x} \geq 0 \), and \( \norm{x} = 0 \) only if \( x = 0 \).
+        \item \( \norm{x+y}\leq \norm{x} + \norm{y} \)
+        \item \( \norm{\alpha x} = |\alpha| \norm{x} \)
+    \end{enumerate}
+\end{definition}
+
+Important norms are \( p \)-norms.
+
+Also have weighted \( p \)-norms.
+
+For any non-singular \( W \), \( \norm{x}_W = \norm{Wx} \) defines a matrix norm.
+
+\subsubsection{Matrix Norms}
+
+\begin{definition}[induced matrix norm]
+Given norms \( \norm{\cdot}_{(n)} \) and \( \norm{\cdot}_{(m)} \) respectively defined on the domain and range of \( A\in\CC^{m\times n} \), the induced matrix norm \( \norm{A}_{(m,n)} \) is defined as,
+\begin{align*}
+    \norm{A}_{(m,n)}
+    = \sup_{x\neq 0} \dfrac{\norm{Ax}_{(m)}}{\norm{x}_{(n)}}
+    = \sup_{\norm{x}_{(n)} =1 } \norm{Ax}_{(m)}
+\end{align*}
+\end{definition}
+
+one norms
+
+infinity norms
+
+\begin{theorem}[H\"older Inequality]
+Let \( 1/p+1/q = 1 \) with \( p,q\geq 1 \). Then,
+\begin{align*}
+    |x^*y| \leq \norm{x}_p\norm{y}_q
+\end{align*}
+In the case \( p=q=2 \) this is the Cauchy-Schwarz Inequality.
+\end{theorem}
+
+
+
+\begin{theorem}
+Let \( \norm{\cdot}_{(l)} \), \( \norm{\cdot}_{(m)} \), and \( \norm{\cdot}_{(n)} \) be norms on \( \CC^l \), \( \CC^m \), and \( \CC^n \) respectively, and let \( A\in\CC^{l\times m} \) and \( B\in \CC^{m\times n} \). Then,
+\begin{align*}
+    \norm{AB}_{(l,n)} \leq \norm{A}_{(l,m)}\norm{B}_{(m,n)}
+\end{align*}
+\end{theorem}
+
+
+\begin{definition}[matrix norm]
+A matrix norm is a function \( \norm{\cdot}:\CC^{m\times n}\to\RR \) satisfying:
+\begin{enumerate}[label=(\roman*), nolistsep]
+    \item \( \norm{A} \geq 0 \), and \( \norm{A} = 0 \) only if \( A = 0 \).
+    \item \( \norm{A+B}\leq \norm{A} + \norm{B} \)
+    \item \( \norm{\alpha A} = |\alpha| \norm{A} \)
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Frobenius Norm]
+\end{definition}
+
+\begin{theorem}
+\( \norm{A}_F  = \sqrt{\operatorname{tr}(AA^*)} = \sqrt{\operatorname{tr}(A^*A)} \)
+\end{theorem}
+
+\begin{theorem}[Invariance under Unitary Multiplication]
+For any \( A\in\CC^{m\times n} \) and unitary \( Q\in \CC^{m\times m} \) we have,
+\begin{align*}
+    \norm{QA}_2 = \norm{A}_2, && \norm{QA}_F = \norm{A}_F
+\end{align*}
+\end{theorem}
+
+\note{Check that this is not true for general norms}
+
+I guess it should be fore the norm induced by the inner product on the inner product space.
+
+\subsection{The Singular Value Decomposition}
+The SVD is motivated by the fact that the image of the unit ball under matrix multiplication is a hyperellipse.
+
+\begin{definition}[Singular Value Decomposition]
+Given \( A\in\CC^{m\times n} \) a singular value decomposition of \( A \) is a factorization  \( A = U\Sigma V^* \), where \( U\in \CC^{m\times m} \) and \( V\in\CC^{n\times n} \) are unitary and \( \Sigma \in \CC^{m\times n} \) is diagonal.
+
+In addition, we assume that the diagonal entries of \( \Sigma \) are in non-increasing order.
+
+A reduced SVD drops the zero entries of \( \Sigma \) and the corresponding columns and rows of \( U \) and \( V^* \).
+\end{definition}
+
+\begin{theorem}[SVD Existence and Uniqueness]
+Every matrix \( A\in\CC^{m\times n} \) has a singular value decomposition. Furthermore, the signular values \( \{\sigma_j\} \) are uniqely determined, and if \( A \) is square and the \( \sigma_j \) are distinct, then left and right singular vectors, \( \{u_j\} \) and \( \{v_j\} \) are uniquely determined up to complex signs.
+\end{theorem}
+
+\begin{theorem}
+The rank of \( A \) is the number of nonzer singular values
+\end{theorem}
+
+\begin{theorem}
+\( \operatorname{range}(A) = \operatorname{span}\{u_1, \ldots, u_r\} \) and \( \operatorname{null}(A) = \operatorname{span}\{v_1, \ldots, v_r \} \).
+\end{theorem}
+
+\begin{theorem}
+\( \norm{A}_2 = \sigma_1 \) and \( \norm{A}_F = \sqrt{\sigma_1^2 + \cdots + \sigma_r^2} \)
+\end{theorem}
+
+\begin{theorem}
+    The nonzero singular values of \( A \) are the square roots of the eigenvalues of \( A^*A \) or \( AA^* \). (These matrices have the same nonzero eigenvalues.)
+\end{theorem}
+
+\begin{theorem}
+If \( A = A^* \), then the singular values of \( A \) are the absolute values of the eigenvalues of \( A \).
+\end{theorem}
+
+\begin{theorem}
+\( |\operatorname{det}(A)| = \Pi_{j=1}^{m} \sigma_j \)
+\end{theorem}
+
+\begin{theorem}
+\( A \) is the sum of \( r \) rank-one matrices:
+\begin{align*}
+    A = \sum_{j=1}^{r} \sigma_j u_j v_j^*
+\end{align*}
+\end{theorem}
+
+\begin{theorem}
+For any \( 0\leq k\leq r \), define,
+\begin{align*}
+    A_k  = \sum_{j=1}^{k} \sigma_j u_j v_j^*
+\end{align*}
+if \( k = \min\{m,n\} \) define \( \sigma_{\min\{n,m\}} = 0 \). Then,
+\begin{align*}
+    \norm{A-A_k}_2 = \inf_{\operatorname{rank}(B) = k}\norm{A-B}_2 = \sigma_{k+1}
+\end{align*}
+\end{theorem}
+
+This basically gives rise to principal component analysis (PCA). I.e.
+
+\begin{theorem}
+\( \displaystyle \norm{A-A_k}_F = \inf_{\operatorname{rank}(B) = k}\norm{A-B}_F = \sqrt{\sigma_{k+1} + \cdots + \sigma_r^2 } \)
+\end{theorem}
+
+\section{QR Factorization and Least Squares}
+
+\subsection{Projectors}
+
+\begin{definition}[Projector]
+A projector is a square matrix \( P \) satisfying,
+\begin{align*}
+    P^2 = P
+\end{align*}
+\end{definition}
+
+\begin{definition}[Complimentary Projector]
+Given a projector \( P \), the matrix \( I-P \) is also a projector and is called the complimentary projector to \( P \).
+\end{definition}
+
+\begin{theorem}
+\( \operatorname{range}(I-P) = \operatorname{null}(P) \) and \( \operatorname{range}(P) \cap \operatorname{null}(P) = \{ 0 \} \)
+\end{theorem}
+
+\begin{theorem}
+Let \( S_1 \) and \( S_2 \) be two subspaces of \( \CC^m \) satisfying \( S_1\cap S_2 = \{ 0 \} \) and \( S_1 + S_2 = \CC^m \), where \( S_1+S_2 \) denotes the span of \( S_1 \) and \( S_2 \). Then there exists a projector \( P \) with \( \operatorname{range}(P) = S_1 \) and \( \operatorname{null}(P) = S_2 \). We say \( P \) is a projector onto \( S_1 \) along \( S_2 \).
+\end{theorem}
+
+\subsubsection{Orthogonal Projectors}
+
+\begin{definition}[Orthogonal Projector]
+A projector \( P \) is orthogonal if \( \operatorname{range}(P) \perp \operatorname{null}(P) \).
+\end{definition}
+
+\begin{theorem}
+A projector \( P \) is orthogonal if and only if \( P = P^* \).
+\end{theorem}
+
+\begin{proof}
+Forward: trivial.
+Backward: Pick orthonormal bases for range and kernel. Then this basically is basically the SVD and is clearly Hermetian.
+\end{proof}
+
+
+\subsubsection{Projection with an Orthonormal Basis}
+The SVD of an orthogonal projector has some zero entries. If we drop these we obtain the reduced SVD,
+\begin{align*}
+    P = \hat{Q}\hat{Q}^*
+\end{align*}
+
+It is also clear that given any \( \hat{Q} \) orthonormal that \( \hat{Q}\hat{Q}^* \) is an orthogonal projector.
+
+A special case is rank one projectors where \( \hat{Q} = q \).
+
+\begin{theorem}
+Given any linear independent set of vectors, \( A = \{a_1, a_2, \ldots, a_r \} \), \( P = A(A^*A)^{-1}A^* \) is an orthogonal projector onto \( \operatorname{range}(A) \).
+\end{theorem}
+
+\subsection{QR Factorization}
+
+\begin{definition}[QR Factorization]
+Given \( A\in \CC^{m\times n} \) ( \( m\geq n \)) of full rank, a QR factorization of \( A \) is a factorization \( A = QR \), where \( Q \in \CC^{m\times m} \) is unitary and \( R\in \CC^{m\times n} \) is upper triangular.
+
+A reduced QR factorization drops the silent columns of \( Q \) and rows of \( R \).
+\end{definition}
+
+A natural way of constructing a QR decomposition is Gram--Schmidt orthogonalization.
+
+\begin{algorithm}[Gram--Schmidt (\( \cO(2mn^2 \))]
+\begin{algorithmic}
+\For{\( j=1 \) \To \( n \)}
+    \State{\( v_j = a_j \) }
+    \For{\( i=1 \) \To \( j-1 \)}
+        \State{\( r_{ij} = q_i^* a_j \)}
+        \State{\( v_j = v_j - r_{ij}q_i \)}
+    \EndFor
+    \State{\( r_{jj} = \norm{v_j}_2 \)}
+    \State{\( q_j = v_j / r_{jj} \)}
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+\begin{theorem}[QR Existence and Uniqueness]
+Every \( A\in\CC^{m\times n} \), (\( m\geq n \)) of full rank has a full QR factorization, hence a reduced QR factorization.
+
+The reduced QR factorization is unique when \( r_{jj} > 0 \).
+\end{theorem}
+
+\begin{method}[Solve Linear System using QR]
+\begin{enumerate}[nolistsep]
+    \item Compute QR factorization \( A = QR \)
+    \item Compute \( y = Q^*b \)
+    \item Solve triangular system \( Rx = Q^*b \)
+\end{enumerate}
+\end{method}
+\note{Add running time}
+
+It turns out that Gram--Schmidt in the above form is unstable.
+
+\begin{algorithm}[Modified Gram--Schmidt (\( \cO(2mn^2) \))]
+\begin{algorithmic}
+\For{\( j=1 \) \To \( n \)}
+    \State{\( v_j = a_j \) }
+    \For{\( i=1 \) \To \( j-1 \)}
+        \State{\( r_{ij} = q_i^* v_j \)}
+        \State{\( v_j = v_j - r_{ij}q_i \)}
+    \EndFor
+    \State{\( r_{jj} = \norm{v_j}_2 \)}
+    \State{\( q_j = v_j / r_{jj} \)}
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+\iffalse
+\begin{algorithm}[Modified Gram--Schmidt]
+\begin{algorithmic}
+\For{\( i=1 \) \To \( n \)}
+    \State{ \( v_i = a_i \) }
+\EndFor
+\For{\( i=1 \) \To \( n \)}
+    \State{\( r_{ii} = \norm{v_i}_2 \)}
+    \State{\( q_i = v_i / r_{ii} \)}
+    \For{\( j=i+1 \) \To \( n \)}
+        \State{\( r_{ij} = q_i^* v_j \)}
+        \State{\( v_j = v_j - r_{ij}q_i \)}
+    \EndFor
+    \State{\(q_{i    5} = v_i / r_{ii}\)}
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+\fi
+
+\note{why were the indexing orders also switched??. Rewrite this in a more logical way..}
+
+\subsection{Householder Triangularization}
+Householder QR decomposition triangularizes a matrix using unitary operations.
+
+This is done by choosing \( Q_k \) so that \( Q_n \cdots Q_2Q_1 A \) is triangular. For instance,
+\begin{align*}
+    \begin{array}{ccccccc}
+    \left[\begin{array}{ccc}
+    \times & \times & \times \\
+    \times & \times & \times \\
+    \times & \times & \times \\
+    \times & \times & \times \\
+    \times & \times & \times
+    \end{array}\right]
+    &\xrightarrow{Q_1}&
+    \left[\begin{array}{ccc}
+    \times & \times & \times \\
+    0 & \times & \times \\
+    0 & \times & \times \\
+    0 & \times & \times \\
+    0 & \times & \times
+    \end{array}\right]
+    &\xrightarrow{Q_2}&
+    \left[\begin{array}{ccc}
+    \times & \times & \times \\
+     & \times & \times \\
+     & 0 & \times \\
+     & 0 & \times \\
+     & 0 & \times
+    \end{array}\right]
+    &\xrightarrow{Q_3}&
+    \left[\begin{array}{ccc}
+    \times & \times & \times \\
+     & \times & \times \\
+     &  & \times \\
+     &  & 0 \\
+     &  & 0
+    \end{array}\right]
+    \\
+    A & & Q_1A & & Q_2Q_1A & & Q_3Q_2Q_1A
+\end{array}
+\end{align*}
+
+\subsubsection{Householder Reflectors}
+We would like a map like,
+\begin{align*}
+    x = \left[\begin{array}{c}\times \\ \times \\ \times \\ \vdots \\ \times \end{array}\right]
+    \hspace{2em}\longrightarrow \hspace{2em}
+    Fx = \left[\begin{array}{c}\norm{x} \\ 0 \\ 0 \\ \vdots \\ 0 \end{array}\right]
+    = \norm{x} e_1
+\end{align*}
+
+To do this we will defined \( F \) as the reflection across the hyperplane orthogonal to \( v = \norm{x}e_1 - x \).
+
+First note that \( vv^*/v^*v \) gives the vector from \( x \) to the hyperplane. Therefore,
+\begin{align*}
+    F = I - 2 \dfrac{vv^*}{v^*v}
+\end{align*}
+will is a reflection across this hyerplane.
+
+Note that we can reflect to any points \( z\norm{x}e_1 \), where \( |z|=1 \). For numerical stability we want to move as far as possible.
+
+In the real case this is done by picking \( z = -\operatorname{sign}(x_1) \). Then \( v = \operatorname{sign}(x_1)\norm{x}e_1 + x \).
+
+
+\begin{algorithm}[Householder QR Factorization (\( \cO(2mn^2-\frac{2}{3}n^3) \))]
+\begin{algorithmic}
+\For{\( k=1 \) \To \( n \)}
+    \State{\( x = A_{k:m,k} \) }
+    \State{\( v_k = \operatorname{sign}(x_1)\norm{x}_2e_1 + x \)}
+    \State{\( v_k = v_k / \norm{v_k}_2 \)}
+    \State{\( A_{k:m,k:n} = A_{k:m,k:n} - 2 v_k (v_k^* A_{k:m,k:n}) \)}
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+Note that this reduces \( A \) to an upper triangular matrix \( R \), however \( Q \) is not explicitly constructed.
+
+We do not always need to construct \( Q \) explicitly.
+\begin{algorithm}[Implicit Calculation of \( Q^*b \)]
+\begin{algorithmic}
+\For{\( k=1 \) \To \( n \)}
+    \State{\( b_{k:m} = b_{k:m}-2v_k(v_k^* b_{k:m}) \) }
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[Implicit Calculation of \( Qx \)]
+\begin{algorithmic}
+\For{\( k=n \) \DownTo \( 1 \)}
+    \State{\( x_{k:m} = x_{k:m}-2v_k(v_k^* x_{k:m}) \) }
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Least Squares}
+The general least squares problem is to solve,
+\begin{align*}
+    \min_{x} \norm{b-Ax}
+\end{align*}
+
+\begin{theorem}
+Let \( A\in\CC^{m\times n} \) (\( m\geq n \)) and \( b\in\CC^m \). A vector \( x \) minimizes the residual norm \( \norm{r}_2 = \norm{b-Ax}_2 \) if and only if \( r \perp \operatorname{range}(A) \), that is,
+\begin{align*}
+    A^*r = 0
+\end{align*}
+or equivalently,
+\begin{align*}
+    A^*Ax = A^*b
+\end{align*}
+or again equivalently,
+\begin{align*}
+    Pb = Ax
+\end{align*}
+where \( P\in\CC^{m\times m} \) is the orthogonal projector onto \( \operatorname{range}(A) \).
+
+The solution \( x \) is unique if and only if \( A \) has full rank.
+\end{theorem}
+
+\begin{proof}
+The three if statements are equivalent by the definition of \( r \) and by properties of orthogonal projectors.
+
+Then show that the point \( Pb \in \operatorname{range}(A) \) is the point minimizing the residual norm. This obvious geometrically.
+
+Finally, note that \( A^*A \) is full rank if and only if \( A \) is full rank. Could use SVD.
+\end{proof}
+
+\begin{definition}[Pseudoinverse]
+The Pseudoinverse of \( A \) is defined as \( A^\dagger = (A^*A)^{-1}A^* \)
+\end{definition}
+
+To solve the least squares problem we can compute \( x = A^\dagger b \) or \( y = Ax = P b \), where \( P \) is the projection onto \( \operatorname{range}(A) \).
+
+\subsubsection{Methods for Solving the Least Squares Problem}
+\begin{method}[Least squares via Normal Equations (\( \cO(mn^2 + \frac{1}{3}n^3) \))]
+\begin{enumerate}[nolistsep]
+    \item Form the matrix \( A^*A \) and the vector \( A^*b \).
+    \item Compute Cholesky factorization \( A^*A = R^*R \).
+    \item Solve lower-triangular system \( R^*w = A^*b \) for \( w \).
+    \item Solve upper-triangular system \( Rx = w \) for \( x \).
+\end{enumerate}
+\end{method}
+
+\begin{method}[Least squares via QR factorization (\( \cO(2mn^2 - \frac{2}{3}n^3) \))]
+\begin{enumerate}[nolistsep]
+    \item Compute the reduced QR factorization \( A = \hat{Q}\hat{R} \).
+    \item Compute the vector \( \hat{Q}^*b \).
+    \item Solve upper-triangular system \( \hat{R}x = \hat{Q}^*b \) for \( x \).
+\end{enumerate}
+\end{method}
+
+\begin{method}[Least squares via SVD (\( \cO(2mn^2 + 11n^3) \))]
+\begin{enumerate}[nolistsep]
+    \item Compute the reduced SVD \( A = \hat{U}\hat{\Sigma}\hat{V}^* \).
+    \item Compute the vector \( \hat{U}^*b \).
+    \item Solve the diagonal system \( \hat{\Sigma}w = \hat{U}^*b \) for \( w \).
+    \item Set \( x = Vw \).
+\end{enumerate}
+\end{method}
+
+\subsubsection{Comparison of Methods}
+Each of these methods may be advantageous in certain situations. When speed is the only consideration solving the normal equations may be best. However this is not always stable. QR is a good middle ground and is the generally suggested algorithm. However, if \( A \) is close to rank-deficient then it may also be unstable and so the SVD may be better.
+
+\section{Conditioning and Stability}
+\subsection{Conditioning}
+We can view a problem as a function \( f:X\to Y \) between normed vector spaces.
+
+\begin{definition}[Well-Conditioned]
+A well-conditioned problem is one with the property that all small perturbations of \( x \) lead to only small changes in \( f(x) \).
+\end{definition}
+
+\begin{definition}[Absolute Condition Number]
+The absolute condition number \( \hat{\kappa} = \hat{\kappa}(x) \) of the problem \( f \) at \( x \) is defined as,
+\begin{align*}
+    \hat{\kappa} = \lim_{\delta\to 0} \sup_{\norm{\delta x}\leq \delta} \dfrac{\norm{f(x+\delta x) - f(x)}}{\norm{\delta x}}
+\end{align*}
+\end{definition}
+
+If \( f \) is differentiable then \( f(x+\delta x) - f(x) \approx J(x) \delta x \) to first order. Therefore,
+\begin{align*}
+    \hat{\kappa} = \norm{J(x)}
+\end{align*}
+
+\begin{definition}[Relative Condition Number]
+The relative condition number \( \kappa = \kappa(x) \) of the problem \( f \) at \( x \) is defined as,
+\begin{align*}
+    \kappa = \lim_{\delta \to 0} \sup_{\norm{\delta x}\leq \delta} \left( \dfrac{\norm{f(x+\delta x) - f(x)}}{\norm{\delta x}} \bigg/ \dfrac{\norm{\delta x} }{\norm{x}} \right)
+\end{align*}
+\end{definition}
+
+If \( f \) is differentiable,
+\begin{align*}
+    \kappa = \dfrac{\norm{J(x)}}{\norm{f(x)}/\norm{x}}
+\end{align*}
+
+\begin{theorem}
+Let \( A\in \CC^{m\times m} \) be non-singular and consider the equation \( Ax=b \). The problem of computing \( b \), given \( x \), has condition number,
+\begin{align*}
+    \kappa = \norm{A} \dfrac{\norm{x}}{\norm{b}} \leq \norm{A}\norm{A^{-1}}
+\end{align*}
+with respect to perturbations of \( x \). The problem of computing \( x \), given \( b \), has condition number
+\begin{align*}
+    \kappa = \norm{A^{-1}} \dfrac{\norm{b}}{\norm{x}} \leq \norm{A}\norm{A^{-1}}
+\end{align*}
+with respect to perturbations of \( b \).
+
+If \( \norm{\cdot} = \norm{\cdot}_2 \), the top bound is tight when \( x \) is a multiple of the right singular vector corresponding to the smallest singular value, and the bottom bound is tight when \( b \) is a multiple of the left singular vector corresponding to the largest singular value.
+\end{theorem}
+
+\begin{definition}[Condition Numer of a Matrix]
+The condition number of a matrix is defined as \( \kappa(A) = \norm{A}\norm{A^{-1}} \).
+\end{definition}
+
+\begin{theorem}
+If \( \norm{\cdot} = \norm{\cdot}_2 \), then \( \kappa(A) = \sigma_{\text{max}} / \sigma_{\text{min}} \).
+\end{theorem}
+
+\begin{theorem}
+Let \( b \) be fixed and consider the problem of computing \( x = A^{-1}b \), where \( A \) is square and non-singular. The condition number of this problem with respect to perturbations of \( A \) is \( \kappa = \kappa(A) \)
+\end{theorem}
+
+\subsection{Floating Point Arithmetic}
+
+\begin{definition}[Floating Point Numers]
+A floating point system \( \bF \) for some fixed base \( \beta \), fixed exponent length \( k \), and fixed precision \( t \), are numbers of the form,
+\begin{align*}
+    x = \pm 1.m_1m_2m_3 \cdots m_t \times \beta^{e_1e_2\cdots e_k}
+\end{align*}
+\end{definition}
+
+\begin{definition}[Machine Precision]
+Machine precision is defined to be half the distance between one and the next largest number.
+\end{definition}
+
+\begin{theorem}[Fundamental Axiom of Floating Point Arithmetic]
+For all \( x,y\in\bF \), there exists \( \epsilon \) with \( |\epsilon| \leq \epsilon_{\text{machine}} \) such that,
+\begin{align*}
+    x ~\raisebox{.5pt}{\textcircled{\raisebox{-4pt} {*}}} ~ y = (x*y)(1+\epsilon)
+\end{align*}
+\end{theorem}
+
+\subsection{Stability}
+Since computers are discrete and finite, it isn't possible to obtain exact solutions to many problems.
+
+\begin{definition}[Algorithm]
+An algorithm is a map \( \tilde{f}: X\to Y \) which is computed by, taking the input \( x \), rounding it to the floating point system and using the computer to solve the problem.
+\end{definition}
+
+\note{IF WE ROUND HOW DO WE KNOW WE WILL STILL BE IN Y IF Y ISNT R OR C??}
+
+At the very least \( \tilde{f}(x) \) will be affected by rounding errors. It could also be affected by other things depending on the machine it is run on.
+
+\begin{definition}[Absolute and Relative Errors]
+The absolute error of a computation is, \( \norm{\tilde{f}(x)-f(x)} \) and the relative error of a computation is \( \norm{\tilde{f}(x)-f(x)}/\norm{f(x)} \).
+\end{definition}
+
+If a problem \( f \) is ill-conditioned, having a relative accuracy on the order of machine precision is ``unreasonably ambitious''. Rounding error is unavoidable, and so even if all subsequent computations could be done exactly, the initial rounding error might a large enough perturbation to lead to a computed solution very different from the actual solution.
+
+\begin{definition}[Stable Algorithm]
+We say an algorithm \( \tilde{f} \) for a problem \( f \) is stable if for each \( x\in X \),
+\begin{align*}
+    \dfrac{\norm{\tilde{f}(x)-f(\tilde{x})}}{\norm{f(\tilde{x})}} = \cO(\epsilon_\text{machine})
+\end{align*}
+for some \( \tilde{x} \) with,
+\begin{align*}
+    \dfrac{\norm{x-\tilde{x}}}{\norm{x}} = \cO(\epsilon_\text{machine})
+\end{align*}
+\end{definition}
+In words: A stable algorithm gives nearly the right answer to nearly the right problem
+
+\begin{definition}[Backward Stable Algorithm]
+We say an algorithm \( \tilde{f} \) for a problem \( f \) is backward stable if for each \( x\in X \),
+\begin{align*}
+    \tilde{f}(x) = f(\tilde{x})
+\end{align*}
+for some \( \tilde{x} \) with,
+\begin{align*}
+    \dfrac{\norm{x-\tilde{x}}}{\norm{x}} = \cO(\epsilon_\text{machine})
+\end{align*}
+\end{definition}
+
+In words: A backward stable algorithm gives exactly the right answer to nearly the right question.
+
+\begin{definition}
+We say \( \varphi(t)  = \cO(\psi(t)) \) if there is some \( C>0 \) such that \( |\varphi(t)| \leq C \psi(t) \) as \( t \) approaches some understood limit.
+\end{definition}
+
+General the constant \( C \) may depend on the size of the vector spaces \( X \) and \( Y \). This doens't necessarily contradict our definitions, since changing the dimension of these spaces means we need a new norm.
+
+\begin{theorem}
+For problems \( f \) and algorithms \( \tilde{f} \) defined on finite-dimensional spaces \( X \) and \( Y \), the properties of accuracy, stability and backward stability all hold or fail to hold independently of the choices of norms for \( X \) and \( Y \).
+\end{theorem}
+
+
+\begin{theorem}
+Suppose a backward stable algorithm is applied to solve a problem \( f:X\to Y \) with condition number \( \kappa \). Then the relative errors satisfy,
+\begin{align*}
+    \dfrac{\norm{\tilde{f}(x)-f(x)}}{\norm{f(x)}} = \cO(\kappa(x) \epsilon_{\text{machine}})
+\end{align*}
+\end{theorem}
+
+\subsubsection{Stability of Householder Triangularization}
+
+We can construct an experiment to test Householder triangularization. Let \( Q \) and \( R \) be unitary and triangular and construct \( A = QR \). Now use Householder to compute \( \tilde{Q} \) and \( \tilde{R} \). It turns out that \( \norm{Q-\tilde{Q}} \) and \( \norm{R-\tilde{R}} \) are large. However, \( \norm{A-\tilde{Q}\tilde{R}} \) is not.
+
+\begin{theorem}
+Let \( A = QR \) be the QR factorization of a matrix \( A\in\CC^{m\times n} \) be computed using Householder triangularization, and let \( \tilde{Q} \) and \( \tilde{R} \) be the outputs. Then there exists \( \delta A \) such that,
+\begin{align*}
+    \tilde{Q}\tilde{R} = A + \delta A, && \dfrac{\norm{\delta A}}{\norm{A}} = \cO(\epsilon_\text{machine})
+\end{align*}
+\end{theorem}
+
+\begin{theorem}
+Solving \( Ax=b \) using QR and back substitution is backward stable, satisfying,
+\begin{align*}
+    (A+\Delta A)\tilde{x}=b, && \dfrac{\norm{\Delta A}}{\norm{A}} = \cO(\epsilon_\text{machine})
+\end{align*}
+
+Moreover,
+\begin{align*}
+    \dfrac{\norm{\tilde{x} - x}}{\norm{x}} = \cO(\kappa(A)\epsilon_\text{machine})
+\end{align*}
+\end{theorem}
+
+\subsection{Stability of Back Substitution}
+Backward/Forward substitution are the standard methods of solving (upper/lower) triangular systems.
+
+\begin{algorithm}[Backward Substitution (\( \cO(m^2) \))]
+\begin{algorithmic}
+\State{\( x_m = b_m/r_{mm} \)}
+\For{\( j={m-1} \) \DownTo \( 1 \)}
+    \State{\( x_j = \left( b_j - \sum_{k=j+1}^{m} x_k r_{jk} \right) \Big/ r_{jj} \)}
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+\begin{theorem}
+Backward Substitution is stable in the sense that the compute solution \( \tilde{x} \) satisfies,
+\begin{align*}
+    (R+\delta R)\tilde{x} = b
+\end{align*}
+for some upper-triangular matrix \( \delta R \) with,
+\begin{align*}
+    \dfrac{\norm{\delta R}}{\norm{R}} = \cO(\epsilon_\text{machine})
+\end{align*}
+\end{theorem}
+
+\subsection{Conditioning of Least Squares Problems}
+\note{IDK if this is actually important}
+
+\subsection{Stability of Least Squares Algorithms}
+
+\begin{theorem}
+Let the full-rank least squares problem be solved by Householder triangularization. This algorithm is backwards stable in the sense t hat the compute solution \( \tilde{x} \)has the property,
+\begin{align*}
+    \norm{(A+\delta A)\tilde{x} - b} = \text{min}, && \dfrac{\norm{\delta A}}{\norm{A}} = \cO(\epsilon_\text{machine})
+\end{align*}
+for some \( \delta A \). This is true whether \( Q^*b \) is compute via explicit formation of \( \hat{Q} \) or implicitly. It also holds for Householder triangularization with arbitrary column pivoting.
+\end{theorem}
+
+\begin{theorem}
+The solution of the full-rank least squares problem via Gram--Schmidt orthogonalization is also backward stable, satisfying,\begin{align*}
+    \norm{(A+\delta A)\tilde{x} - b} = \text{min}, && \dfrac{\norm{\delta A}}{\norm{A}} = \cO(\epsilon_\text{machine})
+\end{align*}
+for some \( \delta A \) provided \( Q^*b \) is formed implicitly as indicated in the code segment above.
+\end{theorem}
+
+\note{So forming \( Q^*b \) implicitly is a better way to compute \( Q^*b \) than just projecting the normal way. But what about the order you do it implicitly. Like does it really matter that you start from the first coordinate?}
+
+\begin{theorem}
+The solution of the full-rank least squares problem via the normal equations is unstable. Stability can be achieved for problems where \( \kappa(A) \) is uniformly bounded above, or \( (\tan \theta )/ \eta \) is uniformly bounded below.
+\end{theorem}
+
+\begin{theorem}
+The solution of the full-rank least squares problem via the SVD is backward stable, satisfying,
+\begin{align*}
+    \norm{(A+\delta A)\tilde{x} - b} = \text{min}, && \dfrac{\norm{\delta A}}{\norm{A}} = \cO(\epsilon_\text{machine})
+\end{align*}
+for some \( \delta A \).
+\end{theorem}
+
+
+\subsubsection{Rank-Deficient Least Squares Problems}
+When \( A \) has rank \( < n \) column pivoting and SVD become important. The only fully stable algorithms for rank0-deficient problems are based on the SVD. Householder triangularization with column pivoting is stable for almost all problems.
+
+\section{Systems of Equations}
+
+\subsection{Gaussian Elimination}
+Gaussian elimination transforms a full linear system into an upper-triangular one by applying simple linear transformations on the left. In this respect it is analogous to Householder triangularization for computing QR factorization. The difference is that the transformations applied in Gaussian elimination are not unitary.
+
+\subsubsection{LU factorization}
+
+\begin{definition}[LU factorization]
+The \( LU \) factorization of a square matrix \( A \) is: \( A = LU \), \( L \) lower triangular, \( U \) upper triangular.
+\end{definition}
+
+Such an factorization can sometimes be computing by turning \( A \) inter an upper triangular matrix by introducing zeros below the diagonal, first the the first column, then the second, and so on.  This can be done by subtracting multiples of each row from subsequent rows. This can be thought of as multiplying \( A \) by a sequence of lower triangular matrices \( L_k \) on the left,
+\begin{align*}
+    \underbrace{L_{m-1}\cdots L_2L_1}_{L^{-1}} A = U
+\end{align*}
+Setting \( L = L_1^{-1}L_2^{-1}\cdots L_{m-1}^{-1} \) gives \( A = LU \).
+
+Suppose \( x_k \) denotes the \( k \)-th column of the matrix at the beginning of step \( k \). Then the transformation,
+\begin{align*}
+    x_k = \left[\begin{array}{c}x_{1,k} \\ \vdots \\ x_{k,k} \\ x_{k+1,k} \\ \vdots\\ x_{m,k}\end{array}\right] \xrightarrow{L_k} L_kx_k = \left[\begin{array}{c}x_{1,k} \\ \vdots \\ x_{k,k} \\ 0 \\ \vdots\\ 0\end{array}\right]
+\end{align*}
+
+To do this we wish to subtract \( \ell_{j,k} \) times row \( k \) from row \( j \), where \( \ell_{j,k} \) is the multiplier
+\begin{align*}
+    \ell_{j,k} = \dfrac{x_{j,k}}{x_{kk}} && (k<j\leq m)
+\end{align*}
+In matrix form,
+\begin{align*}
+    L_k = \left[\begin{array}{cccccc}
+    1 \\
+    & \ddots \\
+    && 1 \\
+    && -\ell_{k+1,k} & 1 \\
+    &&\vdots && \ddots \\
+    &&-\ell_{m,k} &&& 1
+    \end{array}\right]
+\end{align*}
+
+We can write \( L_k = I - \ell_k e^*_k \), where \( e_k \) is the column vector with \( 1 \) in position \( k \) and zeros elsewhere.
+
+We can then observe,
+\begin{align*}
+    (I-\ell_ke_k^*)(I+\ell_ke_k^*) = I - \ell_k e_k^*\ell_k e_k^* = I
+\end{align*}
+Thus the inverse of \( L_k \) is \( I + \ell_ke_k^* \).
+
+We also observe that \( L_k^{-1}L_{k+1}^{-1} \) is the unit lower-triangular matrix with entries of both \( L_k^{-1} \) and \( L_{k+1}^{-1} \) inserted in their usual places below the diagonal. In fact,
+\begin{align*}
+    L = L_1^{-1}L_2^{-1} \cdots L_{m-1}^{-1} =
+    L_k = \left[\begin{array}{cccccc}
+    1 \\
+    \ell_{2,1} & 1 \\
+    \ell_{3,1} & \ell_{3,2} & 1 \\
+    \vdots & \vdots & \ddots & \ddots \\
+    \ell_{m,1} & \ell_{m,2} & \cdots & \ell_{m,m-1} & 1
+    \end{array}\right]
+\end{align*}
+
+In practise we do not ever form or multiply the \( L_k \).
+
+\begin{algorithm}[Gaussian Elimination without Pivoting \( \cO \left( \frac{2}{3}   m^3 \right) \)]
+\begin{algorithmic}
+\State{\( U = A, L = I \)}
+\For{\( k=1 \) \To \( m-1 \)}
+    \For{ \( j=k+1 \) \To \( m \)}
+        \State{\( \ell_{j,k} = u_{j,k} / u_{kk} \)}
+        \State{\(  u_{j,k:m} = u_{j,k:m} - \ell_{j,k}u_{k,k:m} \)}
+    \EndFor
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+To save memory note that we can write \( L \) and \( U \) to the same array as \( A \).
+
+However this algorithm can be really unstable sometimes.
+
+
+\subsubsection{Pivoting}
+Without pivoting we always subtracted some multiple of \( x_{k,k} \) from the other rows. However, we could use a different entry as the ``pivot'' and then interchange rows and columns.
+
+However, this would require \( \cO(m^2) \) entries to be examined each of the \( m \) iterations. In total this is \( \cO(m^3) \) operations.
+
+Instead we could only interchange rows. This keeps the total operations to \( \cO(m^2) \).
+
+After \( m-1 \) steps \( A \) becomes the upper-triangular and \( U \),
+\begin{align*}
+    L_{m-1}P_{m-1} \cdots L_2P_2L_1P_1 A = U
+\end{align*}
+
+Define,
+\begin{align*}
+    L_k' = P_{m-1} \cdots P_{k+1}L_k P_{k+1}^{-1} \cdots P_{m-1}^{-1}
+\end{align*}
+
+Then,
+\begin{align*}
+    (L_{m-1}' \cdots L_2'L_1')(P_{m-1} \cdots P_2P_1(A = U
+\end{align*}
+
+\begin{algorithm}[Gaussian Elimination without Partial Pivoting \( \cO \left( \frac{2}{3}   m^3 \right) \)]
+\begin{algorithmic}
+\State{\( U = A, L = I, P=I \)}
+\For{\( k=1 \) \To \( m-1 \)}
+    \State{select \( i\geq k \) to maximize \( |u_{i,k}| \)}
+    \State{\( u_{k,k:m} \leftrightarrow u_{i,k:m} \) (interchange two rows)}
+    \State{\( \ell_{k,1:k-1} \leftrightarrow \ell_{i,1:k-1}\)}
+    \State{\( p_{k,:} \leftrightarrow p_{i,:}\)}
+    \For{ \( j=k+1 \) \To \( m \)}
+        \State{\( \ell_{j,k} = u_{j,k} / u_{kk} \)}
+        \State{\(  u_{j,k:m} = u_{j,k:m} - \ell_{j,k}u_{k,k:m} \)}
+    \EndFor
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+Complete pivoting gives a factorization \( PAQ = LU \).
+
+\subsection{Stability of Gaussian Elimination}
+
+\begin{theorem}
+Let the LU factorization a non-singular matrix \( A \) be computed by Gaussian elimination without pivoting. If \( A \) has an LU factorization, then for all sufficiently small \( \epsilon_{\text{machine}} \), the factorization completes successfully in floating point arithmetic, and for some \( \delta A \), the computed matrices \( \tilde{L} \) and \( \tilde{U} \) satisfy,
+\begin{align*}
+    \tilde{L}\tilde{U} = A + \delta a, && \dfrac{\norm{A}}{\norm{L}\norm{U}} = \cO(\epsilon_\text{machine})
+\end{align*}
+\end{theorem}
+
+For Gaussian elimination without pivoting, both \( L \) and \( U \) can be unboundedly large.
+
+\subsubsection{Growth Factors}
+
+\begin{definition}[Growth Factor]
+The growth factor for a factorization \( A = LU \) computed using Gaussian elimination without pivoting is defined as the ratio,
+\begin{align*}
+    \rho = \dfrac{\max_{i,j} |u_{i,j}|}{\max_{i,j} |a_{i,j}|}
+\end{align*}
+\end{definition}
+
+\begin{theorem}
+Let the PLU factorization a non-singular matrix \( A \) be computed by Gaussian elimination without pivoting. Then the compute matrices \( \tilde{P} \), \( \tilde{L} \) and \( \tilde{U} \) satisfy,
+\begin{align*}
+    \tilde{L}\tilde{U} = \tilde{P}A + \delta A, && \dfrac{\norm{\delta A}}{\norm{A}} = \cO(\rho\epsilon_\text{machine})
+\end{align*}
+for some \( \delta A \), where \( \rho \) is the growth factor for \( A \). If \( |\ell_{i,j}| < 1 \) for each \( i > j \), impliying that there are no ties in teh selection of pivots on exact arithmetic, then \( \tilde{P} = P \) for all sufficiently small \( \epsilon_\text{machine} \).
+\end{theorem}
+
+\begin{theorem}
+Gaussian elimination with partial pivoting is backward stable since \( \rho \leq 2^{m-1} =  \cO(1) \) uniformly for all matrices of a given dimension \( m \).
+\end{theorem}
+
+However, the growth factor can go like \( 2^m \) so this is mostly a failing of the definition of backward stability to require that the bound do not depend on \( m \).
+
+However in practise Gaussian elimination is stable. (Claimed by \cite{trefethen} however there are papers providing examples of real world matrices which are unstable).
+
+\section{Cholesky Factorization}
+Hermetian positive definite matrices can be decomposed into triangular factors twice as quickly as general matrices.
+
+\begin{definition}[Hermetian Matrix]
+A matrix \( A \) is Hermetian if \( A = A^* \)
+\end{definition}
+
+\begin{definition}[Positive Definite]
+A positive definite matrices \( A \) satisfies \( x^*Ax > 0 \) for all \( x\neq 0 \).
+\end{definition}
+
+\begin{theorem}
+Eigenvectors taht correspond to distinct eigenvalues of a Hermetian matrix are orthogonal.
+\end{theorem}
+
+\section{Eigenvalues}
+\begin{definition}[Eigenvalues and Eigenvectors]
+Let \( A \) be a square matrix. A nonzero vector \( x \) is an eigenvector of \( A \), and \( \lambda \) is its corresponding eigenvalue if,
+\begin{align*}
+    Ax = \lambda x
+\end{align*}
+\end{definition}
+
+\begin{definition}[Spectrum]
+The spectrum of a square matrix \( A \), denoted \( \Lambda(A) \), is the set of all eigenvalues of \( A \).
+\end{definition}
+
+\begin{definition}[Eigenvalue Decomposition]
+A factorization \( A = X\Lambda X^{-1} \), where \( \Lambda \) is diagonal, is called an eigenvalue decomposition.
+\end{definition}
+
+\begin{definition}[Eigenspace]
+Let \( A \) be a square matrix. The eigenspace corresponding to an eigenvalue \( \lambda \), denoted \( E_\lambda \) is the subspace formed by the span of all eigenvectors corresponding to \( \lambda \). That is, \( E_\lambda = \operatorname{null}(A-\lambda I) \).
+\end{definition}
+
+\begin{definition}[Geometric Multiplicity]
+The geometric multiplicity of an eigenvalue \( \lambda \) is the dimension of \( E_\lambda \).
+\end{definition}
+
+\begin{definition}[Characteristic Polynomial]
+The characteristic polynomial of a square matrix \( A \) is defined to be,
+\begin{align*}
+    p_A(z) =  \det(zI-A)
+\end{align*}
+\end{definition}
+
+\begin{theorem}
+\( \lambda \) is an eigenvalue of \( A \) if and only if \( p_A(\lambda)=0 \).
+\end{theorem}
+
+\begin{definition}[Algebraic Multiplicity]
+The algebraic multiplicity of an eigenvalue \( \lambda \) is the multiplicity of \( \lambda \) as a root of \( p_A \).
+\end{definition}
+
+\begin{theorem}
+If \( A\in\CC^{m\times m} \), then \( A \) has \( m \) distinct eigenvalues (counted with algebraic multiplicity) In particular, if the roots of \( p_A \) are simple, then \( A \) has \( m \) distinct eigenvalues.
+\end{theorem}
+
+\subsubsection{Similarity Transforms}
+\begin{definition}
+If \( X\in \CC^{m\times m} \) is non-singular, then the map \( A \mapsto X^{-1}AX \) is called a similarity transformation of \( A \).
+\end{definition}
+
+\begin{definition}[Similar Matrices]
+We say two matrices \( A \) and \( B \) are similar if there exists a similarity transform between them.
+\end{definition}
+
+\begin{theorem}
+If \( X \) is non-singular, then \( A \) and \( X^{-1}AX \) have the same characteristic polynomial, eigenvalues, and algebraic and geometric multiplicites.
+\end{theorem}
+
+\begin{theorem}
+The algebraic multiplicity of an eigenvalue \( \lambda \) is at least as great as its geometric multiplicity.
+\end{theorem}
+
+\begin{definition}[Defective Eigenvalue]
+An eigenvalues whose algebraic multiplicity exceeds its geometric multiplicity is called defective.
+\end{definition}
+
+\begin{definition}[Defective Matrix]
+A matrix who has at least one defective eigenvalues is called defective.
+\end{definition}
+
+\begin{theorem}
+A matrix is non-defective if and only if it has an eigenvalue decomposition \( X\Lambda X^{-1} \).
+\end{theorem}
+
+\begin{theorem}
+Let \( A\in\CC^{m\times m} \). Then,
+\begin{align*}
+    \det(A) = \prod_{j=1}^{m} \lambda_j, && \operatorname{tr}(A) = \sum_{j=1}^{m} \lambda_j
+\end{align*}
+\end{theorem}
+
+\begin{definition}[Unitarily Diagonalizable]
+A matrix is called unitarily diagonalizable if there exists a unitary matrix \( Q \) such that \( A = Q\Lambda Q^* \)
+\end{definition}
+
+Note that this is both an eigen-decomposition and an SVD (up to sign).
+
+\begin{theorem}
+A Hermetian matrix is unitarily diagonalizable, and its eigenvalues are real.
+\end{theorem}
+
+\begin{definition}[Normal Matrix]
+A matrix \( A \) is normal if \( A^*A = AA^* \).
+\end{definition}
+
+\begin{theorem}
+A matrix is unitarily diagonalizable if and only if it is normal.
+\end{theorem}
+
+\begin{definition}[Schur Factorization]
+A Schur Factorization of a matrix \( A \) is a factorization \( A=QTQ^* \) where \( Q \) is unitary and \( T \) is upper triangular.
+\end{definition}
+
+\begin{theorem}
+Every square matrix has a Schur factorization.
+\end{theorem}
+
+
+\subsection{Overview of Eigenvalue Algorithms}
+
+Given a polynomial \( p(z) = z^m + a_{m-1} z^{m-1} + \cdots +a_1z + a_0 \) we can construct the matrix,
+\begin{align*}
+    \left[\begin{array}{cccccc}
+    -z & & & & & -a_0 \\
+     1 & -z & & & & -a_1 \\
+     & 1 & -z & & & -a_2 \\
+     & & 1 & \ddots & & \vdots \\
+     & & & \ddots & -z & -a_{m-2} \\
+     & & & & 1 & (-z-a_{m-1})
+    \end{array}\right]
+\end{align*}
+
+The determinant of this matrix is \( (-1)^m p(z) \). Thus the matrix,
+\begin{align*}
+    A =     \left[\begin{array}{cccccc}
+         0 & & & & & -a_0 \\
+         1 & 0 & & & & -a_1 \\
+         & 1 & 0 & & & -a_2 \\
+         & & 1 & \ddots & & \vdots \\
+         & & & \ddots & 0 & -a_{m-2} \\
+         & & & & 1 & -a_{m-1}
+        \end{array}\right]
+\end{align*}
+has eigenvalues equal to the roots of \( p(z) \).
+
+In particular this implies that any eigenvalue solver must be iterative as the roots of a polynomial cannot be solved for in general using just addition, subtraction, multiplication, division, and \( k \)-th roots.
+
+\subsubsection{Schur Factorization and Diagonalization}
+
+\begin{definition}[Upper Hessenberg Matrix]
+An upper Hessenberg matrix is one for which all entries below the first sub diagonal are zero.
+\end{definition}
+
+Most eigenvalue algorithms compute the Schur factorization \( A = QTQ^* \). This is done by converting \( A \) to an upper Hessenberg matrix \( H \), and then to an upper triangular matrix.
+
+If we tried using the same Householder reflectors as for computing the QR factorization then when we comput \( Q_1^*AQ_1 \) the sparsity may not change. Instead we use Householder reflectors to introduce zeros below the first sub-diagonal. Then we constructing \( Q_1^*AQ_1 \) the sparsity does decrease.
+\begin{align*}
+    \begin{array}{ccccccc}
+    \left[\begin{array}{ccccc}
+    \times & \times & \times & \times & \times \\
+    \times & \times & \times & \times & \times \\
+    \times & \times & \times & \times & \times \\
+    \times & \times & \times & \times & \times \\
+    \times & \times & \times & \times & \times
+    \end{array}\right]
+    &\xrightarrow{Q_1^* \cdot}&
+    \left[\begin{array}{ccccc}
+    \times & \times & \times & \times & \times \\
+    \boldsymbol \times & \boldsymbol \times & \boldsymbol\times & \boldsymbol\times & \boldsymbol\times \\
+    0 & \boldsymbol\times & \boldsymbol\times & \boldsymbol\times & \boldsymbol\times \\
+    0 & \boldsymbol\times & \boldsymbol\times & \boldsymbol\times & \boldsymbol\times \\
+    0 & \boldsymbol\times & \boldsymbol\times & \boldsymbol\times & \boldsymbol\times
+    \end{array}\right]
+    &\xrightarrow{\cdot Q_1}&
+    \left[\begin{array}{ccccc}
+    \times & \boldsymbol\times & \boldsymbol\times & \boldsymbol\times & \boldsymbol\times \\
+    \times & \boldsymbol \times & \boldsymbol\times & \boldsymbol\times & \boldsymbol\times \\
+    0 & \boldsymbol\times & \boldsymbol\times & \boldsymbol\times & \boldsymbol\times \\
+    0 & \boldsymbol\times & \boldsymbol\times & \boldsymbol\times & \boldsymbol\times \\
+    0 & \boldsymbol\times & \boldsymbol\times & \boldsymbol\times & \boldsymbol\times
+    \end{array}\right]
+    \\
+    A & & Q_1^*A & & Q_1^*AQ_1
+\end{array}
+\end{align*}
+
+Repeating this process will take \( A \) to an upper Hessenberg matrix.
+
+\begin{algorithm}[Householder Reduction to Hessenberg Form \( (\cO(\frac{10}{3}m^3) \)]
+\begin{algorithmic}
+\For{\( k=1 \) \To \( m-2 \)}
+    \State{\( x = A_{k+1:m,k} \) }
+    \State{\( v_k = \operatorname{sign}(x_1)\norm{x}_2e_1 + x \)}
+    \State{\( v_k = v_k / \norm{v_k}_2 \)}
+    \State{\( A_{k+1:m,k:m} = A_{k+1:m,k:m} - 2 v_k (v_k^* A_{k+1:m,k:m}) \)}
+    \State{\( A_{1:m,k+1:m} = A_{1:m,k+1:m} - 2 (A_{1:m,k+1:m} v_k)v_k^* \)}
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+If \( A \) is Hermetian then the above algorithm will produce a tridiagonal matrix (up to numerical precision) we can then avoid computing these entries and reduce the cost to \( \cO(\frac{8}{3}m^3) \). This saving is based only on sparsity. By using symmetry we can reduce further to \( \cO(\frac{4}{3}m^3) \), but no algorithm is given.
+
+
+\subsubsection{Stability}
+
+\begin{theorem}
+Let the Hessenberg reduction \( A = QHQ^* \) of a matrix \( A \) be computed as above with the computed factors \( \tilde{Q} \)  be the exact unitary matrix corresponding to the computed reflection vectors and \( \tilde{H} \) the compute Hessenberg reduction. Then for some \( \delta A \),
+\begin{align*}
+    \tilde{Q}\tilde{H}\tilde{Q}^* = A+ \delta A, && \dfrac{\norm{\delta A}}{\norm{A}} = \cO(\epsilon_\text{machine})
+\end{align*}
+\end{theorem}
+
+\subsection{Rayleigh Quotient}
+
+Suppose \( A = A^T \in \RR^{m\times m} \). Then \( A \) has real eigenvalues and a complete set of orthogonal eigenvectors.
+
+\begin{definition}[Rayleigh Quotient]
+For a real symmetric matrix \( A \), the Rayleigh quotient of a vector \( x \) is defined as,
+\begin{align*}
+    r(x) = \dfrac{x^TAx}{x^Tx}
+\end{align*}
+\end{definition}
+
+Note that this is the solution to \( \min_\alpha \norm{Ax - \alpha x} \). That is, the scalar which ``acts most like an eigenvalue'' for a given \( x \).
+
+We can compute the gradient of \( r(x) \) as,
+\begin{align*}
+    \nabla r(x) = \dfrac{2}{x^Tx}(Ax-r(x)x)
+\end{align*}
+
+From this formula it is clear that at an eigenvector \( x \) of \( A \) the gradient is zero. Moreover, if \( \nabla r(x) = 0 \) then \( x = 0 \) or \( x  \) is an eigenvector with eigenvalue \( r(x) \).
+
+Geometrically the eigenvectors of \( A \) are stationary points of the function \( r(x) \).
+
+The Rayleigh quotient is a quadratically accurate estimate of an eigenvalue. That is,
+\begin{align*}
+    r(x) - r(v) = \cO(\norm{x-v}^2) && \text{as } x\to v
+\end{align*}
+where \( v \) is an eigenvector of \( A \).
+
+\subsection{Power Iteration}
+
+\begin{algorithm}[Power Iteration]
+\begin{algorithmic}
+\State{\(v^{(0)} = \) some vector with \( \norm{v} = 1 \)}
+\For{\( k=1, 2, \ldots \)}
+    \State{\( w = Av^{(k-1)} \) }
+    \State{\( v^{(k)} = w / \norm{w} \)}
+    \State{\( \lambda^{(k)} = (v^{(k)})^T Av^{(k)} \)}
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+Let \( v \) be any vector and write it as a linear combination of the orthonormal \( q_i \) as,
+\begin{align*}
+    v^{(0)} = a_1q_1 + a_2q_2 + \cdots + a_mq_m
+\end{align*}
+Then,
+\begin{align*}
+    v^{(k)} &= c_k A^k v^{(0)} \\
+    &= c_k(a_1 \lambda_1^k q_1 + a_2 \lambda_2^k q_2 + \cdots + a_m\lambda_m^k q_m) \\
+    &=  c_k\lambda_1^k \left( a_1q_1 + a_2(\lambda_2/\lambda_1)^k + \cdots + a_m(\lambda_m/\lambda_1)^k q_m \right)
+\end{align*}
+
+\begin{theorem}
+Suppose \( |\lambda_1| > |\lambda_2| \geq \cdots \geq |\lambda_m| \geq 0 \) and \( q_1^Tv^{(0)} \neq 0 \). Then, as \( k\to\infty \),
+\begin{align*}
+    \norm{v^{(k)} - (\pm q_1) } = \cO \left( \left| \dfrac{\lambda_2}{\lambda_1} \right|^k \right), &&
+    |\lambda^{(k)} - \lambda_1| = \cO \left( \left| \dfrac{\lambda_2}{\lambda_1} \right|^{2k} \right)
+\end{align*}
+\end{theorem}
+
+\subsection{Inverse Iteration}
+
+For any \( \mu \in \RR \) not equal to an eigenvalue of \( A \), the eigenvectors of \( (A-\mu I)^{-1} \) are the same as those of \( A \), and the eigenvalues are \( \{ (\lambda_j - \mu)^{-1} \} \) where \( \{\lambda_j\} \) are the eigenvalues of \( A \).
+
+If we can guess \( \mu \) near \( \lambda_J \) then \( (\lambda_J - \mu)^{-1} \) may be much larger than \( (\lambda_j - \mu)^{-1} \) for all \( j\neq J \). Thus power iteration applied to \( (A-\mu)^{-1} \) will converge rapidly.
+
+\begin{algorithm}[Inverse Iteration]
+\begin{algorithmic}
+\State{\(v^{(0)} = \) some vector with \( \norm{v} = 1 \)}
+\For{\( k=1, 2, \ldots \)}
+    \State{Solve \( (A-\mu I)w = v^{(k-1)} \) for \( w \)}
+    \State{\( v^{(k)} = w / \norm{w} \)}
+    \State{\( \lambda^{(k)} = (v^{(k)})^T Av^{(k)} \)}
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+\note{Something about mu near lambda being ok. Exercise}
+
+Like power iteration, inverse iteration only convergest linearly. However, the rate of this convergence depends on the ratio of the eigenvalues of \( (A-\mu I)^{-1} \) which we have some control over by our choice of \( \mu \).
+
+\begin{theorem}
+Suppose \( \lambda_J \) is the closes eigenvalue to \( \mu \) and \( \lambda_K \) is the second closes. Suppose further that \( q_J^T v^{(0)} \neq 0 \). Then, as \( k\to\infty \),
+\begin{align*}
+    \norm{v^{(k)} - (\pm q_1) } = \cO \left( \left| \dfrac{\mu - \lambda_J}{\mu - \lambda_K} \right|^k \right), &&
+    |\lambda^{(k)} - \lambda_1| = \cO \left( \left| \dfrac{\mu - \lambda_J}{\mu - \lambda_K} \right|^{2k} \right)
+\end{align*}
+\end{theorem}
+
+\subsection{Rayleigh Quotient Iteration}
+Since the Rayleigh quotient gives an approximation we can use this to update our guess for \( \mu \).
+
+\begin{algorithm}[Rayleigh Quotient Iteration]
+\begin{algorithmic}
+\State{\(v^{(0)} = \) some vector with \( \norm{v} = 1 \)}
+\State{\( \lambda^{(0)} = (v^{(0)})^T Av^{(0)} \)}
+\For{\( k=1, 2, \ldots \)}
+    \State{Solve \( (A- \lambda^{(k-1)} I)w = v^{(k-1)} \) for \( w \)}
+    \State{\( v^{(k)} = w / \norm{w} \)}
+    \State{\( \lambda^{(k)} = (v^{(k)})^T Av^{(k)} \)}
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+\begin{theorem}
+Rayleigh quotient iteration converges to an eigenvalue/eigenvector pair for all except a set of measure zero of starting vector \( v^{(0)} \). When it converges, the convergence is ultimately cubig in the sense that if \( \lambda_J \) is an eigenvalue of \( A \) and \( v^{(0)} \) is sufficiently close to the eigenvector \( q_J \), then as \( k\to\infty \),
+\begin{align*}
+    \norm{v^{(k+1)} - (\pm q_J)} = \cO(\norm{v^{(k)}-(\pm q_J)}^3)
+\end{align*}
+and
+\begin{align*}
+    |\lambda^{(k+1)} - \lambda_J| = \cO(|\lambda^{(k)} - \lambda_J|^3)
+\end{align*}
+\end{theorem}
+
+\subsection{Opeartion Counts}
+Power iteration requires multiplication by \( A \) and costs \( \cO(m^2) \) flops. Inverse iteration require solving a linear system and costs \( \cO(m^3) \) flops. However, \( A \) can be factored ahead of time reducing each iteration to \( \cO(m^2) \). For Rayleigh quotient iteration is is not straightforward to keep it below \( \cO(m^3) \) each iteration.
+
+\subsection{QR Algorithm without Shifts}
+
+\begin{algorithm}[``Pure'' QR Algorithm]
+\begin{algorithmic}
+\State{\( A^{(0)} = A \)}
+\State{\( \lambda^{(0)} = (v^{(0)})^T Av^{(0)} \)}
+\For{\( k=1, 2, \ldots \)}
+    \State{\( Q^{(k)}R^{(k)} = A^{(k-1)} \)}
+    \State{\( A^{(k)} = R^{(k)}Q^{(k)} \)}
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+Matrices will converge to Schur form, or diagonal form if Hermetian.
+
+At each step we triangularize \( A^{(k)} \) by forming \( R^{(k)} = (Q^{(k)})^TA^{(k-1)} \) and then multiply on the right by \( Q^{(k)} \). This is the same transform we called a ``bad idea'' earlier as the sparsity pattern did not change. It turns out that while this will not reduce \( A \) to triangular form in a finite number of steps, it can be a powerful method to use as a basis for iterative methods.
+
+
+We can obtain cubic convergence. To do this first reduce \( A \) to tridiagonal form
+
+\begin{algorithm}[``Practical'' QR Algorithm]
+\begin{algorithmic}
+\State{\( (Q^{(0})^T A^{(0)} Q^{(0)}= A \) puts \( A^{(0)} \) in tridiagonal form}
+\State{\( \lambda^{(0)} = (v^{(0)})^T Av^{(0)} \)}
+\For{\( k=1, 2, \ldots \)}
+    \State{Pick a shift \( \mu^{(k)} \)}
+    \State{\( Q^{(k)}R^{(k)} = A^{(k-1)} - \mu^{(k)} I \)}
+    \State{\( A^{(k)} = R^{(k)}Q^{(k)} + \mu^{(k)} I \)}
+    \If{If any off-diagonal element \( A_{j,j+1}^{(k)} \) is sufficiently close to zero,}
+        \State{set \( A_{j,j+1} = A_{j+1,j} = 0 \) to obtain}
+        \State{\( \left[\begin{array}{cc}A_1 & 0 \\ 0 & A_2\end{array}\right] = A^{(k)} \)}
+        \State{and now apply the algorithm to each \( A_1 \) and \( A_2 \)}
+    \EndIf
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+\subsubsection{Unnormalized Simultaneous Iteration}
+
+If we do power iteration like \( V^{(k)} = A^k V^{(0)} \), where \( V^{(0)} = [v_1^{(0)}, \ldots, v_n^{(0)}] \), then we may expect the columns of \( V^{(k)} \) to converge to the span of the first \( n \) eigenvectors.
+
+However, the columns of \( V^{(k)} \) will all be mostly in the direction of the first eigenvector. Therefore we need to compute a QR factorization of \( V^{(k)} \) to obtain a well conditioned basis.
+
+\begin{theorem}
+Suppose this iteration is carried out and that,
+\begin{align*}
+    |\lambda_1| > |\lambda_2| > \cdots > |\lambda_n| \geq |\lambda_{n+1}| \geq |\lambda_{n+2}| \geq \cdots \geq |\lambda_m|
+\end{align*}
+and that all leading principle minors of \( \hat{Q}^T V^{(0)} \) are nonsingular, where \( \hat{Q} \) denotes the first \( m \) eigenvectors (By leading principal minors, we mean all upper-left square submatrices of \( \hat{Q}^T V^{(0)} \). This is equivalent to \( \hat{Q}^T V^{(0)} \) having an LU decomposition).
+
+Then as \( k\to\infty \) the columns of the matrix \( \hat{Q}^{(k)} \) converge linearly to the eigenvectors of \( A \):
+\begin{align*}
+    \norm{q_j^{(k)} - (\pm q_j)} = \cO \left( \left( \max_{1\leq k\leq n} \left| \dfrac{\lambda_{k+1}}{\lambda_k} \right| \right)^k \right)
+\end{align*}
+for each \( j \) with \( 1\leq j\leq n \).
+\end{theorem}
+
+\subsubsection{Simultaneous Iteration}
+As \( k\to\infty \), the vectors \( v_1^{(k)}, \ldots, v_n^{(k)} \) all converge to multiples of the same dominant eigenvector \( q_1 \). The span does converge to something useful, but if compute numerically the rounding errors will be too large as the vectors are a highly ill-conditioned basis for the desired space.
+
+To fix this we must orthonormalize at every step.
+
+\begin{algorithm}[Simultaneous Iteration]
+\begin{algorithmic}
+\State{Pick \( (Q^{(0}) \) with orthonormal columns}
+\For{\( k=1, 2, \ldots \)}
+    \State{\( Z = A Q^{(k-1)} \)}
+    \State{\( Q^{(k)}R^{(k)} = Z \) reduced QR factorization}
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+\begin{theorem}
+The matrices \( \hat{Q}^{(k)} \) are the same as those without orthonormalizing each iteration, and converge in the same way.
+\end{theorem}
+
+\subsubsection{Simultaneous Iteration equivalent to QR Algorithm}
+
+\note{How important is this?}
+
+
+\subsection{QR Algorithm with Shifts}
+
+\subsection{Other Eigenvalue Algorithms}
+
+\subsection{Computing the SVD}
+
+One way to compute the SVD may be to solve the eigenproblem of \( A^*A \). However, this is unstable since this eigenvalue problems could be much more sensitive to perturbations.
+
+We could instead solve the eigenvalue problem for,
+\begin{align*}
+    H = \left[\begin{array}{cc}0 & A^* \\ A & 0\end{array}\right]
+\end{align*}
+which has eigen-decomposition,
+\begin{align*}
+     \left[\begin{array}{cc}0 & A^* \\ A & 0\end{array}\right]
+     \left[\begin{array}{cc}V & V \\ U & -U\end{array}\right]
+     =
+     \left[\begin{array}{cc}V & V \\ U & -U\end{array}\right]
+     \left[\begin{array}{cc}\Sigma & 0 \\ 0 & -\Sigma\end{array}\right]
+\end{align*}
+
+The singular values and vectors can be extracted from the eigenvalues and vectors of \( H \). This methods is stable, and most SVD methods are based on this.
+
+\section{Finite Difference Approximations}
+Let \( u(x) \) be some sufficiently smooth function.  We would like to approximate \( u'(x) \) based only on values of \( u \). Some possible choices are,
+\begin{align*}
+    D_+ u(x) &:= \dfrac{u(x+h)-u(x)}{h} & \text{right approximation} \\
+    D_- u(x) &:= \dfrac{u(x) - u(x+h)}{h} & \text{left approximation}\\
+    D_0 u(x) &:= \dfrac{u(x+h)-u(x-h)}{2h} & \text{centered approximation}
+\end{align*}
+
+\begin{definition}[One Sided Approximation]
+A one sided approximation to \( u'(x) \) requires that \( u \) be evaluated only one one side of \( x \).
+\end{definition}
+
+If \( E(h) \approx Ch^p \) then \( \log|E(h)| \approx \log|C| + p\log h \), so plotting the error on a log-log scale can be useful for finding the order of the error.
+
+\subsection{Truncation Errors}
+\begin{definition}[Truncation Error of Finite Difference Approximation]
+Amount by which the finite difference approximation fails to satisfy the derivative it approximates.
+\end{definition}
+
+
+\subsection{Deriving Finite Difference Approximations}
+We can derive finite difference approximations by method of undetermined coefficients an Taylor expansions.
+
+
+\subsection{Second/Higher Order Derivatives}
+We have standard second order approximation to \( u'' \),
+\begin{align*}
+D^2 u(x) &:= \dfrac{u(x+h)+u(x-h)-2u(x) }{h^2}  = u''(x) +\dfrac{1}{12}h^2 u''''(x) + \cO(h^4)
+\end{align*}
+
+
+\note{\textbf{RICHARDSON EXTRAPOLATION}}
+
+\subsection{General Approach to Deriving Coefficients}
+
+
+\section{Steady State and Boundary Value Problems}
+
+
+
+\subsection{Boundary Conditions}
+
+\begin{definition}[Dirichlet Boundary Condition]
+A Dirichlet boundary condition means the value of the function is given at a point.
+\end{definition}
+
+\begin{definition}[Neumann Boundary Condition]
+A Neumann boundary condition means the value of the derivative of the function is given at a point.
+\end{definition}
+
+
+\subsection{Error for Finite Difference Method}
+We approximate the solution evaluated on the mesh \( U \) by solving \( A\hat{U} = F \).
+
+\begin{definition}[Global Error]
+The global error for a finite difference method is the difference between the computed solution and the actual solution at the given mesh points.
+\begin{align*}
+    E = U - \hat{U}
+\end{align*}
+\end{definition}
+
+\begin{definition}[Local Truncation Error]
+The local truncation error is the amount by which the finite difference method fails to satisfy the true solution at each mesh point.
+\begin{align*}
+    \tau = A\hat{U} - F
+\end{align*}
+\end{definition}
+
+We then have,
+\begin{align*}
+    AE = -\tau
+\end{align*}
+with boundary conditions \( E_0 = E_{m+1}=0 \). Therefore the global error satisfies the same finite difference equations as the original equations.
+
+\begin{definition}[Stable]
+Suppose a finite difference method for a linear BVP gives a sequence of matrix equations of the form \( A^{(h)} E^{(h)} = F^{(h)} \), where \( h \) is the mesh width. We say that the method is stable if \( (A^{(h)})^{-1} \) exists for all \( h \) sufficiently small and if there is a constant \( C \), independent of \( h \), such that,
+\begin{align*}
+    \norm{(A^{(h)})^{-1}} \leq C, && \forall h \text{ sufficiently small}
+\end{align*}
+\end{definition}
+
+\begin{definition}[Consistency]
+We say a method is consistent with the differential equation and boundary conditions if,
+\begin{align*}
+    \norm{\tau^{(h)}}\to 0 && \text{as} && h\to 0
+\end{align*}
+\end{definition}
+
+\begin{definition}[Convergence]
+We say a method is convergent if,
+\begin{align*}
+    \norm{E^{(h)}}\to 0 && \text{as} && h\to 0
+\end{align*}
+\end{definition}
+
+\begin{theorem}
+\vspace{-1em}
+\begin{align*}
+    \text{consistency} + \text{stability} \Longrightarrow \text{convergence} \\
+\end{align*} \vspace{-4em}
+\begin{align*}
+    \cO(h^p) \text{ local truncation error} + \text{stability} \Longrightarrow \cO(h^p) \text{ global error}
+\end{align*}
+\end{theorem}
+
+\subsection{Deferred Corrections}
+
+If we had an exact expression for the LTE, \( \tau \), then we could solve \( AE = -\tau \) for \( E \), and in turn use this to compute the exact solution. However in general this is not possible.
+
+Sometimes we could eliminate some of the error. For instance, if we are solving \( u''(x) = f(x) \), the dominant term will be \( h^2u''''(x)/12 \), and we know \( u''''=f'' \).
+
+Alternatively we could use the compute solution \( U \) to estimate \( \tau_j \), and then solve another problem to eliminate \( E \).
+
+\subsection{Spectral Methods}
+
+\note{IS THIS USEFUL?}
+
+\section{Finite Element Method}
+
+Suppose we have differential operator \( \cL = -D^2 + r(x) \) and wish to solve,
+\begin{align*}
+    \cL u = f, && 0<x<1, && u(0) = u(1) = 0
+\end{align*}
+
+Define,
+\begin{align*}
+    \ip{f,g}= \int_0^1 f(x)g(x)\d x
+\end{align*}
+
+Observe that \( \cL u = f \) if and only if for any function \( \varphi \),
+\begin{align*}
+    \ip{\cL u, \varphi} = \ip{f,\varphi}
+\end{align*}
+
+We can write this explicitly in integral as,
+\begin{align*}
+    \int_0^1 \left(-u''(x) + r(x)u(x)\right)\varphi(x) \d x = \int_0^1 f(x)\varphi(x)\d x
+\end{align*}
+
+This is called the weak form the the differential equation
+
+Integrating the left hand side by parts we obtain,
+\begin{align*}
+    \left[ -u'(x)\varphi(x) \right]_0^1 + \int_0^1 u'(x)\varphi'(x)\d x + \int_0^1 r(x)u(x)\varphi(x)\d x= \int_0^1 f(x)\varphi(x)\d x
+\end{align*}
+
+Note that since we have integrated we now only require that our solution \( u \) be first differentiable.
+
+We would like to find \( u\in S \), where \( S \) is some ``trial space'' of functions such that the weak form of the differential equation is satisfied for all \( \varphi \in \cL^2[0,1] \). However, this is still too hard of a problem, so we will restrict to only satisfying the equation for some \( \varphi \in T \), where \( T \) is some ``test space'' (often chosen to be \( S \)).
+
+If we pick \( S = T  \) the be the set of all continuous piecewise (on some fixed partition) polynomial functions satisfying the boundary conditions, this gives the Galerkin finite element method.
+
+In particular, suppose \( S = \{\varphi_i\}_{i=1}^{n} \).
+Then for every \( u\in S \), there are coefficients \( c_i \) such that,
+\begin{align*}
+    u = \sum_{i=1}^{n} c_i \varphi_i
+\end{align*}
+
+We solve for the coefficients \( c_i \) so that,
+\begin{align*}
+    \sum_{j=1}^{n} c_j\ip{\cL \varphi_j,\varphi_i}
+    = \ip{\cL u, \varphi_i} = \ip{f,\varphi_i}, && i=1,\ldots, n
+\end{align*}
+
+In matrix form we have,
+\begin{align*}
+    \left[\begin{array}{ccccc}
+    \ip{\cL \varphi_1, \varphi_1} & \ip{\cL \varphi_2,\varphi_1} & \cdots & \ip{\cL \varphi_n,\varphi_1} \\
+    \ip{\cL \varphi_1, \varphi_2} & \ip{\cL \varphi_2,\varphi_2} & \cdots & \ip{\cL \varphi_n,\varphi_2} \\
+    \vdots & \vdots & & \vdots \\
+    \ip{\cL \varphi_1, \varphi_n} & \ip{\cL \varphi_2,\varphi_n} & \cdots & \ip{\cL \varphi_n,\varphi_n} \\
+    \end{array}\right]
+    \left[\begin{array}{c} c_1 \\ c_2 \\ \vdots \\ c_n\end{array}\right]
+    =
+    \left[\begin{array}{c} \ip{f,\varphi_1} \\ \ip{f,\varphi_2} \\ \vdots \\ \ip{f,\varphi_n} \end{array}\right]
+\end{align*}
+
+Note that we use \( \ip{\cL f, g} \) to denote the inner product after integrating by parts.
+
+
+\section{Elliptic Equations}
+
+A common form of equations is,
+\begin{align*}
+    a_1 u_{xx} + a_2u_{xy} + a_3u_{yy} + a_4 u_x + a_5 u_y + a_6 u = f
+\end{align*}
+where \( a_2^2 - 4a_1a_3 < 0 \).
+
+Such equations often arise as steady-state equations for some time-dependent physical problem.
+
+\subsection{Laplacian Stencils}
+The 2-dimensional Laplace operator \( \nabla^2 \) is defined as \( \nabla^2 u = u_{xx} + u_{yy} \).
+
+\subsubsection{5-point Laplacian}
+On a rectangular grid a simple way to approximate this operator would be to use centered, second order accurate, finite difference approximations. This gives the 5-point operator,
+\begin{align*}
+    \nabla_5^2 u_{i,j} := \frac{1}{h^2} (u_{i-1,j}+u_{i+1,j}+u_{i,j-1}+u_{i,j+1}-4u_{ij})
+\end{align*}
+
+If we order the grid from bottom left to top right we will obtain the system \( AU=F \) where,
+\begin{align*}
+    A = \frac{1}{h^2} \left[\begin{array}{ccccc}
+    T & I \\
+    I & T & I \\
+    & I & T & I \\
+    & & \ddots &\ddots & \ddots \\
+    & & & I & T
+    \end{array}\right], &&
+    T=
+    \left[\begin{array}{ccccc}
+    -4 & 1 \\
+    1 & -4 & 1 \\
+    & 1 & -4 & 1 \\
+    & & \ddots &\ddots & \ddots \\
+    & & & 1 & -4
+    \end{array}\right]
+\end{align*}
+and
+\begin{align*}
+    U =
+    \left[\begin{array}{c}
+    u^{[1]} \\ u^{[2]} \\ \vdots \\ u^{[m]}
+    \end{array}\right]
+    , &&
+    u^{[j]}=
+    \left[\begin{array}{c}
+    u_{1j} \\ u_{2j} \\ \vdots \\ u_{mj}
+    \end{array}\right]
+\end{align*}
+
+\subsubsection{Ordering of Equations}
+Other orderings such as ``red-black'' are possible. These will give a system with different structure, and are (obviously) equivalent to a permutation of the variables and equation orders. However the system may have nicer properties for certain solvers.
+
+
+
+\subsubsection{9-point Laplacian}
+We could define the 9-point operator,
+\begin{align*}
+    \nabla_9^2 u_{i,j} := \frac{1}{h^2} (&4u_{i-1,j}+4u_{i+1,j}+4u_{i,j-1}+4u_{i,j+1}\\
+    &+ u_{i-1,j-1} + u_{i-1,j+1} + u_{i+1,j-1} + u_{i+1,j+1} -20u_{ij})
+\end{align*}
+
+This satisfies,
+\begin{align*}
+    \nabla_9^2 u(x_i,y_j) = \nabla^2 u + \dfrac{1}{12}h^2 (u_{xxxx}+2u_{xxyy} + u_{yyyy}) + \cO(h^4)
+\end{align*}
+
+Now observe,
+\begin{align*}
+    u_{xxxx}+2u_{xxyy} + u_{yyyy} = \nabla^2(\nabla^2(u) = \nabla^2 f
+\end{align*}
+
+Thus, we can correct for the leading order error term in the 9-point operator if we are able to compute \( \nabla^2 f \). In fact, even if we are unable to compute this, if \( f \) is sufficiently smooth, \( \nabla_5^2 f \) can be used instead.
+
+
+\section{Iterative Methods}
+
+\subsection{Jacobi, Gauss--Seidel, Successive Overrelaxation}
+
+\note{Include motivation}
+
+\begin{algorithm}[Simple Iteration]
+\begin{algorithmic}
+\State{Pick one of \( M = \begin{cases}
+    \operatorname{diag}(A) & \text{Jacobi Iteration}\\
+    \operatorname{tril}(A) & \text{GS Iteration}\\
+    \omega^{-1}\operatorname{diag}(A) - \operatorname{tril}(A,k=-1) & \text{SOR}
+\end{cases}\)}
+\State{Given initial guess \( x_0 \) compute, \( r_0 = b-Ax_0 \) and solve \( Mz_0 = r_0 \)}
+\For{\( k=1, 2, \ldots \)}
+    \State{\( x_k = x_{k-1}+z_{k-1} \)}
+    \State{\( r_k = b - Ax_k \)}
+    \State{Solve \( Mz_k = r_k \)}
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+\subsubsection{Convergence}
+
+\begin{theorem}
+Simple iteration converges if and only if \( \rho(I-M^{-1}A) < 1 \).
+\end{theorem}
+
+\begin{proof}
+We have,
+\begin{align*}
+    x_k = x_{k-1} + M^{-1} r_{k-1}
+    = x_{k-1} + M^{-1} Ae_{k-1}
+%    = x_{k-1} + M^{-1} A (A^{-1} b -x_{k-1})
+\end{align*}
+
+Thus,
+\begin{align*}
+    e_k = A^{-1}b-x_k = A^{-1}b-x_{k-1} - M^{-1}Ae_{k-1}
+    = (I-M^{-1}A)e_{k-1}
+    = (I-M^{-1}A)^k e_0
+\end{align*}
+
+Suppose \( \rho(I-M^{-1}A) < 1 \). By Theorem,
+\begin{align*}
+    \rho(I-M^{-1}A) = \lim_{k\to\infty} \norm{(I-M^{-1}A)^k}^{1/k}
+\end{align*}
+
+Since \( x\mapsto x^k \) is continuous,
+\begin{align*}
+    \lim_{k\to\infty} \norm{(I-M^{-1}A)^k}
+    = \lim_{k\to\infty} \rho(I-M^{-1}A)^k  = 0
+\end{align*}
+
+Therefore,
+\begin{align*}
+    \lim_{k\to\infty} \norm{e_k} \leq \lim_{k\to\infty} \norm{(I-M^{-1}A)^k}\norm{e_0} = 0
+\end{align*}
+
+Suppose \( \rho(I-M^{-1}A) \geq 1 \). Then There is some (nonzero) eigenvector \( v \) of \( I-M^{-1}A \) with corresponding eigenvalue \( \lambda \geq 1 \). Thus, if we pick some \( x_0 \) such that \( e_0 = v \) we will have,
+\begin{align*}
+    \norm{e_k} = \norm{(I-M^{-1}A)^kv} = |\lambda^k| \norm{v} > 0 \tag*{\qed}
+\end{align*}
+\end{proof}
+
+\subsection{Conjugate Gradient}
+Conjugate gradient is a method for solving \( Ax=b \) when \( A \) is symmetric positive definite. In exact arithmetic it will find the exact solution in at most \( n \) steps.
+
+\subsubsection{Motivation for Algorithm}
+
+Suppose that at each step we will minimize the \( A \)-norm of the error over \( \cK_k = \operatorname{span}\{r_0,Ar_0, \ldots, A^{k-1}r_0\} \).
+
+Let \( \{ p_0, p_1, \ldots, p_{k-1} \} \) be a basis for \( \cK_k \). We will pick \( x_k \) of the form,
+\begin{align*}
+    x_k = x_0 + \sum_{j=0}^{k-1} c_j p_j
+\end{align*}
+
+This gives the relation for the error at step \( k \),
+\begin{align*}
+    e_k = e_0 - \sum_{j=0}^{k-1} c_j p_j
+\end{align*}
+
+If we minimize \( \norm{e_k}_A \) we must pick,
+\begin{align*}
+    c_j = \dfrac{\ip{e_0,Ap_j}}{\ip{p_j,Ap_j}}
+\end{align*}
+
+While we do not know \( e_0 \), since \( A \) is SPD we have,
+\begin{align*}
+    \ip{e_0,Ap_j} = \ip{Ae_0,p_j} = \ip{r_0,p_j}
+\end{align*}
+
+In the present form this algorithm minimizes \( e_k \) over the entire space \( \cK_k \) at each step. It also requires that the basis \( \{ p_0,p_1, \ldots, p_{k-1} \} \) be constructed ahead of time.
+
+\subsubsection{Improvement}
+Note that at each step of the above algorithm we have,
+\begin{align*}
+    x_k = x_{k-1} + c_{k-1}p_{k-1}, && e_k = e_{k-1} - c_{k-1}p_{k-1}
+\end{align*}
+
+Moreover, \( e_{k-1} \perp_A \operatorname{span}\{ p_0, p_1, \ldots, p_{k-2} \} \). Thus,
+\begin{align*}
+    c_{k-1} = \dfrac{\ip{e_{k-1},Ap_{k-1}}}{p_{k-1},Ap_{k-1}}
+    = \dfrac{\ip{r_{k-1},p_{k-1}}}{p_{k-1},Ap_{k-1}}
+\end{align*}
+
+With this update we no longer need to minimize over the entire space.
+
+First observe that,
+\begin{align*}
+    r_k = b-Ax_k = b-A(x_{k-1}+c_{k-1}p_{k-1}) = r_{k-1} -c_{k-1}Ap_{k-1}
+\end{align*}
+
+From this expression it is clear that \( r_k\in\cK_{k+1} \).
+
+We now note that,
+\begin{align*}
+    r_k \perp \operatorname{span}\{ p_0,p_1,\ldots, p_{k-1} \} = \operatorname{span}\{r_0,Ar_0, \ldots A^{k-1}r_0 \}
+\end{align*}
+
+Thus,
+\begin{align*}
+    r_k \perp_A \operatorname{span}\{r_0, Ar_0, \ldots, A^{k-2}r_0 \}
+    = \operatorname{span}\{ p_0, p_1, \ldots, p_{k-2} \}
+\end{align*}
+
+Since \( r_k \) is \( A \)-orthogonal to all of these \( p_j \), we can obtain \( p_{k} \) by \( A \)-orthogonalizing \( r \) against \( p_{k-1} \). That is,
+\begin{align*}
+    p_k = r_k - b_kp_k, && b_k = \dfrac{\ip{r_k,Ap_{k-1}}}{p_{k-1},Ap_{k-1}}
+\end{align*}
+
+This finally gives the standard presentation of the Conjugate Gradient method.
+\begin{algorithm}[HS Conjugate Gradient]
+\begin{algorithmic}
+\State{Given initial guess \( x_0 \) compute, \( r_0 = b-Ax_0 \) and set \( p_0 = r_0 \)}
+\For{\( k=1, 2, \ldots \)}
+    \State{\( a_{k-1} = \ip{r_{k-1},p_{k-1}}/\ip{p_{k-1},Ap_{k-1}} \)}
+    \State{\( x_k = x_{k-1} + a_{k-1} p_{k-1} \)}
+    \State{\( r_k = r_{k-1} - a_{k-1}Ap_{k-1} \)}
+    \State{\( b_{k-1} = \ip{r_k,Ap_{k-1}}/\ip{p_{k-1},Ap_{k-1}}\)}
+    \State{\( p_k = r_k - b_k p_{k-1} \)}
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{GMRES}
+
+\note{Should we include other methods such as BiCGSTAB}
+
+\subsection{Multigrid Methods}
+Simple iteration is slow to eliminate low frequency error on a fine mesh. We can remove this low frequency component by estimating it on a much coarser grid, and then subtracting away an interpolation of this estimate on the fine grid.
+
+This idea can be improved further by cycling over a range of mesh widths.
+
+\note{How much should I know the exact details. This doesn't seem too important or difficult.}
+
+\note{When would I use this vs. conjugate gradient?}
+
+
+\section{Other Direct Methods}
+\note{DID WE DO THIS?}
+
+I remember fast Poisson solvers and stuff.
+
+\bibliography{numerics}{}
+\bibliographystyle{ieeetr}
+
+\section{The Initial Value Problem for ODEs}
+
+We would like to solve,
+\begin{align*}
+    u'(t) = f(u(t),t), && t>t_0, && u(t_0) = \eta
+\end{align*}
+
+\subsection{Linear ODEs}
+
+\begin{definition}[Linear ODE]
+A system of ODEs \( u'(t) = f(u(t),t) \) is called linear if,
+\begin{align*}
+    f(u,t) = A(t) u + g(t)
+\end{align*}
+where \( A(t) \in \RR^{s\times s} \) and \( g(t)\in\RR^s \).
+\end{definition}
+
+\subsection{Some stuff on Existence and Uniqueness. Is this important?}
+
+
+\subsection{Basic Numerical Methods}
+
+The simplest method is forward Euler,
+\begin{align*}
+    \frac{U^{n+1}-U^n}{k} = f(U^n), && n=0,1,\ldots
+\end{align*}
+
+It is possible to solve this equation explicitly for \( U^{n+1} \) in terms of \( U^n \). Therefore the method is called explicit.
+
+Another method is backward Euler,
+\begin{align*}
+    \frac{U^{n+1}-U^n}{k} = f(U^{n+1})
+\end{align*}
+
+However, this is now an implicit method, and \( U^{n+1} \) must be solve for. One way to do this would be to find a root to,
+\begin{align*}
+    g(u) = u - k f(u ) - U^n
+\end{align*}
+
+Another implicit method is the trapezoidal method, obtained by averaging the two Euler method,
+\begin{align*}
+    \frac{U^{n+1}-U^n}{k} = \frac{f(U^{n+1}) + f(U^n)}{2}
+\end{align*}
+
+\subsubsection{Truncation and One-step Errors}
+The truncation error is defined as before. The one step error is the error in \( U^{n+1} \) if all the previous points used were computed exactly. Thus the one step error is always has an extra factor of \( k \) and some constant compared with the local truncation error.
+
+\subsection{Taylor Series Methods}
+Forward Euler can be viewed as a Taylor series expansion in the sense that it arises by dropping all terms of order \( k^2 \) or higher.
+
+Other methods can be constructed this way. However, these methods require being able to compute derivatives of \( f \).
+
+
+\subsection{Runge--Kutta Methods}
+Rather than explicitly computing higher derivatives finite difference approximations can be designed to model these terms automatically.
+
+\begin{definition}[Runge--Kutta Method]
+A genera \( r \)-stage Runge--Kutta method has the form,
+\begin{align*}
+    Y_i &= U^n + k \sum_{j=1}^{r} a_{ij} f(Y_j, t_n + c_jk), && i=1,2,\ldots, r \\
+    U^{n+1} &= U^n + k \sum_{j=1}^{r} b_j f(Y_j, t_n + c_j k)
+\end{align*}
+\end{definition}
+
+\note{should i think of this like a matrix?}
+
+Consistency requires,
+\begin{align*}
+    &\sum_{j=1}^{r} a_{ij} = c_i, && i=1,2,\ldots, r \\
+    &\sum_{j=1}^{r} b_j = 1
+\end{align*}
+
+We can represent this using a ``Butcher tableau'' as,
+\begin{align*}
+    \begin{array}{c|ccc}
+        c_1 & a_{11} & \cdots & a_{1r} \\
+        \vdots & \vdots && \vdots \\
+        c_r & a_{r1} & \cdots & a_{rr} \\ \hline
+        & b_1 & \cdots & b_r
+    \end{array}
+\end{align*}
+
+If \( a_{ij} = 0 \) for all \( j\geq i \) the method is explicit. If \( a_{ij} = 0 \) for all \( j > i \) the method is diagonally implicit. This is means only \( r \) equations each of size \( s \) must be solved, rather than a coupled set of \( sr \) equations.
+
+\subsubsection{Embedded Methods and Error Estimation}
+Most practical ODE solvers do not use a fixed time step, but rather adjust it to try to achieve some given error bound. A simple way to do this is to take a step with two methods, one of order \( p \) and one of order \( p+1 \). Assuming the step is small enough that the higher order method generates a better approximation, then the difference of the two results is an estimate of the one step error in the lower order method.
+
+In general this could double the cost of computing the solution since two methods would have to be run. However, there are many methods where the same coefficients can be used for both the methods of order \( p \) and \( p+1 \). This saves computational costs.
+
+\subsection{One-step vs Multistep methods}
+One step methods are self starting, meaning they only require a single initial value. The timestep can be changed at any step, and if the solution is not smooth at a single point, as long as this point is part of the mesh the solution usually is fully accurate.
+
+On the other hand, Taylor series methods require knowing derivatives, and RK methods require many function evaluations. This can be expensive, especially for implicit methods.
+
+\subsection{Linear Multistep Methods}
+
+\begin{definition}[Linear Multistep Method]
+A linear multistep method has the form,
+\begin{align*}
+    \sum_{j=0}^{r} \alpha_j U^{n+1} = k \sum_{j=0}^{r} f(U^{n+j},t_{n+1})
+\end{align*}
+\end{definition}
+
+For LMMs it is easy to compute the LTE,
+\begin{align*}
+    \tau(t_{n+r}) &= \frac{1}{k} \left( \sum_{j=0}^{r} \alpha_j U^{n+1} - k \sum_{j=0}^{r} f(U^{n+j},t_{n+1}) \right) \\
+    &= \frac{1}{k} \left( \sum_{j=0}^{r} \alpha_j \right) u(t_n) + \sum_{q=1}^{\infty} k^{q-1} \left( \sum_{j=1}^{r} \left( \frac{1}{q!}j^q \alpha_j - \frac{1}{(q-1)!}j^{q-1} \beta_j  \right) \right) u^{(q)}(t_n)
+\end{align*}
+
+For consistency we require,
+\begin{align*}
+    \sum_{j=0}^{r} \alpha_j  = 0 &&
+    \sum_{j=0}^{r} j \alpha_j = \sum_{j=1}^{r} \beta_j
+\end{align*}
+
+\begin{definition}[Characteristic Polynomials]
+The characteristic polynomials \( \rho(\zeta) \) and \( \sigma(\zeta) \) of a LMM are,
+\begin{align*}
+    \rho(\xi) = \sum_{j=0}^{r} \alpha_j \zeta^j, && \sigma(\zeta) = \sum_{j=0}^{r} \beta_j \zeta^j
+\end{align*}
+\end{definition}
+
+\subsubsection{Starting Values}
+One difficulty with LMMs with \( r>0 \) is that we need the values of \( U^0, U^1, \ldots, U^{r-1} \) before we can apply the LMM. We know \( U^0 = \eta \), however the other values are not known.
+
+
+In general, if we are using a \( r \)-step method of order \( p \), we need to generate \( U^0, U^1, \ldots U^{r-1} \) using a method that has a one-step error of order \( p \) (LTE of order \( p-1 \)). 
+
+
+\section{Zero-Stability and Convergence for IVPs}
+
+\subsection{Convergence}
+
+\begin{definition}[Convergence Method]
+    An \( r \)-step method is said to be convergent if applying the method to any ODE \( u' = f(u(t),t) \) with \( f(u,t) \) Lipschitz continuous in \( u \), with any set of starting values converging to \( \eta \) as \( k\to 0 \), and for every fixed time \( T>0 \) for which the ODE has a unique solution we have,
+\begin{align*}
+    \lim_{\substack{k\to 0\\Nk = T}} U^N =  u(T)
+\end{align*}
+    
+\end{definition}
+
+\subsection{Solving Linear Difference Equations}
+Consider the general homogeneous linear difference equation,
+\begin{align*}
+    \sum_{j=0}^{r} \alpha_j U^{n+j} = 0
+\end{align*}
+
+Let \( \rho(\zeta) = \sum_{j=0}^{r} \alpha_j \zeta^j \), and let \( \lambda_1, \ldots, \lambda_{k} \) be the roots of \( \rho(\zeta) \) with multiplicities \( \beta_1, \ldots, \beta_k \). Then the solution to the above difference equation is,
+\begin{align*}
+    U^n =  \sum_{i=1}^{k} \left (c_{i,1} \lambda_i^n + c_{i,2} n \lambda_i^n + \cdots + c_{i,\beta_i} n^{\beta_i-1}\lambda_i^n\right)
+\end{align*}
+
+\begin{definition}[Zero-Stable]
+An \( r \)-step LMM is said to be zero-stable if the roots \( \zeta_1, \ldots, \zeta_r \) of the characteristic polynomial \( \rho(\zeta) \) satisfy,
+\begin{align*}
+    &|\zeta_j| \leq 1 \text{ for } j=1,2,\ldots, r \\
+    &\text{if }|\zeta_j| = 0 \text{ then } \zeta_j \text{ is a simple root}
+\end{align*}
+\end{definition}
+
+\begin{theorem}
+For LMMs applied to the IVP \( u'(t) = f(u(t),t) \),
+\begin{align*}
+    \text{consistency} + \text{zero-stability} \Longrightarrow \text{convergence} \\
+\end{align*}
+\end{theorem}
+
+We can think of zero stable as meaning ``stable in the limit as \( k\to 0 \)''.
+
+However, zero-stability says nothing about how small we need \( k \) to be. 
+
+\section{Absolute Stability for ODEs}
+
+Consider forward Euler applied to the test problem \( u'(t) = \lambda u(t) \). We have,
+\begin{align*}
+    U^{n+1}=(1+k\lambda)U^n = (1+k\lambda)^{n+1} U^0
+\end{align*}
+
+If the actual solution is decaying we want the numerical solution to also decay. For this we need \( |1+k\lambda| \leq 1 \).
+
+\note{But why is this useful? What if \( \lambda > 0 \)?}
+
+\begin{definition}[Region of Absolute Stability]
+The region of absolute stability for a LMM is the set of points \( z\in\CC \) for which \( \pi(\zeta;z) = \rho(\zeta) - z\sigma(\zeta) \) satisfies the root condition.
+\end{definition}
+
+\note{Why do we never have a neighborhood of the origin?}
+
+\subsection{Practical Choice of Step Size}
+
+We need to choose \( k \) small enough so that the local truncation error is acceptably small. At this time, we also need that \( k\lambda \) lies within the region of absolute stability for the given problem.
+
+\subsection{Systems of ODEs}
+How do we relate a given problem to the test equation?
+
+Suppose we have the linear system \( u'(t) = Au(t) \).
+
+In the linear case, if \( A \) is normal (unitarily diagonalizable) then all the eigenvalues being in the region of stability is enough 
+
+\note{ENOUGH FOR WHAT. WHY ARE THERE NO PROPER DEFINITIONS IN APPLIED MATH}
+
+If the systems are nonlinear the Jacobian may give a good linear approximation if the system is not varying too quickly in time.
+
+\subsection{Plotting the Stability Regions}
+
+\subsubsection{Boundary Locus Method for LMMs}
+If a point \( z \) is on the boundary of the stability region, then \( \rho(\zeta) - z\sigma(\zeta) \) has at least one root with modulus one. Thus, \( \pi(e^{i\theta};z) = 0 \) for some \( \theta \). Therefore, to find the boundary we could plot the points,
+\begin{align*}
+    z(\theta) = \rho(e^{i\theta})/\sigma(e^{i\theta})
+\end{align*}
+
+This will give all the boundary points, however not all points of this form need to be on the boundary.
+
+\subsection{Plotting Stability Regions of One-step Methods}
+When we apply a one-step method to the test equation \( u' = \lambda u \) we typically obtain an expression of the form,
+\begin{align*}
+    U^{n+1} = R(z) U^{n}, && z = k\lambda
+\end{align*}
+
+The absolute stability region is,
+\begin{align*}
+    \{z \in \CC : |R(z)| \leq 1 \}
+\end{align*}
+
+In this special case we can use contour plots to find the boundary of the stability region.
+
+\subsection{Relative Stability Regions and Order Stars}
+
+\note{IS THIS RELEVANT??}
+
+\section{Stiff ODEs}
+
+Roughly speaking a problem is stiff if we are computing a solution which is smooth and slowly varying (relative to the time interval of the computation), but in a context where nearby solution curves are much more rapidly varying. That is, if we perturb our solution slightly the resulting solution curve has rapid variation.
+
+\begin{definition}[A-stability]
+    An ODE method is A-stable if its region of absolute stability contains the entire left half plane, \( \{z\in\CC : \operatorname{Re}(z) \leq 0 \} \).
+\end{definition}
+
+It turns out that any A-stable LMM is at most second order accurate.
+
+\begin{definition}[L-stablity]
+    A one-step method is L-stable if it is A-stable and \( R(z) \to 0 \) as \( z\to 0 \).
+\end{definition}
+
+\section{Diffusion Equations and Parabolic Problems}
+
+We will look at the heat equation,
+\begin{align*}
+    u_t = \kappa u_{xx}
+\end{align*}
+This is the classic example of a parabolic equation.
+
+We need initial conditions at time zero, as well as boundary conditions.
+
+We generally discritize in time and space on a discrete rectangular grid.
+
+\subsection{Local Truncation Error and Order of Accuracy}
+We define LTE as usual, by plugging the exact solution into the discrete approximation and finding how much it fails to satisfy the equation. We now have some error in time and some error in space.
+
+\subsection{Method of Lines Discritizations}
+We would like to develop stability theory for PDEs. One way to do this is to view our PDE methods in terms of IVP solvers. That is, discritizing in space and then considering how IVP methods work on the resulting (often linear) system.
+
+In this case we obtain a method like,
+\begin{align*}
+    U'(t) = AU(t) + g(t)
+\end{align*}
+
+\subsection{Stability Theory}
+We can now apply stability results from before to the MOL discritization. However, as we refine the space mesh \( A \) and its eigenvalues will change.
+
+For example, suppose the discritization \( U' = AU + g \) is obtained for \( u' = u_{xx} \) using a standard second order differencing scheme. Then the eigenvalues of \( A \) are \( \lambda_p = 2(\cos(p\pi h)-1)/h^2 \) for \( p=1,2,\ldots, m \).
+
+These are all on the negative real axis, with the one farthest from the origin being bounded by \( -4/h^2 \) (where we can get arbitrarily close to this bound by making the mesh fine enough).
+
+If we use forward Euler to solve \( U' = AU + g \) then we need \(|1+k\lambda|\leq 1 \) for all \( \lambda \). Thus we require, \( -2\leq -4k/h^2 \leq 0 \). This means we need,
+\begin{align*}
+    \frac{k}{h^2} \leq \frac{1}{2}
+\end{align*}
+
+However, if we use Crank-Nicholson, which is obtained by applying the trapezoid method, the method is stable for any step size \( k > 0 \) as the region of absolute stability of the trapezoid method is the entire left half plane.
+
+\subsection{Stiffness of the Heat Equation}
+The heat equation is really stiff. In the continuous case it is infinitely stiff. In the discrete case it is not infinitely stiff, but as we take \( h\to0 \) it is unboundedly stiff. 
+
+\subsection{Convergence}
+In general we cannot just take \( h\to 0 \) and \( k\to 0 \) independently and except convergence. 
+
+\begin{definition}[Lax--Richtmyer Stable]
+    A linear method of the form \( U^{n+1} = B(k) U^n + b^n(k) \) is Lax--Richtmyer stable if, for each time \( T \), there is a constant \( C_T > 0 \) such that,
+    \begin{align*}
+        \norm{B(k)^n} \leq C_T
+    \end{align*}
+for all \( k > 0 \) and integers \( n \) for which \( kn \leq T \).
+\end{definition}
+
+\begin{theorem}[Lax Equivalence Theorem]
+    A consistent linear method of the form \( U^{n+1} = B(k)U^n + b^n(k) \) is stable if and only if it is Lax-Richtmyer stable.
+\end{theorem}
+
+\note{What about multistep method? And non-linear methods?}
+
+\subsection{Von Neumann Analysis}
+To show a finite difference method is stable in 2-norm we have to show that \( \norm{B}_2 \leq 1+ \alpha k \), where \( B = B(k) \) as before. This ammounts to showing there is a constant \( \alpha \) such that,
+\begin{align*}
+    \norm{U^{n+1}}_2 \leq (1+\alpha k) \norm{U^n}_2
+\end{align*}
+
+This is difficult to show since everything in coupled together. That is, \( U_j^{n+1} \) depends on values of \( U^n \) at many points.
+
+However, using Parseval's relation it is sufficient to show,
+\begin{align*}
+    \norm{\hat{U}^{n+1}} \leq (1+\alpha k) \norm{\hat{U}^n}_2
+\end{align*}
+
+Where we have used the notation \( \hat{X} \) to denote the Fourier transform of \( X \), and by Parseval, \( \norm{\hat{X}}_2 = \norm{X}_2 \).
+
+In this case it turns out that \( \hat{U}^n(\xi) \) decouples from all other wave numbers. For a two level method this has the form,
+\begin{align*}
+    \hat{U}^{n+1}(\xi) = g(\xi) \hat{U}^n(\xi)
+\end{align*}
+
+We call the factor \( g(\xi) \) the amplification factor for the wave number \( \xi \).
+
+If we can show \( g(\xi) \leq 1+\alpha k \) for each \( \xi \), then,
+\begin{align*}
+    |\hat{U}^{n+1}| \leq (1+\alpha k) |\hat{U}^n
+\end{align*}
+and so,
+\begin{align*}
+    \norm{\hat{U}^{n+1}} \leq (1+\alpha k) \norm{\hat{U}^n}_2
+\end{align*}
+
+To use this analysis we replace,
+\begin{align*}
+    U_j^n \leftarrow e^{ijh\xi}, && U_j^{n+1} \leftarrow g(\xi) e^{ijh\xi}
+\end{align*}
+
+\note{I think it is misleading to set \( U_j^n \) as its fourier transform. Double check this though.}
+
+\note{See p 213 for three level method}
+
+\subsection{Multidimensional Problems}
+In two space dimensions the heat equation takes the form,
+\begin{align*}
+    u_t = u_{xx} + u_{yy}
+\end{align*}
+
+If we discretize in space using the 5-point Laplacian, and in time using trapezoid method we obtain the two-dimensional version of Crank--Nicolson,
+\begin{align*}
+    U_{ij}^{n+1} = U_{ij}^n + \frac{k}{2} \left[ \nabla_h^2 U_{ij}^n + \nabla_h^2 U_{ij}^{n+1} \right]
+\end{align*}
+Equivalently,
+\begin{align*}
+    \left( I-\frac{k}{2} \nabla_h^2 \right) U_{ij}^{n+1} = \left( I + \frac{k}{2} \nabla_h^2 \right)U_{ij}^n
+\end{align*}
+
+This is a linear system whose left hand side matrix has eigenvalues,
+\begin{align*}
+    \lambda_{p,q} = 1- \frac{k}{h^2} \left[ (\cos(p\pi h)-1) + (\cos(q\pi h)-1) \right]
+\end{align*}
+
+The largest eigenvalue of this matrix is \( \cO(k/h^2) \) while the smallest is \( 1+\cO(k) \). Thus the condition number of \( A \) is \( \cO(k/h^2) \). This is in contrast to the condition number of \( \cO(1/h^2) \) of the 5-point Laplacian alone.
+
+We therefore expect iterative methods to converge quicker on this system. Moreover, we can use the solution at a previous step as a good starting guess for the solution at the next step. We could also use an explicit method (such as forward Euler) to guess at the solution, and use this guess as the starting point for an iterative method.
+
+In practice it is often the case that only one or two iterations are needed in each time step to obtain global second order accuracy.
+
+\subsection{The Locally One-Dimensional Method}
+Rather than solving the coupled equation above, we could solve \( u_t = u_{xx} \) in one time step, and then \( u_t = u_{yy} \) in the next time step. This would give two tridiagonal systems. 
+
+Some care must be taken with the boundary conditions, but if they are treated properly the LOD method is second order accurate and unconditionally stable for any time-step.
+
+\subsection{The Alternating Direction Implicit Method}
+
+We can modify the LOD method by discritizing in both spatial directions at once. That is,
+\begin{align*}
+    U_{ij}^* = U_{ij}^n + \frac{k}{2} \left( D_y^2 U_{ij}^n + D_x^2 U_{ij}^* \right),
+    &&U_{ij}^{n+1} = U_{ij}^* + \frac{k}{2} \left( D_x^2 U_{ij}^* + D_y^2 U_{ij}^{n+1} \right),
+\end{align*}
+
+This again gives two tridiagonal systems. Each step is first oder accurate, however the errors almost cancel exactly and the two steps together are second order accurate. Since \( U^* \) is the approximate solution at time \( t_{n+1/2} \) it is possible to evaluate the given boundary data to generate the boundary values for \( U^* \). This maintains second order accuracy.
+
+
+
+\section{Advection Equations and Hyperbolic Systems}
+
+Hyperbolic PDEs arise in many physical problems, especially when wave motion is observed. 
+
+We consider the simplest case of a hyperbolic equation, the advection equation,
+\begin{align*}
+    u_t +a u_x = 0, && u(x,0) = \eta(x)
+\end{align*}
+
+This has exact solution \( u(x,t) = \eta(x-at) \). Trying to solve this equation numerically will give some insight into the type of issues which arise from hyperbolic equations.
+
+\subsection{Method of Lines Discretization}
+Discretizing in space with periodic boundary conditions gives \( U'=AU \) where,
+\begin{align*}
+    A = -\frac{a}{2h} 
+    \left[\begin{array}{cccccc}
+        0 & 1 & & & & -1 \\
+        -1 & 0 & 1\\
+        &-1 & 0 & 1\\
+        & &\ddots &\ddots & \ddots \\
+        & & & -1 & 0 & 1 \\
+        1 & & & & -1 & 0
+    \end{array}\right]
+\end{align*}
+
+This matrix is skew-Hermetian and therefore has pure imaginary eignevalues. Specifically,
+\begin{align*}
+    \lambda_p = -\frac{ia}{hj}\sin(2\pi p h), && p=1,2,\ldots,m+1
+\end{align*}
+
+\subsubsection{Forward Euler Time Discretization}
+Since \( \lambda_p \) are always imaginary, forward Euler will not be stable no matter how small we make \( k/h \). However, the method is convergent. To see this note we have \( B = I+kA \) and take \( k=h^2 \). Then,
+\begin{align*}
+    |1+k\lambda_p^2| \leq 1+(ka/h)^2 \leq 1 +a^2k
+\end{align*}
+
+Therefore \( \norm{B^n} = 1+\cO(k) \) so the method is Lax--Richtmyer stable (and equivalently convergent).
+
+\subsubsection{Leapfrog}
+A better time discretization is the midpoint method. This gives a 3-level explicit method which is second order in time and space. Recall the region of absolute stability of the midpoint method is the imaginary axis between \( -i \) and \( i \). Therefore the method is stable on the advection equation if \( |k\lambda_p| \leq 1 \) since \( \lambda_p \) is pure imaginary. In particular this require \( |ak/h| < 1 \).
+
+However, \( k\lambda_p \) will always be on the boundary of the stability region so the method is only marginally stable (the eignemodes do not grow or decay). We call such a difference method non-dissipative.
+
+\subsubsection{Lax--Friedrichs}
+Consider the Lax--Friedrichs method,
+\begin{align*}
+    U_j^{n+1} = \frac{1}{2} \left( U_{j-1}^n + U_{j+1}^n \right) - \frac{ak}{2h}(U_{j+1}^n - U_{j-1}^n)
+\end{align*}
+
+We can rewrite this as,
+\begin{align*}
+    U_j^{n+1} = U_j^n - \frac{ak}{2h}(U_{j+1}^n-U_{j-1}^n) + \frac{1}{2} (U_{j-1}^n  -2U_j^n+U_{j+1}^n)
+\end{align*}
+
+Rearranging terms we find,
+\begin{align*}
+    \frac{U_j^{n+1}}{k} + a \left( \frac{U_{j+1}^n-U_{j-1}^n}{2h} \right) = \frac{h^2}{2k} \left( \frac{U_{j-1}^n-2U_j^n + U_{j+1}^n}{h^2} \right)
+\end{align*}
+
+This is consistent with the advection equation \( u_t = a u_x = 0 \) as the right hand side vanishes as \( k,h\to 0 \) (assuming \( h/k \) is fixed).
+
+However, it looks more like a discretization of the advection-diffusion equation \( u_t +au_x = \epsilon u_{xx} \) where \( \epsilon = h^2/2k \).
+
+We can then view Lax--Friedrichs as the result of applying forward Euler to the system \( U' = A_\epsilon U \) where,
+\begin{align*}
+    A_\epsilon = -\frac{a}{2h} 
+    \left[\begin{array}{cccccc}
+        0 & 1 & & & & -1 \\
+        -1 & 0 & 1\\
+        &-1 & 0 & 1\\
+        & &\ddots &\ddots & \ddots \\
+        & & & -1 & 0 & 1 \\
+        1 & & & & -1 & 0
+    \end{array}\right]
+    +\frac{\epsilon}{h^2}
+    \left[\begin{array}{cccccc}
+        -2 & 1 & & & & -1 \\
+        1 & -2 & 1\\
+        &1 & -2 & 1\\
+        & &\ddots &\ddots & \ddots \\
+        & & & 1 & -2 & 1 \\
+        1 & & & & 1 & -2
+    \end{array}\right]
+\end{align*}
+
+The eigenvalues of \( A_\epsilon \) are,
+\begin{align*}
+    \mu_p = -\frac{ia}{h}\sin(2\pi ph) - \frac{2\epsilon}{h^2}(1-\cos(2\pi ph))
+\end{align*}
+
+For the special case \( \epsilon = h^2/2k \) used in Lax--Friedrichs we have all the eignevalues in the unit circle centered at \( -1 \) if \( |ak/h|\leq 1 \). In this case the forward Euler method is stable as a time-discretization, and hence the Lax--Friedrichs method is Lax--Richtmyer stable.
+
+\note{I don't see this implication. What does it mean to be ``stable''.} 
+
+\subsection{The Lax--Wendroff Method}
+One way to achieve second order accuracy is to use a second order temporal discretization. This was done in the leapfrog scheme, however now this is a three-level method.
+
+Instead we could use a Taylor series method and make the substitute \( U'' = AU' = A^2 U \) to obtain,
+\begin{align*}
+    U^{n+1} = U^n + kAU^n + \frac{1}{2} k^2A^2 U^n
+\end{align*}
+
+This gives the method,
+\begin{align*}
+    U_j^{n+1} = U_j^n - \frac{ak}{2h}(U_{j+1}^n - U_{j-1}^n) + \frac{a^2k^2}{8h^2} (U_{j-2}^n - 2U_j^n+U_{j+2}^n)
+\end{align*}
+
+Now, noting that the last term is an approximation to \( a^2k^2u_{xx}/2 \) with step size \( 2h \), we can replace it with an approximation using step size \( h \). This reduces the 5-point method to the 3-point Lax--Wendroff method,
+\begin{align*}
+    U_j^{n+1} = U_j^n - \frac{ak}{2h}(U_{j+1}^n - U_{j-1}^n) + \frac{a^2k^2}{2h^2} (U_{j-1}^n - 2U_j^n+U_{j+1}^n)
+\end{align*}
+
+This can be viewed as forward Euler applied to \( U' = A_\epsilon U \) with \( \epsilon = a^2k/2 \). All the eigenvalues of this matrix lie within the stability region of forward Euler provided \( |ak/h|<1 \).
+
+
+\subsection{Upwind Methods}
+Rather than using centered difference approximations for the \( u_x \) term, we could use one sided approximations. This may be useful in capturing some of the asymmetry many hyperbolic equations have.
+
+\note{IDK if these are worth reading a lot about right now}
+
+\subsection{Von Neumann Analysis}
+We can use Von Neumann analysis, replacing \( U_j^n \) by \( g(\xi)^n e^{i\xi j h} \) and finding an expression for \( g(\xi) \).
+
+\note{UNDERSTAND WHY THIS CAN BE USED FOR MULTI-LEVEL METHOD (p. 213)}
+
+\subsection{Characteristic Tracing and Interpolation}
+The characteristics for the advection equation are lines and \( u(x_j,t_{n+1}) = u(x_j-ak,t_n) \). If we pick \( k,h \) such that \( ak/h = 1 \) then we can compute the exact solution numerically as \( U_j^{n+1} = U_{j-1}^n \).
+
+However, if \( ak/h<1 \), then the point \( x_j - ak \) is not a grid point. To find the value at \( U_j^{n+1} \) we could estimate the value of \( U \) on the characteristic by interpolating \( U_{j-1}^n \) and \( U_j^n \).
+
+Fitting a linear function gives,
+\begin{align*}
+    p(x) = U_j^n + (x-x_j) \left( \frac{U_j^n-U_{j-1}^n}{h} \right)
+\end{align*}
+When we evaluate this at \( x_j - ak \) and use this value as \( U_j^{n+1} \) we obtain,
+\begin{align*}
+    U_j^{n+1} = p(x_j-ak) = U_j^n - \frac{ak}{h} (U_j-U_{j-1}^n) = \left( 1-\frac{ak}{h} \right) U_j^n + \frac{ak}{h} U_{j-1}^n
+\end{align*}
+
+For better accuracy we might try a higher order polynomial depending on more points. Using a quadratic polynomial interpolating \( U_{j-1} \), \( U_j \), and \( U_{j+1} \) gives the Lax--Wendroff method. If instead we interpolate between \( U_{j-2} \), \( U_{j-1} \), and \( U_j \) we obtain the Beam--Warming method.
+
+
+\subsection{The Courant--Friedrichs--Lewy Condition}
+
+\begin{theorem}[CFL condition]
+A numerical method can be convergent only if its numerical domain of dependence contains the true domain dependence of the PDE in the limit as \( k, h \to 0\).
+\end{theorem}
+
+In the case of the advection equation, the domain of dependence is the characteristic \( x_j - ak \).
+
+\subsection{Modified Equations}
+The standard tool for estimating the accuracy of finite difference methods has been the LTE. We can extend this approach slightly, and find a PDE which is better satisfied by our difference method. By doing this we may gain insight into how the difference method behaves.
+
+\note{But do I need to know stuff about PDEs. Because without knowing what ``disspersive'' terms are and stuff this doesn't seem like I can really do anything}
+
+\subsection{Hyperbolic Systems}
+Given some diagonalizable \( A = R\Lambda R^{-1} \), the system \( u_t + Au_x = 0 \), \( u(x,0) = \eta(x) \) is called hyperbolic.
+
+\note{Some stuff about solving these??}
+
+\subsection{Numerical Methods for Hyperbolic Systems}
+Most methods for the advection equation can be extended directly to a general hyperbolic system.
+
+
+
+
+
+
+\bibliographystyle{ieeetr}
+\bibliography{numerics}
+
+\end{document}
