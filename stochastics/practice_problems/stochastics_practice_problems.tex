@@ -30,7 +30,7 @@
 
 % overwrite old problem class to be able to add to ToC
 \let\savedprob=\problem%
-\def\problem[#1]{\phantomsection\addcontentsline{toc}{subsection}{#1}\savedprob[#1]\label{#1}}
+\def\problem[#1]{\pagebreak\phantomsection\addcontentsline{toc}{subsection}{#1}\savedprob[#1]\label{#1}}
 
 
 \begin{document}
@@ -39,12 +39,17 @@
 \pagebreak
 \tableofcontents
 
-
+%%%%%%%%%%%%%%%%%%%%%
+%     CHAPTER 3     %
+%%%%%%%%%%%%%%%%%%%%%
 \pagebreak
 \section{Generating and Characteristic functions}
 
-\include{ch3}
 
+%%%%%%%%%%%%%%%%%%%%%
+%     CHAPTER 4     %
+%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
 \section{Discrete Time Markov Chains}
 \subsection{Transition Matrix}
 \textit{Sample Problems}: 
@@ -94,8 +99,11 @@
 
 
 
-\include{ch4}
 
+\pagebreak
+%%%%%%%%%%%%%%%%%%%%%
+%     CHAPTER 5     %
+%%%%%%%%%%%%%%%%%%%%%
 \section{Continuous Time Markov Chains}
 
 \subsection{Transition Matrix}
@@ -270,8 +278,10 @@ This has mean,
 \end{align*}
 
 
-\include{ch5}
-
+%%%%%%%%%%%%%%%%%%%%%
+%     CHAPTER 7     %
+%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
 \section{Brownian Motion}
 \note{add examples from class notes}
 
@@ -298,17 +308,42 @@ This has mean,
     \item \hyperref[Exercise 7.4]{Exercise 7.4}: Compute Laplace transform of first hitting time.
 \end{itemize}
 
-\include{ch7}
 
+%%%%%%%%%%%%%%%%%%%%%
+%     CHAPTER 8     %
+%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
 \section{Stochastic Calculus}
 
 
-\include{ch8}
-
+%%%%%%%%%%%%%%%%%%%%%
+%     CHAPTER 9     %
+%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
 \section{SDEs and PDEs}
-\include{ch9}
 
+
+%%%%%%%%%%%%%%%%%%%%%
+%     CHAPTER 10    %
+%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
 \section{Jump Diffusions}
+
+
+
+\pagebreak
+\section{Practice Qualification Exams}
+
+
+\pagebreak
+\section{Homework Problems}
+\include{ch3}
+\include{ch4}
+\include{ch5}
+\include{ch6}
+\include{ch7}
+\include{ch8}
+\include{ch9}
 \include{ch10}
 
 
