@@ -1,0 +1,69 @@
+\contentsline {section}{\numberline {1}Generating and Characteristic functions}{4}{section.1}
+\contentsline {section}{\numberline {2}Discrete Time Markov Chains}{5}{section.2}
+\contentsline {subsection}{\numberline {2.1}Transition Matrix}{5}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Classification of States}{5}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Mean Recurence Time}{5}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Reversibility}{5}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}Stationary/Invariant distribution}{5}{subsection.2.5}
+\contentsline {subsection}{\numberline {2.6}Generating Functions}{5}{subsection.2.6}
+\contentsline {section}{\numberline {3}Continuous Time Markov Chains}{7}{section.3}
+\contentsline {subsection}{\numberline {3.1}Transition Matrix}{7}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Stationary/Invariant distribution}{7}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Generator}{7}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Generating Functions}{7}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}KFE AND KBE}{7}{subsection.3.5}
+\contentsline {subsection}{\numberline {3.6}Birth Death Processes}{7}{subsection.3.6}
+\contentsline {subsubsection}{\numberline {3.6.1}General Form for infinite queue}{8}{subsubsection.3.6.1}
+\contentsline {subsubsection}{\numberline {3.6.2}M/M/1 queue}{8}{subsubsection.3.6.2}
+\contentsline {subsubsection}{\numberline {3.6.3}M/M/\(\infty \)}{9}{subsubsection.3.6.3}
+\contentsline {subsubsection}{\numberline {3.6.4}M/M/1/K queue}{9}{subsubsection.3.6.4}
+\contentsline {section}{\numberline {4}Brownian Motion}{11}{section.4}
+\contentsline {subsection}{\numberline {4.1}Martingale}{11}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Characteristic Functions}{11}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Laplace Transform}{11}{subsection.4.3}
+\contentsline {section}{\numberline {5}Stochastic Calculus}{12}{section.5}
+\contentsline {section}{\numberline {6}SDEs and PDEs}{13}{section.6}
+\contentsline {section}{\numberline {7}Jump Diffusions}{14}{section.7}
+\contentsline {section}{\numberline {8}Practice Qualification Exams}{15}{section.8}
+\contentsline {subsection}{Practice Exam 1, Problem 1}{16}{section*.1}
+\contentsline {subsection}{Practice Exam 1, Problem 2}{17}{section*.2}
+\contentsline {section}{\numberline {9}Homework Problems}{20}{section.9}
+\contentsline {subsection}{Exercise 3.1}{21}{section*.3}
+\contentsline {subsection}{Exercise 3.2}{22}{section*.4}
+\contentsline {subsection}{Exercise 3.3}{24}{section*.5}
+\contentsline {subsection}{Exercise 3.4}{25}{section*.6}
+\contentsline {subsection}{Exercise 3.5}{26}{section*.7}
+\contentsline {subsection}{Exercise 3.6}{27}{section*.8}
+\contentsline {subsection}{Exercise 3.7}{28}{section*.9}
+\contentsline {subsection}{Exercise 4.1}{30}{section*.10}
+\contentsline {subsection}{Exercise 4.2}{32}{section*.11}
+\contentsline {subsection}{Exercise 4.3}{33}{section*.12}
+\contentsline {subsection}{Exercise 4.4}{34}{section*.13}
+\contentsline {subsection}{Exercise 4.5}{35}{section*.14}
+\contentsline {subsection}{Exercise 4.6}{36}{section*.15}
+\contentsline {subsection}{Exercise 4.7}{38}{section*.16}
+\contentsline {subsection}{Exercise 4.8}{39}{section*.17}
+\contentsline {subsection}{Exercise 5.1}{41}{section*.18}
+\contentsline {subsection}{Exercise 5.2}{43}{section*.19}
+\contentsline {subsection}{Exercise 5.3}{44}{section*.20}
+\contentsline {subsection}{Exercise 5.4}{47}{section*.21}
+\contentsline {subsection}{Exercise 5.5}{51}{section*.22}
+\contentsline {subsection}{Exercise 7.1}{52}{section*.23}
+\contentsline {subsection}{Exercise 7.2}{53}{section*.24}
+\contentsline {subsection}{Exercise 7.3}{54}{section*.25}
+\contentsline {subsection}{Exercise 7.4}{56}{section*.26}
+\contentsline {subsection}{Exercise 8.1}{58}{section*.27}
+\contentsline {subsection}{Exercise 8.2}{60}{section*.28}
+\contentsline {subsection}{Exercise 8.3}{61}{section*.29}
+\contentsline {subsection}{Exercise 8.4}{63}{section*.30}
+\contentsline {subsection}{Exercise 9.2}{64}{section*.31}
+\contentsline {subsection}{Exercise 9.2}{66}{section*.32}
+\contentsline {subsection}{Exercise 9.3}{67}{section*.33}
+\contentsline {subsection}{Exercise 9.4}{69}{section*.34}
+\contentsline {subsection}{Exercise 9.5}{70}{section*.35}
+\contentsline {subsection}{Exercise 9.6}{73}{section*.36}
+\contentsline {subsection}{Exercise 10.1}{77}{section*.37}
+\contentsline {subsection}{Exercise 10.2}{79}{section*.38}
+\contentsline {subsection}{Exercise 10.3}{80}{section*.39}
+\contentsline {subsection}{Exercise 10.4}{82}{section*.40}
+\contentsline {subsection}{Exercise 10.5}{85}{section*.41}

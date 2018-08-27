@@ -1,0 +1,132 @@
+\begin{problem}[Practice Exam 1, Problem 1]
+    Let \( X = (X_n)_{n\in\NN_0} \) be a discrete time Markov chain with \( X_n \) representig the amount of water in a reservoir at noon on day \( n \). Assume \( X_0 \in \NN_0 \). Let \( Y = (Y_n)_{n\in\NN_0} \) be a sequence of iid random variables with \( Y_n \) representing the aount of water that flows into the reservoir during the \( n \)-th day. The state space of \( Y \) is \( \{0,1,2,\ldots \} \). The resevoir has a maximum capacity of \( K\in\NN \). When the resevoir is filled to level \( K \), all excssive inflows are lost.
+    \begin{enumerate}[nolistsep,label=(\alph*)]
+        \item Write the one-step transition matrix \( P \) of \( X \) in terms of the probability generating function \( G_Y \) of \( Y \).
+        \item Find an expression for the stationary distribution \( \pi \) of \( X \) in terms of the probability generating function \( G_Y \) of \( Y \).
+    \end{enumerate}
+\end{problem}
+
+\begin{solution}[Solution]
+\begin{enumerate}[label=(\alph*)]
+    \item 
+        We assume all the water comes in the afternoon. That is, \( X_{n+1} = X_n + Y_n \).
+
+        Suppose on day \( n \) the resevoir is not full. That is, \( X_n = k < K \). If it is not filled completely by the incoming water, then some amount of water \( j < K-k \) was added. In this case \( X_{n+1} = k+j \) with probability,
+        \begin{align*}
+            \PP(Y_n = j) = f_Y(j) = 
+            \left[\frac{1}{j!}\dd[j]{G_Y(s)}{s} \right]_{s=0}
+        \end{align*}
+        
+        Otherwise, \( X_{n+1} = K \) with probability,
+        \begin{align*}
+            1-\sum_{j < K-k} f_Y(j) = 1 - \sum_{j<K-k} \left[\frac{1}{j!} \dd[j]{G_Y(s)}{s} \right]_{s=0}
+        \end{align*}
+        
+        Suppose \( X_n = K \). Then since no water leaves the resevoir, \( X_{n+1} = K \) with probability one.
+
+        We can write this as,
+        \begin{align*}
+            X_{n+1} = \begin{cases}
+                \left[\frac{1}{j!}\dd[j]{G_Y(s)}{s} \right]_{s=0} & j < K - X_n \\ \\
+                1 - \sum_{j<K-X_n} \left[\frac{1}{j!}\dd[j]{G_Y(s)}{s} \right]_{s=0} & \text{otherwise}
+            \end{cases}
+        \end{align*}
+        
+    \item
+        Note that \( \pi = [0,0,\ldots,0,1] \) is a stationary distribution.
+
+        \note{argue the distributoin is unique?}
+
+
+        \note{alternative approach??}
+        Clearly \( X_n \to K \) as \( n\to\infty \).
+
+        \note{in what sense?}
+        
+\end{enumerate}
+\end{solution}
+
+\begin{problem}[Practice Exam 1, Problem 2]
+    Let \( (X,Y) = (X_t,Y_t)_{t\geq 0} \) satisfy the following SDE,
+    \begin{align*}
+        \d X_t = \d W_t^1, && \d Y_t = \d W_t^2, && (X_0,Y_0) = (x,y)
+    \end{align*}
+    where \( W = (W_t^1,W_t^2)_{t\geq 0} \) is a two-dimensinoal Brownian motion with independent components. Define a process \( (R,\Phi) = (R_t,\Phi_t)_{t\geq 0} \) as follows,
+    \begin{align*}
+        \Phi_t = \arctan(Y_t/X_t), && R_t^2 = X_t^2 + Y_t^2
+    \end{align*}
+    \begin{enumerate}[nolistsep,label=(\alph*)]
+        \item Derive the SDEs satisfied by \( (R,\Phi) \).
+        \item Define,
+            \begin{align*}
+                u(r,\phi) = \EE \left[ e^{-\lambda \tau} f(R_\tau) | R_0 = r,\Phi_0 = \phi \right], &&
+                \tau = \inf\{t\geq 0:\Phi_t\notin(0,\pi/2)\}, &&
+                \phi \in (0,\pi/2)
+            \end{align*}
+            Derive a PDE satisfied by \( u \).
+        \item Desribe with pseudo-code how you would find \( u(r,\phi) \) using Monte Carlo simulation.
+    \end{enumerate}    
+\end{problem}
+
+\begin{solution}[Solution]
+\begin{enumerate}[label=(\alph*)]
+    \item Define \( f(x,y) = \arctan(y/x) \) and \( g(x,y) = \sqrt{x^2+y^2} \). Now note that,
+        \begin{align*}
+            \Phi_t = f(X_t,Y_t), && R_t = g(X_t,Y_t)
+        \end{align*}
+
+        Appying It\^o's formula we find,
+        \begin{align*}
+            \d \Phi_t &=  f_x(X_t,Y_t)\d X_t + f_y(X_t,Y_t)\d Y_t 
+            \\&\hspace{3em}+ \frac{1}{2}\big(f_{xx}(X_t,Y_t)\d[X,X]_t + f_{xy}(X_t,Y_t)\d [X,Y]_t 
+            \\&\hspace{6em}+ f_{yx}(X_t,Y_t)\d[Y,X]_t + f_{yy}(X_t,Y_t)\d[Y,Y]_t\big) 
+        \end{align*}
+        
+        Using our Heuristics we have,
+        \begin{align*}
+            \d[X,X]_t = \d[Y,Y]_t = \d t, && \d[X,Y]_T = \d[Y,X]_t = 0
+        \end{align*}
+        
+        We compute,
+        \begin{align*}
+            f_x(x,y) &= -\frac{y}{x^2+y^2} = - \frac{\sin(\arctan(y/x)}{\sqrt{x^2+y^2}} \\
+            f_y(x,y) &= \frac{x}{x^2+y^2} = \frac{\cos(\arctan(y/x))}{\sqrt{x^2+y^2}}\\
+            f_{xx}(x,y) &= \frac{2xy}{(x^2+y^2)^2} \\ 
+            f_{yy}(x,y) &= -\frac{2xy}{(x^2+y^2)^2}
+        \end{align*}
+        
+        Therefore, maxing the substitutions, \( \Phi_t = \arctan(Y_t/X_t) \), and \( R_t = \sqrt{X_t^2+Y_t^2}  \),
+        \begin{align*}
+            \d \Phi_t &= - \frac{\sin(\Phi_t)}{R_t}\d W_t^1 + \frac{\cos(\Phi_t)}{R_t}\d W_t^2
+        \end{align*}
+        
+        Similarly,
+        \begin{align*}
+            \d R_t &=  g_x(X_t,Y_t)\d X_t + g_y(X_t,Y_t)\d Y_t
+            \\&\hspace{3em}+ \frac{1}{2}\big(g_{xx}(X_t,Y_t)\d[X,X]_t + g_{xy}(X_t,Y_t)\d [X,Y]_t 
+            \\&\hspace{6em}+ g_{yx}(X_t,Y_t)\d[Y,X]_t + g_{yy}(X_t,Y_t)\d[Y,Y]_t\big) 
+        \end{align*}
+        
+        We compute,
+        \begin{align*}
+            g_x(x,t) &= \frac{x}{\sqrt{x^2+y^2}} = \cos(\arctan(y/x)) \\
+            g_y(x,t) &= \frac{y}{\sqrt{x^2+y^2}} = \sin(\arctan(y/x)) \\
+            g_{xx}(x,t) &= \frac{y^2}{(x^2+y^2)^{3/2}} \\
+            g_{yy}(x,t) &= \frac{x^2}{(x^2+y^2)^{3/2}}
+        \end{align*}
+        
+        Therefore, maxing the substitutions, \( \Phi_t = \arctan(Y_t/X_t) \), and \( R_t = \sqrt{X_t^2+Y_t^2}  \),
+        \begin{align*}
+            \d R_t &= \cos(\Phi_t)\d W_t^1 + \sin(\Phi_t) \d W_t^2 + \frac{1}{2R_t} \d t
+        \end{align*}
+        
+
+
+
+    \item 
+    \item 
+    \item 
+\end{enumerate}
+\end{solution}
+
+
