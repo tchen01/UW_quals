@@ -15,6 +15,11 @@
 
 \newcommand{\note}[1]{\textcolor{red}{\textbf{Note:} #1}}
 
+% overwrite old problem class to be able to add to ToC
+\let\savedprob=\problem%
+\def\problem[#1]{\pagebreak\savedprob[#1]}
+
+
 \begin{document}
 \maketitle
 
@@ -2587,48 +2592,178 @@ Consider the advection equation \( u_t + au_x = 0 \) and the ``skewed'' upwind m
 
 
 \begin{problem}[Summer 2011, Day 3, Problem 2]
+In his book on symmetric eigenvalue problems, B. Partlett proves the
+result:
+
+\hrulefill
+
+    Let \( A\in\RR^{n\times n} \) be a symmetric matrix, \( y \) a nonzer vector in \( \RR^n \), \( \theta \) a real number, and \( r \) the residual vector,
+    \begin{align*}
+        r = Ay - y\theta
+    \end{align*}
+    If \( \alpha \) is the eigenvalue of \( A \) closest to \( \theta \), where \( Az = z\alpha \) and \( \norm{z}=1 \) then,
+    \begin{align*}
+        |\theta-\alpha| \leq \frac{\norm{r}}{\norm{y}}, && |\sin \angle (y,z) |\leq \frac{1}{\min_{\lambda_i\neq \alpha} | \lambda_i-\alpha|} \frac{\norm{r}}{\norm{y}}
+    \end{align*}
+    where \( \lambda_i \) is an eigenvalue of \( A \) and \( \norm{\cdot} \) is the Euclidian norm.
+
+    \hrulefill
+    
+    Derive similar estimates for the eigenvalue problem,
+    \begin{align*}
+        \left[\begin{array}{cc}K & B \\ B^T & 0\end{array}\right] x = \lambda \left[\begin{array}{cc}M & 0 \\ 0 & 0\end{array}\right] x
+    \end{align*}
+    where the matrices \( K \) and \( M \) belong to \( \RR^{n\times n} \) and are symmetric positive definite. The matrix \( B \) belongs to \( \RR^{n\times p} \), (\( p<n \)) and is full rank.
 
 \end{problem}
+
+\begin{solution}[Solution]
+    
+\end{solution}
 
 
 \begin{problem}[Summer 2017, Day 1, Problem 2]
-
+Let \( A\in\CC^{n\times n} \) be any \( n\times n \) matric and let \( v\in\CC^n \) be a nonzero \( n \)-vector.
+\begin{enumerate}[nolistsep,label=(\alph*)]
+    \item Show that if \( v\in\operatorname{span}\{Av,A^2v\} \) then \( v\in\operatorname{span}\{A^2v,A^3v\} \).
+    \item Given an example to show that the converse is not necessarily truel that is \( v\in \operatorname{span}\{A^2v,A^3v\} \) does \textit{not} necessarily imply that \( v\in\operatorname{span}\{Av,A^2v\} \).
+\end{enumerate}
 \end{problem}
+
+\begin{solution}[Solution]
+    
+\end{solution}
 
 
 \begin{problem}[Winter 2017, Day 1, Problem 1]
+    An undirected graph consists of \( N \) nodes and a set of edges that connect given nodes. The adjacency matrix for the graph, \( A \), has entries \( A_{ij} = 1 \) if there is an edge between nodes \( i \) and \( j \) and \( A_{ij} = 0 \) otherwise. Note that \( A_{ij} = A_{ji} \), because
+we say if there is an edge between nodes \( i \) and \( j \), then there is also an edge between nodes \( j \) and \( i \). We do not allow self-connections, so that diagonal entries \( A_{ii} \) are always 0.
 
+    The degree of a node is the number of edges that connect to it. A \( d \)-regular random graph is a graph of which every node has degree \( d \), for some integer \( d \leq N \), but the edges are otherwise in random positions. For the adjacency matrix \( A \) of a \( d \)-regular, undirected random graph with \( N \) nodes, answer the following questions.
+    \begin{enumerate}[nolistsep,label=(\alph*)]
+        \item Can \( A \) ever have negative eigenvalues? If yes, give an example, if not, explain why not.
+        \item Can \( A \) ever have imaginary eigenvalues? If yes, give an example, if not, explain why not.
+        \item Identify a vector \( v \) and value \( \lambda \) that is an eigenvector-eigenvalue pair for the adjacency matrix of every \( d \)-regular undirected random graph with \( N \) nodes.
+        \item Give a lower bound on the eigenvalues of the adjacency matrix for any \( d \)-regular undirected random graph.
+    \end{enumerate}
 \end{problem}
+
+\begin{solution}[Solution]
+    
+\end{solution}
+
 
 
 \begin{problem}[Practice 2010, Day 2, Problem 5]
-
+This is basically the same as Summer 2014, Day 2, Problem 3
 \end{problem}
+
+\begin{solution}[Solution]
+    
+\end{solution}
+
 
 
 \begin{problem}[Practice 2010, Day 3, Problem 1]
+Consider the pendulum equation,
+\begin{align*}
+    \theta'' + \frac{g}{L}\sin \theta = 0
+\end{align*}
+where \( \theta \) denotes the angular position of the pendulum away from the downard vertical position.
+    \begin{enumerate}[nolistsep,label=(\alph*)]
+        \item Rewriting the equation in the phase plane with \( x=\theta \) and \( y=\theta' \), analyze the dynamics (equilibrium points, stability, phase plane plot).
+        \item Find a conserved quantity for the pendulum equation, and rewrite it in terms of your phase plane variables. Call this quantity \( H(x,y) \).
+        \item Let \( g=1 \), \( L=1 \). Solve the pendulum equation numerically, using your (self-programmed) numerical solver of choice. Use initial conditions \( \theta(0) = \pi/2 \), \( \theta'(0) = 0 \). Provide the solution at \( t=n \), \( n\in\{0,1,\ldots, 20\} \).
+        \item At each of these times, give the value of \( H(x,y) \). Is it conserved? Discuss your results.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}[Solution]
+    
+\end{solution}
+
+
+
+\begin{problem}[Winter 2011, Day 3, Problem 1]
+\note{This is very similar to Winter 2011, Day 2, Problem 5. Why did they have the same problem twice in one qual??}
+    
+    Consider the Helmholtz problem,
+\begin{align*}
+    u_{xx} + u_{yy} + k^2u = f(x,y) = (k^2-5\pi^2)\sin(\pi x)\sin(2\pi y)
+\end{align*}
+    with \( u(x,y) = 0 \) on the boundary of the unit square \( 0\leq x\leq 1 \), \( 0\leq y\leq 1 \).
+\begin{enumerate}[nolistsep,label=(\alph*)]
+    \item Find the exact solution to this Helmholtz problem.
+    \item Solve the Helmholtz problem using the 5-point Laplacian (second-order finite difference) and the backslash as linear system solver.    
+    \item Plot the maximum nodal error as a function of \( h \) for \( k=5 \), \( k=10 \), and \( k=60 \) (using log-log scale).
+    \item Suppose we change the solver to Jacobi (say take 200 iterations of Jacobi’s method). Program this in your code using the matrix
+        version of Jacobi. Derive the spectral radius of Jacobi’s iteration matrix in terms of \( h \) and \( k \). Recall the eigenvalues \( \lambda_{pq} \) of the 5-point Laplacian are,
+        \begin{align*}
+            \frac{2}{h^2} (\cos(p\pi h)+\cos(q \pi h)-2)
+        \end{align*}
+        where \( h=1/(m+1) \), \( p=1,2,\ldots,m \), \( q=1,2,\ldots,m \).
+    \item If we fix \( h = 1/21 \), for what values of \( k \) will Jacobi’s method converge? Verify this in your code by trying \( k = 5 \), \( k = 10 \), and \( k = 60 \), and any other \( k \) values, say \( k = 0 \) for example, you deem appropriate.
+\end{enumerate}
 
 \end{problem}
 
-
-\begin{problem}[Practice 2011, Day 3, Problem 1]
-
-\end{problem}
+\begin{solution}[Solution]
+    
+\end{solution}
 
 
 \begin{problem}[Winter 2010, Day 1, Problem 5]
-
+Verify that \( y(t) = t^2/4 \) solves the initial value problem,
+\begin{align*}
+    y' = \sqrt{y}, && y(0) = 0
+\end{align*}
+Apply Euler’s method to this problem and explain why the approximation obtained differs
+from the solution \( t^2/4 \).
 \end{problem}
+
+\begin{solution}[Solution]
+    
+\end{solution}
 
 
 \begin{problem}[Winter 2011, Day 2, Problem 4]
-
+Suppose you wish to compute the discrete Fourier transform (DFT) \( F = [F_0,F_1, \ldots, F_{N-1}]^T \) of a vector \( f = [f_0,f_1, \ldots, f_{N-1}]^T \) defined by,
+\begin{align*}
+    F_k = \sum_{j=0}^{N-1} e^{2\pi i j k/N} f_j, && k=0,1,\ldots, N-1
+\end{align*}
+Here \( i = \sqrt{-1} \), and you may assume \( N \) is a power of \( 2 \).
+\begin{enumerate}[nolistsep,label=(\alph*)]
+    \item Suppose you do not know \( f_0, \ldots, f_{N-1} \), but you do know the DFT \( F^{(e)} \) of the even numbered terms and the DFT \( F^{(o)} \) of the odd numbered terms; i.e.,
+        \begin{align*}
+            F_k^{(e)} = \sum_{j=0}^{N/2-1}e^{2\pi i j k/(N/2)} f_{2j}, && F_k^{(o)} = \sum_{j=0}^{N/2-1}e^{2\pi i j k/(N/2)} f_{2j+1}
+        \end{align*}
+        where \( k=0,1,\ldots,N/2-1 \). Explain how you can compute \( F \) from \( F^{(e)} \) and \( F^{(o)} \). Be sure to show how you determine the entries \( F_{N/2}, \ldots, F_{N-1} \), as well as \( F_0, \ldots, F_{N/2-1} \).
+    \item About how many operations (additions, subtractions, multiplications, divisions) are required to compute \( F \), given \( F^{(e)} \) and \( F^{(o)}\)?
+        
+        Suppose this process is repeated and the length \( N/2 \) transforms \( F^{(e)} \) and \( F^{(o)} \) are computed from the DFT’s of their even and old entries. How many operations would be required for this computation? Suppose the process is repeated until one reaches vectors
+of length 1 (for which the DFT is the identity). About how many total operations would be required?
+\end{enumerate}
 \end{problem}
+
+\begin{solution}[Solution]
+    
+\end{solution}
 
 
 \begin{problem}[Summer 2012, Day 1, Problem 3]
-
+Consider the following difference scheme:
+\begin{align*}
+    u(x,t+k)- u(x,t) = \frac{\sigma k}{h^2} (u(x+h,t)-u(x,t)-u(x,t+k)+u(x-h,t+k))
+\end{align*}
+\begin{enumerate}[nolistsep,label=(\alph*)]
+    \item In the limit \( h\to0 \), \( k\to 0 \), what equation is this scheme consistent with? Are tehre any conditions you need to impose on \( h \) and \( k \) for this to be true?
+    \item Discuss the stability of this scheme.
+\end{enumerate}
 \end{problem}
+
+\begin{solution}[Solution]
+    
+\end{solution}
 
 
 

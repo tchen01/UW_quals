@@ -97,11 +97,9 @@ That is, the characteristic function \( \phi(s) \) of \( W(N(t)) \) is,
 
 
 \begin{solution}[Solution]
-We first prove the following useful lemma.
-\begin{lemma}
-    If \( f_n \to 0 \) and \( |g_n| \leq M \) for some \( |M| < \infty \) then \( (f_ng_n)\to 0 \).
-\end{lemma}
-Fix, \( \varepsilon > 0 \). Then, by convergence of \( f_n \) there is some \( N\in\NN \) such that \( |f_n| < \varepsilon/M \) for all \( n\geq N \). Then,
+We first prove that if \( f_n \to 0 \) and \( |g_n| \leq M \) for some \( |M| < \infty \) then \( (f_ng_n)\to 0 \).
+
+Indeed, fix \( \varepsilon > 0 \). Then, by convergence of \( f_n \) there is some \( N\in\NN \) such that \( |f_n| < \varepsilon/M \) for all \( n\geq N \). Then,
 \begin{align*}
     |f_ng_n| = |f_n||g_n| \leq |f_n|M < (\varepsilon/M)M = \varepsilon
 \end{align*}
