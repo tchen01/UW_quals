@@ -510,12 +510,51 @@ This has mean,
     \\&\hspace{6em}+ f_{yx}(X_t,Y_t)\d[Y,X]_t + f_{yy}(X_t,Y_t)\d[Y,Y]_t \Big)
 \end{align*}
 
+\subsection{Product Rule}
+\begin{align*}
+    \d(X_tY_t) = Y_t\d X_t + X_t \d Y_t + \d[X,Y]_t 
+\end{align*}
+
 
 %%%%%%%%%%%%%%%%%%%%%
 %     CHAPTER 9     %
 %%%%%%%%%%%%%%%%%%%%%
 \pagebreak
 \section{SDEs and PDEs}
+
+\subsection{KBE}
+Let \( X = (X_t)_{t\geq 0} \) be the solution of an SDE of the form,
+\begin{align*}
+    \d X_t = \mu(t,X_t)\d t + \sigma(t,X_t)\d W_t
+\end{align*}
+For some suitible function \( \varphi \), define,
+\begin{align*}
+    u(t,X_t):= \EE[\varphi(X_T)|\cF_t]
+\end{align*}
+If \( u\in C^{1,2} \) then it satisfies the Kolmogorov Backward Equation,
+\begin{align*}
+    (\partial_t + \cA(t)) u(t,\cdot) = 0, && u(T,\cdot) = \varphi, && \cA(t) = \mu(t,x) \partial_x + \frac{1}{2}\sigma^2(t,x)\partial^2_x
+\end{align*}
+
+\subsection{Finding a PDE}
+\begin{enumerate}[nolistsep]
+    \item Find a martingale process depending on \( u(t,X_t) \).
+    \item Take the differential of it.
+    \item Set the \( \d t \) term to zero.
+\end{enumerate}
+
+This will give a PDE which \( u(t,X_t) \) satisfies.
+
+\textit{Sample Problems}:
+\begin{itemize}[nolistsep]
+    \item Theorem 9.2.1: Derive KBE
+    \item Theorem 9.2.2: Derive PDE for process,
+        \begin{align*}
+            u(t,X_t) = \EE \left[ e^{-A(t,T)}\varphi(X_T) + \int_t^T e^{-A(t,s)}g(s,X_s) | \cF_t \right], && A(t,s) = \int_t^s \gamma(u,X_u)\d u
+        \end{align*}
+        
+\end{itemize}
+
 
 \note{ADD ASSOCIATED PDEs}
 

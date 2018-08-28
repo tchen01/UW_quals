@@ -1,3 +1,11 @@
+\begin{problem}[Exercise 9.1]
+\end{problem}
+
+\begin{solution}[Solution]
+\end{solution}
+
+
+
 \begin{problem}[Exercise 9.2]
 Let \( X \) be a solution to the following SDE
 \begin{align*}
@@ -15,10 +23,78 @@ Define
     where \( A \) and \( B \) are deterministic functions of \( t \). Show that \( A \) and \( B \) must satisfy a pair of coupled ODEs (with appropriate terminal conditions at time \( T \)). Bonus question: solve the ODEs (it may be helpful to note that one of the ODEs is a Riccati equation).
 \end{problem}
 
+
+\begin{solution}[Solution (direct)]
+    First observe that \( u(t,X_t) \) is not a martingale as,
+\begin{align*}
+    \EE[u(t,X_t) | \cF_s] 
+    &= \EE \left[ \EE \left[ \exp \left( -\int_t^T X_z\d z \right) \bigg| \cF_t \right] \bigg| \cF_s \right]
+    \\&= \EE \left[ \exp \left( -\int_t^T X_z\d z \right) \bigg| \cF_s \right]
+    \\&\neq \EE \left[ \exp \left( -\int_s^T X_z\d z \right) \bigg| \cF_s \right]
+    \\&= u(s,X_s)
+\end{align*}
+
+Define,
+\begin{align*}
+    M_t &= \exp \left( -\int_0^t X_z\d z \right) u(t,X_t)
+    = \EE \left[ \exp \left( -\int_0^T X_z\d z \right) \bigg| \cF_t \right]
+\end{align*}
+    where we have used the fact that \( \exp(-\int_0^t X_z\d z) \in \cF_t \).
+
+Clearly,
+\begin{align*}
+    \EE[M_t|\cF_s] 
+    &= \EE \left[ \EE \left[ \exp \left( -\int_0^T X_z\d z \right) \bigg| \cF_t \right] \bigg|\cF_s \right]
+    = \EE \left[ \exp \left( -\int_0^T X_z\d z \right) \bigg| \cF_s \right]
+    = M_s
+\end{align*}
+
+    Therefore \( M_t \) is a martingale.
+
+    Note that,
+    \begin{align*}
+        \d u(t,X_t) &= \partial_t u(t,X_t) \d t + \partial_x u(t,X_t) \d X_t + \frac{1}{2} \partial_x^2 u(t,X_t) \d[X,X]_t 
+        \\&= \left(\partial_t + \mu(t,X_t) \partial_x + \frac{1}{2}\sigma^2(t,X_t) \partial_x^2 \right) u(t,X_t) \d t + \sigma(t,X_t) \partial_x u(t,X_t)\d W_t
+    \end{align*}
+    
+    Write \( v(t,X_t) = \exp(-\int_0^t X_z\d z) \). This does not depend on \( X_t \) so,
+    \begin{align*}
+        \d v(t,X_t) &= 
+        \partial_t v(t,X_t) \d t + \partial_x v(t,X_t) \d X_t + \frac{1}{2} \partial_x^2 v(t,X_t) \d[X,X]_t
+        \\&= -X_t v(t,X_t) \d t
+    \end{align*}
+
+    We supress the arguments to \( u,v,\mu,\sigma \) and compute,
+\begin{align*}
+    \d M_t &= u(t,X_t) \d v(t,X_t) + v(t,X_t) \d u(t,X_t) + \d[u,v]_t 
+    \\&= u(-X_t v)\d t + v \left( \partial_t + \mu \partial_x + \frac{1}{2}\sigma^2\partial_x^2 \right) u \d t + \left( \cdots \right)\d W_t 
+    \\&= \left( \partial_t + \frac{1}{2}\sigma^2\partial_x^2 + \mu \partial_x - X_t \right)u \d t + \left( \cdots \right)\d W_t
+\end{align*}
+
+    Since \( M_t \) is a martingale, the \( \d t \) term must be zero. Moreover, \( v \) is always positive. Therefore,
+    \begin{align*}
+        \left[ \left( \partial_t + \frac{1}{2}\sigma^2(t,x) \partial_x^2 + \mu(t,x) \partial_x - x \right)u(t,x) \right]_{t=t,x=X_t} = 0
+    \end{align*}
+    
+    The boundary condition is obtained by,
+    \begin{align*}
+        u(T,X_T) = \EE \left[ \exp \left( -\int_T^T X_z\d z \right) \bigg| \cF_T \right] = 1
+    \end{align*}
+    
+    The rest of the solution is included below.
+\end{solution}
+
+
+
 \begin{solution}[Solution]
 With \( \gamma(u,x) = x \), \( \phi(x) = 1 \), \( g(u,x) = 0 \) this is a subcase of an example in the notes. We then know \( u(t,x) \) solves,
 \begin{align*}
     (\partial_t + \mathcal{A})u + g = 0, && u(T,\cdot) = \phi, && \mathcal{A} = \frac{1}{2} \sigma^2 \partial_x^2 + \mu \partial_x-\gamma = 0
+\end{align*}
+
+Assume \( u \) has the form,
+\begin{align*}
+    u(t,x) = \exp \left( -x A(t) - B(t) \right)
 \end{align*}
 
 First compute,
@@ -69,15 +145,8 @@ where,
     c_1 = \dfrac{1}{2\sqrt{-2\delta^2-\kappa^2}} \left[ 2\arctan\left(\dfrac{\kappa}{\sqrt{-2\delta^2-\kappa}} \right) - T\sqrt{-2\delta^2-\kappa^2} \right] \\
     c_2 =  -\frac{\theta  \kappa  \left(2 \log \left(\cos \left(c_1 \sqrt{-2 \delta ^2-\kappa ^2}+\frac{1}{2} T \sqrt{-2 \delta ^2-\kappa ^2}\right)\right)+\kappa  T\right)}{\delta ^2}
 \end{align*}
-
-We could have done this by hand by since the first equation is separable but its just as ugly.
 \end{solution}
 
-\begin{problem}[Exercise 9.2]
-\end{problem}
-
-\begin{solution}[Solution]
-\end{solution}
 
 \begin{problem}[Exercise 9.3]
 For \( i=1,2, \ldots, d \) let \( X^{(i)} \) satisfy,
@@ -132,7 +201,7 @@ Compute, using It\^o's formula,
 Using our heuristics we have,
 \begin{align*}
     \d[X^{(i)},X^{(i)}]_t = \left( \d X_t^{(i)} \right) \left(\d X_t^{(i)} \right) 
-    = \left( -\dfrac{b}{2} X_t^{(i)} \d t + \dfrac{1}{s}\sigma \d W_t^{(i)} \right)^2 
+    = \left( -\dfrac{b}{2} X_t^{(i)} \d t + \dfrac{1}{2}\sigma \d W_t^{(i)} \right)^2 
     = \dfrac{\sigma^2}{4} \d t
 \end{align*}
 
@@ -211,14 +280,14 @@ We then have,
     \partial_z \psi(z) &= \gamma \psi + \exp(\gamma z) k \cos(z') \\
     \partial_z^2 \psi(z) &= \gamma^2 \psi + \gamma \exp(\gamma z) k \cos(z'))
     + \gamma \exp(\gamma z) k \cos(z') - k^2\psi
-    = \gamma^2 \psi + 2 \gamma \exp(\gamma z) k \cos(z') - k^2\psi
+    \\&= \gamma^2 \psi + 2 \gamma \exp(\gamma z) k \cos(z') - k^2\psi
 \end{align*}
 
 We seek \( \gamma \) such that \( \mathcal{A}_z \psi = \lambda \psi \) for some constant \( \lambda \). That is, in our expression of \( \mathcal{A}_z\psi \) we require the terms not containing a \( \psi \) be zero.
 Thus,
 \begin{align*}
-    0 = \left( \mu - \dfrac{\sigma^2}{2} \right) \exp(\gamma z) k \cos(z') + \left( \dfrac{\sigma^2}{2} \right)2\gamma\exp(\gamma z) k \cos(z') 
-    = \left[ \left( \mu - \dfrac{\sigma^2}{2} \right) + \sigma^2 \gamma \right]\exp(\gamma z)\cos(z')
+    0 &= \left( \mu - \dfrac{\sigma^2}{2} \right) \exp(\gamma z) k \cos(z') + \left( \dfrac{\sigma^2}{2} \right)2\gamma\exp(\gamma z) k \cos(z') 
+    \\&= \left[ \left( \mu - \dfrac{\sigma^2}{2} \right) + \sigma^2 \gamma \right]\exp(\gamma z)\cos(z')
 \end{align*}
 
 Suppose \( k\neq 0 \) (i.e. that the solution is non-trivial). Since \( \exp(\gamma z) \) and \( \cos(z')\neq 0 \) we have,
@@ -394,8 +463,8 @@ We verify in Mathematica that \( \Gamma \) satisfies both the KFE and KBE.
         \begin{align*}
             u(x,y) &= \dfrac{1}{2\pi} \int_\RR e^{-i\omega z}\d z e^{-|a-y||\omega|}e^{i\omega x}\d \omega 
 %            \\&= \dfrac{1}{2\pi} \int_{-\infty}^{0} e^{(-iz+|a-y|-ix)\omega}\d \omega + \dfrac{1}{2\pi} \int_{0}^{\infty} e^{(-iz-|a-y|-ix)\omega} \d \omega
-            = \dfrac{1}{2\pi} \left [\dfrac{2|a-y|}{(a-y)^2 + (x-z)^2}\right]\d z
-            = \dfrac{1}{\pi} \left[ \dfrac{|y-a|}{(y-a)^2+(x-z)^2} \right]\d z
+            \\&= \dfrac{1}{2\pi} \left [\dfrac{2|a-y|}{(a-y)^2 + (x-z)^2}\right]\d z
+            \\&= \dfrac{1}{\pi} \left[ \dfrac{|y-a|}{(y-a)^2+(x-z)^2} \right]\d z
         \end{align*}
 
     \item 

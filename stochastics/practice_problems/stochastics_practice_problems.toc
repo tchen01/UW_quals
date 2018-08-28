@@ -40,9 +40,12 @@
 \contentsline {subsection}{\numberline {6.3}Laplace Transform}{17}{subsection.6.3}
 \contentsline {section}{\numberline {7}Stochastic Calculus}{18}{section.7}
 \contentsline {subsection}{\numberline {7.1}It\^o's Formula}{18}{subsection.7.1}
+\contentsline {subsection}{\numberline {7.2}Product Rule}{18}{subsection.7.2}
 \contentsline {section}{\numberline {8}SDEs and PDEs}{19}{section.8}
-\contentsline {subsection}{\numberline {8.1}Geometric Brownian Motion}{19}{subsection.8.1}
-\contentsline {subsection}{\numberline {8.2}Ornstein--Uhlenbeck (OU) process}{19}{subsection.8.2}
+\contentsline {subsection}{\numberline {8.1}KBE}{19}{subsection.8.1}
+\contentsline {subsection}{\numberline {8.2}Finding a PDE}{19}{subsection.8.2}
+\contentsline {subsection}{\numberline {8.3}Geometric Brownian Motion}{19}{subsection.8.3}
+\contentsline {subsection}{\numberline {8.4}Ornstein--Uhlenbeck (OU) process}{19}{subsection.8.4}
 \contentsline {section}{\numberline {9}Jump Diffusions}{20}{section.9}
 \contentsline {section}{\numberline {10}Practice Qualification Exams}{21}{section.10}
 \contentsline {subsection}{Practice Exam 1, Problem 1}{22}{section*.1}
@@ -90,14 +93,14 @@
 \contentsline {subsection}{Exercise 8.2}{81}{section*.42}
 \contentsline {subsection}{Exercise 8.3}{82}{section*.43}
 \contentsline {subsection}{Exercise 8.4}{84}{section*.44}
-\contentsline {subsection}{Exercise 9.2}{85}{section*.45}
-\contentsline {subsection}{Exercise 9.2}{87}{section*.46}
-\contentsline {subsection}{Exercise 9.3}{88}{section*.47}
-\contentsline {subsection}{Exercise 9.4}{90}{section*.48}
-\contentsline {subsection}{Exercise 9.5}{91}{section*.49}
-\contentsline {subsection}{Exercise 9.6}{94}{section*.50}
-\contentsline {subsection}{Exercise 10.1}{98}{section*.51}
-\contentsline {subsection}{Exercise 10.2}{100}{section*.52}
-\contentsline {subsection}{Exercise 10.3}{101}{section*.53}
-\contentsline {subsection}{Exercise 10.4}{103}{section*.54}
-\contentsline {subsection}{Exercise 10.5}{106}{section*.55}
+\contentsline {subsection}{Exercise 9.1}{85}{section*.45}
+\contentsline {subsection}{Exercise 9.2}{86}{section*.46}
+\contentsline {subsection}{Exercise 9.3}{90}{section*.47}
+\contentsline {subsection}{Exercise 9.4}{92}{section*.48}
+\contentsline {subsection}{Exercise 9.5}{93}{section*.49}
+\contentsline {subsection}{Exercise 9.6}{96}{section*.50}
+\contentsline {subsection}{Exercise 10.1}{100}{section*.51}
+\contentsline {subsection}{Exercise 10.2}{102}{section*.52}
+\contentsline {subsection}{Exercise 10.3}{103}{section*.53}
+\contentsline {subsection}{Exercise 10.4}{105}{section*.54}
+\contentsline {subsection}{Exercise 10.5}{108}{section*.55}
