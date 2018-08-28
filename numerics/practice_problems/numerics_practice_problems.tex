@@ -2775,7 +2775,17 @@ where \( \theta \) denotes the angular position of the pendulum away from the do
 \end{problem}
 
 \begin{solution}[Solution]
-    
+\begin{enumerate}[label=(\alph*)]
+    \item We have solution,
+        \begin{align*}
+            u(x,y) = \sin(\pi x)\sin(2\pi y)
+        \end{align*} 
+    \item 
+    \item 
+    \item 
+    \item 
+\end{enumerate}
+ 
 \end{solution}
 
 
@@ -2789,7 +2799,33 @@ from the solution \( t^2/4 \).
 \end{problem}
 
 \begin{solution}[Solution]
-    
+Clearly,
+\begin{align*}
+    y'(t) = \dd{}{t} \frac{t^2}{4} = \frac{t}{2} = \sqrt{\frac{t^2}{4}} = \sqrt{y(t)}, && y(0) = 0
+\end{align*}
+
+Euler's method gives an approximation to \( y \) one some mesh \( \{ t_n = n k \}_{n=0}^{N}  \) by computing,
+\begin{align*}
+    \hat{y}_{n+1} = \hat{y}_n + k \sqrt{\hat{y}_n}
+\end{align*}
+where \( \hat{y}_n  \) is meant to approximate \( y(t_n) \), and \( y_0 = 0 \).
+
+Over one step we have,
+\begin{align*}
+    y(t+k) = y(t) + \int_t^{t+k} y'(s)\d s
+\end{align*}
+
+We approximate this integral using a single Reimann sum. Therefore some error is introduced and our estimated solution diverges from the actual solution. Moreover, the errors compound.
+
+    More specifically, even assuming \( \hat{y}_n = y_n \), in one step we introduce an error,
+\begin{align*}
+    y(t_n+k) - \hat{y}_{n+1} &=  y(t_n+k) - \hat{y}_n - k\sqrt{\hat{y}_n} 
+    \\&= k y'(t) + \frac{k^2}{2}y''(t) + \cO(k^3) - k\sqrt{y(t)} 
+    \\&= -\frac{k^2}{2} \frac{1}{\sqrt{y(t)}} + \cO(k^3)
+\end{align*}
+
+    These errors are all in the same direction as \( \sqrt{y(t)} \) does not chance signs for \( t>0 \). Therefore the errors compound.
+
 \end{solution}
 
 
@@ -2813,7 +2849,10 @@ of length 1 (for which the DFT is the identity). About how many total operations
 \end{problem}
 
 \begin{solution}[Solution]
-    
+    \begin{enumerate}[label=(\alph*)]
+    \item
+    \item 
+\end{enumerate}    
 \end{solution}
 
 
@@ -2823,13 +2862,17 @@ Consider the following difference scheme:
     u(x,t+k)- u(x,t) = \frac{\sigma k}{h^2} (u(x+h,t)-u(x,t)-u(x,t+k)+u(x-h,t+k))
 \end{align*}
 \begin{enumerate}[nolistsep,label=(\alph*)]
-    \item In the limit \( h\to0 \), \( k\to 0 \), what equation is this scheme consistent with? Are tehre any conditions you need to impose on \( h \) and \( k \) for this to be true?
+    \item In the limit \( h\to0 \), \( k\to 0 \), what equation is this scheme consistent with? Are there any conditions you need to impose on \( h \) and \( k \) for this to be true?
     \item Discuss the stability of this scheme.
 \end{enumerate}
 \end{problem}
 
 \begin{solution}[Solution]
-    
+\begin{enumerate}[label=(\alph*)]
+    \item 
+    \item 
+\end{enumerate}
+
 \end{solution}
 
 

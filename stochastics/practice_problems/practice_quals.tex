@@ -245,7 +245,11 @@ Let \( Y = (Y_n)_{n\in\NN_0} \) be a sequence of iid random variables with \( Y_
 
 
 \begin{problem}[Practice Exam 3, Problem 1]
-
+Let \( X = (X_t)_{t\geq 0} \) be a continuous time Markov chain with \( X_t \) representing the number of individuals in a population at time \( t \). Individuals do not reproduce. However, immigrants join the population as a Poisson process with parameter \( \lambda \). The lifetimes of individuals are iid exponentially distributed random varaibles with parameter \( \mu \).
+\begin{enumerate}[nolistsep,label=(\alph*)]
+    \item Write the generator \( G \) of \( X \)
+    \item Find the stationary distribution \( \pi \) of \( X \).
+\end{enumerate}
 \end{problem}
 
 \begin{solution}[Solution]
@@ -257,6 +261,16 @@ Let \( Y = (Y_n)_{n\in\NN_0} \) be a sequence of iid random variables with \( Y_
 
 
 \begin{problem}[Practice Exam 3, Problem 2]
+Fix a probability space \( (\Omega, \cF,\PP) \) and a filtratoin \( \bF = (\cF_t)_{t\geq 0} \). Consider a process \( X = (X_t)_{t\geq 0} \) that satisfies the following SDE,
+\begin{align*}
+    \d X_t = b\d t + a\d W_t
+\end{align*}
+where \( W \) is a \( (\PP,\bF) \)-Brownian motion. Suppose that \( X_0 \in (L,R) \) and that \( \{L\} \) and \( \{R\} \) are reflecting boundaries.
+\begin{enumerate}[nolistsep,label=(\alph*)]
+    \item Derive an expression for the invariant distribution of \( X \).
+    \item Derive an expression for the transition density \( \Gamma(t,x;T,y)\d y:= \PP(X_t \in\d y | X_t = x) \).
+    \item Show that \( \Gamma(t,x;T,y) \to \pi(y) \) as \( T\to\infty \).
+\end{enumerate}
 
 \end{problem}
 
@@ -268,11 +282,17 @@ Let \( Y = (Y_n)_{n\in\NN_0} \) be a sequence of iid random variables with \( Y_
 \end{solution}
 
 \begin{problem}[Practice Exam 4, Problem 1]
-
+    A transition probablity matrix \( P \) for a Markov chain with \( N \) states is said be doubly stochastic if the entries in each of its columns add up to one.
+\begin{enumerate}[nolistsep,label=(\alph*)]
+\item Show that the uniform distribution given by \( q_i = 1/N \) for all \( j \) is a stationary distribution for such a Markov chain.
+\item Consider the following random walk on the sets of integers \( \{0, 1, \ldots, L\} \). The walk jumps to the right or left at each step with probability 1/2 subject to the rule that if it tries to go to the left from 0 or to the right from \( L \) it stays put. Compute the stationary distribution of this random walk.
+\item Consider the following random walk on state-space \( \{0, 1, 2, \ldots, L\} \) of numbers arranged on a ring. At each step, the walk goes to the right with probability \( a \) or to the left with probability \( 1 - a \) subject to the rules if it tries to go to the left from 0 it ends up at \( L \) or if it tries to go to the right from \( L \) it ends up at 0. Compute the stationary distribution of this chain.
+\end{enumerate}
 \end{problem}
 
 \begin{solution}[Solution]
 \begin{enumerate}[label=(\alph*)]
+    \item 
     \item 
     \item 
 \end{enumerate}
@@ -280,6 +300,23 @@ Let \( Y = (Y_n)_{n\in\NN_0} \) be a sequence of iid random variables with \( Y_
 
 
 \begin{problem}[Practice Exam 4, Problem 2]
+    Fix a probability space \( (\Omega, \cF, \PP\) and a filtration \( \bF = (\cF_t )_{0\leq t \leq T} \). Suppose that \( X = (X_t)_{t\geq 0} \) satisfies the following SDE,
+    \begin{align*}
+        \d X_t = - \kappa X_t\d t + \sigma \d W_t
+    \end{align*}
+    where \( W \) is a \( (\PP,\bF) \)-Brownian motion. Now consider a chance of measure,
+    \begin{align*}
+        \dd{\tilde{\PP}}{\PP} = \exp \left( -\frac{1}{2}\gamma^2 T - \gamma W_T \right).
+    \end{align*}
+\begin{enumerate}[nolistsep,label=(\alph*)]
+    \item Derive an SDE for theh process \( X \) under \( \tilde{\PP} \). Your answer should be given in terms of a process \( \tilde{W} \) which is a \( (\tilde{\PP},\bF) \)-Brownian motion.
+    \item Define functions \( u:[0,T]\times \RR \to \RR \) and \( \tilde{u}:[0,T]\times \RR \to \RR \) as follows
+        \begin{align*}
+            u(t,x):= \EE[h(X_T) | X_t = x), && \tilde{u}(t,x):= \tilde{\EE}[h(X_T) | X_t = x]
+        \end{align*}
+        Provide the PDEs satisfied by \( u \) and \( \tilde{u} \), respectively.
+\end{enumerate}
+
 
 \end{problem}
 
@@ -291,6 +328,22 @@ Let \( Y = (Y_n)_{n\in\NN_0} \) be a sequence of iid random variables with \( Y_
 \end{solution}
 
 \begin{problem}[Practice Exam 5, Problem 1]
+    Consider a Markov chain with state space \( \{0,1,2,\ldots\} \) and transition probabilities,
+    \begin{align*}
+        p(i,i+1) &= p_i, && i\geq 0 \\
+        p(i,i-1) &= q_i, && i> 0 \\
+        p(i,i) &= r_i, && i\geq 0
+    \end{align*}
+    For \( N > 0 \) and satet \( i \), let \( a_N(i) \) be the probability that the tiem of first visit to state \( N \) is strictly less than the time of first visit to state \( 0 \) if we start at state \( i \). Note that \( a_N(0) = 0 \) and \( a_N(N) = 1 \).
+\begin{enumerate}[nolistsep,label=(\alph*)]
+    \item Write a recursive relation for \( a_N(i) \) by consider what happens on the first transition out of state \( i \).
+    \item Solve the above equation to compute \( a_N(i) \).
+    \item Use (b) above to show that state 0 is recurrent if and only if,
+        \begin{align*}
+            \sum_{j=1}^{\infty} \prod_{i=1}^{j-1} \frac{q_i}{p_i} = \infty
+        \end{align*}
+    \item Analyze the situation where \( p_i = p \), \( q_i = 1-p \), \( r_i = 0 \) for \( x \geq 1 \), and \( r_0 = 1-p \).
+\end{enumerate}
 
 \end{problem}
 
@@ -303,7 +356,15 @@ Let \( Y = (Y_n)_{n\in\NN_0} \) be a sequence of iid random variables with \( Y_
 
 
 \begin{problem}[Practice Exam 5, Problem 2]
-
+    Fix a probability space \( (\Omega,\cF,\PP) \) and a filtration \( \bF = (\cF_t)_{t\geq 0} \). Consider a mean-repelling OU process,
+    \begin{align*}
+        \d X_t = X_t\d t + \sqrt{2} \d W_t
+    \end{align*}
+    where \( W \) is a \( (\PP,\bF) \)-Brownian motion.
+\begin{enumerate}[nolistsep,label=(\alph*)]
+    \item Derive two representations of the transition density \( \Gamma(t,x,T,y)\d y := \PP(X_t \in\d y | X_t = x) \) of \( X \). One of the representations should involve Hermite polynomials.
+    \item Does the process \( X \) have an invariant distribution? If so, provide it. If not, explain why not.
+\end{enumerate}
 \end{problem}
 
 \begin{solution}[Solution]
@@ -315,19 +376,102 @@ Let \( Y = (Y_n)_{n\in\NN_0} \) be a sequence of iid random variables with \( Y_
 
 
 \begin{problem}[Practice Exam 6, Problem 1]
+Consider a game which is played on a network with nodes numbered \( 1, 2, 3, 4 \) and edges that connect these nodes as show below. Note that each node in this network has self-loop edges. Every edge in the network has an associated weight. For example, the weight associated with the edge connecting nodes 1 and 2 is 3. Similarly the weight associated with the self-loop edge on node 1 is 1. The game proceeds as follows. You have a token that you move randomly from one node to another with probabilities propotional to the corresponding edge weights. For example, the probability that your token moves from node 1 to node 2 is \( 3/(1 + 2 + 3) = 1/2 \). Let \( X_n \) be the position of your token after \( n \) moves, for \( n = 0, 1, 2, \ldots \).
+\begin{center}
+\begin{tikzpicture}[shorten >=1pt,auto,node distance=3cm,
+  thick,main node/.style={circle,draw,minimum size=7mm}]
 
+  \node[main node] (1) {1};
+    \node[main node] (2) [right of=1] {2};
+  \node[main node] (3) [below of=2] {3};
+  \node[main node] (4) [below of=1] {4};
+
+  \path[every node/.style={fill=white,inner sep=1pt}, every loop/.style={}]
+    (1) edge[in=90,out=180, loop] node {1} (1)
+        edge node {3} (2)
+    (2) edge[in=0, out=90, loop] node {1} (2)
+        edge node {4} (3)
+    (3) edge[in=270, out=0, loop] node{1} (3)
+        edge node {5} (4)
+    (4) edge[in=270, out=180, loop] node{1} (4)
+        edge node {2} (1)
+        ;
+\end{tikzpicture}
+\end{center}
+\begin{enumerate}[nolistsep,label=(\alph*)]
+    \item Model the stochastic process \( X_n \) as a Markov chain by drawing its state transition diagram and write the corresponding one-step transition probability matrix.
+    \item Calculate the stationary distribution that your token is at node \( j \), for \( j = 1, 2, 3, 4 \).
+    \item Find the expected number of token moves between two consecutive visits to node 2.
+\end{enumerate}
 \end{problem}
 
 \begin{solution}[Solution]
 \begin{enumerate}[label=(\alph*)]
+    \item We have transition diagram, 
+    \begin{center}
+    \begin{tikzpicture} 
+
+    \draw node[circle, draw, minimum size=7mm] (1) at (0,3) {1};
+    \draw node[circle, draw, minimum size=7mm] (2) at (3,3) {2};
+    \draw node[circle, draw, minimum size=7mm] (3) at (3,0) {3};
+    \draw node[circle, draw, minimum size=7mm] (4) at (0,0) {4};
+
+
+        \path[->,every node/.style={fill=white,inner sep=1pt}, every loop/.style={->}]
+    (1) edge[in=90,out=180, loop] node {1/6} (1)
+        edge[bend left=30] node {1/2} (2)
+        edge[bend left=30] node {1/3} (4)
+    (2) edge[in=0, out=90, loop] node {1/8} (2)
+        edge[bend left=30] node {1/2} (3)
+        edge[bend left=30] node {3/8} (1)
+    (3) edge[in=270, out=0, loop] node{1/10} (3)
+        edge[bend left=30] node {1/2} (4)
+        edge[bend left=30] node {2/5} (2)
+    (4) edge[in=270, out=180, loop] node{1/8} (4)
+        edge[bend left=30] node {1/4} (1)
+        edge[bend left=30] node {5/8} (3)
+        ;
+    \end{tikzpicture}
+    \end{center}
+
+        The corresponding probability transition matrix \( P \) is,
+        \begin{align*}
+            P = \left[\begin{array}{cccc}
+                1/6 & 1/2 & 0 & 1/3 \\
+                3/8 & 1/8 & 1/2 & 0 \\
+                0 & 2/5 & 1/10 & 1/2 \\
+                1/4 & 0 & 5/8 & 1/8
+            \end{array}\right]
+        \end{align*} 
     \item 
-    \item 
+        We easily compute the right eigenvector corresponding to eigenvalue \( 1 \) as,
+        \begin{align*}
+            \pi = \frac{1}{4}[3/4,1,5/4,1] = [3/16,1/4,5/16,1/4]
+        \end{align*}
+        
+    \item The expected number of moves is the mean recurrence time. This chain is irreducible so by theorem we have,
+        \begin{align*}
+            \tau_2 = 1/\pi(2) =4
+        \end{align*}
+        
 \end{enumerate}
 \end{solution}
 
 
 \begin{problem}[Practice Exam 6, Problem 2]
-
+    Fix a probability space \( (\Omega,\cF,\PP) \) and a filtration \( \bF = (\cF_t)_{t\geq 0} \). Let \( X \) be an OU process, and \( S \) a strictly increasing L\'evy process (also known as a subordinator), whose dynamics are given by,
+    \begin{align*}
+        \d X_t = - X_t \d t + \sqrt{2}\d W_t, && \d S_t = \gamma \d t + \int_0^\infty z N(\d t,\d z), && S_0 = 0
+    \end{align*}
+    where \( W \) is a \( (\PP,\bF) \)-Brownian motion and \( N \) is a poisson random measure with associated L\'evy measure \( \nu \). Consider a Subordianted OU process \( Y \) defined as follows,
+    \begin{align*}
+        Y_t = X_{S_t}
+    \end{align*}
+    Define the two-parameter semigroup \( \cP(t,T) \) associated with the \( Y \) process,
+    \begin{align*}
+        \cP(t,T) f(y) := \EE[f(Y_T) | Y_t = y)
+    \end{align*}
+    For a fixed \( 0\leq t\leq T <\infty \), what are the eigenfunctions and associated eigenvalues of the operator \( \cP(t,T) \)?
 \end{problem}
 
 \begin{solution}[Solution]
@@ -339,7 +483,10 @@ Let \( Y = (Y_n)_{n\in\NN_0} \) be a sequence of iid random variables with \( Y_
 
 
 \begin{problem}[Practice Exam 7, Problem 1]
-
+\begin{enumerate}[nolistsep,label=(\alph*)]
+    \item (Weather chain) The weather can be either sunny, smoggy, or rainy. The weather stays sunny for an exponentially distributed amount of time with mean 3 days and then turns smoggy. It stays smoggy for an exponentially distributed amount of time with mean 4 days and then turns rainy. Finally, it rains for an exponentially distributed amount of time with mean 1 and then it is sunny. Model the weather system as a continuous time Markov chain and compute its stationary distribution.
+    \item (Barbershop) Consider a barbershop with one barber and two waiting chairs. The barber cuts hair at rate 3 customers per hour (exponentially distributed hair-cutting time). Customers arrive according to a Poisson process with rate 2 per hour. Arriving customers leave immediately if they find that the two waiting chairs are occupied. Model this system as a continuous time Markov chain and derive its stationary distribution.
+\end{enumerate}
 \end{problem}
 
 \begin{solution}[Solution]
@@ -351,6 +498,22 @@ Let \( Y = (Y_n)_{n\in\NN_0} \) be a sequence of iid random variables with \( Y_
 
 
 \begin{problem}[Practice Exam 7, Problem 2]
+    Fix a probability space \( (\Omega,\cF,\PP) \) and a filtration \( \bF = (\cF_t)_{0\leq t\leq T} \). Consider two processes,
+    \begin{align*}
+        \d X_t = \sigma \d W_t, && \d S_t = \sigma_t S_t \d W_t
+    \end{align*}
+    where \( W \) is a \( (\PP,\bF) \)-Brownian motino and the process \( \sigma = (\sigma_t)_{0\leq t\leq T} \) evolves independently of \( W \).
+\begin{enumerate}[nolistsep,label=(\alph*)]
+    \item Show that,
+        \begin{align*}
+            \EE[G(X_T-X_t)|\cF_t] = \EE[G(X_t-X_T)|\cF_t]
+        \end{align*}
+    \item Show that,
+        \begin{align*}
+            \EE[G(S_T)|\cF_t] = \EE[(S_T/S_t) G(S_t^2/S_T) | \cF_t]
+        \end{align*}
+        
+\end{enumerate}
 
 \end{problem}
 
@@ -363,7 +526,13 @@ Let \( Y = (Y_n)_{n\in\NN_0} \) be a sequence of iid random variables with \( Y_
 
 
 \begin{problem}[Practice Exam 8, Problem 1]
-
+A bakery uses a two-step process to make chocolate cakes. The first step involves baking the cake and the second step involves frosting the cake. Baking takes an exponentially distributed amount of time with rate \( \mu_1 \) . After a cake is baked, it goes to the frosting machine. Frosting takes an exponentially distributed amount of time with rate \( \mu_2 \). The processing times at the oven and the frosting machine are independent random variables. Potential cakes arrive according to a Poisson process at rate \( \lambda \), however, a cake goes to the baking oven only if both the oven and the frosting machine are idle. If any of the two is busy, the cake simply exits the system. We wish to model this system as a continuous-time Markov chain.
+\begin{enumerate}[nolistsep,label=(\alph*)]
+    \item Precisely define the states of your continuous-time Markov chain (Hint: your model should have three states and note that there will never be two cakes in this system).
+    \item Draw a transition diagram for your continuous-time Markov chain.
+    \item Derive stationary distribution for your continuous-time Markov chain.
+    \item Find the expected number of cakes in this system in steady-state.
+\end{enumerate}
 \end{problem}
 
 \begin{solution}[Solution]
@@ -375,7 +544,15 @@ Let \( Y = (Y_n)_{n\in\NN_0} \) be a sequence of iid random variables with \( Y_
 
 
 \begin{problem}[Practice Exam 8, Problem 2]
-
+    Fix a probability space \( (\Omega,\cF,\PP) \) and a filtration \( \bF = (\cF_t)_{0\leq t\leq T} \). Define a procecss \( X \) and stoppting time \( \tau \) as follows,
+    \begin{align*}
+        \d X_t = \mu \d t + \sigma \d W_t, && \tau = \inf\{t\geq 0: X_t\notin(a,b)\}
+    \end{align*}
+    where \( W \) is a \( (\PP,\bF) \)-Brownian motion. Define the following Laplace Transform,
+    \begin{align*}
+        L(x;\lambda) := \EE[e^{-\lambda \tau} | X_0 = 0), && x\in(a,b)
+    \end{align*}
+    Derive the PDE satisfied by \( L \) and use this to find \( L \) explicitly.
 \end{problem}
 
 \begin{solution}[Solution]

@@ -45,48 +45,48 @@
 \contentsline {subsection}{Practice Exam 5, Problem 1}{31}{section*.9}
 \contentsline {subsection}{Practice Exam 5, Problem 2}{32}{section*.10}
 \contentsline {subsection}{Practice Exam 6, Problem 1}{33}{section*.11}
-\contentsline {subsection}{Practice Exam 6, Problem 2}{34}{section*.12}
-\contentsline {subsection}{Practice Exam 7, Problem 1}{35}{section*.13}
-\contentsline {subsection}{Practice Exam 7, Problem 2}{36}{section*.14}
-\contentsline {subsection}{Practice Exam 8, Problem 1}{37}{section*.15}
-\contentsline {subsection}{Practice Exam 8, Problem 2}{38}{section*.16}
-\contentsline {section}{\numberline {11}Homework Problems}{39}{section.11}
-\contentsline {subsection}{Exercise 3.1}{40}{section*.17}
-\contentsline {subsection}{Exercise 3.2}{41}{section*.18}
-\contentsline {subsection}{Exercise 3.3}{43}{section*.19}
-\contentsline {subsection}{Exercise 3.4}{44}{section*.20}
-\contentsline {subsection}{Exercise 3.5}{45}{section*.21}
-\contentsline {subsection}{Exercise 3.6}{46}{section*.22}
-\contentsline {subsection}{Exercise 3.7}{47}{section*.23}
-\contentsline {subsection}{Exercise 4.1}{49}{section*.24}
-\contentsline {subsection}{Exercise 4.2}{51}{section*.25}
-\contentsline {subsection}{Exercise 4.3}{52}{section*.26}
-\contentsline {subsection}{Exercise 4.4}{53}{section*.27}
-\contentsline {subsection}{Exercise 4.5}{54}{section*.28}
-\contentsline {subsection}{Exercise 4.6}{55}{section*.29}
-\contentsline {subsection}{Exercise 4.7}{57}{section*.30}
-\contentsline {subsection}{Exercise 4.8}{58}{section*.31}
-\contentsline {subsection}{Exercise 5.1}{60}{section*.32}
-\contentsline {subsection}{Exercise 5.2}{62}{section*.33}
-\contentsline {subsection}{Exercise 5.3}{63}{section*.34}
-\contentsline {subsection}{Exercise 5.4}{66}{section*.35}
-\contentsline {subsection}{Exercise 5.5}{70}{section*.36}
-\contentsline {subsection}{Exercise 7.1}{71}{section*.37}
-\contentsline {subsection}{Exercise 7.2}{72}{section*.38}
-\contentsline {subsection}{Exercise 7.3}{73}{section*.39}
-\contentsline {subsection}{Exercise 7.4}{75}{section*.40}
-\contentsline {subsection}{Exercise 8.1}{77}{section*.41}
-\contentsline {subsection}{Exercise 8.2}{79}{section*.42}
-\contentsline {subsection}{Exercise 8.3}{80}{section*.43}
-\contentsline {subsection}{Exercise 8.4}{82}{section*.44}
-\contentsline {subsection}{Exercise 9.2}{83}{section*.45}
-\contentsline {subsection}{Exercise 9.2}{85}{section*.46}
-\contentsline {subsection}{Exercise 9.3}{86}{section*.47}
-\contentsline {subsection}{Exercise 9.4}{88}{section*.48}
-\contentsline {subsection}{Exercise 9.5}{89}{section*.49}
-\contentsline {subsection}{Exercise 9.6}{92}{section*.50}
-\contentsline {subsection}{Exercise 10.1}{96}{section*.51}
-\contentsline {subsection}{Exercise 10.2}{98}{section*.52}
-\contentsline {subsection}{Exercise 10.3}{99}{section*.53}
-\contentsline {subsection}{Exercise 10.4}{101}{section*.54}
-\contentsline {subsection}{Exercise 10.5}{104}{section*.55}
+\contentsline {subsection}{Practice Exam 6, Problem 2}{35}{section*.12}
+\contentsline {subsection}{Practice Exam 7, Problem 1}{36}{section*.13}
+\contentsline {subsection}{Practice Exam 7, Problem 2}{37}{section*.14}
+\contentsline {subsection}{Practice Exam 8, Problem 1}{38}{section*.15}
+\contentsline {subsection}{Practice Exam 8, Problem 2}{39}{section*.16}
+\contentsline {section}{\numberline {11}Homework Problems}{40}{section.11}
+\contentsline {subsection}{Exercise 3.1}{41}{section*.17}
+\contentsline {subsection}{Exercise 3.2}{42}{section*.18}
+\contentsline {subsection}{Exercise 3.3}{44}{section*.19}
+\contentsline {subsection}{Exercise 3.4}{45}{section*.20}
+\contentsline {subsection}{Exercise 3.5}{46}{section*.21}
+\contentsline {subsection}{Exercise 3.6}{47}{section*.22}
+\contentsline {subsection}{Exercise 3.7}{48}{section*.23}
+\contentsline {subsection}{Exercise 4.1}{50}{section*.24}
+\contentsline {subsection}{Exercise 4.2}{52}{section*.25}
+\contentsline {subsection}{Exercise 4.3}{53}{section*.26}
+\contentsline {subsection}{Exercise 4.4}{54}{section*.27}
+\contentsline {subsection}{Exercise 4.5}{55}{section*.28}
+\contentsline {subsection}{Exercise 4.6}{56}{section*.29}
+\contentsline {subsection}{Exercise 4.7}{58}{section*.30}
+\contentsline {subsection}{Exercise 4.8}{59}{section*.31}
+\contentsline {subsection}{Exercise 5.1}{61}{section*.32}
+\contentsline {subsection}{Exercise 5.2}{63}{section*.33}
+\contentsline {subsection}{Exercise 5.3}{64}{section*.34}
+\contentsline {subsection}{Exercise 5.4}{67}{section*.35}
+\contentsline {subsection}{Exercise 5.5}{71}{section*.36}
+\contentsline {subsection}{Exercise 7.1}{72}{section*.37}
+\contentsline {subsection}{Exercise 7.2}{73}{section*.38}
+\contentsline {subsection}{Exercise 7.3}{74}{section*.39}
+\contentsline {subsection}{Exercise 7.4}{76}{section*.40}
+\contentsline {subsection}{Exercise 8.1}{78}{section*.41}
+\contentsline {subsection}{Exercise 8.2}{80}{section*.42}
+\contentsline {subsection}{Exercise 8.3}{81}{section*.43}
+\contentsline {subsection}{Exercise 8.4}{83}{section*.44}
+\contentsline {subsection}{Exercise 9.2}{84}{section*.45}
+\contentsline {subsection}{Exercise 9.2}{86}{section*.46}
+\contentsline {subsection}{Exercise 9.3}{87}{section*.47}
+\contentsline {subsection}{Exercise 9.4}{89}{section*.48}
+\contentsline {subsection}{Exercise 9.5}{90}{section*.49}
+\contentsline {subsection}{Exercise 9.6}{93}{section*.50}
+\contentsline {subsection}{Exercise 10.1}{97}{section*.51}
+\contentsline {subsection}{Exercise 10.2}{99}{section*.52}
+\contentsline {subsection}{Exercise 10.3}{100}{section*.53}
+\contentsline {subsection}{Exercise 10.4}{102}{section*.54}
+\contentsline {subsection}{Exercise 10.5}{105}{section*.55}
