@@ -40,10 +40,115 @@
 \tableofcontents
 
 %%%%%%%%%%%%%%%%%%%%%
+%    Useful Info    %
+%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
+\section{Table of Random Varibles and Distributions}
+
+\textit{Probability Mass Function} (for discrete random variables):
+\begin{align*}
+    p(k) = \PP(X = k)
+\end{align*}
+
+\textit{Probability Density Function} (for continuous random variables):
+\begin{align*}
+    p(x)\d x = \PP(X \in [x,x+\d x))
+\end{align*}
+
+\textit{Probability Generating Function}:
+\begin{align*}
+    G(z) = \EE[z^X] = p(0) + p(1)z + p(2)z^2 + p(3)z^3 + \cdots
+\end{align*}
+
+\textit{Characteristic Function}:
+\begin{align*}
+    \phi(t) = \EE[e^{itX}] 
+\end{align*}
+
+
+
+\subsection{Bernoulli}
+Models if a heads is flipped for a biased coin.
+\begin{center}
+\def\arraystretch{1.5}
+\begin{tabular}{|r|l|} \hline
+    Parameters & \( p\in[0,1] \) \\ \hline
+    Support & \( \{0,1\} \) \\ \hline
+    PMF & \( \begin{cases} 1-p & k=0 \\ p & k=1 \end{cases} \) \\ \hline 
+    Mean & \( p \) \\ \hline
+    Variance & \( p(1-p) \) \\ \hline
+    PGF & \( (1-p)+pz \) \\ \hline
+    CF & \( (1-p)+pe^{it} \)\\ \hline
+\end{tabular}
+\end{center}
+
+
+\subsection{Binomial}
+Models the number of heads when flipping a biased coin \( n \) times.
+\begin{center}
+\def\arraystretch{1.5}
+\begin{tabular}{|r|l|} \hline
+    Parameters & \( p\in[0,1],n\in \NN_{\geq 0} \) \\ \hline
+    Support & \( \{0,1,\ldots, n\} \) \\ \hline
+    PMF & \( \binom{n}{k} p^k(1-p)^{n-k} \) \\ \hline 
+    Mean & \( np \) \\ \hline
+    Variance & \( np(1-p) \) \\ \hline
+    PGF & \( [(1-p)+pz]^n \) \\ \hline
+    CF & \( [(1-p) + pe^{it}]^n \)\\ \hline
+\end{tabular}
+\end{center}
+
+
+\subsection{Geometric}
+Models the number of flips of a biased coin required to flip a heads.
+\begin{center}
+\def\arraystretch{1.5}
+\begin{tabular}{|r|l|} \hline
+    Parameters & \( p\in[0,1] \) \\ \hline
+    Support & \( \{1,\ldots, n\} \) \\ \hline
+    PMF & \( p(1-p)^{k-1} \) \\ \hline 
+    CDF & \( 1-(1-p)^k \) \\ \hline
+    Mean & \( 1/p \) \\ \hline
+    Variance & \( (1-p)/p^2 \) \\ \hline
+    PGF & \( ps/(1-(1-p)s) \) \\ \hline
+    CF & \( pe^{it}/(1-(1-p)e^{it}) \)\\ \hline
+\end{tabular}
+\end{center}
+
+\subsection{Poisson}
+Expresses the probability of a given number of events occurring in a fixed interval of time or space if these events occur with a known constant rate and independently of the time since the last event.
+\begin{center}
+\def\arraystretch{1.5}
+\begin{tabular}{|r|l|} \hline
+    Parameters & \( \lambda > 0 \) \\ \hline
+    Support & \( \{0,1,2,\ldots\} \) \\ \hline
+    PMF & \( \lambda^k e^{-\lambda}/k! \) \\ \hline 
+    CDF & \( e^{-\lambda} \sum_{j=0}^{k} \lambda^j/j! \) \\ \hline
+    Mean & \( \lambda \) \\ \hline
+    Variance & \( \lambda \) \\ \hline
+    PGF & \( \exp(\lambda(z-1)) \) \\ \hline
+    CF & \( \exp(\lambda(e^{it}-1)) \)\\ \hline
+\end{tabular}
+\end{center}
+
+
+\pagebreak
+\section{Table of Random Processes}
+
+give probability of jump in time dt
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%
 %     CHAPTER 3     %
 %%%%%%%%%%%%%%%%%%%%%
 \pagebreak
 \section{Generating and Characteristic functions}
+
+how to get density from gen function
+
 
 
 %%%%%%%%%%%%%%%%%%%%%
@@ -319,12 +424,47 @@ This has mean,
 \section{Stochastic Calculus}
 
 \note{ITO FORMULA AND STUFF}
+\subsection{It\^o's Formula}
+\textit{One Dimension}:
+\begin{align*}
+    \d f(X_t) = f'(X_t)\d X_t + \frac{1}{2}f''(X_t)\d[X,X]_t
+\end{align*}
+
+\textit{Two Dimensions}:
+\begin{align*}
+    \d f(t,X_t) = f_t(t,X_t)\d t + f_x(t,X_t)\d X_t + \frac{1}{2}f_{xx}(t,X_t) \d[X,X]_t
+\end{align*}
+
+\textit{Two Dimensions}:
+\begin{align*}
+    \d f(X_t,Y_t) &= f_x(X_t,Y_t)\d X_t + f_y(X_t,Y_t)\d Y_t 
+    \\&\hspace{3em} + \frac{1}{2} \Big( f_{xx}(X_t,Y_t)\d[X,X]_t + f_{xy}(X_t,Y_t)\d[X,Y]_t 
+    \\&\hspace{6em}+ f_{yx}(X_t,Y_t)\d[Y,X]_t + f_{yy}(X_t,Y_t)\d[Y,Y]_t \Big)
+\end{align*}
+
 
 %%%%%%%%%%%%%%%%%%%%%
 %     CHAPTER 9     %
 %%%%%%%%%%%%%%%%%%%%%
 \pagebreak
 \section{SDEs and PDEs}
+
+\note{ADD ASSOCIATED PDEs}
+
+\subsection{Geometric Brownian Motion}
+
+
+\subsection{Ornstein--Uhlenbeck (OU) process}
+\textit{SDE}:
+\begin{align*}
+    \d X_t = \kappa(\theta-X_t)\d t + \d W_t
+\end{align*}
+
+\textit{Solution}:
+\begin{align*}
+    X_t = \theta + e^{-\kappa t}(X_0-\theta) + \int_0^t e^{-\kappa(t-s)}\d W_s
+\end{align*}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%

@@ -2626,12 +2626,43 @@ result:
 Let \( A\in\CC^{n\times n} \) be any \( n\times n \) matric and let \( v\in\CC^n \) be a nonzero \( n \)-vector.
 \begin{enumerate}[nolistsep,label=(\alph*)]
     \item Show that if \( v\in\operatorname{span}\{Av,A^2v\} \) then \( v\in\operatorname{span}\{A^2v,A^3v\} \).
-    \item Given an example to show that the converse is not necessarily truel that is \( v\in \operatorname{span}\{A^2v,A^3v\} \) does \textit{not} necessarily imply that \( v\in\operatorname{span}\{Av,A^2v\} \).
+    \item Given an example to show that the converse is not necessarily true; that is \( v\in \operatorname{span}\{A^2v,A^3v\} \) does \textit{not} necessarily imply that \( v\in\operatorname{span}\{Av,A^2v\} \).
 \end{enumerate}
 \end{problem}
 
 \begin{solution}[Solution]
-    
+\begin{enumerate}[label=(\alph*)]
+    \item Suppose \( v\in\operatorname{span}\{Av,A^2v\} \). That is, there are scalars \( a \) and \( b \) such that,
+        \begin{align*}
+            v = aAv+bA^2v
+        \end{align*}
+        Then,
+        \begin{align*}
+            Av = aA^2v + bA^3v
+        \end{align*}
+        Therefore,
+        \begin{align*}
+            v = a(aA^2v+bA^3v)+bA^2v = (a^2+v)A^2v+abA^3v \in\operatorname{span}\{A^2v,A^3v\} \tag*{\qed}
+        \end{align*}
+        
+    \item 
+        Let,
+        \begin{align*}
+            A = \left[\begin{array}{ccc}
+            0 & 0 & 1 \\
+            1 & 0 & 0 \\
+            0 & 1 & 0
+            \end{array}\right]
+            ,&&
+            v = \left[\begin{array}{c}1 \\ 0 \\ 0\end{array}\right]
+        \end{align*}
+        
+        Then clearly \( A^3v = v \) so \( v\in\operatorname{span}\{A^2v,A^3v\} \). However, \( Av = [0,1,0]^T \) and \( A^2v = [0,0,1]^T \) so clearly \( v\notin\operatorname{span}\{Av,A^2v\} \).
+
+
+
+\end{enumerate}
+  
 \end{solution}
 
 
@@ -2649,6 +2680,17 @@ we say if there is an edge between nodes \( i \) and \( j \), then there is also
 \end{problem}
 
 \begin{solution}[Solution]
+\begin{enumerate}[label=(\alph*)]
+    \item Yes. Consider the complete graph on 2 nodes. This has adjacency matrix,
+        \begin{align*}
+            A = \left[\begin{array}{cc}0 & 1 \\ 1& 0\end{array}\right]
+        \end{align*}
+        which has eigenvalues \( \pm 1 \).
+        
+    \item The adjacency matrix \( A \) of any undirected graph is real and symmetric, so all eigenvalues are real. 
+    \item The vector \( v=[1,1,\ldots, 1]^T \) has eigenvalue \( d \) since the sum of each row is \( d \) (the number of edges).
+    \item For any matrix, the spectral radius bounded above by any matrix norm. The infinity and one norms of the adjacency matrix of a \( d \)-regular graph are both \( d \). Therefore \( \rho(A) \leq d \) so all eigenvalues are bounded below by \( d \). 
+\end{enumerate}
     
 \end{solution}
 
@@ -2679,7 +2721,32 @@ where \( \theta \) denotes the angular position of the pendulum away from the do
 \end{problem}
 
 \begin{solution}[Solution]
-    
+\begin{enumerate}[label=(\alph*)]
+    \item
+        \note{Not relevant}
+    \item
+        Energy is conserved as is energy/mass. We therefore have a conserved quantity,
+        \begin{align*}
+            H(x,y) =  -g\cos(x) + \frac{1}{2}L^2 y^2
+        \end{align*}
+        
+    \item We write this as a system of the form \( u' = G(u) \),
+        \begin{align*}
+            \dd{}{t} \left[\begin{array}{cc} y \\ x \end{array}\right]
+            =
+            \left[\begin{array}{c} - \frac{g}{L}\sin x \\ y \end{array}\right]
+        \end{align*}
+        
+        We will solve this using forward Euler. That is,
+        \begin{align*}
+            u(t_{n+1}) = u(t_n) + k f(u(t_n))
+        \end{align*}
+        
+        \note{maybe do bw euler for practice.}
+
+    \item 
+\end{enumerate}
+ 
 \end{solution}
 
 

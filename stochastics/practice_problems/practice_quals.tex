@@ -58,11 +58,13 @@
     \begin{enumerate}[nolistsep,label=(\alph*)]
         \item Derive the SDEs satisfied by \( (R,\Phi) \).
         \item Define,
+            {\small
             \begin{align*}
                 u(r,\phi) = \EE \left[ e^{-\lambda \tau} f(R_\tau) | R_0 = r,\Phi_0 = \phi \right], &&
                 \tau = \inf\{t\geq 0:\Phi_t\notin(0,\pi/2)\}, &&
                 \phi \in (0,\pi/2)
             \end{align*}
+            }
             Derive a PDE satisfied by \( u \).
         \item Desribe with pseudo-code how you would find \( u(r,\phi) \) using Monte Carlo simulation.
     \end{enumerate}    
@@ -119,14 +121,269 @@
         \begin{align*}
             \d R_t &= \cos(\Phi_t)\d W_t^1 + \sin(\Phi_t) \d W_t^2 + \frac{1}{2R_t} \d t
         \end{align*}
-        
 
 
+    \item
 
     \item 
+
+\end{enumerate}
+\end{solution}
+
+
+\begin{problem}[Practice Exam 2, Problem 1]
+Let \( Y = (Y_n)_{n\in\NN_0} \) be a sequence of iid random variables with \( Y_n\sim \operatorname{Pois}(\lambda) \) representing the number of particles entering a chamer at time \( n \). The lifetimes of the particles are iid geometric random variables with parameter \( p \). Let \( X_n \) represent the number of particles in the chamber at time \( n \).
+\begin{enumerate}[nolistsep,label=(\alph*)]
+    \item Give an expression for \( p(i,j) = \PP(X_{n+1} = j | X_n = i) \).
+    \item Find the stationary distribution \( \pi \) of \( X = (X_n)_{n\geq 0} \).
+\end{enumerate}
+\end{problem}
+
+\begin{solution}[Solution]
+\begin{enumerate}[label=(\alph*)]
+    \item
+        If the lifetime of a particle is a geometric random variable with parameter \( p \), then at each step there is a probability \( p \) that the particle will decay and a probability \( 1-p \) that the particle will not decay.
+
+        Let \( Z_n \) represent the number of particles which no \textit{not} decay during the \( n \)-th step. That is,
+        \begin{align*}
+            X_{n+1} = Z_n + Y_n 
+        \end{align*}
+        
+        Since each of the \( X_n \) particles no not decay with probability \( 1-p \) we have \( Z_n \sim \operatorname{Bin}(X_n,1-p) \) and \( Y_n \sim \operatorname{Pois}(\lambda) \).
+
+        Denote the generating functions of \( Y_n \) and \( Z_n \) by, \( G_{Y_n}(s) \) and \( G_{Z_n}(s) \) respectively.
+        Explicitly,
+        \begin{align*}
+            G_{Y_n}(s) = G_Y(s) = e^{\lambda(s-1)}, &&
+            G_{Z_n}(s) = (p+(1-p)s)^{X_n} = G_{X_n}(p+(1-p)s)
+        \end{align*}
+        
+        Assume \( Y_n \) is independent of \( X_n \) and therefore of \( Z_n \). 
+        If \( X_n = i \) the generating function is \( G_{X_n} = s^i \). We can then write,
+        \begin{align*}
+            G_{X_{n+1}}(s) = G_{Y_n}(s)G_{Z_n}(s) = G_Y(s) (p+(1-p)s)^i = e^{\lambda(s-1)} (p+(1-p)s)^i
+        \end{align*}
+
+        Therefore,
+        \begin{align*}
+            p(i,j) &= \PP(X_{n+1} = j | X_n = i) 
+            \\&= \left[\frac{1}{j!} \dd[j]{G_{X_{n+1}}(s)}{s} \right]_{s=0}
+            \\&= \left[\frac{1}{j!} \dd[j]{}{s} \left[ e^{\lambda(s-1)}(p+(1-p)s)^i \right] \right]_{s=0}
+        \end{align*}
+
+       
+    \item 
+        More generally, the generating function \( G_{X_{n+1}}(s) \) of \( X_{n+1} \) is then,
+        \begin{align*}
+            G_{X_{n+1}}(s) = G_{Y_n}(s)G_{Z_n}(s) = G_{Y}(s)G_{X_{n}}(p+(1-p)s) 
+        \end{align*}
+        
+        This gives a recurrence relation. We assume \( X_0 = 0 \) so that \( G_{X_0}(s) = 1 \).
+        For convencience write \( q = 1-p \). Then,
+        \begin{align*}
+            1+q^k(s-1) |_{s=(1+q(s-1))} = 1+q^k((1+q(s-1))-1) = 1+q^{k+1}(s-1)
+        \end{align*}
+        
+        Therefore,
+        \begin{align*}
+            G_{X_n}(s) &= G_Y(s) G_{X_{n-1}}(1+q(s-1)) \\
+            &= G_Y(s) G_Y(1+q(s-1)) G_{x_{n-2}}(1+q^2(s-1)) \\
+            &\hspace{.6em}\vdots \\
+            &= \prod_{k=0}^n G_Y(1+q^k(s-1))
+        \end{align*}
+       
+        We can rewrite this as,
+        \begin{align*}
+            G_{X_n}(s) = \exp \left( \sum_{k=0}^n \lambda((1+q^k(s-1))-1) \right)
+            = \exp \left( \lambda(s-1) \sum_{k=0}^n q^k \right)
+        \end{align*}
+        
+        Taking the limit as \( n\to\infty \) we find,
+        \begin{align*}
+            G_{X_{\infty}}(s) 
+            &= \lim_{n\to\infty} G_{X_n}(s) 
+            \\&= \exp \left( \lambda(s-1) \sum_{k=0}^{\infty} q^k \right) 
+            \\&= \exp \left( \frac{\lambda(s-1)}{1-q}  \right) 
+            \\&= \exp\left( \frac{\lambda}{p}(s-1)\right)        
+        \end{align*}
+        
+        Therefore, by the continuity theorem, \( X_\infty \) is distributed like a Poisson random variable with parameter \( \lambda/p \). 
+
+        This means the invariant distribution of \( X \) is the density function of a Poisson random variable with parameter \( \lambda/p \). That is,
+        \begin{align*}
+            \pi(k) = \left( \frac{\lambda}{p} \right)^k \frac{e^{-\lambda/p}}{k!}
+        \end{align*}
+        
+\end{enumerate}
+\end{solution}
+
+
+\begin{problem}[Practice Exam 2, Problem 2]
+    Fix a probability space \( (\Omega, \cF, \PP) \) and a filtration \( \bF = (\cF_t)_{0\leq t\leq T} \) where \( T< \infty \). Consider a process \( P = (P_t)_{0\leq t\leq T} \) defined as,
+    \begin{align*}
+        P_t = \EE[\bOne_{X_T\leq a} | \cF_t], && \d X_t = \d W_t
+    \end{align*}
+    where \( W \) is a \( (\PP,\bF) \)-Brownian motion. Derive an SDE for the process \( P \). Your answer should not involve \( X \). You may find it useful to use the CDF \( \Phi \) of a standard normal random variable,
+    \begin{align*}
+        \Phi(z) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{z} e^{-x^2/2}\d x
+    \end{align*}
+    its inverse \( \Phi^{-1} \) and its derivative \( \phi:= \Phi' \).
+\end{problem}
+
+\begin{solution}[Solution]
+
+\end{solution}
+
+
+
+\begin{solution}[Solution]
+\begin{enumerate}[label=(\alph*)]
     \item 
     \item 
 \end{enumerate}
 \end{solution}
+
+
+\begin{problem}[Practice Exam 3, Problem 1]
+
+\end{problem}
+
+\begin{solution}[Solution]
+\begin{enumerate}[label=(\alph*)]
+    \item 
+    \item 
+\end{enumerate}
+\end{solution}
+
+
+\begin{problem}[Practice Exam 3, Problem 2]
+
+\end{problem}
+
+\begin{solution}[Solution]
+\begin{enumerate}[label=(\alph*)]
+    \item 
+    \item 
+\end{enumerate}
+\end{solution}
+
+\begin{problem}[Practice Exam 4, Problem 1]
+
+\end{problem}
+
+\begin{solution}[Solution]
+\begin{enumerate}[label=(\alph*)]
+    \item 
+    \item 
+\end{enumerate}
+\end{solution}
+
+
+\begin{problem}[Practice Exam 4, Problem 2]
+
+\end{problem}
+
+\begin{solution}[Solution]
+\begin{enumerate}[label=(\alph*)]
+    \item 
+    \item 
+\end{enumerate}
+\end{solution}
+
+\begin{problem}[Practice Exam 5, Problem 1]
+
+\end{problem}
+
+\begin{solution}[Solution]
+\begin{enumerate}[label=(\alph*)]
+    \item 
+    \item 
+\end{enumerate}
+\end{solution}
+
+
+\begin{problem}[Practice Exam 5, Problem 2]
+
+\end{problem}
+
+\begin{solution}[Solution]
+\begin{enumerate}[label=(\alph*)]
+    \item 
+    \item 
+\end{enumerate}
+\end{solution}
+
+
+\begin{problem}[Practice Exam 6, Problem 1]
+
+\end{problem}
+
+\begin{solution}[Solution]
+\begin{enumerate}[label=(\alph*)]
+    \item 
+    \item 
+\end{enumerate}
+\end{solution}
+
+
+\begin{problem}[Practice Exam 6, Problem 2]
+
+\end{problem}
+
+\begin{solution}[Solution]
+\begin{enumerate}[label=(\alph*)]
+    \item 
+    \item 
+\end{enumerate}
+\end{solution}
+
+
+\begin{problem}[Practice Exam 7, Problem 1]
+
+\end{problem}
+
+\begin{solution}[Solution]
+\begin{enumerate}[label=(\alph*)]
+    \item 
+    \item 
+\end{enumerate}
+\end{solution}
+
+
+\begin{problem}[Practice Exam 7, Problem 2]
+
+\end{problem}
+
+\begin{solution}[Solution]
+\begin{enumerate}[label=(\alph*)]
+    \item 
+    \item 
+\end{enumerate}
+\end{solution}
+
+
+\begin{problem}[Practice Exam 8, Problem 1]
+
+\end{problem}
+
+\begin{solution}[Solution]
+\begin{enumerate}[label=(\alph*)]
+    \item 
+    \item 
+\end{enumerate}
+\end{solution}
+
+
+\begin{problem}[Practice Exam 8, Problem 2]
+
+\end{problem}
+
+\begin{solution}[Solution]
+\begin{enumerate}[label=(\alph*)]
+    \item 
+    \item 
+\end{enumerate}
+\end{solution}
+
 
 
