@@ -43,28 +43,49 @@
 %    Useful Info    %
 %%%%%%%%%%%%%%%%%%%%%
 \pagebreak
-\section{Table of Random Varibles and Distributions}
-
-\textit{Probability Mass Function} (for discrete random variables):
+\section{Random Varibles and Distributions}
+\subsection{Basic Definitions}
+\subsubsection{Probability Mass Function (discrete)} 
 \begin{align*}
     p(k) = \PP(X = k)
 \end{align*}
 
-\textit{Probability Density Function} (for continuous random variables):
+\subsubsection{Probability Density Function (continuous)} 
 \begin{align*}
-    p(x)\d x = \PP(X \in [x,x+\d x))
+    f(x)\d x = \PP(X \in [x,x+\d x))
 \end{align*}
 
-\textit{Probability Generating Function}:
+\subsubsection{Cumulative Density Function}
 \begin{align*}
-    G(z) = \EE[z^X] = p(0) + p(1)z + p(2)z^2 + p(3)z^3 + \cdots
+    F(x) = \PP(X < x ) = 
+    \begin{cases}
+        \sum_{k=0}^{\lfloor x \rfloor} p(k) & \text{discrete} \\
+        \int_{-\infty}^{x} f(x)\d x & \text{continuous}
+    \end{cases}
 \end{align*}
 
-\textit{Characteristic Function}:
+Can obtain probability density function by,
 \begin{align*}
-    \phi(t) = \EE[e^{itX}] 
+    f(x) = \dd{}{x} F(x)
 \end{align*}
 
+
+\subsubsection{Probability Generating Function}
+\begin{align*}
+    G(z) = \EE\left[z^X\right] = p(0) + p(1)z + p(2)z^2 + p(3)z^3 + \cdots
+\end{align*}
+Can obtain probability mass function by,
+\begin{align*}
+    p(k) = \frac{1}{k!} \left[ \dd[k]{}{z} G(z) \right]_{z=0}
+\end{align*}
+
+
+\subsubsection{Characteristic Function}
+\begin{align*}
+    \phi(t) = \EE\left[e^{itX}\right] 
+\end{align*}
+
+\note{WHAT DO WE USE THIS FOR??}
 
 
 \subsection{Bernoulli}
@@ -131,14 +152,55 @@ Expresses the probability of a given number of events occurring in a fixed inter
 \end{tabular}
 \end{center}
 
+\subsection{Exponential}
+Describes times between events in a Poisson point process.
+\begin{center}
+\def\arraystretch{1.5}
+\begin{tabular}{|r|l|} \hline
+    Parameters & \( \lambda > 0 \) \\ \hline
+    Support & \( [0,\infty) \) \\ \hline
+    PDF & \( \lambda e^{-\lambda x} \) \\ \hline 
+    CDF & \( 1-e^{- \lambda x} \) \\ \hline
+    Mean & \( 1/\lambda \) \\ \hline
+    Variance & \( 1/\lambda^2 \) \\ \hline
+    CF & \( \lambda/(\lambda-it) \)\\ \hline
+\end{tabular}
+\end{center}
+
 
 \pagebreak
-\section{Table of Random Processes}
+\section{Table of Random (COUNTING??????) Processes}
 
-give probability of jump in time dt
+\subsection{Poisson Point Process}
+A process in which events occur continuously and independently at a constant average rate \note{IS THIS ENOUGH TO DESCRIBE PPP UNIQUELY?}
 
+\subsubsection{Viewed as a Counting Process}
+A counting process \( N = (N_t)_{t\geq 0} \) is a Poisson process with parameter \( \lambda \) if it has the properties,
+\begin{enumerate}[nolistsep]
+    \item \( N_0 = 0 \)
+    \item independent increments
+    \item the number of points in any time interval of length \( t \) is a Poisson random variable with parameter \( \lambda t \)
+\end{enumerate}
 
+In other words, a Poisson point process has probability mass function,
+\begin{align*}
+    \PP(N_t=n) = \frac{(\lambda t)^n}{n!}e^{-\lambda t}
+\end{align*}
 
+\subsubsection{Memoryless property} 
+The distance between two consecutive points will be an exponential random variable with parameter \( \lambda \) (mean \( 1/\lambda \)).
+
+\subsubsection{Probability of Jump}
+\begin{align*}
+    \PP(N_{t+s}=n+m | N_t =n) = 
+    \begin{cases}
+        1-\lambda s + \cO(s^2) & m = 0 \\
+        \lambda s + \cO(s^2) & m = 1 \\
+        \cO(s^2) & m \geq 1
+    \end{cases} 
+\end{align*}
+
+\note{Something about exponentially distributed counting process}
 
 
 %%%%%%%%%%%%%%%%%%%%%
@@ -252,6 +314,9 @@ how to get density from gen function
 \end{itemize}
 
 
+\note{?????}
+\hyperref[Practice Exam 6, Problem 1]{Practice Exam 6, Problem ??}:  fdsaf sad sa??
+
 
 \subsection{Birth Death Processes}
 
@@ -333,7 +398,10 @@ This has mean,
 \end{align*}
 
 
-\textit{Sample Problems}: \hyperref[Exercise 5.1]{Exercise 5.1}
+\textit{Sample Problems}: 
+\begin{itemize}[nolistsep]
+    \item \hyperref[Exercise 5.1]{Exercise 5.1}: fdsaf sad
+\end{itemize}
 
 
 \subsubsection{M/M/\(\infty\)}
