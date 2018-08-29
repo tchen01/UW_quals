@@ -231,17 +231,55 @@ Let \( Y = (Y_n)_{n\in\NN_0} \) be a sequence of iid random variables with \( Y_
 \end{problem}
 
 \begin{solution}[Solution]
+Note that condition on \( \cF_t \) is the same as conditioning on \( X_t \). For notational convenience let \( x=X_t \). Then,
+\begin{align*}
+    P_t = \EE[\bOne_{X_T\leq a} | \cF_t] = \PP(X_T\leq a | X_t = x)
+    = \int_{-\infty}^a \Gamma(t,x;T;y)\d y
+\end{align*}
+
+Note further that,
+\begin{align*}
+    \Gamma(t,x;T,y) = \frac{1}{\sqrt{2\pi (T-t)}}\exp \left( -\frac{(y-x)^2}{2(T-t)} \right) 
+    = \frac{1}{\sqrt{T-t}}\phi \left( \frac{y-x}{\sqrt{T-t}} \right)
+\end{align*}
+
+    Let \( u = (y-x)/\sqrt{T-t} \). Then \( \d y = \sqrt{T-t} \d u \) so,
+    \begin{align*}
+       P_t
+        = \int_{-\infty}^{a}  \frac{1}{\sqrt{T-t}}\phi \left( \frac{y-x}{\sqrt{T-t}} \right)\d y
+        = \int_{-\infty}^{\frac{a-x}{\sqrt{T-t}}} \phi(u)\d u
+        = \Phi \left( \frac{a-x}{\sqrt{T-t}} \right)
+    \end{align*}
+    
+Recall that \( X_t = x \) so,
+\begin{align*}
+    P_t = \Phi \left( \frac{a-X_t}{\sqrt{T-t}} \right)
+   \end{align*}
+
+
+    Let \( Y_t = (a-X_t)/\sqrt{T-t} = \Phi^{-1}(P_t) \). Then,
+    \begin{align*}
+        \d Y_t = \frac{1}{2(T-t)} \frac{a-X_t}{\sqrt{T-t}}\d t-\frac{1}{\sqrt{T-t}}\d X_t 
+        = \frac{Y_t}{2(T-t)} \d t - \frac{1}{\sqrt{T-t}}\d W_t
+    \end{align*}
+    
+    Therefore,
+    \begin{align*}
+        \d P_t &= \d \Phi(Y_t) = \phi(Y_t)\d Y_t + \frac{1}{2} \phi'(Y_t)\d[Y,Y]_t 
+        \\&= \phi(Y_t) \frac{Y_t}{2(T-t)}\d t - \phi(Y_t) \frac{1}{\sqrt{T-t}}\d W_t + \frac{1}{2}\phi'(Y_t) \frac{1}{T-t}\d t
+        \\&= \left(\phi(Y_t) \frac{Y_t}{2(T-t)} + \frac{1}{2}\phi'(Y_t) \frac{1}{T-t} \right)\d t  - \frac{\phi(Y_t)}{\sqrt{T-t}}\d W_t 
+    \end{align*}
+    We know that \( \phi'(z) = z\phi(z) \).
+    (alternative argument: As \( P_t \) is a martingale we know the \( \d t \) term is zero.) 
+    Therefore,
+    \begin{align*}
+        \d P_t = -\frac{\phi(\Phi^{-1}(P_t))}{\sqrt{T-t}}\d W_t
+    \end{align*}
+    
+
 
 \end{solution}
 
-
-
-\begin{solution}[Solution]
-\begin{enumerate}[label=(\alph*)]
-    \item 
-    \item 
-\end{enumerate}
-\end{solution}
 
 
 \begin{problem}[Practice Exam 3, Problem 1]
