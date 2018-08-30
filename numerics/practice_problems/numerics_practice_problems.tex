@@ -2863,7 +2863,28 @@ of length 1 (for which the DFT is the identity). About how many total operations
 \begin{solution}[Solution]
     \begin{enumerate}[label=(\alph*)]
     \item
+        First split the sum into od and even terms as,
+            \begin{align*}
+                F_k &= \sum_{j=0}^{N-1}e^{2\pi i j k/N} f_j 
+                = \sum_{j=0,2,\ldots}^{N-2} e^{2\pi i j k/N} f_j + \sum_{j=1,3,\ldots}^{N-1} e^{2\pi i j k/N} f_j
+            \end{align*}
+            
+        Now reindex as,
+            \begin{align*}
+                F_k = \sum_{j=0}^{N/2-1} e^{2\pi i (2j) k / N} f_{2j} + \sum_{j=0}^{N/2-1} e^{2\pi i (2j+1)k/N} f_{2j+1}
+            \end{align*}
+
+            Finally, observe that by our definitions of \( F^{(e)} \) and \( F^{(o)} \) we have,
+        \begin{align*}
+            F_k= F_k^{(e)} + e^{2\pi i k/N} F_k^{(o)}
+       \end{align*}
+            
     \item 
+        We must do \( n \) additions and multiplications (assuming we can evaluate \( e^{2\pi ik/N} \) in \( \cO(1) \) time). 
+
+            We can repeat the bisection \( \cO(\log_2(n)) \) times so the total cost is \( \cO(n\log(n)) \) (in comparison to the \( \cO(n^2) \) operations requried to compute the definition directly).
+
+
 \end{enumerate}    
 \end{solution}
 
