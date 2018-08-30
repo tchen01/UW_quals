@@ -472,11 +472,119 @@ where \( W \) is a \( (\PP,\bF) \)-Brownian motion. Suppose that \( X_0 \in (L,R
 
 \begin{solution}[Solution]
 \begin{enumerate}[label=(\alph*)]
-    \item If we transition down, the probability of reaching state \( N \) before state 0 is \( a_N(i-1) \). Similarly, if we transition up, the probability of reaching state \( N \) before state 0 is \( a_N(i+1) \).
+    \item Fix a state \( i\in\ZZ_{+} \). If we transition down when we first leave \( i \), the probability of reaching state \( N \) before state 0 is \( a_N(i-1) \). Similarly, if we transition up when we first leave \( i \), the probability of reaching state \( N \) before state 0 is \( a_N(i+1) \). 
+        
+    The probability of transitioning up when leaving state \( i \) is \( p_i / (p_i+q_i) \) and the probability of transitioning down when leaving state \( i \) is \( q_i / (p_i-q_i) \). We therefore have the relationship,
+    \begin{align*}
+        a_N(i) = \frac{p_i}{p_i+q_i} a_N(i+1) + \frac{q_i}{p_i+q_i}a_N(i-1)
+    \end{align*}
+
+    \item We solve this using Mathematica.
+    \begin{lstlisting}
+        RSolve[{a[i] == ((p[i - 1] + q[i - 1]) a[i - 1] - q[i - 1] a[i - 2])/p[i - 1], a[0] == 0, a[n] == 1}, a[i], i]
+    \end{lstlisting}
+    
+
+        This yields solution,
+        \begin{align*}
+            a_N(i) = \frac{\sum_{k=1}^{i}\prod_{j=1}^{k-1} \frac{q_{j}}{p_{j}}}{\sum_{k=1}^{N}\prod_{j=1}^{k-1} \frac{q_{j}}{p_{j}}}
+        \end{align*}
+        
+
+    \item
+
+        \iffalse
+        By definition, state \( 0 \) is recurrent if,
+        \begin{align*}
+            \PP(X_n = 0\text{ for some } n | X_0 = 0) = 1 
+        \end{align*}
+        
+        More precisely,
+        \begin{align*}
+            \lim_{N\to\infty} \PP( \exists~ n < N: X_n = 0 | X_0=0) = 1
+        \end{align*}
+       
+        Taking the compliment,
+        \begin{align*}
+            \lim_{N\to\infty} \PP( \forall n < N, X_n \neq 0 | X_0 =0 ) = 0
+        \end{align*}
+       
+        \note{PROBABLY NEED MORE ARGUMENT HERE} also what \( N \) means has changed.
+        (I THINK) equivalently,
+        \begin{align*}
+            \lim_{N\to\infty} a_N(i) = \lim_{N\to\infty} \PP(\tau_N < \tau_0|X_0=i) = 0
+        \end{align*}
+        
+        This happens if and only if the denominator of \( a_N(i) \) is infinite. That is,
+        \begin{align*}
+            \lim_{N \to\infty} \sum_{k=1}^{N} \prod_{j=1}^{k-1} \frac{q_j}{p_j} 
+            = \sum_{k=1}^{\infty} \prod_{j-1}^{k-1} \frac{q_j}{p_j}
+            = \infty
+        \end{align*}
+       
+        \hrulefill
+        \fi
+
+        Define,
+        \begin{align*}
+            \tau_0 = \operatorname{inf}\{ t > 0 : X_t = 0 \},&&
+            \tau_N = \operatorname{inf}\{ t > 0 : X_t = N \}
+        \end{align*}
+        
+        By definition, state 0 is recurrent if and only if,
+        \begin{align*}
+            \PP(\tau_0 < \infty | X_0 = 0 ) = \lim_{T\to\infty} \PP(\tau_0 \leq T | X_0 = 0) = 1
+        \end{align*}
+        
+        Since, given \( X_0 = 0 \),
+        \begin{align*}
+            \lim_{N\to\infty} \tau_N = \infty
+        \end{align*}
+        
+        State 0 is recurrent if and only if,
+        \begin{align*}
+            \lim_{N\to\infty} \PP(\tau_0 \leq \tau_N | X_0 = 0) = 1
+        \end{align*}
+        
+        Taking the compliment we have that state 0 is recurrent if and only if,
+        \begin{align*}
+            \lim_{N\to\infty} \PP(\tau_N < \tau_0 | X_0 = 0) = 0
+        \end{align*}
+        
+
+        In order to reach state \( N \) before returning to state \( 0 \), we must first move to state 1, and then reach state \( N \) before reaching state \( 0 \). We move from state 0 to state \( N \) with probability \( p_0 \), and we reach state \( N \) before state \( 0 \) from state 1 with probability \( a_N(1) \). Therefore,
+        \begin{align*}
+            \PP(\tau_N < \tau_0 | X_0=0) = \PP(\tau_N < \tau_0) = p_0a_N(1)
+        \end{align*}
+
+        We then have that state 0 is recurrent if and only if,
+        \begin{align*}
+            \lim_{N\to\infty} p_0a_N(1) = 0 
+        \end{align*}
+        
+\iffalse
+        Therefore state 0 is recurrent if and only if,
+        \begin{align*}
+            p_0 = 0 \text{ or } \lim_{N\to\infty} a_N(1) = 0
+        \end{align*}
+\fi
+        Finally, we see that \( \lim_{N\to\infty} a_N(1) = 0 \) if and only if,
+        \begin{align*}
+            \frac{1}{p_0}\sum_{k=1}^\infty \prod_{j=1}^{k-1}\frac{q_j}{p_j}
+            = \lim_{N\to\infty}\frac{1}{p_0}\sum_{k=1}^N \prod_{j=1}^{k-1}\frac{q_j}{p_j}
+            = \infty
+        \end{align*}
+
+    
+    \item
+        Let \( s = q/p \). Then,
+        \begin{align*}
+            \sum_{j=1}^{\infty} \prod_{i=1}^{j-1} \frac{q_i}{p_1} = \sum_{j=1}^{\infty} s^{j-1} = \sum_{j=0}^{\infty} s^j
+        \end{align*}
+        
+        This is convergent if and only if \( q/p = s < 1 \). Therefore state 0 is recurrent if and only if \( q \geq p \).
 
 
-
-    \item 
 \end{enumerate}
 \end{solution}
 
@@ -528,7 +636,7 @@ where \( W \) is a \( (\PP,\bF) \)-Brownian motion. Suppose that \( X_0 \in (L,R
 
         Write speed density,
         \begin{align*}
-            m(y) = \exp \left( \int y \d y \right) = \exp(y^2/2)
+            m(x) = \exp \left( \int x \d x \right) = \exp(x^2/2)
         \end{align*}
         
 
@@ -539,9 +647,13 @@ where \( W \) is a \( (\PP,\bF) \)-Brownian motion. Suppose that \( X_0 \in (L,R
             \Gamma(t,x,T,y) = m(y) \sum_{n} e^{(T-t)\lambda_n}\psi_n(y) \psi_n(x)
         \end{align*}
         
-        We now funch such eigenfunctions. Indeed, define,
+        We now funch such eigenfunctions. Indeed, 
+        
+        \note{Use forward equation to find eigenfunctions, then convert to eigenfunctions of backward equation}
+
+        Define,
         \begin{align*}
-            \hat{\psi}_n(x) = e^{-x^2/2}H_n(x) = e^{-x^2/2} (-1)^n e^{x^2/2} \dd[n]{}{x}e^{-x^2/2} = (-1)^n \dd[n]{}{x} e^{-x^2/2}
+            \hat{\psi}_n(x) = e^{-x^2/2}H_n(x) %= e^{-x^2/2} (-1)^n e^{x^2/2} \dd[n]{}{x}e^{-x^2/2} = (-1)^n \dd[n]{}{x} e^{-x^2/2}
         \end{align*}
 
         The Hermite polynomials have the properties,
@@ -549,12 +661,6 @@ where \( W \) is a \( (\PP,\bF) \)-Brownian motion. Suppose that \( X_0 \in (L,R
             H_{n+1} = xH_n - H_n', && H_n' = nH_{n-1}
         \end{align*}
         
-        \begin{align*}
-            H_n' &= xH_n - H_{n+1} \\
-%            H_n'' = xH_n' - H_{n+1}' = x^2H_n - xH_{n+1} - xH_{n+1} + H_{n+2}
-            H_n'' &= nH_{n-1}' = nxH_{n-1}-nH_n
-        \end{align*}
-
         Therefore,
         \begin{align*}
             \hat{\psi}_n' &= -xe^{-x^2/2}H_n + e^{-x^2/2}H_n' = (H_n'-xH_n)e^{-x^2/2} = -H_{n+1}e^{-x^2/2} = -\hat{\psi}_{n+1} \\
@@ -573,7 +679,7 @@ where \( W \) is a \( (\PP,\bF) \)-Brownian motion. Suppose that \( X_0 \in (L,R
         
         Now define,
         \begin{align*}
-            \psi_n = \frac{1}{\norm{\hat{\psi}_n}_m} \hat{\psi}_n
+            \psi_n = \frac{\hat{\psi}_n}{\lVert\hat{\psi}_n\rVert_m} 
         \end{align*}
        
         Finally \note{argument about completeness}
