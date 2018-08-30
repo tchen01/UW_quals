@@ -564,12 +564,12 @@ This will give a PDE which \( u(t,X_t) \) satisfies.
 \subsection{Ornstein--Uhlenbeck (OU) process}
 \textit{SDE}:
 \begin{align*}
-    \d X_t = \kappa(\theta-X_t)\d t + \d W_t
+    \d X_t = \kappa(\theta-X_t)\d t + \sigma \d W_t
 \end{align*}
 
 \textit{Solution}:
 \begin{align*}
-    X_t = \theta + e^{-\kappa t}(X_0-\theta) + \int_0^t e^{-\kappa(t-s)}\d W_s
+    X_t = \theta + e^{-\kappa t}(X_0-\theta) + \int_0^t e^{-\kappa(t-s)}\sigma \d W_s
 \end{align*}
 
 

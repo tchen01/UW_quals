@@ -375,7 +375,8 @@ where \( W \) is a \( (\PP,\bF) \)-Brownian motion. Suppose that \( X_0 \in (L,R
             \pi = [1/L,1/L,\ldots, 1/L]
         \end{align*}
 
-        \note{Something about uniqueness, although I guess this isn't really needed based on problem wording}
+        This is a finite irreducible chain so the stationary distribution is unique.
+
         
     \item We have probability transition matrix,
         \begin{align*}
@@ -394,6 +395,7 @@ where \( W \) is a \( (\PP,\bF) \)-Brownian motion. Suppose that \( X_0 \in (L,R
             \pi = [1/L,1/L,\ldots, 1/L]
         \end{align*}
         
+        This is a finite irreducible chain so the stationary distribution is unique.
 
 \end{enumerate}
 \end{solution}
@@ -409,10 +411,10 @@ where \( W \) is a \( (\PP,\bF) \)-Brownian motion. Suppose that \( X_0 \in (L,R
         \dd{\tilde{\PP}}{\PP} = \exp \left( -\frac{1}{2}\gamma^2 T - \gamma W_T \right).
     \end{align*}
 \begin{enumerate}[nolistsep,label=(\alph*)]
-    \item Derive an SDE for theh process \( X \) under \( \tilde{\PP} \). Your answer should be given in terms of a process \( \tilde{W} \) which is a \( (\tilde{\PP},\bF) \)-Brownian motion.
+    \item Derive an SDE for the process \( X \) under \( \tilde{\PP} \). Your answer should be given in terms of a process \( \tilde{W} \) which is a \( (\tilde{\PP},\bF) \)-Brownian motion.
     \item Define functions \( u:[0,T]\times \RR \to \RR \) and \( \tilde{u}:[0,T]\times \RR \to \RR \) as follows
         \begin{align*}
-            u(t,x):= \EE[h(X_T) | X_t = x), && \tilde{u}(t,x):= \tilde{\EE}[h(X_T) | X_t = x]
+            u(t,x):= \EE[h(X_T) | X_t = x], && \tilde{u}(t,x):= \tilde{\EE}[h(X_T) | X_t = x]
         \end{align*}
         Provide the PDEs satisfied by \( u \) and \( \tilde{u} \), respectively.
 \end{enumerate}
@@ -422,8 +424,29 @@ where \( W \) is a \( (\PP,\bF) \)-Brownian motion. Suppose that \( X_0 \in (L,R
 
 \begin{solution}[Solution]
 \begin{enumerate}[label=(\alph*)]
-    \item 
-    \item 
+    \item By Girsanov's theorem we know that the process \( \tilde{W} \) defined as,
+        \begin{align*}
+            \d \tilde{W}_t = \gamma \d t + \d W_t
+        \end{align*}
+        is a Brownian motion under \( \tilde{\PP} \). Therefore, writing \( X \) in terms of this process we have,
+        \begin{align*}
+            \d X_t = - \kappa X_t \d t + \sigma \left( \d \tilde{W}_t - \gamma \d t \right) 
+            = - \left( \sigma \gamma + \kappa X_t \right) \d t + \sigma \d \tilde{W}_t
+        \end{align*}
+        
+    \item
+        We have that \( u \) and \( \tilde{u} \) satisfy the KBE. In particular,
+        \begin{align*}
+            \left[ \left( \partial_t - \kappa \partial_x + \frac{1}{2}\sigma^2 \partial_x^2 \right)u(t,x)\right]_{x=X_t} =0 , && u(T,x) = h(x)
+        \end{align*}
+        
+        \begin{align*}
+            \left[ \left( \partial_t - (\sigma \gamma + \kappa x) \partial_x + \frac{1}{2}\sigma^2 \partial_x^2 \right) \tilde{u}(t,x) \right]_{x=X_t} =0 , && \tilde{u}(T,x) = h(x)
+        \end{align*}
+        
+
+
+
 \end{enumerate}
 \end{solution}
 
@@ -434,7 +457,7 @@ where \( W \) is a \( (\PP,\bF) \)-Brownian motion. Suppose that \( X_0 \in (L,R
         p(i,i-1) &= q_i, && i> 0 \\
         p(i,i) &= r_i, && i\geq 0
     \end{align*}
-    For \( N > 0 \) and satet \( i \), let \( a_N(i) \) be the probability that the tiem of first visit to state \( N \) is strictly less than the time of first visit to state \( 0 \) if we start at state \( i \). Note that \( a_N(0) = 0 \) and \( a_N(N) = 1 \).
+    For \( N > 0 \) and state \( i \), let \( a_N(i) \) be the probability that the time of first visit to state \( N \) is strictly less than the time of first visit to state \( 0 \) if we start at state \( i \). Note that \( a_N(0) = 0 \) and \( a_N(N) = 1 \).
 \begin{enumerate}[nolistsep,label=(\alph*)]
     \item Write a recursive relation for \( a_N(i) \) by consider what happens on the first transition out of state \( i \).
     \item Solve the above equation to compute \( a_N(i) \).
@@ -449,7 +472,7 @@ where \( W \) is a \( (\PP,\bF) \)-Brownian motion. Suppose that \( X_0 \in (L,R
 
 \begin{solution}[Solution]
 \begin{enumerate}[label=(\alph*)]
-    \item 
+    \item        
     \item 
 \end{enumerate}
 \end{solution}
@@ -469,8 +492,95 @@ where \( W \) is a \( (\PP,\bF) \)-Brownian motion. Suppose that \( X_0 \in (L,R
 
 \begin{solution}[Solution]
 \begin{enumerate}[label=(\alph*)]
-    \item 
-    \item 
+    \item Recall that \( X_t \) can be written explicitly in terms of \( W_t \) as,
+        \begin{align*}
+            X_T = e^{T-t} X_t + \int_t^T \sqrt{2}e^{T-s} \d W_s %= e^{T-t} X_t + \sqrt{2} e^T \int_t^T e^{-s}\d W_s
+        \end{align*}
+
+        
+        Recall that \( \int_t^T g(s)\d W_s \) is normally distributed with mean zero and variance \( \int_t^T g(s)^2 \d s \).
+        Therefore \( X_T \) is distributed normally with mean \( m(T,t,X_t) = e^{T-t}X_t \) and variance,
+        \begin{align*}
+            v(T,t,X_t) = \int_t^T \left( \sqrt{2} e^{T-s} \right)^2\d s = e^{2(T-t)}-1
+        \end{align*}
+        
+
+        Therefore,
+        \begin{align*}
+            \Gamma(t,x,T,y)\d y = \PP(X_t\in\d y | X_t = x) = \phi(y)\d y
+        \end{align*}
+        where \( \phi(y) \) is the density of a normal random variable with the above mean and variance \( m(T,t,x) \) and \( v(T,t,x) \) respectively.
+        
+        Explicitly,
+        \begin{align*}
+            \Gamma(t,x,T,y)\d y = \frac{\d y}{ \left( e^{2(T-t)}-1 \right)\sqrt{2\pi}} \exp \left( - \frac{1}{2} \frac{ (y-xe^{T-t})^2}{ e^{2(T-t)}-1}  \right)
+        \end{align*}
+        
+        \hrulefill
+
+        We now compute \( \Gamma(t,x,T,y) \) by solving the KBE. In particular we have,
+        \begin{align*}
+            (\partial_t + \cA) \Gamma(t,x,T,y) = 0, && \Gamma(T,x,T,y) = \delta_y, && \cA = x\partial_x + \partial_x^2
+        \end{align*}
+
+        Write speed density,
+        \begin{align*}
+            m(y) = \exp \left( \int y \d y \right) = \exp(y^2/2)
+        \end{align*}
+        
+
+        Suppose we have a complete set of eigenfunctions \( \psi_n \) of \( \cA \) satisfying \( \cA \psi_n = \lambda_n\psi_n \) normalized with respect to the speed density \( m(x) \).
+
+        In this case,
+        \begin{align*}
+            \Gamma(t,x,T,y) = m(y) \sum_{n} e^{(T-t)\lambda_n}\psi_n(y) \psi_n(x)
+        \end{align*}
+        
+        We now funch such eigenfunctions. Indeed, define,
+        \begin{align*}
+            \hat{\psi}_n(x) = e^{-x^2/2}H_n(x) = e^{-x^2/2} (-1)^n e^{x^2/2} \dd[n]{}{x}e^{-x^2/2} = (-1)^n \dd[n]{}{x} e^{-x^2/2}
+        \end{align*}
+
+        The Hermite polynomials have the properties,
+        \begin{align*}
+            H_{n+1} = xH_n - H_n', && H_n' = nH_{n-1}
+        \end{align*}
+        
+        \begin{align*}
+            H_n' &= xH_n - H_{n+1} \\
+%            H_n'' = xH_n' - H_{n+1}' = x^2H_n - xH_{n+1} - xH_{n+1} + H_{n+2}
+            H_n'' &= nH_{n-1}' = nxH_{n-1}-nH_n
+        \end{align*}
+
+        Therefore,
+        \begin{align*}
+            \hat{\psi}_n' &= -xe^{-x^2/2}H_n + e^{-x^2/2}H_n' = (H_n'-xH_n)e^{-x^2/2} = -H_{n+1}e^{-x^2/2} = -\hat{\psi}_{n+1} \\
+        \end{align*}
+       
+        We then have,
+        \begin{align*}
+            x\hat{\psi}_n' &= -xH_{n+1}e^{-x^2/2} = -(H_{n+2}-H_{n+1}')e^{-x^2/2} = -\hat{\psi}_{n+2} + (n+1) \hat{\psi}_n \\
+            \hat{\psi}_n''&= \hat{\psi}_{n+2}
+        \end{align*}
+        
+        Then,
+        \begin{align*}
+            \cA \hat{\psi}_n = (n+1)\hat{\psi}_n
+        \end{align*}
+        
+        Now define,
+        \begin{align*}
+            \psi_n = \frac{1}{\norm{\hat{\psi}_n}_m} \hat{\psi}_n
+        \end{align*}
+       
+        Finally \note{argument about completeness}
+
+
+ 
+    \item No.
+
+        Argument about spreading out.
+
 \end{enumerate}
 \end{solution}
 
@@ -569,7 +679,7 @@ Consider a game which is played on a network with nodes numbered \( 1, 2, 3, 4 \
     \end{align*}
     Define the two-parameter semigroup \( \cP(t,T) \) associated with the \( Y \) process,
     \begin{align*}
-        \cP(t,T) f(y) := \EE[f(Y_T) | Y_t = y)
+        \cP(t,T) f(y) := \EE[f(Y_T) | Y_t = y]
     \end{align*}
     For a fixed \( 0\leq t\leq T <\infty \), what are the eigenfunctions and associated eigenvalues of the operator \( \cP(t,T) \)?
 \end{problem}
