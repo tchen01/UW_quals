@@ -42,8 +42,52 @@
 %%%%%%%%%%%%%%%%%%%%%
 %    Useful Info    %
 %%%%%%%%%%%%%%%%%%%%%
+
 \pagebreak
-\section{Linear Algebra}
+\section{Calculus}
+
+\subsection{Gradient and Jacobian}
+For \( f:\RR^n\to\RR \) we define the gradient as,
+\begin{align*}
+    \nabla f = \left[ \pp{f}{x_1}, \pp{f}{x_2}, \ldots, \pp{f}{x_n} \right]
+\end{align*}
+
+For \( f:\RR^n\to\RR^m \) we define the Jacobian as,
+\begin{align*}
+    J_f = \left[\begin{array}{c}
+        \nabla f_1 \\ \nabla f_2 \\ \vdots \\ \nabla f_m
+    \end{array}\right]
+    =
+    \left[\begin{array}{cccc}
+        \pp{f_1}{x_1} & \pp{f_1}{x_2} & \cdots &\pp{f_1}{x_n} \\
+        \pp{f_2}{x_1} & \pp{f_2}{x_2} & \cdots &\pp{f_2}{x_n} \\
+        \vdots & \vdots & & \vdots\\
+         \pp{f_m}{x_1} & \pp{f_m}{x_2} &\ldots & \pp{f_m}{x_n}
+    \end{array}\right]
+\end{align*}
+
+Note that a liner approximation to \( f \) at \( x_0 \) is given by,
+\begin{align*}
+    f(x_0) + J_f x
+\end{align*}
+
+
+\subsection{Gradients of Matrix Vector Forms}
+\begin{align*}
+    \nabla b^TAx &= A^Tb \\
+    \nabla x^TAx &= (A+A^T)x
+\end{align*}
+
+\subsection{Taylor Expansions}
+
+2d case.
+
+\subsubsection{Computing Expansions in Mathematica}
+
+
+
+\pagebreak
+\section{Matrices}
 
 \subsection{Classification of Matrices}
 Matrices are assumed to be complex unless specified otherwise.
@@ -89,8 +133,14 @@ Matrices are assumed to be complex unless specified otherwise.
     \item[\(\Leftrightarrow\)] Has \hyperref[sec:cholesky]{Cholesky} factorization
 \end{itemize}
 
-\subsection{Matrix Decompositions}
 
+\subsection{???}
+Where should I put things like similarity transform, unitarily diagonalizable, etc.
+
+Also things like 
+
+
+\subsection{Matrix Decompositions}
 \subsubsection{SVD}
 \begin{align*}
     A = U\Sigma V^*
@@ -149,6 +199,11 @@ When is pivoting needed?
 \subsubsection{Eigen}
 
 
+% these are less relevant
+\subsubsection{Shur}
+
+\subsubsection{Jordan Normal}
+
 \subsection{Matrix and Vector Norms}
 
 \begin{align*}
@@ -169,16 +224,19 @@ If \( A \) is self Hermetian,
 \note{Anne seems to like these}
 
 
-\subsection{Miscellaneous}
 
-\subsubsection{Gradients of Matrix Vector Forms}
-\begin{align*}
-\nabla x^*Ax = 2Ax
-\end{align*}
+\section{Linear Systems}
+
+\subsection{Direct Methods}
+\subsubsection{QR}
+
+\subsubsection{Gaussian Elimination}
+
+\subsubsection{SVD}
 
 
-\subsection{Iterative Methods}
 
+\subsection{Iterative Metods}
 \subsubsection{Simple Iteration}
 
 \subsubsection{Conjugate Gradient}
@@ -186,13 +244,42 @@ If \( A \) is self Hermetian,
 \subsubsection{GMRES}
 
 
+\subsection{Solving Least Squares}
+The linear least squares problem is,
+\begin{align*}
+    \min_{x} \norm{b-Ax}_2
+\end{align*}
 
+This is solved when \( x \) solve the linear system (called the normal equations),
+\begin{align*}
+    A^TAx = A^Tb
+\end{align*}
+
+
+\subsubsection{Derivations of Normal Equations}
+
+\textit{Using Projectors}:
+
+
+\textit{Using Calculus}:
+
+Note that
+\begin{align*}
+    \norm{b-Ax} = (b-Ax)^T(b-Ax) = b^Tb + -2b^TAx + x^T(A^TA)x
+\end{align*}
+Therefore, taking the gradient of \( \norm{b-Ax} \), we know it is minimized when \( 2A^TAx - 2A^Tb = 0 \). 
+
+\note{How do we do derivative of things like x*Ax }
+
+\subsubsection{Solving Least Squares Numerically}
+
+\pagebreak
 \section{Boundary Value Problems}
 
 \subsection{Laplacian}
 
 
-
+\pagebreak
 \section{Initial Value Problems}
 \note{need better section names}
 
