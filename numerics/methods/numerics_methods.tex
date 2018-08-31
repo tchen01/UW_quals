@@ -66,34 +66,119 @@ For \( f:\RR^n\to\RR^m \) we define the Jacobian as,
     \end{array}\right]
 \end{align*}
 
-Note that a liner approximation to \( f \) at \( x_0 \) is given by,
+Note that the best linear approximation to \( f \) at \( x_0 \) is given by,
 \begin{align*}
     f(x_0) + J_f x
 \end{align*}
 
 
 \subsection{Gradients of Matrix Vector Forms}
+This can be useful for minimizing/maximizing expressions involving matrix vector quantities.
 \begin{align*}
     \nabla b^TAx &= A^Tb \\
     \nabla x^TAx &= (A+A^T)x
 \end{align*}
 
-\subsection{Taylor Expansions}
 
-2d case.
+\subsection{Taylor Expansions}
+\begin{align*}
+    f(t+k,x+h) = f + kf_t + hf_x + \frac{k^2}{2}f_{tt} + kh f_{tx} + \frac{h^2}{2} f_{xx} + \cO(k^2+h^2)
+\end{align*}
+
 
 \subsubsection{Computing Expansions in Mathematica}
+Compute Taylor expansion of \( f(t+k,x+h) \) to \( d \)-th order.
+\begin{lstlisting}
+Normal[Series[f[t + z k, x + z h], {z,0,d}]] /. {z->1}
+\end{lstlisting}
 
+This can be written into a function like,
+\begin{lstlisting}
+F[n_,j_] := Normal[Series[f[t + z n k, x + z j h], {z,0,d}]] /. {z->1}
+\end{lstlisting}
+
+Then {\tt F[n,j]} computes the Taylor expansion of \( f(t+nk,x+jh) \) about \( (t,x) \). This is useful for compute local truncation errors. For instance, to compute the LTE of a second order centered difference approximation \( f'(x) \approx (f(t+k,x)-f(t-k,x))/2k \) we set \( d=3 \) and use,
+\begin{lstlisting}
+    FullSimplify[(F[1, 0] - F[-1, 0])/(2 k)]
+\end{lstlisting}
+This gives that the difference methods is like \( f_t(t,x) + \cO(k^2) \).
+
+\pagebreak
+\section{Basic Linear Algebra}
+
+\subsection{Matrix and Vector Norms}
+The general definition of a matrix norm is,
+\begin{align*}
+    \norm{A} = \sup_{u\neq 0} \frac{\norm{Au}}{\norm{u}} = \sup_{\norm{u}=1} \norm{Au}
+\end{align*}
+
+Equivalent definition:
+\begin{align*}
+    \norm{A} = \sup_{u,v\neq 0} \frac{\ip{Au,v}}{\norm{u}\norm{v}} = \sup_{\norm{u}=\norm{v}=1} \ip{Au,v}
+\end{align*}
+ 
+If \( A \) is self Hermitian,
+\note{double check this}
+\begin{align*}
+    \norm{A} = \sup_{u\neq 0} \frac{\ip{Au,u}}{\norm{u}^2} = \sup_{\norm{u}=1} \ip{Au,u}
+\end{align*}
+
+
+\subsection{Similar Matrices}
+\textit{Definition}: Two matrices \( A \) and \( B \) are similar if \( A = XBX^{-1} \) for some \( X \).
+
+\textit{Why it is useful}: The eigenvalues of similar matrices are the same.
+
+\subsubsection{Diagonalizable}
+\textit{Definition}: A matrix \( A \) is diagonalizable if it is similar to a diagonal matrix
+
+\pagebreak
+\section{Projectors}
+\textit{Definition}: A matrix \( P \) is a projector if \( P^2 = P \)
+
+\textit{Why it is useful}: The eigenvalues of a diagonal matrix are the diagonal entries
+
+
+\subsection{Orthogonal Projectors}
 
 
 \pagebreak
-\section{Matrices}
+\section{Rayleigh Quotients}
+\note{Anne seems to like these}
 
-\subsection{Classification of Matrices}
-Matrices are assumed to be complex unless specified otherwise.
+Approximates eigenvalues
 
-\subsubsection{Hermetian}
-\textit{Definition}: A matrix \( A \) is Hermetian if \( A^* = A \)
+Can write every value in range of eigenvalues as rayleigh quotient for real symmetric matrices.
+
+
+\pagebreak
+\section{Classification of Matrices}
+Matrices are assumed to be complex and unless specified otherwise.
+
+\subsection{Upper Triangular}
+\textit{Definition}: A matrix \( R \) is upper triangular if \( r_{ij} = 0 \) for \( i>j \).
+If \( r_{ii} = 0 \) the matrix is called strictly upper triangular. 
+
+\textit{Properties}:
+\begin{itemize}[nolistsep]
+    \item[\(\Rightarrow\)] Eigenvalues are diagonal entries
+    \item[\(\Rightarrow\)] Inverse, product, and sum of upper triangular matrices are upper triangular
+    \item[\(\Rightarrow\)] Can solve triangular linear systems in \( \cO(m^2) \) time with back substitution
+\end{itemize}
+
+
+\subsection{Unitary}
+\textit{Definition}: A matrix \( U \) is unitary if \( U^*U = UU^* = I  \).
+
+\textit{Properties}:
+\begin{itemize}[nolistsep]
+    \item[\(\Leftrightarrow\)] Columns are orthonormal and form a basis for \( \CC^n \)
+    \item[\(\Rightarrow\)] \( \norm{AU}_2 = \norm{UA}_2 = \norm{A}_2 \)
+\end{itemize}
+
+
+\subsection{Hermitian}
+\textit{Definition}: A matrix \( A \) is Hermitian if \( A^* = A \)
 
 \textit{Properties}:
 \begin{itemize}[nolistsep]
@@ -104,7 +189,7 @@ Matrices are assumed to be complex unless specified otherwise.
 \end{itemize}
 
 
-\subsubsection{Skew symmetric}
+\subsection{Skew symmetric}
 \textit{Definition}: A real matrix \( A \) is skew symmetric if \( A^T = -A \)
 
 \textit{Properties}:
@@ -114,17 +199,18 @@ Matrices are assumed to be complex unless specified otherwise.
 \end{itemize}
 
 
-\subsubsection{Normal}
+\subsection{Normal}
 \label{sec:normal}
 \textit{Definition}: A matrix \( A \) is normal if \( A^*A = AA^* \)
 
 \textit{Properties}:
 \begin{itemize}[nolistsep]
-    \item[\(\Leftrightarrow\)] Unitarily diagonalizable  
+    \item[\(\Leftrightarrow\)] Unitarily diagonalizable (means eigenvectors are orthogonal)
+    \item[\(\Rightarrow\)] Hermitian if all eigenvalues are real
 \end{itemize}
 
 
-\subsubsection{Positive definite}
+\subsection{Positive definite}
 \textit{Definition}: A matrix \( A \) is positive definite if all eigenvalues are positive.
 
 \textit{Properties}:
@@ -139,9 +225,9 @@ Where should I put things like similarity transform, unitarily diagonalizable, e
 
 Also things like 
 
-
-\subsection{Matrix Decompositions}
-\subsubsection{SVD}
+\pagebreak
+\section{Matrix Decompositions}
+\subsection{SVD}
 \begin{align*}
     A = U\Sigma V^*
 \end{align*}
@@ -161,15 +247,18 @@ Unique up to complex sign of columns of \( U \) and \( V \)
 
 \textit{Computing}:
 
-
 \textit{Why it is useful}:
 \begin{itemize}[nolistsep]
+    \item Gives geometric interpretation for linear transforms on \( \CC^n \)
     \item Rank revealing
     \item Numerical stability of algorithms using SVD
 \end{itemize}
 
+\subsubsection{Reduced SVD}
+If \( A \) is rank deficient some singular values will be zero. We can drop these singular values and the corresponding singular vectors.
 
-\subsubsection{(P)LU}
+
+\subsection{(P)LU}
 
 \textit{Existence}:
 
@@ -178,13 +267,13 @@ Unique up to complex sign of columns of \( U \) and \( V \)
 \textit{Computing}:
 Gaussian Elimination 
 
+\subsubsection{Partial Pivoting}
+
 When is pivoting needed?
-
-
 
 \subsubsection{Cholesky}
 \label{sec:cholesky}
-\textit{Existence}: If \( A \) is Hermetian positive definite
+\textit{Existence}: If \( A \) is Hermitian positive definite
 
 \textit{Uniqueness}: Unique up to sign
 
@@ -193,58 +282,42 @@ When is pivoting needed?
     \item Save storage space
 \end{itemize}
 
-\subsubsection{QR}
+\subsection{QR}
 
 
-\subsubsection{Eigen}
+\subsection{Eigen}
 
 
 % these are less relevant
-\subsubsection{Shur}
+\subsection{Shur}
 
-\subsubsection{Jordan Normal}
-
-\subsection{Matrix and Vector Norms}
-
-\begin{align*}
-    \norm{A} = \sup_{u\neq 0} \frac{\norm{Au}}{\norm{u}} = \sup_{\norm{u}=1} \norm{Au}
-\end{align*}
-
-\begin{align*}
-    \norm{A} = \sup_{u,v\neq 0} \frac{\ip{Au,v}}{\norm{u}\norm{v}} = \sup_{\norm{u}=\norm{v}=1} \ip{Au,v}
-\end{align*}
- 
-If \( A \) is self Hermetian,
-\note{double check this}
-\begin{align*}
-    \norm{A} = \sup_{u\neq 0} \frac{\ip{Au,u}}{\norm{u}^2} = \sup_{\norm{u}=1} \ip{Au,u}
-\end{align*}
-
-\subsection{Rayleigh Quotients}
-\note{Anne seems to like these}
+\subsection{Jordan Normal}
 
 
 
-\section{Linear Systems}
+\section{Direct Methods for Linear Systems}
+\subsection{QR}
 
-\subsection{Direct Methods}
-\subsubsection{QR}
-
-\subsubsection{Gaussian Elimination}
-
-\subsubsection{SVD}
+\subsection{Gaussian Elimination}
+\subsection{SVD}
 
 
 
-\subsection{Iterative Metods}
-\subsubsection{Simple Iteration}
+\section{Iterative Methods for Linear Systems}
+\subsection{Simple Iteration}
 
-\subsubsection{Conjugate Gradient}
+\subsection{Power Iteration}
 
-\subsubsection{GMRES}
+\subsubsection{Simultaneous Power Iteration (QR)}
 
 
-\subsection{Solving Least Squares}
+\subsection{Conjugate Gradient}
+
+\subsection{GMRES}
+
+\subsection{Other methods}
+
+\section{Solving Least Squares}
 The linear least squares problem is,
 \begin{align*}
     \min_{x} \norm{b-Ax}_2
@@ -256,7 +329,7 @@ This is solved when \( x \) solve the linear system (called the normal equations
 \end{align*}
 
 
-\subsubsection{Derivations of Normal Equations}
+\subsection{Derivations of Normal Equations}
 
 \textit{Using Projectors}:
 
@@ -271,7 +344,7 @@ Therefore, taking the gradient of \( \norm{b-Ax} \), we know it is minimized whe
 
 \note{How do we do derivative of things like x*Ax }
 
-\subsubsection{Solving Least Squares Numerically}
+\subsection{Solving Least Squares Numerically}
 
 \pagebreak
 \section{Boundary Value Problems}
@@ -280,8 +353,7 @@ Therefore, taking the gradient of \( \norm{b-Ax} \), we know it is minimized whe
 
 
 \pagebreak
-\section{Initial Value Problems}
-\note{need better section names}
+\section{Integrators and IVPs}
 
 \subsection{Runge-Kutta Methods}
 
@@ -290,17 +362,26 @@ Therefore, taking the gradient of \( \norm{b-Ax} \), we know it is minimized whe
 
 
 \subsection{Stability}
+A method is stable, if when applied to the test equation with \( \lambda < 0 \), the solution doesn't blow up. That is, \( \{ U^n \}_{n=0}^{\infty} \) is bounded.
+\note{double check this}
 
+\subsection{Zero Stable}
 
-zero stable
-
-region of abs stability
+\subsection{Region of Absolute Stability}
 
 A stable L stable etc
 
-MOL
+\section{PDEs}
+\subsection{Method of Lines}
 
-Von Neumann
+\subsubsection{Von Neumann Analysis}
+
+\begin{enumerate}[nolistsep]
+    \item Replace \( U_j^n \) with \( g(\xi)^n e^{i\xi j \Delta x} \)
+    \item Solve for \( g(\xi) \) and compute \( |g(\xi)| \)
+    \item Method is stable if and only if for all \( \xi \), \( |g(\xi)| \leq 1+\cO(\Delta x) \)
+\end{enumerate}
+
 
 
 

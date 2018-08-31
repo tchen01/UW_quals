@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.5.26)  30 AUG 2018 19:44
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.7.11)  31 AUG 2018 14:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1643,20 +1643,19 @@ Missing character: There is no ’ in font ec-lmr10!
 Package mdframed Info: Not enough space on this page on input line 2811.
  [73]
 Missing character: There is no ’ in font ec-lmr10!
-Package mdframed Info: Not enough space on this page on input line 2861.
- [74]
-Package mdframed Info: Not enough space on this page on input line 2901.
- [75]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2945.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 2945.
+Package mdframed Info: Not enough space on this page on input line 2865.
+ [74] [75]
+Package mdframed Info: Not enough space on this page on input line 2917.
+ [76]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2952.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 2952.
  (./numerics_practice_problems.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 2945.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 2945.
-
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 2952.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 2952.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2945.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2952.
  ) 
 Here is how much of TeX's memory you used:
  44705 strings out of 494956
@@ -1667,4 +1666,4 @@ Here is how much of TeX's memory you used:
  14 hyphenation exceptions out of 8191
  64i,17n,96p,10496b,1250s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on numerics_practice_problems.pdf (75 pages).
+Output written on numerics_practice_problems.pdf (76 pages).

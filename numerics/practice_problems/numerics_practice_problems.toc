@@ -46,4 +46,4 @@
 \contentsline {subsection}{Winter 2011, Day 3, Problem 1}{72}{section*.49}
 \contentsline {subsection}{Winter 2010, Day 1, Problem 5}{73}{section*.50}
 \contentsline {subsection}{Winter 2011, Day 2, Problem 4}{74}{section*.51}
-\contentsline {subsection}{Summer 2012, Day 1, Problem 3}{75}{section*.52}
+\contentsline {subsection}{Summer 2012, Day 1, Problem 3}{76}{section*.52}

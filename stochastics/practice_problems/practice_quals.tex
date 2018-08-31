@@ -579,10 +579,10 @@ where \( W \) is a \( (\PP,\bF) \)-Brownian motion. Suppose that \( X_0 \in (L,R
     \item
         Let \( s = q/p \). Then,
         \begin{align*}
-            \sum_{j=1}^{\infty} \prod_{i=1}^{j-1} \frac{q_i}{p_1} = \sum_{j=1}^{\infty} s^{j-1} = \sum_{j=0}^{\infty} s^j
+            \frac{1}{p_0}\sum_{j=1}^{\infty} \prod_{i=1}^{j-1} \frac{q_i}{p_1} = \frac{1}{p} \sum_{j=1}^{\infty} s^{j-1} = \sum_{j=0}^{\infty} s^j
         \end{align*}
         
-        This is convergent if and only if \( q/p = s < 1 \). Therefore state 0 is recurrent if and only if \( q \geq p \).
+        This is convergent if and only if \( q/p = s < 1 \). Therefore state 0 is recurrent if and only if \( q \geq p \) or \( p=0 \).
 
 
 \end{enumerate}
@@ -624,7 +624,7 @@ where \( W \) is a \( (\PP,\bF) \)-Brownian motion. Suppose that \( X_0 \in (L,R
         
         Explicitly,
         \begin{align*}
-            \Gamma(t,x,T,y)\d y = \frac{\d y}{ \left( e^{2(T-t)}-1 \right)\sqrt{2\pi}} \exp \left( - \frac{1}{2} \frac{ (y-xe^{T-t})^2}{ e^{2(T-t)}-1}  \right)
+            \Gamma(t,x,T,y)\d y = \frac{\d y}{ \sqrt{2\pi\left( e^{2(T-t)}-1 \right)}} \exp \left( - \frac{1}{2} \frac{ (y-xe^{T-t})^2}{ e^{2(T-t)}-1}  \right)
         \end{align*}
         
         \hrulefill
