@@ -1,0 +1,221 @@
+\documentclass[12pt]{article}
+\usepackage[T1]{fontenc}
+
+% Document Details
+\newcommand{\CLASS}{Numerics}
+\newcommand{\assigmentnum}{Methods and Useful Facts}
+
+
+\usepackage[margin = 1in, top = 1.25in, bottom = 1.in]{geometry}
+\input{../../TeX_headers/title.tex} % Title Styling
+\input{../../TeX_headers/sfftoc.tex} % ToC Styling
+\input{../../TeX_headers/styling.tex} % General Styling
+\input{../../TeX_headers/section.tex} % Section Styling
+\input{../../TeX_headers/code.tex} % Code Display Setup
+\input{../../TeX_headers/math.tex} % Math shortcuts
+\input{../../TeX_headers/problem.tex} % Math shortcuts
+\input{../../TeX_headers/proof.tex} % Math shortcuts
+
+
+\hypersetup{
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=violet,          % color of internal links (change box color with linkbordercolor)
+    citecolor=green,        % color of links to bibliography
+    filecolor=magenta,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+
+\setlength{\headheight}{15pt}
+\newcommand{\note}[1]{\textcolor{red}{\textit{Note:} #1}}
+
+% overwrite old problem class to be able to add to ToC
+\let\savedprob=\problem%
+\def\problem[#1]{\pagebreak\phantomsection\addcontentsline{toc}{subsection}{#1}\savedprob[#1]\label{#1}}
+
+
+\begin{document}
+\maketitle
+
+\pagebreak
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%
+%    Useful Info    %
+%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
+\section{Linear Algebra}
+
+\subsection{Classification of Matrices}
+Matrices are assumed to be complex unless specified otherwise.
+
+\subsubsection{Hermetian}
+\textit{Definition}: A matrix \( A \) is Hermetian if \( A^* = A \)
+
+\textit{Properties}:
+\begin{itemize}[nolistsep]
+    \item[\(\Rightarrow\)] Real eigenvalues
+    \item[\(\Rightarrow\)] \hyperref[sec:normal]{Normal}
+    \item[\(\Rightarrow\)] Unitarily diagonalizable
+    \item[\(\Rightarrow\)] \( \norm{A}_2 = \rho(A) \)
+\end{itemize}
+
+
+\subsubsection{Skew symmetric}
+\textit{Definition}: A real matrix \( A \) is skew symmetric if \( A^T = -A \)
+
+\textit{Properties}:
+\begin{itemize}[nolistsep]
+    \item[\(\Rightarrow\)] pure imaginary eigenvalues
+    \item[\(\Rightarrow\)] \( I+A \) is invertible
+\end{itemize}
+
+
+\subsubsection{Normal}
+\label{sec:normal}
+\textit{Definition}: A matrix \( A \) is normal if \( A^*A = AA^* \)
+
+\textit{Properties}:
+\begin{itemize}[nolistsep]
+    \item[\(\Leftrightarrow\)] Unitarily diagonalizable  
+\end{itemize}
+
+
+\subsubsection{Positive definite}
+\textit{Definition}: A matrix \( A \) is positive definite if all eigenvalues are positive.
+
+\textit{Properties}:
+\begin{itemize}[nolistsep]
+    \item[\(\Leftrightarrow\)] \( v^*Av > 0 \) for all \( v \)
+    \item[\(\Leftrightarrow\)] Has \hyperref[sec:cholesky]{Cholesky} factorization
+\end{itemize}
+
+\subsection{Matrix Decompositions}
+
+\subsubsection{SVD}
+\begin{align*}
+    A = U\Sigma V^*
+\end{align*}
+
+\begin{itemize}[nolistsep]
+    \item \( U \) unitary
+    \item \( \Sigma \) diagonal, with real positive entries in non-increasing order
+    \item \( V \) unitary
+\end{itemize}
+
+\textit{Existence}:
+Always
+
+\textit{Uniqueness}:
+\note{double check}
+Unique up to complex sign of columns of \( U \) and \( V \)
+
+\textit{Computing}:
+
+
+\textit{Why it is useful}:
+\begin{itemize}[nolistsep]
+    \item Rank revealing
+    \item Numerical stability of algorithms using SVD
+\end{itemize}
+
+
+\subsubsection{(P)LU}
+
+\textit{Existence}:
+
+\textit{Uniqueness}:
+
+\textit{Computing}:
+Gaussian Elimination 
+
+When is pivoting needed?
+
+
+
+\subsubsection{Cholesky}
+\label{sec:cholesky}
+\textit{Existence}: If \( A \) is Hermetian positive definite
+
+\textit{Uniqueness}: Unique up to sign
+
+\textit{Why it is useful}:
+\begin{itemize}[nolistsep]
+    \item Save storage space
+\end{itemize}
+
+\subsubsection{QR}
+
+
+\subsubsection{Eigen}
+
+
+\subsection{Matrix and Vector Norms}
+
+\begin{align*}
+    \norm{A} = \sup_{u\neq 0} \frac{\norm{Au}}{\norm{u}} = \sup_{\norm{u}=1} \norm{Au}
+\end{align*}
+
+\begin{align*}
+    \norm{A} = \sup_{u,v\neq 0} \frac{\ip{Au,v}}{\norm{u}\norm{v}} = \sup_{\norm{u}=\norm{v}=1} \ip{Au,v}
+\end{align*}
+ 
+If \( A \) is self Hermetian,
+\note{double check this}
+\begin{align*}
+    \norm{A} = \sup_{u\neq 0} \frac{\ip{Au,u}}{\norm{u}^2} = \sup_{\norm{u}=1} \ip{Au,u}
+\end{align*}
+
+\subsection{Rayleigh Quotients}
+\note{Anne seems to like these}
+
+
+\subsection{Miscellaneous}
+
+\subsubsection{Gradients of Matrix Vector Forms}
+\begin{align*}
+\nabla x^*Ax = 2Ax
+\end{align*}
+
+
+\subsection{Iterative Methods}
+
+\subsubsection{Simple Iteration}
+
+\subsubsection{Conjugate Gradient}
+
+\subsubsection{GMRES}
+
+
+
+\section{Boundary Value Problems}
+
+\subsection{Laplacian}
+
+
+
+\section{Initial Value Problems}
+\note{need better section names}
+
+\subsection{Runge-Kutta Methods}
+
+
+\subsection{LMMs}
+
+
+\subsection{Stability}
+
+
+zero stable
+
+region of abs stability
+
+A stable L stable etc
+
+MOL
+
+Von Neumann
+
+
+
+\end{document}
+

@@ -2764,7 +2764,7 @@ where \( \theta \) denotes the angular position of the pendulum away from the do
 
 
 \begin{problem}[Winter 2011, Day 3, Problem 1]
-\note{This is very similar to Winter 2011, Day 2, Problem 5. Why did they have the same problem twice in one qual??}
+    \note{This is very similar to \hyperref[Winter 2011, Day 2, Problem 5]{Winter 2011, Day 2, Problem 5}.}
     
     Consider the Helmholtz problem,
 \begin{align*}
@@ -2827,7 +2827,7 @@ Over one step we have,
     y(t+k) = y(t) + \int_t^{t+k} y'(s)\d s
 \end{align*}
 
-We approximate this integral using a single Reimann sum. Therefore some error is introduced and our estimated solution diverges from the actual solution. Moreover, the errors compound.
+We approximate this integral using a single Riemann sum. Therefore some error is introduced and our estimated solution diverges from the actual solution. Moreover, the errors compound.
 
     More specifically, even assuming \( \hat{y}_n = y_n \), in one step we introduce an error,
 \begin{align*}
@@ -2882,7 +2882,7 @@ of length 1 (for which the DFT is the identity). About how many total operations
     \item 
         We must do \( n \) additions and multiplications (assuming we can evaluate \( e^{2\pi ik/N} \) in \( \cO(1) \) time). 
 
-            We can repeat the bisection \( \cO(\log_2(n)) \) times so the total cost is \( \cO(n\log(n)) \) (in comparison to the \( \cO(n^2) \) operations requried to compute the definition directly).
+            We can repeat the bisection \( \cO(\log_2(n)) \) times so the total cost is \( \cO(n\log(n)) \) (in comparison to the \( \cO(n^2) \) operations required to compute the definition directly).
 
 
 \end{enumerate}    
@@ -2902,18 +2902,35 @@ Consider the following difference scheme:
 
 \begin{solution}[Solution]
 \begin{enumerate}[label=(\alph*)]
-    \item 
-    \item 
+    \item We define the local truncation error by,
+    \begin{align*}
+        \tau = \frac{u(x,t+k) - u(x,t)}{k} - \frac{\sigma}{h^2} (u(x+h,t)-u(x,t)-u(x,t+k)+u(x-h,t+k))
+    \end{align*}
+    
+        We compute this in Mathematica,
+        \begin{lstlisting}
+        U[n_, j_] :=  Normal[Series[u[x + z n h, t + z j k], {z, 0, 3}]] /. {z -> 1}
+    \end{lstlisting}
+    \begin{lstlisting}
+        FullSimplify[(U[0, 1] - U[0, 0])/   k - \[Sigma] /h^2 (U[1, 0] - U[0, 0] - U[0, 1] + U[-1, 1]),   Assumptions -> {h > 0, k > 0}] // ExpandAll
+    \end{lstlisting}
+
+    This gives the result,
+        \begin{align*}
+            \tau = u_t(x,t) - \sigma u_{xx}(x,t) + \frac{k}{h}\sigma u_{tx}(x,t) + \cO(h+k)    
+        \end{align*}
+       
+    The local truncation error goes to zero as \( h,k\to 0 \) if \( k/h\to 0 \) and we are solving,
+        \begin{align*}
+            u_t(x,t) -\sigma u_{xx}(x,t) = 0
+        \end{align*}
+       
+    \item
+
+        Von Neumann?
+
 \end{enumerate}
 
 \end{solution}
-
-
-
-
-
-
-
-
 
 \end{document}
