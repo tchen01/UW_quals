@@ -103,25 +103,37 @@ Then {\tt F[n,j]} computes the Taylor expansion of \( f(t+nk,x+jh) \) about \( (
 \end{lstlisting}
 This gives that the difference methods is like \( f_t(t,x) + \cO(k^2) \).
 
+
+\subsection{Newton's Method}
+Suppose we wish to solve \( G(x) = 0 \) for some \( G:\RR^m\to \RR \). One standard way to do this is using Newton's method, which iteratively finds the root of the first order linear approximation to \( G(x) \) at points near the solution.
+
+That is, we iteratively solve,
+\begin{align*}
+    G(x_k) + J_G(x_k) (x_{k+1}-x_k) = 0
+\end{align*}
+
+Explicitly,
+\begin{align*}
+    x_{k+1} = x_k - J_G(x_k)^{-1} G(x_k)
+\end{align*}
+
+
+
 \pagebreak
 \section{Basic Linear Algebra}
 
-\subsection{Matrix and Vector Norms}
-The general definition of a matrix norm is,
-\begin{align*}
-    \norm{A} = \sup_{u\neq 0} \frac{\norm{Au}}{\norm{u}} = \sup_{\norm{u}=1} \norm{Au}
-\end{align*}
-
-Equivalent definition:
-\begin{align*}
-    \norm{A} = \sup_{u,v\neq 0} \frac{\ip{Au,v}}{\norm{u}\norm{v}} = \sup_{\norm{u}=\norm{v}=1} \ip{Au,v}
-\end{align*}
- 
-If \( A \) is self Hermitian,
-\note{double check this}
-\begin{align*}
-    \norm{A} = \sup_{u\neq 0} \frac{\ip{Au,u}}{\norm{u}^2} = \sup_{\norm{u}=1} \ip{Au,u}
-\end{align*}
+\subsection{Invertible Matrix Theorem}
+The following are equivalent:
+\begin{itemize}[nolistsep]
+    \item \( A \) is invertible
+    \item Exists \( B \) such that \( BA = AB = I \)
+    \item \( \det(A) \neq 0 \)
+    \item \( A \) has full rank
+    \item The columns of \( A \) are linearly independent
+    \item The null space of \( A \) is zero.
+    \item \( A \) is surjective
+    \item \( Ax = 0 \) implies \( x = 0 \)
+\end{itemize}
 
 
 \subsection{Similar Matrices}
@@ -129,26 +141,128 @@ If \( A \) is self Hermitian,
 
 \textit{Why it is useful}: The eigenvalues of similar matrices are the same.
 
-\subsubsection{Diagonalizable}
-\textit{Definition}: A matrix \( A \) is diagonalizable if it is similar to a diagonal matrix
-
 \pagebreak
 \section{Projectors}
 \textit{Definition}: A matrix \( P \) is a projector if \( P^2 = P \)
 
-\textit{Why it is useful}: The eigenvalues of a diagonal matrix are the diagonal entries
+If \( P \) is a projector then \( I-P \) is a projector onto the null space of \( P \).
+
+Given any projector,
+\begin{align*}
+    \operatorname{range}(P) \cap \operatorname{ker}(P) = \{0\}
+    ,&&
+    \operatorname{range}(P) + \operatorname{ker}(P) = \CC^{m}
+\end{align*}
+
+Conversely, given any two subspaces \( S_1,S_2 \) of \( \CC^m \) satisfying, \( S_1\cup S_2 = \{0\} \) and \( S_1+S_2=\CC^m \), there is a projector \( P \) such that,
+\begin{align*}
+    \operatorname{range}(P) = S_1, &&
+    \operatorname{ker}(P) = S_2
+\end{align*}
+
+\subsection{Orthogonal Projector}
+\textit{Definition}: A projector is called orthogonal if its range and null space are orthogonal. Equivalently, if \( P = P^* \).
+
+In general \( \norm{P}_2 \geq 1 \), and equality is attained if and only if \( P \) is orthogonal.
+
+\subsection{Constructing Projectors}
+Given a matrix \( A \), the orthogonal projector onto the range of \( A \) is given by,
+\begin{align*}
+    P_A = A(A^*A)^{-1}A^*
+\end{align*}
+
+In the case that \( A \) has orthonormal columns, this reduces to \( P_A = AA^* \)
 
 
-\subsection{Orthogonal Projectors}
 
 
 \pagebreak
-\section{Rayleigh Quotients}
-\note{Anne seems to like these}
 
-Approximates eigenvalues
+\section{Scalar Functions of Matrices}
 
-Can write every value in range of eigenvalues as rayleigh quotient for real symmetric matrices.
+\subsection{Matrix Norms}
+\textit{Definition}: Given a matrix \( A \), and vector norm \( \norm{\cdot} \), the induced matrix norm is defined as,
+\begin{align*}
+    \norm{A} = \sup_{u\neq 0} \frac{\norm{Au}}{\norm{u}} = \sup_{\norm{u}=1} \norm{Au}
+\end{align*}
+
+Note that we could really use two different norms (one for the domain of \( A \), and one for the range), but this is not common.
+
+Equivalent definition:
+\begin{align*}
+    \norm{A} = \sup_{u,v\neq 0} \frac{\ip{Au,v}}{\norm{u}\norm{v}} = \sup_{\norm{u}=\norm{v}=1} \ip{Au,v}
+\end{align*}
+ 
+If \( A \) is Hermitian,
+\begin{align*}
+    \norm{A} = \sup_{u\neq 0} \frac{\ip{Au,u}}{\norm{u}^2} = \sup_{\norm{u}=1} \ip{Au,u}
+\end{align*}
+
+
+\subsubsection{Inequalities}
+
+All norms are similar over finite dimensional vector spaces.
+
+Give bounds.
+
+For certain definitoin of matrix norm
+\begin{align*}
+    \norm{A B} \leq \norm{A}\norm{B}
+\end{align*}
+
+
+\subsubsection{Specific Properties}
+\begin{align*}
+    \norm{A}_2 = \sigma_{\text{max}}
+\end{align*}
+
+\begin{align*}
+    \norm{A}_F = \sqrt{\sigma_1^2 + \sigma_2^2 + \cdots + \sigma_m^2}
+\end{align*}
+
+
+\subsection{Spectral Radius}
+\textit{Definition}: Given a matrix \( A \), the spectral radius is defined as,
+\begin{align*}
+    \rho(A) = \max \{ \lambda : \lambda \text{ is an eigenvalue of } A \}
+\end{align*}
+
+The spectral radius is bounded above by any matrix norm. Equality with the 2-norm when \( A \) is Hermitian.
+
+\begin{align*}
+    \rho(I-M^{-1}A) = \lim_{k\to\infty} \norm{(I-M^{-1}A)^k}^{1/k}
+\end{align*}
+
+
+\subsection{Condition number}
+\textit{Definition}: Given a matrix \( A \), the condition number is defined as,
+\begin{align*}
+    \kappa(A) = \frac{\norm{A}}{\norm{A^{-1}}}
+\end{align*}
+
+We always have \( \kappa(A) = \sigma_{\text{max}}/\sigma_{\text{min}} \), where \( \sigma_\text{max} \) and \( \sigma_\text{min} \) are the largest and smallest singular values.
+
+
+\subsection{Rayleigh Quotients}
+\textit{Definition}: For a Hermitian matrix \( A \) and vector \( x \), the Rayleigh quotient is defined as,
+\begin{align*}
+    r(x) = \frac{x^*Ax}{x^*x}
+\end{align*}
+
+\textit{Why it is useful}:
+\begin{itemize}[nolistsep]
+    \item Gives an estimate of eigenvalues.
+        \begin{itemize}[nolistsep]
+            \item If \( x \) is an eigenvector, then \( r(x) \) is the corresponding eigenvalue.
+            \item Specifically, if \( q \) is an eigenvector, \( r(x) - r(q) = \cO(\norm{r-q})^2 \) as \( x\to q \). That is, the Rayleigh quotient is a quadratically accurate estimate to eigenvalues.
+            \item For any \( z\in[\lambda_{\text{min}},\lambda_{\text{max}}] \) there exists \( x \) such that \( r(x) = z \).
+        \end{itemize}
+    \item Eigenvectors are stationary points of \( r(x) \). That is, \( \nabla r(x) = 0 \) when \( Ax = r(x) x \).
+    \item Can be used to estimate eigenvalues in inverse iteration (called Rayleigh quotient iteration)
+\end{itemize}
+
+
+
 
 
 \pagebreak
@@ -178,14 +292,13 @@ If \( r_{ii} = 0 \) the matrix is called strictly upper triangular.
 
 
 \subsection{Hermitian}
+\label{sec:hermitian}
 \textit{Definition}: A matrix \( A \) is Hermitian if \( A^* = A \)
 
 \textit{Properties}:
 \begin{itemize}[nolistsep]
     \item[\(\Rightarrow\)] Real eigenvalues
     \item[\(\Rightarrow\)] \hyperref[sec:normal]{Normal}
-    \item[\(\Rightarrow\)] Unitarily diagonalizable
-    \item[\(\Rightarrow\)] \( \norm{A}_2 = \rho(A) \)
 \end{itemize}
 
 
@@ -199,39 +312,53 @@ If \( r_{ii} = 0 \) the matrix is called strictly upper triangular.
 \end{itemize}
 
 
-\subsection{Normal}
+\subsection{Normal (Unitarily Diagonalizable)}
 \label{sec:normal}
 \textit{Definition}: A matrix \( A \) is normal if \( A^*A = AA^* \)
 
 \textit{Properties}:
 \begin{itemize}[nolistsep]
-    \item[\(\Leftrightarrow\)] Unitarily diagonalizable (means eigenvectors are orthogonal)
-    \item[\(\Rightarrow\)] Hermitian if all eigenvalues are real
+    \item[\(\Leftrightarrow\)] Unitarily diagonalizable (similar to a diagonal matrix by unitary similarity transform)
+    \item[\(\Rightarrow\)] \hyperref[sec:hermitian]{Hermitian} if all eigenvalues are real
+    \item[\(\Rightarrow\)] \( \norm{A}_2 = \rho(A) \)
 \end{itemize}
 
 
 \subsection{Positive definite}
-\textit{Definition}: A matrix \( A \) is positive definite if all eigenvalues are positive.
+\textit{Definition}: A matrix \( A \) is positive definite if \( v^*Av > 0 \) for all \( v \).
+
+\subsection{Hermitian Positive definite}
+\textit{Definition}: A matrix \( A \) is Hermitian positive definite if it is Hermitian and positive definite 
 
 \textit{Properties}:
 \begin{itemize}[nolistsep]
-    \item[\(\Leftrightarrow\)] \( v^*Av > 0 \) for all \( v \)
+    \item[\(\Leftrightarrow\)] All eigenvalues are positive
     \item[\(\Leftrightarrow\)] Has \hyperref[sec:cholesky]{Cholesky} factorization
 \end{itemize}
 
+\subsection{Diagonalizable}
+\textit{Definition}: A matrix \( A \) is diagonalizable if it is similar to a diagonal matrix
 
-\subsection{???}
-Where should I put things like similarity transform, unitarily diagonalizable, etc.
 
-Also things like 
+\subsection{Toeplitz}
+\textit{Definition}: A matrix \( A \) is Toeplitz if each diagonal is constant.
+
+\textit{Properties}:
+\begin{itemize}[nolistsep]
+    \item[\(\Rightarrow\)] Can solve Toeplitz systems in \( \cO(m^2) \) time
+    \item[\(\Rightarrow\)] If \( A \) is triangular, \( y_j = \sin(k j \pi / m) \) is an eigenvector
+\end{itemize}
+
+
 
 \pagebreak
 \section{Matrix Decompositions}
-\subsection{SVD}
-\begin{align*}
-    A = U\Sigma V^*
-\end{align*}
 
+\subsection{SVD}
+\textit{Definition}: For any matrix \( A\in\CC^m \), the singular value decomposition (SVD) is a decomposition,
+\begin{align*}
+    A = U\Sigma V^* = \sum_{i=1}^{m} \sigma_i u_iv_i^*
+\end{align*}
 \begin{itemize}[nolistsep]
     \item \( U \) unitary
     \item \( \Sigma \) diagonal, with real positive entries in non-increasing order
@@ -257,14 +384,38 @@ Unique up to complex sign of columns of \( U \) and \( V \)
 \subsubsection{Reduced SVD}
 If \( A \) is rank deficient some singular values will be zero. We can drop these singular values and the corresponding singular vectors.
 
+\textit{Why it is useful}:
+\begin{itemize}[nolistsep]
+    \item Saves storage compared to regular SVD
+\end{itemize}
+
+\subsubsection{Rank Reduced SVD}
+We can always define a new matrix \( A_k \) by,
+\begin{align*}
+    A_k = \sum_{i=1}^{k} \sigma_i u_iv_i^*
+\end{align*}
+
+This gives the best rank-\( k \) approximation to \( A \) in the sense that when \( \norm{\cdot} \) is the 2-norm of Frobenius norm,
+\begin{align*}
+    \norm{A-A_k} \leq \operatorname{inf} \{ \norm{A-B} : B\text{ is rank } k \}
+\end{align*}
+
+
 
 \subsection{(P)LU}
+\textit{Definition}:
 
 \textit{Existence}:
 
 \textit{Uniqueness}:
 
 \textit{Computing}:
+
+\textit{Why it is useful}:
+\begin{itemize}[nolistsep]
+    \item 
+\end{itemize}
+
 Gaussian Elimination 
 
 \subsubsection{Partial Pivoting}
@@ -273,28 +424,67 @@ When is pivoting needed?
 
 \subsubsection{Cholesky}
 \label{sec:cholesky}
+\textit{Definition}:
+
 \textit{Existence}: If \( A \) is Hermitian positive definite
 
 \textit{Uniqueness}: Unique up to sign
 
+\textit{Computing}: Same as LU decomposition, except don't make \( L \) unit lower triangular.
+
 \textit{Why it is useful}:
 \begin{itemize}[nolistsep]
-    \item Save storage space
+    \item Save storage space vs. LU decomposition
 \end{itemize}
 
 \subsection{QR}
+\textit{Definition}:
+
+\textit{Existence}:
+
+\textit{Uniqueness}:
+
+\textit{Computing}:
+
+\textit{Why it is useful}:
+\begin{itemize}[nolistsep]
+    \item 
+\end{itemize}
+
 
 
 \subsection{Eigen}
+\textit{Definition}:
 
+\textit{Existence}:
+
+\textit{Uniqueness}:
+
+\textit{Computing}:
+
+\textit{Why it is useful}:
+\begin{itemize}[nolistsep]
+    \item 
+\end{itemize}
 
 % these are less relevant
 \subsection{Shur}
 
 \subsection{Jordan Normal}
 
+\pagebreak
+\section{The Eigenproblem}
+\subsection{Direct Methods}
+Do we even have direct methods?
+
+\subsection{Power iteration}
 
 
+\subsection{Simultaneous Power Iteration}
+
+
+
+\pagebreak
 \section{Direct Methods for Linear Systems}
 \subsection{QR}
 
@@ -302,21 +492,65 @@ When is pivoting needed?
 \subsection{SVD}
 
 
-
+\pagebreak
 \section{Iterative Methods for Linear Systems}
 \subsection{Simple Iteration}
 
-\subsection{Power Iteration}
+Simple iteration can be described as,
+\begin{align*}
+    x_{k+1}= x_k+M^{-1} r_k = x_k + M^{-1}(b-Ax_{k}) = M^{-1}b - (I-M^{-1}A)x_{k}
+\end{align*}
+where \( M^{-1} \) is some matrix which approximates \( A^{-1} \).
 
-\subsubsection{Simultaneous Power Iteration (QR)}
+\subsubsection{Algorithm}
+Pick \( M \) as one of,
+\begin{align*}
+    M = \begin{cases}
+    \operatorname{diag}(A) & \text{Jacobi Iteration}\\
+    \operatorname{tril}(A) & \text{GS Iteration}\\
+    \omega^{-1}\operatorname{diag}(A) - \operatorname{tril}(A,k=-1) & \text{SOR}
+\end{cases}
+\end{align*}
+
+Iteratively, compute the residual \( r_k = b-Ax_k \), solve the system \( Mz_k = r_k \) for \( z_k \), and update \( x_{k+1} = x_{k} + z_{k}  \)
+
+\subsubsection{Convergence}
+Simple iteration converges if and only if \( \rho(I-M^{-1}A) < 1 \).
+
+To prove ``if'' direction, use theorem on spectral radius as limit of matrix norms. To prove ``only if'' direction, look at largest eigenvector of \( I-M^{-1}A \).
+
+\subsection{Multigrid Methods}
+Simple iteration converges really slowly for low frequency components. However, by adjusting the mesh size we can solve an approximation to the low frequency components much quicker.
 
 
 \subsection{Conjugate Gradient}
+At each step the \( A \)-norm of the error is minimized over successive Krylov spaces,
+\begin{align*}
+    \cK_k = \operatorname{span}\{ r_0, Ar_0, \ldots, A^k r_0 \}
+\end{align*}
+
+\subsection{When/why it is used}
+CG is the standard method for Hermitian positive definite systems \( Ax = b \). 
+
+Lower storage and computation cost than GMRES
+
+Good for use with PDE methods.
+
+\subsubsection{Algorithm}
+
+
+\subsubsection{Convergence}
+In exact arithmetic CG will converge in at most \( m \) steps. In finite precision arithmetic, orthogonality of search directions is \textit{not} maintained, so exact convtem[\(\Leftrightarrow\)] Has \hyperref[sec:cholesky]{Cholesky} factorization
+ergence may never be obtained.
+
+
 
 \subsection{GMRES}
+Minimizes 2-norm of the residual over successive Krylov spaces.
 
 \subsection{Other methods}
 
+\pagebreak
 \section{Solving Least Squares}
 The linear least squares problem is,
 \begin{align*}
@@ -332,42 +566,141 @@ This is solved when \( x \) solve the linear system (called the normal equations
 \subsection{Derivations of Normal Equations}
 
 \textit{Using Projectors}:
+We know that the image of \( x \) solving the least squares problem will be the orthogonal projection of \( b \) onto the range of \( A \). That is,
+\begin{align*}
+    Ax = A(A^*A)^{-1}A^*b
+\end{align*}
 
+Multiplying both sides on the left by \( A^* \) yields the normal equations.
 
 \textit{Using Calculus}:
-
 Note that
 \begin{align*}
-    \norm{b-Ax} = (b-Ax)^T(b-Ax) = b^Tb + -2b^TAx + x^T(A^TA)x
+    \norm{b-Ax} = (b-Ax)^*(b-Ax) = b^*b + -2b^*Ax + x^*(A^*A)x
 \end{align*}
-Therefore, taking the gradient of \( \norm{b-Ax} \), we know it is minimized when \( 2A^TAx - 2A^Tb = 0 \). 
+Therefore, since \( A^*A \) is Hermitian, solving \( \nabla \norm{b-Ax} = 0 \) Gives \( 2A^*Ax - 2A^*b = 0 \).
 
-\note{How do we do derivative of things like x*Ax }
 
 \subsection{Solving Least Squares Numerically}
 
 \pagebreak
 \section{Boundary Value Problems}
+How do we solve boundary value ODEs?
+
+\subsection{Error and Convergence}
+
+\subsubsection{Local Truncation Error}
+\textit{Definition}: The LTE of a method is defined by replacing \( U_j \) in the method with the true solution \( u(x_j) \). The discrepancy is the local truncation error. Denoting the true solution evaluated on the mesh by \( \hat{U} \) we have,
+\begin{align*}
+    \tau = A \hat{U} - F
+\end{align*}
+
+
+\subsubsection{Global Error}
+\textit{Definition}: The global error of a method is defined as \( E = U - \hat{U} \).
+
+\subsubsection{Stability}
+Explicitly denoting the dependence of the equations on the mesh spacing \( h \) we have,
+\begin{align*}
+    A^hE^h = -\tau^h
+\end{align*}
+
+Therefore, 
+\begin{align*}
+    \norm{E^h} = \norm{(A^h)^{-1} \tau^h} \leq \norm{(A^h)^{-1}}\norm{\tau^h}
+\end{align*}
+
+If \( \norm{(A^h)^{-1}} \) is bounded for \( h \) sufficiently small, then the global error will go to zero provided the LTE goes to zero.
+
+\textit{Definition}: A method is stable if \( (A^h)^{-1} \) exists and is bounded in norm for all \( h \) sufficiently small.
+
+\subsubsection{Convergence}
+\textit{Definition}: A method is said to be convergent if \( \norm{E^h} \to 0 \) as \( h\to 0 \).
+
+We have condition,
+\begin{align*}
+    \text{consistency} + \text{stability} \Longrightarrow \text{convergence}
+\end{align*}
+
+
+\subsection{Green's Functions}
 
 \subsection{Laplacian}
 
+\subsection{Finite Element Methods}
 
 \pagebreak
 \section{Integrators and IVPs}
+How do we solve \( u'(t) = f(t,u(t)) \) given \( u(0) \)?
 
 \subsection{Runge-Kutta Methods}
 
 
-\subsection{LMMs}
+\subsection{Linear Multistep Methods}
+A linear multistep method is a method of the form,
+\begin{align*}
+    \sum_{j=0}^{r} \alpha_j U^{n+r} = k \sum_{j=1}^{r} \beta_j f(t_{n+r},U^{n+r})
+\end{align*}
+
+The local truncation error is,
+\begin{align*}
+    \tau_n = \frac{1}{k} \left( \sum_{j=0}^{r} \alpha_j \right) u(t_n) + \sum_{q=1}^{\infty} k^{q-1} \left( \sum_{j=0}^{r} \left( \frac{1}{q!}j^q \alpha_j - \frac{1}{(q-1)!}j^{q-1}\beta_j \right)\right) u^{(q)}(t_n)
+\end{align*}
+
+Therefore the method is consistent if,
+\begin{align*}
+    \sum_{j=0}^{r}\alpha_j = 0, && \sum_{j=0}^{r} j \alpha_j = \sum_{j=0}^{r} \beta_j
+\end{align*}
+
+The method is \( p \)-th order accurate if,
+\begin{align*}
+    \sum_{j=0}^{r} \left( j^{q} \alpha_j - q j^{q-1}\beta_j \right) = 0, && q=1,2,\ldots, p 
+\end{align*}
+
+\subsubsection{Characteristic Polynomials}
+The characteristic polynomials for a LMM are defined as,
+\begin{align*}
+    \rho(\zeta) = \sum_{j=0}^{r} \alpha_j \zeta^j, && \sigma(\zeta) = \sum_{j=0}^{r} \beta_j \zeta^j
+\end{align*}
+
 
 
 \subsection{Stability}
-A method is stable, if when applied to the test equation with \( \lambda < 0 \), the solution doesn't blow up. That is, \( \{ U^n \}_{n=0}^{\infty} \) is bounded.
-\note{double check this}
 
 \subsection{Zero Stable}
+An \( r \)-step LMM is said to be zero-stable if the roots of the characteristic polynomial \( \rho(\zeta) \) all have modulus at most one, and are simple if they have modulus one.
 
-\subsection{Region of Absolute Stability}
+\begin{align*}
+    \text{consistency} + \text{zero-stability} \Longleftrightarrow \text{convergence}
+\end{align*}
+
+
+\subsection{Absolute Stability}
+The region of absolute stability for a method is the values of \( k\lambda \), if when applied to the test equation \( u' = \lambda u \), the solution doesn't blow up. That is, \( \{ U^n \}_{n=0}^{\infty} \) is bounded.
+
+\note{double check this}
+
+The region of absolute stability for a LMM is the set of points \( z \) for which \( \pi(\zeta,z) = \rho(\zeta) - z \sigma(\zeta) \) satisfy the root condition.
+
+
+\subsubsection{Regions of Absolute Stability of Common Methods}
+
+Forward Euler : \( \{z : |z+1|\leq 1 \} \)
+
+Backward Euler : \( \{ z : |z-1| \geq 1 \} \)
+
+Trapezoid : \( \{ z : \operatorname{Re}(z) \leq 0 \)
+
+Midpoint : \( \{ z : \operatorname{Im}(z) \in (-1,1) \} \)
+
+
+\subsubsection{Plotting Regions of Stability}
+
+boundary locus method for LMM
+
+contour method for one step methods
+
+\subsection{Stiff ODEs}
 
 A stable L stable etc
 

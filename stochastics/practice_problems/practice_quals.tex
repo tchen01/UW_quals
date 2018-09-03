@@ -27,11 +27,23 @@
         We can write this as,
         \begin{align*}
             X_{n+1} = \begin{cases}
+                0 & j < i \\
                 \left[\frac{1}{j!}\dd[j]{G_Y(s)}{s} \right]_{s=0} & j < K - X_n \\ \\
                 1 - \sum_{j<K-X_n} \left[\frac{1}{j!}\dd[j]{G_Y(s)}{s} \right]_{s=0} & \text{otherwise}
             \end{cases}
         \end{align*}
-        
+       
+        Conditioning on \( X_n = i \) we then have,
+        \begin{align*}
+            P_{i,j} = \PP(X_{n+1} = j | X_n = i) = 
+             \begin{cases}
+                0 & j < i \\
+                \left[\frac{1}{j!}\dd[j]{G_Y(s)}{s} \right]_{s=0} & j < K - i \\ \\
+                1 - \sum_{j<i} \left[\frac{1}{j!}\dd[j]{G_Y(s)}{s} \right]_{s=0} & \text{otherwise}
+            \end{cases}
+        \end{align*}
+
+
     \item
         Note that \( \pi = [0,0,\ldots,0,1] \) is a stationary distribution.
 
