@@ -416,13 +416,44 @@ where \( W \) is a \( (\PP,\bF) \)-Brownian motion. Suppose that \( X_0 \in (L,R
 
 \begin{solution}[Solution]
 \begin{enumerate}[label=(\alph*)]
-    \item
+    \item We have scale and speed densities,
+        \begin{align*}
+            s(x) &= \exp \left( -2\int_L^R \frac{b}{a^2}\d x \right)
+            = \exp \left( -2 \frac{b}{a^2} (R-L) \right)
+            \\
+            m(x) &= \frac{1}{a^2}\exp \left( 2\int_L^R \frac{b}{\sigma^2(x)}\d x \right)
+            = \frac{1}{a^2} \exp \left( 2 \frac{b}{a^2} (R-L) \right)
+        \end{align*}
+
+        Since \( m(x) \) is constant on a finite interval it can me normalized (for \( a\neq 0 \)) as \( m(x) = 1/(R-L) \), which is therefore the invariant distribution of \( X \). 
+
+        This makes sense since as time evolves, the Brownian motion term will dominate, and the reflecting boundary condition means that the process becomes constant.
+
+        
+        
     \item We have infinitesimal generator,
         \begin{align*}
-            \cA(t) = 
+            \cA(t) = b\partial_x + \frac{1}{2}a^2\partial_x^2 
         \end{align*}
-        
-    \item 
+
+        The boundary conditions require \( \cA \) act on functions satisfying,
+        \begin{align*}
+            \left[\frac{1}{s(x)}\partial_x f(x) \right]_{x\in\{L,R\}} = 0
+        \end{align*}
+        \note{I dont quite understand this}
+
+        We seek a complete set of eigenfunctions \( \{\psi_n(x)\}_{n=0}^{\infty} \) with corredponing eignevlaues \( \lambda_n \) of \( \cA \) satisfying this boundary condition and normalized with respect to \( m \). In this case,
+        \begin{align*}
+            \Gamma(t,x;T,y) = m(y) \sum_{n=0}^{\infty} e^{(T-t) \lambda_n}\psi_n(y)\psi_n(x)
+        \end{align*}
+       
+
+        We now find such functions:
+       
+        \note{I have no idea}
+       
+    \item
+        \note{Presumably this is easy if you can do (b)}
 \end{enumerate}
 \end{solution}
 

@@ -658,7 +658,7 @@ If \( m \) is normalizable then \( m \) is a time-homogeneous solution to the KF
 
 \subsubsection{Computing Solution to KBE for 1d Time Homogeneous Process}
 \begin{enumerate}[nolistsep]
-    \item Write down \( \cA \)
+    \item Write down infinitesimal generatorea\( \cA \)
     \item Write down speed density \( m(x) \)
     \item Find complete set of eigenfunctions, \( \{ \psi_n \} \) of \( \cA \) satisfying, \( \cA \psi_n = \lambda_n\psi_n \)
     \item Normalize eigenvectors wrt. \( m \) so that \( \ip{\psi_n,\psi_n}_m = 1 \).
@@ -679,14 +679,23 @@ and satisfies,
     \text{KFE}: && (-\partial_T + \cA^*(T)) \Gamma(t,x;T,\cdot) = 0, && \Gamma(T,x;T,\cdot) = \delta_x
 \end{align*}
 
+\subsubsection{Boundary Conditions}
+
+\begin{align}
+    \text{killing}: && \left[ f(x) \right]_{\text{on }\partial R} = 0 \\
+    \text{reflecting}: && \left[ \frac{1}{s(x)}\partial_x f(x) \right]_{\text{on }\partial R} = 0 \\
+    \text{natural}: && \text{no boundary conditions}
+\end{align}
+
 
 \subsubsection{Computing Transition Density}
 \note{WHAT KIND OF BC DO WE NEED???}
 
 \begin{enumerate}[nolistsep]
-    \item Write down \( \cA \)
-    \item Write down speed density \( m(x) \)
-    \item Find complete set of eigenfunctions, \( \{ \psi_n \} \) of \( \cA \) satisfying, \( \cA \psi_n = \lambda_n\psi_n \)
+    \item Write down infinitesimal generator \( \cA \)
+    \item Write down speed density \( m(x) \) and scale density \( s(x) \)
+    \item Write down boundary conditions
+    \item Find complete set of eigenfunctions, \( \{ \psi_n \} \) of \( \cA \) satisfying, \( \cA \psi_n = \lambda_n\psi_n \) and boundary conditions.
     \item Normalize eigenvectors wrt. \( m \) so that \( \ip{\psi_n,\psi_n}_m = 1 \).
     \item Compute,
         \begin{align*}
@@ -696,7 +705,7 @@ and satisfies,
 
 \textit{Sample Problems}:
 \begin{itemize}[nolistsep]
-    \item \hyperref[Practice Exam 4, Problem 2]{Practice Exam 4, Problem 2}: Find transition density for constant coefficient process.
+    \item \hyperref[Practice Exam 3, Problem 2]{Practice Exam 3, Problem 2}: Find transition density for constant coefficient process with reflecting boundary conditions.
     \item \hyperref[Practice Exam 5, Problem 2]{Practice Exam 5, Problem 2}: Find transition density for mean repelling OU process (two different approaches)
 \end{itemize}
 
