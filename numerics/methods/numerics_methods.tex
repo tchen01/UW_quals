@@ -174,7 +174,9 @@ Given a matrix \( A \), the orthogonal projector onto the range of \( A \) is gi
 In the case that \( A \) has orthonormal columns, this reduces to \( P_A = AA^* \)
 
 
+\subsection{Gershgorin's Theorem}
 
+\note{TODO}
 
 \pagebreak
 
@@ -269,6 +271,18 @@ We always have \( \kappa(A) = \sigma_{\text{max}}/\sigma_{\text{min}} \), where 
 \section{Classification of Matrices}
 Matrices are assumed to be complex and unless specified otherwise.
 
+\subsection{Banded}
+\textit{Definition}: A matrix \( A \) is banded with bandwidth \( 2k+1 \) (semi-bandwidth \( k \)) if \( a_{ij} = 0 \) whenever \( |i-j| > k \).
+
+\textit{Properties}:
+\begin{itemize}[nolistsep]
+    \item[\(\Rightarrow\)] Eigenvalues are diagonal entries
+    \item[\(\Rightarrow\)] Inverse, product, and sum of upper triangular matrices are upper triangular
+    \item[\(\Rightarrow\)] Can solve linear systems in \( \cO((2k+1)m) \) time
+\end{itemize}
+
+
+
 \subsection{Upper Triangular}
 \textit{Definition}: A matrix \( R \) is upper triangular if \( r_{ij} = 0 \) for \( i>j \).
 If \( r_{ii} = 0 \) the matrix is called strictly upper triangular. 
@@ -277,7 +291,7 @@ If \( r_{ii} = 0 \) the matrix is called strictly upper triangular.
 \begin{itemize}[nolistsep]
     \item[\(\Rightarrow\)] Eigenvalues are diagonal entries
     \item[\(\Rightarrow\)] Inverse, product, and sum of upper triangular matrices are upper triangular
-    \item[\(\Rightarrow\)] Can solve triangular linear systems in \( \cO(m^2) \) time with back substitution
+    \item[\(\Rightarrow\)] Can solve linear systems in \( \cO(m^2) \) time with back substitution
 \end{itemize}
 
 
@@ -286,7 +300,7 @@ If \( r_{ii} = 0 \) the matrix is called strictly upper triangular.
 
 \textit{Properties}:
 \begin{itemize}[nolistsep]
-    \item[\(\Leftrightarrow\)] Columns are orthonormal and form a basis for \( \CC^n \)
+    \item[\(\Leftrightarrow\)] Columns are an orthonormal basis for \( \CC^n \)
     \item[\(\Rightarrow\)] \( \norm{AU}_2 = \norm{UA}_2 = \norm{A}_2 \)
 \end{itemize}
 
@@ -323,12 +337,10 @@ If \( r_{ii} = 0 \) the matrix is called strictly upper triangular.
     \item[\(\Rightarrow\)] \( \norm{A}_2 = \rho(A) \)
 \end{itemize}
 
-
 \subsection{Positive definite}
-\textit{Definition}: A matrix \( A \) is positive definite if \( v^*Av > 0 \) for all \( v \).
 
 \subsection{Hermitian Positive definite}
-\textit{Definition}: A matrix \( A \) is Hermitian positive definite if it is Hermitian and positive definite 
+\textit{Definition}: A Hermitian matrix \( A \) is positive definite if \( v^*Av > 0 \) for all \( v \).
 
 \textit{Properties}:
 \begin{itemize}[nolistsep]
@@ -345,8 +357,8 @@ If \( r_{ii} = 0 \) the matrix is called strictly upper triangular.
 
 \textit{Properties}:
 \begin{itemize}[nolistsep]
-    \item[\(\Rightarrow\)] Can solve Toeplitz systems in \( \cO(m^2) \) time
-    \item[\(\Rightarrow\)] If \( A \) is triangular, \( y_j = \sin(k j \pi / m) \) is an eigenvector
+    \item[\(\Rightarrow\)] Can solve linear systems in \( \cO(m^2) \) time
+    \item[\(\Rightarrow\)] If \( A \) is tridiagonal, \( y_j = \sin(k j \pi / (m+1)) \) is an eigenvector for \( k=1,2,\ldots, m \)
 \end{itemize}
 
 
@@ -578,7 +590,7 @@ Note that
 \begin{align*}
     \norm{b-Ax} = (b-Ax)^*(b-Ax) = b^*b + -2b^*Ax + x^*(A^*A)x
 \end{align*}
-Therefore, since \( A^*A \) is Hermitian, solving \( \nabla \norm{b-Ax} = 0 \) Gives \( 2A^*Ax - 2A^*b = 0 \).
+Therefore, since \( A^*A \) is Hermitian, solving \( \nabla \norm{b-Ax} = 0 \) gives \( 2A^*Ax - 2A^*b = 0 \).
 
 
 \subsection{Solving Least Squares Numerically}

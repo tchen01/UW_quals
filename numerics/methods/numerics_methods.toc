@@ -10,6 +10,7 @@
 \contentsline {section}{\numberline {3}Projectors}{8}{section.3}
 \contentsline {subsection}{\numberline {3.1}Orthogonal Projector}{8}{subsection.3.1}
 \contentsline {subsection}{\numberline {3.2}Constructing Projectors}{8}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Gershgorin's Theorem}{8}{subsection.3.3}
 \contentsline {section}{\numberline {4}Scalar Functions of Matrices}{9}{section.4}
 \contentsline {subsection}{\numberline {4.1}Matrix Norms}{9}{subsection.4.1}
 \contentsline {subsubsection}{\numberline {4.1.1}Inequalities}{9}{subsubsection.4.1.1}
@@ -18,15 +19,16 @@
 \contentsline {subsection}{\numberline {4.3}Condition number}{10}{subsection.4.3}
 \contentsline {subsection}{\numberline {4.4}Rayleigh Quotients}{10}{subsection.4.4}
 \contentsline {section}{\numberline {5}Classification of Matrices}{11}{section.5}
-\contentsline {subsection}{\numberline {5.1}Upper Triangular}{11}{subsection.5.1}
-\contentsline {subsection}{\numberline {5.2}Unitary}{11}{subsection.5.2}
-\contentsline {subsection}{\numberline {5.3}Hermitian}{11}{subsection.5.3}
-\contentsline {subsection}{\numberline {5.4}Skew symmetric}{11}{subsection.5.4}
-\contentsline {subsection}{\numberline {5.5}Normal (Unitarily Diagonalizable)}{11}{subsection.5.5}
-\contentsline {subsection}{\numberline {5.6}Positive definite}{12}{subsection.5.6}
-\contentsline {subsection}{\numberline {5.7}Hermitian Positive definite}{12}{subsection.5.7}
-\contentsline {subsection}{\numberline {5.8}Diagonalizable}{12}{subsection.5.8}
-\contentsline {subsection}{\numberline {5.9}Toeplitz}{12}{subsection.5.9}
+\contentsline {subsection}{\numberline {5.1}Banded}{11}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Upper Triangular}{11}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}Unitary}{11}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.4}Hermitian}{11}{subsection.5.4}
+\contentsline {subsection}{\numberline {5.5}Skew symmetric}{12}{subsection.5.5}
+\contentsline {subsection}{\numberline {5.6}Normal (Unitarily Diagonalizable)}{12}{subsection.5.6}
+\contentsline {subsection}{\numberline {5.7}Positive definite}{12}{subsection.5.7}
+\contentsline {subsection}{\numberline {5.8}Hermitian Positive definite}{12}{subsection.5.8}
+\contentsline {subsection}{\numberline {5.9}Diagonalizable}{12}{subsection.5.9}
+\contentsline {subsection}{\numberline {5.10}Toeplitz}{12}{subsection.5.10}
 \contentsline {section}{\numberline {6}Matrix Decompositions}{13}{section.6}
 \contentsline {subsection}{\numberline {6.1}SVD}{13}{subsection.6.1}
 \contentsline {subsubsection}{\numberline {6.1.1}Reduced SVD}{13}{subsubsection.6.1.1}

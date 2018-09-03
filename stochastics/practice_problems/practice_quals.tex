@@ -136,8 +136,76 @@
 
 
     \item
-        \note{DO THIS SHIT}
-    \item 
+        We know \( u \) satisfies,
+        \begin{align*}
+            (\cA - \lambda) u = 0, && u(r,0) = u(r,\pi/2) = f(r)
+        \end{align*}
+        where,
+        \begin{align*}
+            \cA = \frac{1}{2r} \partial_r + \frac{1}{2}\left(\partial_r + \frac{1}{r^2}\partial_\phi^2 \right)
+        \end{align*}
+        
+
+        \iffalse
+        Define,
+        \begin{align*}
+            v(r,\phi) = \EE[e^{-\lambda(\tau - t)}f(R_\tau) | X_t=x, \Phi_t =\phi]
+        \end{align*}
+        
+        Define,
+        \begin{align*}
+            M_t &= e^{-\lambda t} v(R_t,\Phi_t)
+            \\&= e^{-\lambda t} \EE[e^{-\lambda (\tau - t)}f(R_\tau) | X_t = x, \Phi_t = \phi]
+            \\&= \EE[e^{-\lambda \tau}f(R_\tau) | X_t = x, \Phi_t = \phi]
+        \end{align*}
+        
+
+        We claim that \( M_t \) is a Martingale. Indeed,
+        \begin{align*}
+            \EE[ M_t | \cF_s] 
+            &= \EE[\EE[ e^{-\lambda \tau} f(R_\tau) | R_t,\Phi_t] | \cF_s]
+            \\&= \EE[\EE[ e^{-\lambda \tau} f(R_\tau) | \cF_t] | \cF_s]
+            \\&= \EE[ e^{-\lambda \tau} f(R_\tau) | \cF_s]
+            \\&= M_s
+        \end{align*}
+        
+        Using our Heuristics \( \d W_t^1 \d W_t^1 = \d W_t^2 \d W_t^2 = \d t \) and \( \d W_t^1 \d W_t^2 = \d t\d W_t^1 = \d t \d W_t^2 = \d t \d t = 0 \) we compute,
+        \begin{align*}
+            \d[R,R]_t &= 0 \\ %&= \cos^2(\Phi_t) \d t + \sin^2(\Phi_t)\d t = \d t \\
+            \d[R,\Phi]_t &=  - \frac{\sin(\Phi_t)\cos(\Phi_t)}{R_t}\d t + \frac{\cos(\Phi_t)\sin(\Phi_t)}{R_t}\d t = 0\\
+            \d[\Phi,\Phi]_t &= \frac{\sin^2(\Phi_t)}{R_t^2}\d t + \frac{\cos(\Phi_t)^2}{R_t^2}\d t = \frac{1}{R_t^2}\d t
+        \end{align*}
+        
+
+        Therefore,
+        \begin{align*}
+            \d M_t &= \d \left( e^{-\lambda t} v(R_t,\Phi_t) \right) \\
+            &= \d \left( e^{-\lambda t} \right) v(R_t,\Phi_t) + e^{-\lambda t} \d v(R_t,\Phi_t)
+        \end{align*}
+        \fi
+
+\iffalse
+        Therefore,
+        \begin{align*}
+            \d u(R_t,\Phi_t) &= \partial_r u(R_t,\Phi_t) \d R_t + \partial_\phi u(R_t,\Phi_t) \d \Phi_t
+            \\& \hspace{3em}+ \frac{1}{2} \big( \partial_r^2 u (R_t,\Phi_t) \d[R,R]_t + 2\partial_{r\phi} u(R_t,\Phi_t) \d[R,\Phi]_t 
+            \\&\hspace{6em}+ \partial_{\phi}^2 u(R,\Phi)\d[\Phi,\Phi]_t \big)
+            \\&= \left( \frac{1}{2R_t}\partial_r + \frac{1}{2} \frac{1}{R^2}\partial_\phi^2  \right)u(R_t,\Phi_t)\d t + (\cdots)\d W_t^1 + (\cdots)\d W_t^2
+        \end{align*}
+        
+        Since \( u(R_t,\Phi_t) \) is a martingale, the \( \d t \) term must be zero. Therefore,
+        \begin{align*}
+            \left( \frac{1}{r} \partial_r + \frac{1}{r^2}\partial_\phi^2  \right) u(r,\phi) = 0
+        \end{align*}
+        
+        We have boundary conditions,
+        \begin{align*}
+            u(r,0) = u(r,\pi/2) = f(r)
+        \end{align*}
+        \fi 
+
+
+    \item \note{DO THIS SHIT}
 
 \end{enumerate}
 \end{solution}
