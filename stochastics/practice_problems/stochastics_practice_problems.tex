@@ -306,7 +306,9 @@ how to get density from gen function
 
 
 
-\subsection{KFE AND KBE}
+\subsection{Finding PDEs}
+
+\subsubsection{KFE AND KBE}
 \textit{Sample Problems}: 
 \begin{itemize}[nolistsep]
     \item \hyperref[Exercise 5.3]{Exercise 5.3}: Given generator solve KFE
@@ -314,9 +316,7 @@ how to get density from gen function
 \end{itemize}
 
 
-\note{?????}
-\hyperref[Practice Exam 6, Problem 1]{Practice Exam 6, Problem ??}:  fdsaf sad sa??
-
+\subsubsection{note{OTHER METHODS?}}
 
 \subsection{Birth Death Processes}
 
@@ -521,8 +521,70 @@ This has mean,
 %%%%%%%%%%%%%%%%%%%%%
 \pagebreak
 \section{SDEs and PDEs}
+\note{unclassified}:
+\hyperref[Exercise 9.4]{Exercise 9.1}
+\hyperref[Exercise 9.4]{Exercise 9.4}
+\hyperref[Exercise 9.5]{Exercise 9.5}
+\hyperref[Exercise 9.6]{Exercise 9.6}
 
-\subsection{KBE}
+\hyperref[Exercise 9.7]{Exercise 9.7} (no solution for this)
+
+
+\subsection{SDEs}
+
+\textit{Sample Problems}:
+\begin{itemize}[nolistsep]
+    \item \hyperref[Exercise 9.3]{Exercise 9.3}: Use It\^o's Lemma to derive SDE for two new processes defined in terms of other processes
+\end{itemize}
+
+
+\subsubsection{Geometric Brownian Motion}
+
+
+\subsubsection{Ornstein--Uhlenbeck (OU) process}
+\textit{SDE}:
+\begin{align*}
+    \d X_t = \kappa(\theta-X_t)\d t + \sigma \d W_t
+\end{align*}
+
+\textit{Solution}:
+\begin{align*}
+    X_t = \theta + e^{-\kappa t}(X_0-\theta) + \int_0^t e^{-\kappa(t-s)}\sigma \d W_s
+\end{align*}
+
+\textit{Transition Density}:
+\note{TODO}
+
+\subsection{Infinitesimal Generator}
+\label{sec:infgen}
+Suppose \( X = (X_t)_{t\geq 0} \) is given by,
+\begin{align*}
+    X_t = \left[\begin{array}{c}\mu_1 \\ \mu_2 \\ \vdots \\ \mu_d \end{array}\right] \d t + \left[\begin{array}{cccc}\sigma_{1,1} & \sigma_{1,2} & \cdots & \sigma_{1,d} \\
+        \sigma_{2,1} & & & \sigma_{2,d} \\
+        \vdots & & & \vdots \\
+        \sigma_{d,1} & \sigma_{d,2} & \cdots & \sigma_{d,d}
+\end{array}\right]
+\left[\begin{array}{c}\d W_t^1 \\ \d W_t^2 \\ \vdots \\ \d W_t^d\end{array}\right]
+\end{align*}
+where \( \mu_i \) and \( \sigma_{ij} \) depend on \( (t,X_t) \).
+
+The infinitesimal generator of \( X \) is given by,
+\begin{align*}
+    \cA(t) = \sum_{i=1}^{d}\mu_i(t,x)\partial_{x_i} + \frac{1}{2} \sum_{i=1}^{d}\sum_{j=1}^{d} (\sigma\sigma^T)_{i,j}(t,X_t)\partial_{x_i} \partial_{x_j}
+\end{align*}
+
+\iffalse
+In the 2d case,
+\begin{align*}
+    \sigma \sigma^T = \left[\begin{array}{cc} 
+        \sigma_{1,1}^2+\sigma_{1,2}^2 & \sigma_{1,1}\sigma_{2,1} + \sigma_{1,2}\sigma_{2,2} \\
+        \sigma_{1,1}\sigma_{2,1}+\sigma_{1,2}\sigma_{2,2} & \sigma_{2,1}^2 + \sigma_{2,2}^2
+    \end{array}\right]
+\end{align*}
+\fi
+
+
+\subsection{KBE \note{WHAT IS THIS?}}
 Let \( X = (X_t)_{t\geq 0} \) be the solution of an SDE of the form,
 \begin{align*}
     \d X_t = \mu(t,X_t)\d t + \sigma(t,X_t)\d W_t
@@ -533,10 +595,56 @@ For some suitible function \( \varphi \), define,
 \end{align*}
 If \( u\in C^{1,2} \) then it satisfies the Kolmogorov Backward Equation,
 \begin{align*}
-    (\partial_t + \cA(t)) u(t,\cdot) = 0, && u(T,\cdot) = \varphi, && \cA(t) = \mu(t,x) \partial_x + \frac{1}{2}\sigma^2(t,x)\partial^2_x
+    (\partial_t + \cA(t)) u(t,\cdot) = 0, && u(T,\cdot) = \varphi %, && \cA(t) = \mu(t,x) \partial_x + \frac{1}{2}\sigma^2(t,x)\partial^2_x
 \end{align*}
 
-\subsection{Finding a PDE}
+\subsubsection{Computing solution to KBE}
+\begin{enumerate}[nolistsep]
+    \item Write down \( \cA \)
+    \item Write down speed density \( m(x) \)
+    \item Find complete set of eigenfunctions, \( \{ \psi_n \} \) of \( \cA \) satisfying, \( \cA \psi_n = \lambda_n\psi_n \)
+    \item Normalize eigenvectors wrt. \( m \) so that \( \ip{\psi_n,\psi_n}_m = 1 \).
+    \item Compute,
+        \begin{align*}
+            u(t,x) = \sum_{n} e^{(T-t)\lambda_n} \ip{\psi_n,\varphi}_m\psi_n
+        \end{align*}
+\end{enumerate}
+
+
+\subsection{Transition Density}
+The transition density is defined as,
+\begin{align*}
+    \Gamma(t,x;T,y) = \PP(X_T\in\d y | X_t=  x)
+\end{align*}
+and satisfies,
+\begin{align*}
+    \text{KBE}: && (\partial_t + \cA(t)) \Gamma(t,\cdot;T,y) = 0, && \Gamma(T,\cdot;T,y) = \delta_y \\
+    \text{KFE}: && (-\partial_T + \cA^*(T)) \Gamma(t,x;T,\cdot) = 0, && \Gamma(T,x;T,\cdot) = \delta_x
+\end{align*}
+
+
+\subsubsection{Computing Transition Density}
+\note{WHAT KIND OF BC DO WE NEED???}
+
+\begin{enumerate}[nolistsep]
+    \item Write down \( \cA \)
+    \item Write down speed density \( m(x) \)
+    \item Find complete set of eigenfunctions, \( \{ \psi_n \} \) of \( \cA \) satisfying, \( \cA \psi_n = \lambda_n\psi_n \)
+    \item Normalize eigenvectors wrt. \( m \) so that \( \ip{\psi_n,\psi_n}_m = 1 \).
+    \item Compute,
+        \begin{align*}
+            \Gamma(t,x;T,y) = m(y)\sum_{n} e^{(T-t)\lambda_n} \psi_n(y)\psi_n(x)
+        \end{align*}
+\end{enumerate}
+
+\textit{Sample Problems}:
+\begin{itemize}[nolistsep]
+    \item PROBLEMS FROM PRACTICE EXAM
+\end{itemize}
+
+
+
+\subsection{Finding PDEs Using Martingale Process}
 \begin{enumerate}[nolistsep]
     \item Find a martingale process depending on \( u(t,X_t) \).
     \item Take the differential of it.
@@ -549,28 +657,42 @@ This will give a PDE which \( u(t,X_t) \) satisfies.
 \begin{itemize}[nolistsep]
     \item Theorem 9.2.1: Derive KBE
     \item Theorem 9.2.2: Derive PDE for process,
+        {\small
         \begin{align*}
             u(t,X_t) = \EE \left[ e^{-A(t,T)}\varphi(X_T) + \int_t^T e^{-A(t,s)}g(s,X_s) | \cF_t \right], && A(t,s) = \int_t^s \gamma(u,X_u)\d u
         \end{align*}
-        
+        }
+    \item \hyperref[Exercise 9.2]{Exercise 9.2}: Find PDE for given expression (solution using theorem and by finding martingale)
+\end{itemize}
+
+
+\subsection{Finding PDEs for Hitting Time Problems}
+Given a process \( X = (X_t)_{t\geq 0} \) and some region \( R \), define,
+\begin{align*}
+    \tau = \operatorname{inf}\{t \geq 0 : X_t \notin R \}
+\end{align*}
+
+Define,
+\begin{align*}
+    u(x) = \EE \left[ e^{-\lambda(\tau - t)} \varphi(X_\tau) + \int_t^\tau e^{-\lambda(s-t)}g(X_s)\d s \bigg| X_t = x \right], && t \leq \tau 
+\end{align*}
+
+Assuming \( \PP(\tau < \infty) = 1 \), the function \( u \) satisfies,
+\begin{align*}
+    (\cA - \lambda) u = 0, && u = \varphi \text{ on }\partial R
+\end{align*}
+where \( \cA \) is the \hyperref[sec:infgen]{infinitesimal generator} of \( X \).
+
+\textit{Sample Problems}:
+\begin{itemize}[nolistsep]
+    \item Theorem 9.4.1: This is that theorem
+    \item Corollary 9.4.2: Find Laplace transform of \( \tau \)
+    \item Example 9.4.3: First hitting time of Brownian motion
+    \item \hyperref[Practice Exam 1, Problem 2]{Practice Exam 1, Problem 2}: Find PDE for hitting time of 2d process.
 \end{itemize}
 
 
 \note{ADD ASSOCIATED PDEs}
-
-\subsection{Geometric Brownian Motion}
-
-
-\subsection{Ornstein--Uhlenbeck (OU) process}
-\textit{SDE}:
-\begin{align*}
-    \d X_t = \kappa(\theta-X_t)\d t + \sigma \d W_t
-\end{align*}
-
-\textit{Solution}:
-\begin{align*}
-    X_t = \theta + e^{-\kappa t}(X_0-\theta) + \int_0^t e^{-\kappa(t-s)}\sigma \d W_s
-\end{align*}
 
 
 

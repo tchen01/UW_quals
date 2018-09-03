@@ -205,7 +205,9 @@
         \fi 
 
 
-    \item \note{DO THIS SHIT}
+    \item We can compute \( u(r,\phi) \) by simulating trajectories of \( R \) and \( \Phi \), and observing where they end up. In particular, starting at the point \( (R_0,\Phi_0) = (r,\phi) \), we run a stochastic integrator (forward Euler for instance) until the process exits. We then compute the value of \( e^{-\lambda \tau} f(R_\tau) \). Repeating this integration many times will give an estimate at the expected value.
+
+        To integrate we must set a time step size \( \Delta t \). At each step \( \d W_t^1 \) and \( \d W_t^2 \) will be normally distributed with mean 0 and variane \( \Delta t \). To advance the solution we generate random normal variables with this mean and variance, and then compute the change using our SDEs for \( R \) and \( \Phi \), replacing \( \d t \) with \( \Delta t \) and \( \d W_t^1, \d W_t^2 \) with the random normal variables. This is repeated iteratively.
 
 \end{enumerate}
 \end{solution}

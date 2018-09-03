@@ -28,7 +28,9 @@
 \contentsline {subsection}{\numberline {5.2}Stationary/Invariant distribution}{13}{subsection.5.2}
 \contentsline {subsection}{\numberline {5.3}Generator}{13}{subsection.5.3}
 \contentsline {subsection}{\numberline {5.4}Generating Functions}{13}{subsection.5.4}
-\contentsline {subsection}{\numberline {5.5}KFE AND KBE}{13}{subsection.5.5}
+\contentsline {subsection}{\numberline {5.5}Finding PDEs}{13}{subsection.5.5}
+\contentsline {subsubsection}{\numberline {5.5.1}KFE AND KBE}{13}{subsubsection.5.5.1}
+\contentsline {subsubsection}{\numberline {5.5.2}note{OTHER METHODS?}}{13}{subsubsection.5.5.2}
 \contentsline {subsection}{\numberline {5.6}Birth Death Processes}{13}{subsection.5.6}
 \contentsline {subsubsection}{\numberline {5.6.1}General Form for infinite queue}{14}{subsubsection.5.6.1}
 \contentsline {subsubsection}{\numberline {5.6.2}M/M/1 queue}{14}{subsubsection.5.6.2}
@@ -42,65 +44,71 @@
 \contentsline {subsection}{\numberline {7.1}It\^o's Formula}{18}{subsection.7.1}
 \contentsline {subsection}{\numberline {7.2}Product Rule}{18}{subsection.7.2}
 \contentsline {section}{\numberline {8}SDEs and PDEs}{19}{section.8}
-\contentsline {subsection}{\numberline {8.1}KBE}{19}{subsection.8.1}
-\contentsline {subsection}{\numberline {8.2}Finding a PDE}{19}{subsection.8.2}
-\contentsline {subsection}{\numberline {8.3}Geometric Brownian Motion}{19}{subsection.8.3}
-\contentsline {subsection}{\numberline {8.4}Ornstein--Uhlenbeck (OU) process}{19}{subsection.8.4}
-\contentsline {section}{\numberline {9}Jump Diffusions}{20}{section.9}
-\contentsline {section}{\numberline {10}Practice Qualification Exams}{21}{section.10}
-\contentsline {subsection}{Practice Exam 1, Problem 1}{22}{section*.1}
-\contentsline {subsection}{Practice Exam 1, Problem 2}{24}{section*.2}
-\contentsline {subsection}{Practice Exam 2, Problem 1}{27}{section*.3}
-\contentsline {subsection}{Practice Exam 2, Problem 2}{29}{section*.4}
-\contentsline {subsection}{Practice Exam 3, Problem 1}{31}{section*.5}
-\contentsline {subsection}{Practice Exam 3, Problem 2}{32}{section*.6}
-\contentsline {subsection}{Practice Exam 4, Problem 1}{33}{section*.7}
-\contentsline {subsection}{Practice Exam 4, Problem 2}{35}{section*.8}
-\contentsline {subsection}{Practice Exam 5, Problem 1}{36}{section*.9}
-\contentsline {subsection}{Practice Exam 5, Problem 2}{39}{section*.10}
-\contentsline {subsection}{Practice Exam 6, Problem 1}{42}{section*.11}
-\contentsline {subsection}{Practice Exam 6, Problem 2}{44}{section*.12}
-\contentsline {subsection}{Practice Exam 7, Problem 1}{45}{section*.13}
-\contentsline {subsection}{Practice Exam 7, Problem 2}{46}{section*.14}
-\contentsline {subsection}{Practice Exam 8, Problem 1}{47}{section*.15}
-\contentsline {subsection}{Practice Exam 8, Problem 2}{48}{section*.16}
-\contentsline {section}{\numberline {11}Homework Problems}{49}{section.11}
-\contentsline {subsection}{Exercise 3.1}{50}{section*.17}
-\contentsline {subsection}{Exercise 3.2}{51}{section*.18}
-\contentsline {subsection}{Exercise 3.3}{53}{section*.19}
-\contentsline {subsection}{Exercise 3.4}{54}{section*.20}
-\contentsline {subsection}{Exercise 3.5}{55}{section*.21}
-\contentsline {subsection}{Exercise 3.6}{56}{section*.22}
-\contentsline {subsection}{Exercise 3.7}{57}{section*.23}
-\contentsline {subsection}{Exercise 4.1}{59}{section*.24}
-\contentsline {subsection}{Exercise 4.2}{61}{section*.25}
-\contentsline {subsection}{Exercise 4.3}{62}{section*.26}
-\contentsline {subsection}{Exercise 4.4}{63}{section*.27}
-\contentsline {subsection}{Exercise 4.5}{64}{section*.28}
-\contentsline {subsection}{Exercise 4.6}{65}{section*.29}
-\contentsline {subsection}{Exercise 4.7}{67}{section*.30}
-\contentsline {subsection}{Exercise 4.8}{68}{section*.31}
-\contentsline {subsection}{Exercise 5.1}{70}{section*.32}
-\contentsline {subsection}{Exercise 5.2}{72}{section*.33}
-\contentsline {subsection}{Exercise 5.3}{73}{section*.34}
-\contentsline {subsection}{Exercise 5.4}{76}{section*.35}
-\contentsline {subsection}{Exercise 5.5}{80}{section*.36}
-\contentsline {subsection}{Exercise 7.1}{81}{section*.37}
-\contentsline {subsection}{Exercise 7.2}{82}{section*.38}
-\contentsline {subsection}{Exercise 7.3}{83}{section*.39}
-\contentsline {subsection}{Exercise 7.4}{85}{section*.40}
-\contentsline {subsection}{Exercise 8.1}{87}{section*.41}
-\contentsline {subsection}{Exercise 8.2}{89}{section*.42}
-\contentsline {subsection}{Exercise 8.3}{90}{section*.43}
-\contentsline {subsection}{Exercise 8.4}{92}{section*.44}
-\contentsline {subsection}{Exercise 9.1}{93}{section*.45}
-\contentsline {subsection}{Exercise 9.2}{94}{section*.46}
-\contentsline {subsection}{Exercise 9.3}{98}{section*.47}
-\contentsline {subsection}{Exercise 9.4}{100}{section*.48}
-\contentsline {subsection}{Exercise 9.5}{101}{section*.49}
-\contentsline {subsection}{Exercise 9.6}{104}{section*.50}
-\contentsline {subsection}{Exercise 10.1}{108}{section*.51}
-\contentsline {subsection}{Exercise 10.2}{110}{section*.52}
-\contentsline {subsection}{Exercise 10.3}{111}{section*.53}
-\contentsline {subsection}{Exercise 10.4}{113}{section*.54}
-\contentsline {subsection}{Exercise 10.5}{116}{section*.55}
+\contentsline {subsection}{\numberline {8.1}SDEs}{19}{subsection.8.1}
+\contentsline {subsubsection}{\numberline {8.1.1}Geometric Brownian Motion}{19}{subsubsection.8.1.1}
+\contentsline {subsubsection}{\numberline {8.1.2}Ornstein--Uhlenbeck (OU) process}{19}{subsubsection.8.1.2}
+\contentsline {subsection}{\numberline {8.2}Infinitesimal Generator}{19}{subsection.8.2}
+\contentsline {subsection}{\numberline {8.3}KBE \leavevmode {\color {red}\textit {Note:} WHAT IS THIS?}}{20}{subsection.8.3}
+\contentsline {subsubsection}{\numberline {8.3.1}Computing solution to KBE}{20}{subsubsection.8.3.1}
+\contentsline {subsection}{\numberline {8.4}Transition Density}{20}{subsection.8.4}
+\contentsline {subsubsection}{\numberline {8.4.1}Computing Transition Density}{20}{subsubsection.8.4.1}
+\contentsline {subsection}{\numberline {8.5}Finding PDEs Using Martingale Process}{21}{subsection.8.5}
+\contentsline {subsection}{\numberline {8.6}Finding PDEs for Hitting Time Problems}{21}{subsection.8.6}
+\contentsline {section}{\numberline {9}Jump Diffusions}{22}{section.9}
+\contentsline {section}{\numberline {10}Practice Qualification Exams}{23}{section.10}
+\contentsline {subsection}{Practice Exam 1, Problem 1}{24}{section*.1}
+\contentsline {subsection}{Practice Exam 1, Problem 2}{26}{section*.2}
+\contentsline {subsection}{Practice Exam 2, Problem 1}{29}{section*.3}
+\contentsline {subsection}{Practice Exam 2, Problem 2}{31}{section*.4}
+\contentsline {subsection}{Practice Exam 3, Problem 1}{33}{section*.5}
+\contentsline {subsection}{Practice Exam 3, Problem 2}{34}{section*.6}
+\contentsline {subsection}{Practice Exam 4, Problem 1}{35}{section*.7}
+\contentsline {subsection}{Practice Exam 4, Problem 2}{37}{section*.8}
+\contentsline {subsection}{Practice Exam 5, Problem 1}{38}{section*.9}
+\contentsline {subsection}{Practice Exam 5, Problem 2}{41}{section*.10}
+\contentsline {subsection}{Practice Exam 6, Problem 1}{44}{section*.11}
+\contentsline {subsection}{Practice Exam 6, Problem 2}{46}{section*.12}
+\contentsline {subsection}{Practice Exam 7, Problem 1}{47}{section*.13}
+\contentsline {subsection}{Practice Exam 7, Problem 2}{48}{section*.14}
+\contentsline {subsection}{Practice Exam 8, Problem 1}{49}{section*.15}
+\contentsline {subsection}{Practice Exam 8, Problem 2}{50}{section*.16}
+\contentsline {section}{\numberline {11}Homework Problems}{51}{section.11}
+\contentsline {subsection}{Exercise 3.1}{52}{section*.17}
+\contentsline {subsection}{Exercise 3.2}{53}{section*.18}
+\contentsline {subsection}{Exercise 3.3}{55}{section*.19}
+\contentsline {subsection}{Exercise 3.4}{56}{section*.20}
+\contentsline {subsection}{Exercise 3.5}{57}{section*.21}
+\contentsline {subsection}{Exercise 3.6}{58}{section*.22}
+\contentsline {subsection}{Exercise 3.7}{59}{section*.23}
+\contentsline {subsection}{Exercise 4.1}{61}{section*.24}
+\contentsline {subsection}{Exercise 4.2}{63}{section*.25}
+\contentsline {subsection}{Exercise 4.3}{64}{section*.26}
+\contentsline {subsection}{Exercise 4.4}{65}{section*.27}
+\contentsline {subsection}{Exercise 4.5}{66}{section*.28}
+\contentsline {subsection}{Exercise 4.6}{67}{section*.29}
+\contentsline {subsection}{Exercise 4.7}{69}{section*.30}
+\contentsline {subsection}{Exercise 4.8}{70}{section*.31}
+\contentsline {subsection}{Exercise 5.1}{72}{section*.32}
+\contentsline {subsection}{Exercise 5.2}{74}{section*.33}
+\contentsline {subsection}{Exercise 5.3}{75}{section*.34}
+\contentsline {subsection}{Exercise 5.4}{78}{section*.35}
+\contentsline {subsection}{Exercise 5.5}{82}{section*.36}
+\contentsline {subsection}{Exercise 7.1}{83}{section*.37}
+\contentsline {subsection}{Exercise 7.2}{84}{section*.38}
+\contentsline {subsection}{Exercise 7.3}{85}{section*.39}
+\contentsline {subsection}{Exercise 7.4}{87}{section*.40}
+\contentsline {subsection}{Exercise 8.1}{89}{section*.41}
+\contentsline {subsection}{Exercise 8.2}{91}{section*.42}
+\contentsline {subsection}{Exercise 8.3}{92}{section*.43}
+\contentsline {subsection}{Exercise 8.4}{94}{section*.44}
+\contentsline {subsection}{Exercise 9.1}{95}{section*.45}
+\contentsline {subsection}{Exercise 9.2}{96}{section*.46}
+\contentsline {subsection}{Exercise 9.3}{100}{section*.47}
+\contentsline {subsection}{Exercise 9.4}{102}{section*.48}
+\contentsline {subsection}{Exercise 9.5}{103}{section*.49}
+\contentsline {subsection}{Exercise 9.6}{106}{section*.50}
+\contentsline {subsection}{Exercise 10.1}{110}{section*.51}
+\contentsline {subsection}{Exercise 10.2}{112}{section*.52}
+\contentsline {subsection}{Exercise 10.3}{113}{section*.53}
+\contentsline {subsection}{Exercise 10.4}{115}{section*.54}
+\contentsline {subsection}{Exercise 10.5}{118}{section*.55}
