@@ -280,7 +280,7 @@ how to get density from gen function
 
 
 \subsection{Stationary/Invariant distribution}
-
+Solve \( \pi P = \pi \) or \( \pi G = 0 \).
 \textit{Sample Problems}: 
 \begin{itemize}[nolistsep]
     \item \hyperref[Exercise 5.1]{Exercise 5.1}: Find invariant distribution and conditions for existence
@@ -292,11 +292,41 @@ how to get density from gen function
 \textit{Sample Problems}: 
 \begin{itemize}[nolistsep]
     \item \hyperref[Exercise 5.1]{Exercise 5.1}: Write down generator
-    \item \hyperref[Exercise 5.3]{Exercise 5.3}: Given generator solve KFE
+    \item \hyperref[Exercise 5.3]{Exercise 5.3}: Given generator find Generating function
     \item \hyperref[Exercise 5.4]{Exercise 5.4}: Write down generator and solve KFE/KBE
 \end{itemize}
 
+\subsection{KFE AND KBE}
+Given infinitesimal generator \( G \) we have,
+\begin{align*}
+    \text{KFE}: && \dd{}{t}P_t = P_t G \\
+    \text{KBE}: && \dd{}{t}P_t = GP_t
+\end{align*}
+
 \subsection{Generating Functions}
+We can use the KFE and KBE to find the generating function of \( X_t \).
+
+
+From definition,
+\begin{align*}
+    G_{X_t}(z) = \EE[z^{X_t} | X_0 = i] = \sum_{j=0}^{\infty} z^j p_t(i,j)
+\end{align*}
+
+It then follows that,
+\begin{align*}
+    \pp{}{t}G_{X_t}(z) = \sum_{j=0}^{\infty} s^j  \pp{}{t} p_{t}(i,j) 
+    ,&&
+    \pp{}{z}G_{X_t}(z) = \sum_{j=1}^{\infty} js^{j-1}p_t(i,j)
+\end{align*}
+
+\begin{enumerate}[nolistsep]
+    \item Write down KFE or KBE equations
+    \item Add equations together and PDE involving \( G_{X_t}(z) \), \( \partial_t G_{X_t}(z) \), and \( \partial_z G_{X_t}(z) \)
+    \item Use initial condition \( G_{X_t}(z) = z^i \) (\(X_0 = i \)) to solve PDE
+\end{enumerate}
+
+
+
 \textit{Sample Problems}: 
 \begin{itemize}[nolistsep]
     \item \hyperref[Exercise 5.3]{Exercise 5.3}: Use KBE to find PDE for generating function of \( X \)
@@ -308,7 +338,8 @@ how to get density from gen function
 
 \subsection{Finding PDEs}
 
-\subsubsection{KFE AND KBE}
+
+
 \textit{Sample Problems}: 
 \begin{itemize}[nolistsep]
     \item \hyperref[Exercise 5.3]{Exercise 5.3}: Given generator solve KFE
@@ -515,6 +546,13 @@ This has mean,
     \d(X_tY_t) = Y_t\d X_t + X_t \d Y_t + \d[X,Y]_t 
 \end{align*}
 
+\subsection{Girsanov's Theorem}
+
+\textit{Sample Problems}:
+\begin{itemize}[nolistsep]
+    \item \hyperref[Practice Exam 4, Problem 2]{Practice Exam 4, Problem 2}
+\end{itemize}
+
 
 %%%%%%%%%%%%%%%%%%%%%
 %     CHAPTER 9     %
@@ -584,11 +622,12 @@ In the 2d case,
 \fi
 
 
-\subsection{KBE \note{WHAT IS THIS?}}
+\subsection{Kolmogorov Backwards Equation}
 Let \( X = (X_t)_{t\geq 0} \) be the solution of an SDE of the form,
 \begin{align*}
     \d X_t = \mu(t,X_t)\d t + \sigma(t,X_t)\d W_t
 \end{align*}
+where \( \mu:\RR_+\times\RR \to\RR^d  \) and \( \sigma:\RR_+\times\RR \to \RR^{d\times d} \).
 For some suitible function \( \varphi \), define,
 \begin{align*}
     u(t,X_t):= \EE[\varphi(X_T)|\cF_t]
@@ -598,7 +637,26 @@ If \( u\in C^{1,2} \) then it satisfies the Kolmogorov Backward Equation,
     (\partial_t + \cA(t)) u(t,\cdot) = 0, && u(T,\cdot) = \varphi %, && \cA(t) = \mu(t,x) \partial_x + \frac{1}{2}\sigma^2(t,x)\partial^2_x
 \end{align*}
 
-\subsubsection{Computing solution to KBE}
+\subsubsection{Speed and Scale Densities}
+In one dimension, a time homogeneous process \( \d X_t = \mu(X_t) \d t + \sigma(X_t) \d W_t \) has generator,
+\begin{align*}
+    \cA(t) = \mu(x) \partial_x + \frac{1}{2}\sigma^2(x)\partial_x^2
+\end{align*}
+
+We can write this as,
+\begin{align*}
+    \cA = \frac{1}{m(x)}\partial_x \left( \frac{1}{s(x)}\partial_x \right)
+\end{align*}
+where \( s(x) \) and \( m(x) \) are respectively called the scale and speed densities, and are given by,
+\begin{align*}
+    s(x) = \exp \left( - 2\int \frac{\mu(x)}{\sigma^2(x)}d\ x \right)
+    ,&& m(x) = \frac{2}{\sigma^2(x)} \exp \left( 2\int \frac{\mu(x)}{\sigma^2(x)}\d x \right)
+\end{align*}
+
+If \( m \) is normalizable then \( m \) is a time-homogeneous solution to the KFE and a stationary density for \( X \).
+
+
+\subsubsection{Computing Solution to KBE for 1d Time Homogeneous Process}
 \begin{enumerate}[nolistsep]
     \item Write down \( \cA \)
     \item Write down speed density \( m(x) \)
@@ -609,7 +667,6 @@ If \( u\in C^{1,2} \) then it satisfies the Kolmogorov Backward Equation,
             u(t,x) = \sum_{n} e^{(T-t)\lambda_n} \ip{\psi_n,\varphi}_m\psi_n
         \end{align*}
 \end{enumerate}
-
 
 \subsection{Transition Density}
 The transition density is defined as,
@@ -639,7 +696,8 @@ and satisfies,
 
 \textit{Sample Problems}:
 \begin{itemize}[nolistsep]
-    \item PROBLEMS FROM PRACTICE EXAM
+    \item \hyperref[Practice Exam 4, Problem 2]{Practice Exam 4, Problem 2}: Find transition density for constant coefficient process.
+    \item \hyperref[Practice Exam 5, Problem 2]{Practice Exam 5, Problem 2}: Find transition density for mean repelling OU process (two different approaches)
 \end{itemize}
 
 
@@ -662,7 +720,7 @@ This will give a PDE which \( u(t,X_t) \) satisfies.
             u(t,X_t) = \EE \left[ e^{-A(t,T)}\varphi(X_T) + \int_t^T e^{-A(t,s)}g(s,X_s) | \cF_t \right], && A(t,s) = \int_t^s \gamma(u,X_u)\d u
         \end{align*}
         }
-    \item \hyperref[Exercise 9.2]{Exercise 9.2}: Find PDE for given expression (solution using theorem and by finding martingale)
+    \item \hyperref[Exercise 9.2]{Exercise 9.2}: Find PDE for given expression (solutions given using theorem and by finding martingale)
 \end{itemize}
 
 
