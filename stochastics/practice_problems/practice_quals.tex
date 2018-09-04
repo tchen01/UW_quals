@@ -911,10 +911,64 @@ Consider a game which is played on a network with nodes numbered \( 1, 2, 3, 4 \
 \end{problem}
 
 \begin{solution}[Solution]
-\begin{enumerate}[label=(\alph*)]
-    \item 
-    \item 
-\end{enumerate}
+    We first compute eigenvalues and eigenfunctions of \( \cQ(t,T) \) defined by \( \cQ(t,T)f(y) =  \EE[f(X_T)|X_t = x] \).
+
+    We know that \( X \) has transition density,
+    \begin{align*}
+        \Gamma_X(t,x;T,y) = m(y) \sum_{n=0}^{\infty}H_n(x)H_n(y)e^{\lambda_n (T-t)}, && \lambda_n = n+1
+    \end{align*}
+
+    Therefore,
+    \begin{align*}
+        \cQ(t,T)f(y) &= \EE[f(X_T)|X_t = x] 
+        = \int_\RR f(y) \Gamma_X(t,x;T,y) \d y
+    \end{align*}
+
+    Now expanding the sum,
+    \begin{align*}    
+        \cQ(t,T)f(y) &= \int_\RR f(y) m(y)\sum_{n=0}^\infty H_n(x)H_n(y) e^{\lambda_n (T-t)} \d y 
+        \\&= \sum_{n=0}^{\infty} H_n(x)e^{\lambda_n (T-t)} \int_{\RR} f(y) H_n(y) m(y) \d y
+        \\&= \sum_{n=0}^{\infty} H_n(x) e^{\lambda_n (T-t)} \ip{f,H_n}_m
+    \end{align*}
+
+    Now observe that for non-negative integer \( k \), since \( \ip{H_k,H_n} = \delta_{k,n} \),
+    \begin{align*}
+        \cQ(t,T) H_k(y) = \sum_{n=0}^{\infty} H_n(x) e^{\lambda_n (T-t)} \ip{H_k,H_n}_m
+        = H_k(x)e^{\lambda_k (T-t)}
+    \end{align*}
+
+    Therefore \( H_k \) is an eigenvector of \( \cQ(t,T) \) with eigenvalue \( e^{\lambda_k (T-t)} \).
+
+    Now observe,
+    \begin{align*}
+        \cP(t,T)f(y) &= \EE[f(Y_T) | Y_t = y]
+        = \EE[f(X_{S_T})|X_{S_t}=y]
+    \end{align*}
+
+    Now, by conditional averaging,
+    \begin{align*}
+        \cP(t,T)f(y) = \EE[\EE[f(X_{S_T}) | S_t,S_T, X_{S_t} = y] | X_{S_t}= y]
+        = \EE[\cQ(S_t,S_T)f(y) | X_{S_t} =y ]
+    \end{align*}
+    
+    Therefore,
+    \begin{align*}
+        \cP(t,T)H_n(y) 
+        = \EE[\cQ(S_t,S_T) H_n(y) | X_{S_t} = y]
+        = \EE[e^{\lambda_n (S_T-S_t)} H_n(y) | X_{S_t} = y]
+    \end{align*}
+    
+    Let \( \phi(s) = \EE[e^{isZ_{T-t}}] \) where \( Z_{T-t} = -i S_{T-t} \). Then, using the stationary increments property of \( S \) and the fact that \( S_0 = 0 \),
+    \begin{align*}
+        \cP(t,T)H_n(y) = \EE[e^{i \lambda_n S_{T-t}} H_n(y) | X_0 = y] = \phi(\lambda_n) H_n(y)
+    \end{align*}
+
+    \note{DID SOME SKETCHY SHIT HERE}
+    
+    
+
+
+
 \end{solution}
 
 

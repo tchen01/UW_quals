@@ -22,20 +22,21 @@
 \contentsline {subsection}{\numberline {4.3}Mean Recurence Time}{11}{subsection.4.3}
 \contentsline {subsection}{\numberline {4.4}Reversibility}{11}{subsection.4.4}
 \contentsline {subsection}{\numberline {4.5}Stationary/Invariant distribution}{11}{subsection.4.5}
-\contentsline {subsection}{\numberline {4.6}Generating Functions}{11}{subsection.4.6}
+\contentsline {subsection}{\numberline {4.6}Generating Functions}{12}{subsection.4.6}
 \contentsline {section}{\numberline {5}Continuous Time Markov Chains}{13}{section.5}
 \contentsline {subsection}{\numberline {5.1}Transition Matrix}{13}{subsection.5.1}
 \contentsline {subsection}{\numberline {5.2}Stationary/Invariant distribution}{13}{subsection.5.2}
 \contentsline {subsection}{\numberline {5.3}Generator}{13}{subsection.5.3}
 \contentsline {subsection}{\numberline {5.4}KFE AND KBE}{13}{subsection.5.4}
 \contentsline {subsection}{\numberline {5.5}Generating Functions}{13}{subsection.5.5}
-\contentsline {subsection}{\numberline {5.6}Finding PDEs}{14}{subsection.5.6}
-\contentsline {subsubsection}{\numberline {5.6.1}note{OTHER METHODS?}}{14}{subsubsection.5.6.1}
-\contentsline {subsection}{\numberline {5.7}Birth Death Processes}{14}{subsection.5.7}
-\contentsline {subsubsection}{\numberline {5.7.1}General Form for infinite queue}{14}{subsubsection.5.7.1}
-\contentsline {subsubsection}{\numberline {5.7.2}M/M/1 queue}{15}{subsubsection.5.7.2}
-\contentsline {subsubsection}{\numberline {5.7.3}M/M/\(\infty \)}{16}{subsubsection.5.7.3}
-\contentsline {subsubsection}{\numberline {5.7.4}M/M/1/K queue}{16}{subsubsection.5.7.4}
+\contentsline {subsection}{\numberline {5.6}Computing Generating Functions}{14}{subsection.5.6}
+\contentsline {subsection}{\numberline {5.7}Finding PDEs}{14}{subsection.5.7}
+\contentsline {subsubsection}{\numberline {5.7.1}note{OTHER METHODS?}}{14}{subsubsection.5.7.1}
+\contentsline {subsection}{\numberline {5.8}Birth Death Processes}{14}{subsection.5.8}
+\contentsline {subsubsection}{\numberline {5.8.1}General Form for infinite queue}{14}{subsubsection.5.8.1}
+\contentsline {subsubsection}{\numberline {5.8.2}M/M/1 queue}{15}{subsubsection.5.8.2}
+\contentsline {subsubsection}{\numberline {5.8.3}M/M/\(\infty \)}{16}{subsubsection.5.8.3}
+\contentsline {subsubsection}{\numberline {5.8.4}M/M/1/K queue}{16}{subsubsection.5.8.4}
 \contentsline {section}{\numberline {6}Brownian Motion}{17}{section.6}
 \contentsline {subsection}{\numberline {6.1}Martingale}{17}{subsection.6.1}
 \contentsline {subsection}{\numberline {6.2}Characteristic Functions}{17}{subsection.6.2}
@@ -71,47 +72,47 @@
 \contentsline {subsection}{Practice Exam 5, Problem 2}{43}{section*.10}
 \contentsline {subsection}{Practice Exam 6, Problem 1}{46}{section*.11}
 \contentsline {subsection}{Practice Exam 6, Problem 2}{48}{section*.12}
-\contentsline {subsection}{Practice Exam 7, Problem 1}{49}{section*.13}
-\contentsline {subsection}{Practice Exam 7, Problem 2}{50}{section*.14}
-\contentsline {subsection}{Practice Exam 8, Problem 1}{51}{section*.15}
-\contentsline {subsection}{Practice Exam 8, Problem 2}{52}{section*.16}
-\contentsline {section}{\numberline {11}Homework Problems}{53}{section.11}
-\contentsline {subsection}{Exercise 3.1}{54}{section*.17}
-\contentsline {subsection}{Exercise 3.2}{55}{section*.18}
-\contentsline {subsection}{Exercise 3.3}{57}{section*.19}
-\contentsline {subsection}{Exercise 3.4}{58}{section*.20}
-\contentsline {subsection}{Exercise 3.5}{59}{section*.21}
-\contentsline {subsection}{Exercise 3.6}{60}{section*.22}
-\contentsline {subsection}{Exercise 3.7}{61}{section*.23}
-\contentsline {subsection}{Exercise 4.1}{63}{section*.24}
-\contentsline {subsection}{Exercise 4.2}{65}{section*.25}
-\contentsline {subsection}{Exercise 4.3}{66}{section*.26}
-\contentsline {subsection}{Exercise 4.4}{67}{section*.27}
-\contentsline {subsection}{Exercise 4.5}{68}{section*.28}
-\contentsline {subsection}{Exercise 4.6}{69}{section*.29}
-\contentsline {subsection}{Exercise 4.7}{71}{section*.30}
-\contentsline {subsection}{Exercise 4.8}{72}{section*.31}
-\contentsline {subsection}{Exercise 5.1}{74}{section*.32}
-\contentsline {subsection}{Exercise 5.2}{76}{section*.33}
-\contentsline {subsection}{Exercise 5.3}{77}{section*.34}
-\contentsline {subsection}{Exercise 5.4}{80}{section*.35}
-\contentsline {subsection}{Exercise 5.5}{84}{section*.36}
-\contentsline {subsection}{Exercise 7.1}{85}{section*.37}
-\contentsline {subsection}{Exercise 7.2}{86}{section*.38}
-\contentsline {subsection}{Exercise 7.3}{87}{section*.39}
-\contentsline {subsection}{Exercise 7.4}{89}{section*.40}
-\contentsline {subsection}{Exercise 8.1}{91}{section*.41}
-\contentsline {subsection}{Exercise 8.2}{93}{section*.42}
-\contentsline {subsection}{Exercise 8.3}{94}{section*.43}
-\contentsline {subsection}{Exercise 8.4}{96}{section*.44}
-\contentsline {subsection}{Exercise 9.1}{97}{section*.45}
-\contentsline {subsection}{Exercise 9.2}{98}{section*.46}
-\contentsline {subsection}{Exercise 9.3}{102}{section*.47}
-\contentsline {subsection}{Exercise 9.4}{104}{section*.48}
-\contentsline {subsection}{Exercise 9.5}{105}{section*.49}
-\contentsline {subsection}{Exercise 9.6}{108}{section*.50}
-\contentsline {subsection}{Exercise 10.1}{112}{section*.51}
-\contentsline {subsection}{Exercise 10.2}{114}{section*.52}
-\contentsline {subsection}{Exercise 10.3}{115}{section*.53}
-\contentsline {subsection}{Exercise 10.4}{117}{section*.54}
-\contentsline {subsection}{Exercise 10.5}{120}{section*.55}
+\contentsline {subsection}{Practice Exam 7, Problem 1}{50}{section*.13}
+\contentsline {subsection}{Practice Exam 7, Problem 2}{51}{section*.14}
+\contentsline {subsection}{Practice Exam 8, Problem 1}{52}{section*.15}
+\contentsline {subsection}{Practice Exam 8, Problem 2}{53}{section*.16}
+\contentsline {section}{\numberline {11}Homework Problems}{54}{section.11}
+\contentsline {subsection}{Exercise 3.1}{55}{section*.17}
+\contentsline {subsection}{Exercise 3.2}{56}{section*.18}
+\contentsline {subsection}{Exercise 3.3}{58}{section*.19}
+\contentsline {subsection}{Exercise 3.4}{59}{section*.20}
+\contentsline {subsection}{Exercise 3.5}{60}{section*.21}
+\contentsline {subsection}{Exercise 3.6}{61}{section*.22}
+\contentsline {subsection}{Exercise 3.7}{62}{section*.23}
+\contentsline {subsection}{Exercise 4.1}{64}{section*.24}
+\contentsline {subsection}{Exercise 4.2}{66}{section*.25}
+\contentsline {subsection}{Exercise 4.3}{67}{section*.26}
+\contentsline {subsection}{Exercise 4.4}{68}{section*.27}
+\contentsline {subsection}{Exercise 4.5}{69}{section*.28}
+\contentsline {subsection}{Exercise 4.6}{70}{section*.29}
+\contentsline {subsection}{Exercise 4.7}{72}{section*.30}
+\contentsline {subsection}{Exercise 4.8}{73}{section*.31}
+\contentsline {subsection}{Exercise 5.1}{75}{section*.32}
+\contentsline {subsection}{Exercise 5.2}{77}{section*.33}
+\contentsline {subsection}{Exercise 5.3}{78}{section*.34}
+\contentsline {subsection}{Exercise 5.4}{81}{section*.35}
+\contentsline {subsection}{Exercise 5.5}{85}{section*.36}
+\contentsline {subsection}{Exercise 7.1}{86}{section*.37}
+\contentsline {subsection}{Exercise 7.2}{87}{section*.38}
+\contentsline {subsection}{Exercise 7.3}{88}{section*.39}
+\contentsline {subsection}{Exercise 7.4}{90}{section*.40}
+\contentsline {subsection}{Exercise 8.1}{92}{section*.41}
+\contentsline {subsection}{Exercise 8.2}{94}{section*.42}
+\contentsline {subsection}{Exercise 8.3}{95}{section*.43}
+\contentsline {subsection}{Exercise 8.4}{97}{section*.44}
+\contentsline {subsection}{Exercise 9.1}{98}{section*.45}
+\contentsline {subsection}{Exercise 9.2}{99}{section*.46}
+\contentsline {subsection}{Exercise 9.3}{103}{section*.47}
+\contentsline {subsection}{Exercise 9.4}{105}{section*.48}
+\contentsline {subsection}{Exercise 9.5}{106}{section*.49}
+\contentsline {subsection}{Exercise 9.6}{109}{section*.50}
+\contentsline {subsection}{Exercise 10.1}{113}{section*.51}
+\contentsline {subsection}{Exercise 10.2}{115}{section*.52}
+\contentsline {subsection}{Exercise 10.3}{116}{section*.53}
+\contentsline {subsection}{Exercise 10.4}{118}{section*.54}
+\contentsline {subsection}{Exercise 10.5}{121}{section*.55}

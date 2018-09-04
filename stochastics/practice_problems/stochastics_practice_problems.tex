@@ -235,7 +235,7 @@ how to get density from gen function
 \end{itemize}
 
 \subsection{Mean Recurence Time}
-
+In general find stationary distribution and invert \( i \)-th entry to find mean recurrence time to state \( i \).
 \textit{Sample Problems}: 
 \begin{itemize}[nolistsep]
     \item \hyperref[Exercise 4.4]{Exercise 4.4}: Find expected visits to a state given some properties
@@ -280,7 +280,13 @@ how to get density from gen function
 
 
 \subsection{Stationary/Invariant distribution}
-Solve \( \pi P = \pi \) or \( \pi G = 0 \).
+\textit{Methods to find Invariant Distribution}:
+\begin{itemize}[nolistsep]
+    \item Solve \( \pi P = \pi \)
+    \item Solve \( \pi G = 0 \)
+    \item Find \( G_{X_t}(z) \) and take limit as \( z\to\infty \) 
+\end{itemize}
+
 \textit{Sample Problems}: 
 \begin{itemize}[nolistsep]
     \item \hyperref[Exercise 5.1]{Exercise 5.1}: Find invariant distribution and conditions for existence
@@ -306,7 +312,6 @@ Given infinitesimal generator \( G \) we have,
 \subsection{Generating Functions}
 We can use the KFE and KBE to find the generating function of \( X_t \).
 
-
 From definition,
 \begin{align*}
     G_{X_t}(z) = \EE[z^{X_t} | X_0 = i] = \sum_{j=0}^{\infty} z^j p_t(i,j)
@@ -319,6 +324,7 @@ It then follows that,
     \pp{}{z}G_{X_t}(z) = \sum_{j=1}^{\infty} js^{j-1}p_t(i,j)
 \end{align*}
 
+\subsection{Computing Generating Functions}
 \begin{enumerate}[nolistsep]
     \item Write down KFE or KBE equations
     \item Add equations together and PDE involving \( G_{X_t}(z) \), \( \partial_t G_{X_t}(z) \), and \( \partial_z G_{X_t}(z) \)
@@ -578,7 +584,6 @@ This has mean,
 
 \subsubsection{Geometric Brownian Motion}
 
-
 \subsubsection{Ornstein--Uhlenbeck (OU) process}
 \textit{SDE}:
 \begin{align*}
@@ -592,6 +597,9 @@ This has mean,
 
 \textit{Transition Density}:
 \note{TODO}
+
+
+\note{ALSO ADD DIFFERENT BOUNDARY CONDITIONS}
 
 \subsection{Infinitesimal Generator}
 \label{sec:infgen}
@@ -681,16 +689,14 @@ and satisfies,
 
 \subsubsection{Boundary Conditions}
 
-\begin{align}
+\begin{align*}
     \text{killing}: && \left[ f(x) \right]_{\text{on }\partial R} = 0 \\
     \text{reflecting}: && \left[ \frac{1}{s(x)}\partial_x f(x) \right]_{\text{on }\partial R} = 0 \\
     \text{natural}: && \text{no boundary conditions}
-\end{align}
+\end{align*}
 
 
 \subsubsection{Computing Transition Density}
-\note{WHAT KIND OF BC DO WE NEED???}
-
 \begin{enumerate}[nolistsep]
     \item Write down infinitesimal generator \( \cA \)
     \item Write down speed density \( m(x) \) and scale density \( s(x) \)
