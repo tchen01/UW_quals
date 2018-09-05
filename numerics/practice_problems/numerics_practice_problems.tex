@@ -2944,9 +2944,74 @@ Consider the following difference scheme:
     \item
 
         Von Neumann?
-
+        \note{Come back and do this}
 \end{enumerate}
-
 \end{solution}
+
+
+\begin{problem}[Summer 2015, Day 2, Problem 2]
+Let \( A \) be a complex square matrix. A coneigenvalue of \( A \) is a number \( \lambda\in\CC \) such that,
+\begin{align*}
+    A \overline{x}  = \lambda x
+\end{align*}
+    for some nonzero vector \( x \), where \( \overline{x} \) denotes the complex conjugate of \( x \). The vector \( x \) is called a coneigenvector.
+    \begin{enumerate}[label=(\alph*),nolistsep]
+        \item Show that if \( \lambda \) is a coneigenvalue of \( A \) then so is \( e^{i \theta} \) for any \( \theta\in[0,2\pi) \). (Here \( i = \sqrt{-1} \).
+        \item Show that if \( \lambda \) is a coneignevalue of \( A \) then \( |\lambda|^2 \) is an eigenvalue of \( \overline{A}A \).
+        \item Write down a 2 by 2 matrix that has no coneigenvalues and explain how you know this.
+    \end{enumerate}
+    
+\end{problem}
+
+\begin{problem}[Winter 2015, Day 1, Problem 2]
+    Let \( A \) be a \( n\times n \) matrix and defined \( \cos(A) \) by the Taylor series,
+    \begin{align*}
+        \cos(A) = I - \frac{1}{2!}A^2 + \frac{1}{4!}A^4 - \frac{1}{6!}A^6 + \cdots
+    \end{align*}
+    \begin{enumerate}[label=(\alph*), nolistsep]
+        \item Show that this series converges in \( \norm{\cdot}_\infty \) for any matrix.
+        \item If \( A \) is diagonalizable, show how \( \cos(A) \) can be expressed in terms of the eigenvalues and eigenvectors of \( A \).
+        \item In particular, calculate \( \cos(A) \) for,
+            \begin{align*}
+                A = \frac{2\pi}{5} \left[\begin{array}{cc}1 & 2 \\ 2 & 4\end{array}\right]
+            \end{align*}
+        \item Write out explicitly the matrix \( \cos(A) \) if \( A \) is a \( 2\times 2 \) Jordan block with eigenvalue \( \lambda \).
+    \end{enumerate}
+    
+\end{problem}
+
+\begin{problem}[Winter 2015, Day 2, Problem 1]
+    Let \( V \) be the function space consisting of all functions of the form \( g(x) = c_1 + c_2 x^2 \) on \( 0\leq x\leq 1 \) where \( c_1,c_2\in\RR \). Define the \( L_2 \) inner product as usual by \( (u,v) = \int_0^1 u(x)v(x)\d x \) and let \( \norm{\cdot} \) be the corresponding norm.
+    \begin{enumerate}[label=(\alph*),nolistsep]
+        \item Determine an orthonormal basis for \( V \).
+        \item Let \( P \) denote the orthogonal projection operator from functions \( L_2(0,1) \) to the subspace \( V \). Determine \( \norm{P} \) and \( \norm{I-P} \).
+        \item Let \( f(x) = x \) and determine the projection \( g = Pf \).
+        \item Plot the functions \( f \) and \( g \) on the same axes.        
+    \end{enumerate}
+    
+\end{problem}
+
+\begin{problem}[Winter 2015, Day 2, Problem 2]
+    \begin{enumerate}[label=(\alph*),nolistsep]
+        \item Let \( A \) and \( B \) be real \( n\times n \) matrices and define the commutator \( C = AB - BA \). Show that \( \operatorname{trace}(C) = 0 \).
+        \item Suppose \( C \) has all diagonal entries equal to 0. Find a diagonal matrix \( X \) and a matrix \( Y \) such that \( C \) is the commutator for \( X \) and \( Y \): \( C = XY - YX \).
+\end{enumerate}
+\end{problem}
+
+\begin{problem}[Summer 2016, Day 1, Problem 2]
+Consider the predictor-corrector scheme,
+\begin{align*}
+    \hat{U}_{n+2} = U_{n+1} + hf(t_{n+1},U_{n+1}), \\
+    U_{n+2} = U_n + h f(t_n,U_n) + h f(t_{n+2},\hat{U}_{n+2})
+\end{align*}
+    for solving the ODE initial value problem \( u' = f(t,u) \), \( u(0) = u_0 \), using time step size \( h \). Assume that \( f \) is \( C^\infty \) in both variables.
+    \begin{enumerate}[label=(\alph*),nolistsep]
+        \item Determine the order of the local truncation error of the method.
+        \item Suppose this scheme is applied to the test equation \( u' = \lambda u \). Which, if any, of the values \( h \lambda = -1,-2,-3 \) lie in the \textit{region of absolute stability} of the method (i.e., values of \( h \lambda \) for which \( U_n \to 0 \) as \( n\to\infty \), for all initial values \( U_0 \) and \( U_1 \)). Justify your answer.
+        
+    \end{enumerate}
+\end{problem}
+
+
 
 \end{document}
