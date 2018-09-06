@@ -117,7 +117,30 @@ Explicitly,
     x_{k+1} = x_k - J_G(x_k)^{-1} G(x_k)
 \end{align*}
 
+\subsection{Richardson Extrapolation}                                                                                                                       
+Suppose \( \varphi(h) \) approximates quantity \( u \) to \( \cO(h^n) \). That is,
+\begin{align*}
+    \varphi(h) = u + c h^n + \cO(h^{n+k})
+\end{align*}
 
+Then,                                                                                                                                                    
+\begin{align*}
+    \varphi \left( \frac{h}{t} \right) = u + c \left( \frac{h}{t} \right)^n + \cO \left( \left( \frac{h}{t} \right)^{n+k} \right)
+    = u + t^{-n} c h^n + \cO\left( h^{n+k} \right)
+\end{align*}
+
+Therefore,
+
+\begin{align*}
+    t^n \varphi \left( \frac{h}{t} \right) = t^n u + c h^n + \cO(h^{n+k})
+\end{align*}
+
+
+Therefore,   
+\begin{align*}                                                                                                                                           
+    \frac{t^n \varphi(h/t) - \varphi(h)}{t^n-1}
+    = \frac{(t^n-1)u + \cO(h^{n+k})}{t^n-1}                                                                                                              = u + \cO(h^{n+k})                                                                                                                                 
+\end{align*}  
 
 \pagebreak
 \section{Basic Linear Algebra}
