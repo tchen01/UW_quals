@@ -2924,7 +2924,7 @@ Consider the following difference scheme:
     \end{align*}
     
         We compute this in Mathematica,
-        \begin{lstlisting}
+    \begin{lstlisting}
         U[n_, j_] :=  Normal[Series[u[x + z n h, t + z j k], {z, 0, 3}]] /. {z -> 1}
     \end{lstlisting}
     \begin{lstlisting}
@@ -2956,12 +2956,68 @@ Let \( A \) be a complex square matrix. A coneigenvalue of \( A \) is a number \
 \end{align*}
     for some nonzero vector \( x \), where \( \overline{x} \) denotes the complex conjugate of \( x \). The vector \( x \) is called a coneigenvector.
     \begin{enumerate}[label=(\alph*),nolistsep]
-        \item Show that if \( \lambda \) is a coneigenvalue of \( A \) then so is \( e^{i \theta} \) for any \( \theta\in[0,2\pi) \). (Here \( i = \sqrt{-1} \).
+        \item Show that if \( \lambda \) is a coneigenvalue of \( A \) then so is \( e^{i \theta} \) for any \( \theta \in [0,2\pi) \). (Here \( i = \sqrt{-1} \).)
         \item Show that if \( \lambda \) is a coneignevalue of \( A \) then \( |\lambda|^2 \) is an eigenvalue of \( \overline{A}A \).
         \item Write down a 2 by 2 matrix that has no coneigenvalues and explain how you know this.
     \end{enumerate}
-    
 \end{problem}
+
+\begin{solution}[Solution]
+\begin{enumerate}[label=(\alph*)]
+    \item Suppose \( \lambda \) is a coneigenavlue. Then there is some \( x \) such that,
+        \begin{align*}
+            A \overline{x}  =\lambda x
+        \end{align*}
+        Therefore,
+        \begin{align*}
+            A \overline{e^{-i\theta/2}x}
+            = e^{i\theta/2} A\overline{x}
+            = e^{i\theta/2} \lambda x
+            = e^{i\theta} \lambda \left( e^{-i \theta/2} x \right)
+        \end{align*}
+        
+        This proves \( e^{i\theta} \lambda \) is a coneigenvalue with coneigenvector \( e^{-i\theta/2} x \).
+
+    \item Similarly,
+        \begin{align*}
+            \overline{A} A \overline{x} 
+            = \overline{A} \lambda x 
+            = \overline{\overline{\lambda \overline{A} x}}
+            = \overline{\overline{\lambda} A \overline{x}}
+            = \overline{\overline{\lambda} \lambda x}
+            = \lambda \overline{\lambda} \overline{x}
+            = |\lambda|^2 \overline{x}
+        \end{align*}
+        
+        This proves \( |\lambda|^2 \) is an eigenvalue of \( \overline{A}A \) with eigenvector \( \overline{x} \).
+        
+    \item 
+        We note that we would like \( A \) such that \( \overline{A}A \) has all negative eignevalues. In this case, by the contrapositive of (b) thre can be no coneigenvalues.
+
+        Observe also that the eigenvectors of \( A \) cannot be real or \( A \) will have coneigenvalues equal to the eignevalues of \( A \). Moreover, we need that.
+
+        We now construct \( A \) with 
+
+        Let,
+        \begin{align*}
+            A = \left[\begin{array}{cc}i & 1 \\ 1 & i\end{array}\right]
+                \left[\begin{array}{cc}1 & 0 \\0 & -1 \end{array}\right]
+                \left[\begin{array}{cc}i & 1 \\ 1 & i\end{array}\right]^{-1}
+            =
+            \left[\begin{array}{cc}0 & -i \\ i & 0\end{array}\right]
+        \end{align*}
+        
+        Then,
+        \begin{align*}
+            \overline{A}A = \left[\begin{array}{cc}-1 & 0 \\ 0 & -1\end{array}\right]
+        \end{align*}
+
+
+        Since \( \overline{A}A \) has negative eigenvalues, so \( A \) has no coneigenvalues.
+
+\end{enumerate}
+\end{solution}
+
 
 \begin{problem}[Winter 2015, Day 1, Problem 2]
     Let \( A \) be a \( n\times n \) matrix and defined \( \cos(A) \) by the Taylor series,
@@ -2977,8 +3033,77 @@ Let \( A \) be a complex square matrix. A coneigenvalue of \( A \) is a number \
             \end{align*}
         \item Write out explicitly the matrix \( \cos(A) \) if \( A \) is a \( 2\times 2 \) Jordan block with eigenvalue \( \lambda \).
     \end{enumerate}
-    
 \end{problem}
+
+\begin{solution}[Solution]
+\begin{enumerate}[label=(\alph*)]
+    \item I'm not even sure what it means for a sequence of matrices to converge in some norm. 
+    \item Suppose \( A = X\Lambda X^{-1} \). Then \( A^n = X\Lambda^nX^{-1} \). Therefore the partial sums are,
+        \begin{align*}
+            \sum_{i=0}^{n} (-1)^n \frac{1}{(2n)!} A^{2n}
+            =\sum_{i=0}^{n} (-1)^n \frac{1}{(2n)!} X\Lambda^{2n}X^{-1}
+            = X \left(\sum_{i=0}^{n} (-1)^n \frac{1}{(2n)!} \Lambda^{2n} \right)X^{-1}
+        \end{align*}
+        
+        We now move the sum into each component so that the \( i,i \) entry of the quantity in the parenthesis is,
+        \begin{align*}
+            \sum_{i=0}^{n} (-1)^n \frac{1}{(2n)!} \lambda_i^{2n}
+        \end{align*}
+        
+        As \( n\to\infty \), the \( i,i \) entry converges to \( \cos(\lambda_i) \) so that,
+        \begin{align*}
+            \cos(A) = X \left[\begin{array}{cccc}\cos(\lambda_1) \\ & \cos(\lambda_2) \\ & & \ddots\\ & & & \cos( \lambda_n) \end{array}\right]X^{-1}
+        \end{align*}
+        
+
+    \item
+        We can write,
+        \begin{align*}
+            A = \left[\begin{array}{cc}1 & -2 \\ 2 & 1\end{array}\right]
+                \left[\begin{array}{cc}2\pi \\ & 0\end{array}\right]
+                \left[\begin{array}{cc}1 & -2 \\ 2 & 1\end{array}\right]^{-1}
+        \end{align*}
+        
+        Therefore,
+        \begin{align*}
+            \cos(A) =
+            \left[\begin{array}{cc}1 & -2 \\ 2 & 1\end{array}\right]
+                \left[\begin{array}{cc}\cos(2\pi) \\ & \cos(0)\end{array}\right]
+                \left[\begin{array}{cc}1 & -2 \\ 2 & 1\end{array}\right]^{-1}
+                    = \left[\begin{array}{cc}1 \\ & 1\end{array}\right]
+        \end{align*}
+
+    \item Suppose,
+        \begin{align*}
+            A = \left[\begin{array}{cc} \lambda & 1 \\ & \lambda\end{array}\right]
+        \end{align*}
+
+        Then,
+        \begin{align*}
+            A^n = \left[\begin{array}{cc} \lambda^n & n \lambda^{n-1} \\ & \lambda^n \end{array}\right]
+        \end{align*}
+        
+        By definition the diagonal entries of \( \cos(A) \) are then,
+        \begin{align*}
+            1 - \frac{1}{2!} \lambda^2 + \frac{1}{4!}\lambda^4 - \frac{1}{6!} \lambda^6 + \cdots = \cos(\lambda)
+        \end{align*}
+        
+        The \( 2,1 \) entry is cleary 0. Finally, the \( 1,2 \) entry is,
+        \begin{align*}
+            1 - \frac{1}{2!}(2 \lambda) + \frac{1}{4!} (3 \lambda^3) - \frac{1}{6!} (6 \lambda^5) + \cdots
+            = - \sin(\lambda) 
+        \end{align*}
+        
+        Explicitly,
+        \begin{align*}
+            \cos(A) = \left[\begin{array}{cc}\cos(\lambda) & -\sin(\lambda) \\ & \cos(\lambda)\end{array}\right]
+        \end{align*}
+
+\end{enumerate}
+
+\end{solution}
+
+
 
 \begin{problem}[Winter 2015, Day 2, Problem 1]
     Let \( V \) be the function space consisting of all functions of the form \( g(x) = c_1 + c_2 x^2 \) on \( 0\leq x\leq 1 \) where \( c_1,c_2\in\RR \). Define the \( L_2 \) inner product as usual by \( (u,v) = \int_0^1 u(x)v(x)\d x \) and let \( \norm{\cdot} \) be the corresponding norm.
@@ -2987,9 +3112,48 @@ Let \( A \) be a complex square matrix. A coneigenvalue of \( A \) is a number \
         \item Let \( P \) denote the orthogonal projection operator from functions \( L_2(0,1) \) to the subspace \( V \). Determine \( \norm{P} \) and \( \norm{I-P} \).
         \item Let \( f(x) = x \) and determine the projection \( g = Pf \).
         \item Plot the functions \( f \) and \( g \) on the same axes.        
-    \end{enumerate}
-    
+    \end{enumerate}    
 \end{problem}
+
+
+\begin{solution}[Solution]
+\begin{enumerate}[label=(\alph*)]
+    \item Let \( p = 1 \) and \( \tilde{q} = x^2 \). These are clearly linearly independent elements of \( V \). It is also clear that \( V \) has dimension at most 2 so these must span \( V \). We do Gram-Schmidt. Indeed, define,
+        \begin{align*}
+            \hat{q} = q - \frac{\ip{p,q}}{\ip{p,p}}p = x^2 - \frac{1/3}{1} 1 = x^2 - \frac{1}{3}
+        \end{align*}
+        
+        Finally, we normalize,
+        \begin{align*}
+            q = \frac{1}{\ip{hat{q},\hat{q}}^{1/2}} \hat{q} = \frac{3\sqrt{5}}{2} \left( x^2 - \frac{1}{3} \right)
+        \end{align*}
+        
+        We easily verify that \( p \) and \( q \) are orthonormal.
+
+    \item Since \( p \) and \( q \) are orthonormal, an orthogonal projector \( P \) onto their span is defined as,
+        \begin{align*}
+            Pf = \ip{f,p}p + \ip{f,q}q
+        \end{align*}
+        
+        Similarly, \( I-P \) is defined as,
+        \begin{align*}
+            (I-P)f = f - \ip{f,p}p + \ip{f,q}q
+        \end{align*}
+        
+        All projectors have norm 1 and both \( P \) and \( I-P \) are projectors.
+
+    \item
+        We have,
+        \begin{align*}
+            Pf = Px = \ip{x,p}p + \ip{x,q}q = \frac{3}{16} \left( 1+5x^2 \right)
+        \end{align*}
+        
+    \item The plot looks reasonable and is not included.
+
+\end{enumerate}
+\end{solution}
+
+
 
 \begin{problem}[Winter 2015, Day 2, Problem 2]
     \begin{enumerate}[label=(\alph*),nolistsep]
@@ -2998,19 +3162,142 @@ Let \( A \) be a complex square matrix. A coneigenvalue of \( A \) is a number \
 \end{enumerate}
 \end{problem}
 
+\begin{solution}[Solution]
+\begin{enumerate}[label=(\alph*)]
+    \item Note that,
+        \begin{align*}
+            (AB)_{i,i} = \sum_{k=1}^{n} A_{i,k}B_{k,i}
+            ,&&
+            (BA)_{i,i} = \sum_{k=1}^{n} B_{i,k}A_{k,i}
+        \end{align*}
+        
+        Therefore,
+        \begin{align*}
+            \sum_{i=1}^{n} C_{i,i} 
+            = \sum_{i=1}^{n} \sum_{k=1}^{n} (A_{i,k}B_{k,i} - B_{i,k}A_{k,i})
+            = \sum_{i=1}^{n} \sum_{k=1}^{n} A_{i,k}B_{k,i}
+            - \sum_{k=1}^{n} \sum_{i=1}^{n} A_{k,i}B_{i,k}
+            = 0
+        \end{align*}
+        
+    \item We assume we can write \( C = XY - YX \) for some \( X \) diagonal. Then,
+        \begin{align*}
+            C_{i,j} = \sum_{k=1}^{n}X_{i,k}Y_{k,j} - Y_{i,k}X_{k,j}
+            = X_{i,i} Y_{i,j} - Y_{i,j}X_{j,j}
+            = (X_{i,i} - X_{j,j}) Y_{i,j}
+        \end{align*}
+       
+        Therefore  one choice of \( X \) and \( Y \) is to pick,
+        \begin{align*}
+            X_{i,i} = i
+            ,&&
+            Y_{i,j} = \frac{C_{i,j}}{i-j}
+        \end{align*}
+        
+
+
+
+\end{enumerate}
+
+\end{solution}
+
 \begin{problem}[Summer 2016, Day 1, Problem 2]
 Consider the predictor-corrector scheme,
 \begin{align*}
-    \hat{U}_{n+2} = U_{n+1} + hf(t_{n+1},U_{n+1}), \\
-    U_{n+2} = U_n + h f(t_n,U_n) + h f(t_{n+2},\hat{U}_{n+2})
+    \hat{U}_{n+2} &= U_{n+1} + hf(t_{n+1},U_{n+1}), \\
+    U_{n+2} &= U_n + h f(t_n,U_n) + h f(t_{n+2},\hat{U}_{n+2})
 \end{align*}
     for solving the ODE initial value problem \( u' = f(t,u) \), \( u(0) = u_0 \), using time step size \( h \). Assume that \( f \) is \( C^\infty \) in both variables.
     \begin{enumerate}[label=(\alph*),nolistsep]
         \item Determine the order of the local truncation error of the method.
-        \item Suppose this scheme is applied to the test equation \( u' = \lambda u \). Which, if any, of the values \( h \lambda = -1,-2,-3 \) lie in the \textit{region of absolute stability} of the method (i.e., values of \( h \lambda \) for which \( U_n \to 0 \) as \( n\to\infty \), for all initial values \( U_0 \) and \( U_1 \)). Justify your answer.
-        
+        \item Suppose this scheme is applied to the test equation \( u' = \lambda u \). Which, if any, of the values \( h \lambda = -1,-2,-3 \) lie in the \textit{region of absolute stability} of the method (i.e., values of \( h \lambda \) for which \( U_n \to 0 \) as \( n\to\infty \), for all initial values \( U_0 \) and \( U_1 \)). Justify your answer. 
     \end{enumerate}
 \end{problem}
+
+\begin{solution}[Solution]
+\begin{enumerate}[label=(\alph*)]
+    \item 
+        The local truncation error is defined as,
+        \begin{align*}
+            \frac{u(t_{n+2}) - u(t_n)}{2h} - \frac{1}{2} (f(t_n,u(t_n)) + f(t_{n+2},u(t_{n+1}) + hf(t_{n+1},u(t_{n+1}))))
+        \end{align*}
+        
+        We first compute how much \( \hat{u} = u(t_{n+1}) + h f(t_{n+1},u(t_{n+1})) \) varies from \( u(t_{n+2}) \). Indeed, making the substitution \( u' = f(t,u) \),
+        \begin{align*}
+            u(t_{n+2}-h) + h u'(t_{n+2}-h)
+            = u(t_{n+2}) - \frac{1}{2}u''(t_{n+2})h^2 + \cO(h^3) 
+        \end{align*}
+        
+        Write \( \Delta = -u''(t_{n+2})h^2/2 + \cO(h^3) \) and compute,
+        \begin{align*}
+            f(t_{n+2}, \hat{u}) 
+            = f(t_{n+2}, u(t_{n+2}) + \Delta) 
+            = f(t_{n+2},u(t_{n+2})) + f_u(t_{n+2},u(t_{n+2}))\Delta  + \cO(\Delta^2)
+        \end{align*}
+
+        Therefore,
+        \begin{align*}
+            f(t_{n+2},\hat{u}) &= u'(t_{n+2}) + f_u(t_{n+2},u(t_{n+2}))\Delta + \cO(\Delta^4)
+            \\&= u'(t_n) + 2h u''(t_n) + f_u(t_{n+2},u(t_{n+2})) \Delta + \cO(\Delta^2)
+            \\&= u'(t_n) + 2h u''(t_n) - f_u(t_{n+2},u(t_{n+2})) u''(t_{n+2})h^2/2  + \cO(h^4)
+        \end{align*}
+        
+        Finally,
+        \begin{align*}
+            {u(t_{n+2}) - u(t_n)}{2h}
+            = u'(t_n) + u''(t_n) h + \frac{2}{3}u'''(t_n)h^2 + \cO(h^3)
+        \end{align*}
+        
+        Putting this all together we have,
+        \begin{align*}
+            \tau = \frac{2}{3} u'''(t_n)h^2 + \frac{1}{4} f_u(t_{n+2},u(t_{n+2})) u''(t_{n+2}) h^2
+        \end{align*}
+       
+        Consider the equation \( u' = \lambda u \). Then \( f_u = \lambda \) and \( u''' = \lambda u'' \). This term does not disappear.
+        
+        The method is therefore second order accurate.
+
+
+
+        
+
+
+    \item Applied to the test equation, writing \( z = h \lambda \), we have,
+        \begin{align*}
+            \hat{U}_{n+2} &= U_{n+1} h \lambda U_{n+1} = (1+z) U_{n+1}
+            \\U_{n+2} &= U_n + h \lambda U_n + h \lambda \hat{U}_{n+2}
+            = (1+z) U_n + z(1+z) U_{n+1}
+        \end{align*}
+        
+        We can write this as,
+        \begin{align*}
+            U_{n+2} - a U_{n+1} - bU_n = 0, && a = z(1+z), && b = (1+z)
+        \end{align*}
+        
+        This is a linear difference equation with characteristic polynomial,
+        \begin{align*}
+            \rho(x) = x^2 - ax - b = \left( x-\frac{1}{2} \left( a - \sqrt{a^2-4b} \right) \right)\left( x-\frac{1}{2} \left( a + \sqrt{a^2-4b} \right) \right)
+        \end{align*}
+        Writing the two roots as \( x_1 \) and \( x_2 \) we have solution,
+        \begin{align*}
+            U_n = A x_1^n + B x_2^n
+        \end{align*}
+        where \( A \) and \( B \) are constants to be solved for using the initial conditions.
+
+        We need \( |x_1|, |x_2| < 1 \) to be in the interior of the region of absolute stability, \( |x_1|,|x_2| = 1 \) to be on the boundary, and \( |x_1|,|x_2| > 1 \) to be outside.
+
+        If \( z = -1 \) then \( a,b = 0 \) so \( |x_1| = |x_2| = 0 < 1 \).
+
+        If \( z = -2 \) then \( a = 2 \), \( b = -1 \) so \( |x_1|=|x_2|=1 \).
+
+        If \( z = -3 \) then \( a = 6 \), \( b = -2 \) so \( |x_1|=3-\sqrt{7} \), \( |x_2| = 3+\sqrt{7} > 1 \).
+
+        Therefore \( z=-1 \) is in the region of absolute stability, \( z=-2 \) is on the boundary, and \( z=-3 \) is on the exterior.
+
+
+
+\end{enumerate}
+\end{solution}
 
 
 
