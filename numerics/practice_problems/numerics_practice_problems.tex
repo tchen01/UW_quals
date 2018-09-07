@@ -3009,7 +3009,7 @@ Let \( A \) be a complex square matrix. A coneigenvalue of \( A \) is a number \
         
         Then,
         \begin{align*}
-            \overline{A}A = \left[\begin{array}{cc}-1 & 0 \\ 0 & -1\end{array}\right]
+            \overline{A}A = \left[\begin{array}{rr}-1 & 0 \\ 0 & -1\end{array}\right]
         \end{align*}
 
 
@@ -3037,7 +3037,7 @@ Let \( A \) be a complex square matrix. A coneigenvalue of \( A \) is a number \
 
 \begin{solution}[Solution]
 \begin{enumerate}[label=(\alph*)]
-    \item I'm not even sure what it means for a sequence of matrices to converge in some norm. 
+    \item \note{Not Relevant} 
     \item Suppose \( A = X\Lambda X^{-1} \). Then \( A^n = X\Lambda^nX^{-1} \). Therefore the partial sums are,
         \begin{align*}
             \sum_{i=0}^{n} (-1)^n \frac{1}{(2n)!} A^{2n}
@@ -3052,35 +3052,35 @@ Let \( A \) be a complex square matrix. A coneigenvalue of \( A \) is a number \
         
         As \( n\to\infty \), the \( i,i \) entry converges to \( \cos(\lambda_i) \) so that,
         \begin{align*}
-            \cos(A) = X \left[\begin{array}{cccc}\cos(\lambda_1) \\ & \cos(\lambda_2) \\ & & \ddots\\ & & & \cos( \lambda_n) \end{array}\right]X^{-1}
+            \cos(A) = X \left[\begin{array}{rrrr}\cos(\lambda_0) \\ & \cos(\lambda_2) \\ & & \ddots\\ & & & \cos( \lambda_n) \end{array}\right]X^{-1}
         \end{align*}
         
 
     \item
         We can write,
         \begin{align*}
-            A = \left[\begin{array}{cc}1 & -2 \\ 2 & 1\end{array}\right]
-                \left[\begin{array}{cc}2\pi \\ & 0\end{array}\right]
-                \left[\begin{array}{cc}1 & -2 \\ 2 & 1\end{array}\right]^{-1}
+            A = \left[\begin{array}{rr}1 & -2 \\ 2 & 1\end{array}\right]
+                \left[\begin{array}{rr}2\pi \\ & 0\end{array}\right]
+                \left[\begin{array}{rr}1 & -2 \\ 2 & 1\end{array}\right]^{-1}
         \end{align*}
         
         Therefore,
         \begin{align*}
             \cos(A) =
-            \left[\begin{array}{cc}1 & -2 \\ 2 & 1\end{array}\right]
-                \left[\begin{array}{cc}\cos(2\pi) \\ & \cos(0)\end{array}\right]
-                \left[\begin{array}{cc}1 & -2 \\ 2 & 1\end{array}\right]^{-1}
-                    = \left[\begin{array}{cc}1 \\ & 1\end{array}\right]
+            \left[\begin{array}{rr}1 & -2 \\ 2 & 1\end{array}\right]
+                \left[\begin{array}{rr}\cos(2\pi) \\ & \cos(0)\end{array}\right]
+                \left[\begin{array}{rr}1 & -2 \\ 2 & 1\end{array}\right]^{-1}
+                    = \left[\begin{array}{rr}1 \\ & 1\end{array}\right]
         \end{align*}
 
     \item Suppose,
         \begin{align*}
-            A = \left[\begin{array}{cc} \lambda & 1 \\ & \lambda\end{array}\right]
+            A = \left[\begin{array}{rr} \lambda & 1 \\ & \lambda\end{array}\right]
         \end{align*}
 
         Then,
         \begin{align*}
-            A^n = \left[\begin{array}{cc} \lambda^n & n \lambda^{n-1} \\ & \lambda^n \end{array}\right]
+            A^n = \left[\begin{array}{rr} \lambda^n & n \lambda^{n-1} \\ & \lambda^n \end{array}\right]
         \end{align*}
         
         By definition the diagonal entries of \( \cos(A) \) are then,
@@ -3096,7 +3096,7 @@ Let \( A \) be a complex square matrix. A coneigenvalue of \( A \) is a number \
         
         Explicitly,
         \begin{align*}
-            \cos(A) = \left[\begin{array}{cc}\cos(\lambda) & -\sin(\lambda) \\ & \cos(\lambda)\end{array}\right]
+            \cos(A) = \left[\begin{array}{rr}\cos(\lambda) & -\sin(\lambda) \\ & \cos(\lambda)\end{array}\right]
         \end{align*}
 
 \end{enumerate}
@@ -3125,7 +3125,7 @@ Let \( A \) be a complex square matrix. A coneigenvalue of \( A \) is a number \
         
         Finally, we normalize,
         \begin{align*}
-            q = \frac{1}{\ip{hat{q},\hat{q}}^{1/2}} \hat{q} = \frac{3\sqrt{5}}{2} \left( x^2 - \frac{1}{3} \right)
+            q = \frac{1}{\ip{\hat{q},\hat{q}}^{1/2}} \hat{q} = \frac{3\sqrt{5}}{2} \left( x^2 - \frac{1}{3} \right)
         \end{align*}
         
         We easily verify that \( p \) and \( q \) are orthonormal.
@@ -3140,7 +3140,7 @@ Let \( A \) be a complex square matrix. A coneigenvalue of \( A \) is a number \
             (I-P)f = f - \ip{f,p}p + \ip{f,q}q
         \end{align*}
         
-        All projectors have norm 1 and both \( P \) and \( I-P \) are projectors.
+        All orthogonal projectors have norm 1 and both \( P \) and \( I-P \) are orthogonal projectors.
 
     \item
         We have,
@@ -3192,13 +3192,11 @@ Let \( A \) be a complex square matrix. A coneigenvalue of \( A \) is a number \
             X_{i,i} = i
             ,&&
             Y_{i,j} = \frac{C_{i,j}}{i-j}
+            ,&&
+            Y_{i,i} = \text{anything}
         \end{align*}
-        
-
-
 
 \end{enumerate}
-
 \end{solution}
 
 \begin{problem}[Summer 2016, Day 1, Problem 2]
@@ -3278,19 +3276,14 @@ Consider the predictor-corrector scheme,
         \begin{align*}
             \rho(x) = x^2 - ax - b = \left( x-\frac{1}{2} \left( a - \sqrt{a^2-4b} \right) \right)\left( x-\frac{1}{2} \left( a + \sqrt{a^2-4b} \right) \right)
         \end{align*}
-        Writing the two roots as \( x_1 \) and \( x_2 \) we have solution,
-        \begin{align*}
-            U_n = A x_1^n + B x_2^n
-        \end{align*}
-        where \( A \) and \( B \) are constants to be solved for using the initial conditions.
 
-        We need \( |x_1|, |x_2| < 1 \) to be in the interior of the region of absolute stability, \( |x_1|,|x_2| = 1 \) to be on the boundary, and \( |x_1|,|x_2| > 1 \) to be outside.
+        We need the root condition to be satisfied.
 
-        If \( z = -1 \) then \( a,b = 0 \) so \( |x_1| = |x_2| = 0 < 1 \).
+        If \( z = -1 \) then \( a,b = 0 \) so \( x_1 = x_2 = 0  \) so the root condition is satisfied.
 
-        If \( z = -2 \) then \( a = 2 \), \( b = -1 \) so \( |x_1|=|x_2|=1 \).
+        If \( z = -2 \) then \( a = 2 \), \( b = -1 \) so \( x_1=x_2=1 \) so the root condition is not satisfied.
 
-        If \( z = -3 \) then \( a = 6 \), \( b = -2 \) so \( |x_1|=3-\sqrt{7} \), \( |x_2| = 3+\sqrt{7} > 1 \).
+        If \( z = -3 \) then \( a = 6 \), \( b = -2 \) so \( x_1=3-\sqrt{7} \), \( x_2 = 3+\sqrt{7} > 1 \) so the root condition is not satisfied.
 
         Therefore \( z=-1 \) is in the region of absolute stability, \( z=-2 \) is on the boundary, and \( z=-3 \) is on the exterior.
 
