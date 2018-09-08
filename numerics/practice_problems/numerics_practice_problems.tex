@@ -2603,36 +2603,6 @@ Consider the advection equation \( u_t + au_x = 0 \) and the ``skewed'' upwind m
 \end{solution}
 
 
-\begin{problem}[Summer 2011, Day 3, Problem 2]
-In his book on symmetric eigenvalue problems, B. Partlett proves the
-result:
-
-\hrulefill
-
-    Let \( A\in\RR^{n\times n} \) be a symmetric matrix, \( y \) a nonzer vector in \( \RR^n \), \( \theta \) a real number, and \( r \) the residual vector,
-    \begin{align*}
-        r = Ay - y\theta
-    \end{align*}
-    If \( \alpha \) is the eigenvalue of \( A \) closest to \( \theta \), where \( Az = z\alpha \) and \( \norm{z}=1 \) then,
-    \begin{align*}
-        |\theta-\alpha| \leq \frac{\norm{r}}{\norm{y}}, && |\sin \angle (y,z) |\leq \frac{1}{\min_{\lambda_i\neq \alpha} | \lambda_i-\alpha|} \frac{\norm{r}}{\norm{y}}
-    \end{align*}
-    where \( \lambda_i \) is an eigenvalue of \( A \) and \( \norm{\cdot} \) is the Euclidian norm.
-
-    \hrulefill
-    
-    Derive similar estimates for the eigenvalue problem,
-    \begin{align*}
-        \left[\begin{array}{cc}K & B \\ B^T & 0\end{array}\right] x = \lambda \left[\begin{array}{cc}M & 0 \\ 0 & 0\end{array}\right] x
-    \end{align*}
-    where the matrices \( K \) and \( M \) belong to \( \RR^{n\times n} \) and are symmetric positive definite. The matrix \( B \) belongs to \( \RR^{n\times p} \), (\( p<n \)) and is full rank.
-
-\end{problem}
-
-\begin{solution}[Solution]
-    
-\end{solution}
-
 
 \begin{problem}[Summer 2017, Day 1, Problem 2]
 Let \( A\in\CC^{n\times n} \) be any \( n\times n \) matric and let \( v\in\CC^n \) be a nonzero \( n \)-vector.
@@ -3287,9 +3257,204 @@ Consider the predictor-corrector scheme,
 
         Therefore \( z=-1 \) is in the region of absolute stability, \( z=-2 \) is on the boundary, and \( z=-3 \) is on the exterior.
 
+\end{enumerate}
+\end{solution}
+
+\begin{problem}[Summer 2011, Day 3, Problem 2]
+In his book on symmetric eigenvalue problems, B. Partlett proves the
+result:
+
+\hrulefill
+
+    Let \( A\in\RR^{n\times n} \) be a symmetric matrix, \( y \) a nonzer vector in \( \RR^n \), \( \theta \) a real number, and \( r \) the residual vector,
+    \begin{align*}
+        r = Ay - y\theta
+    \end{align*}
+    If \( \alpha \) is the eigenvalue of \( A \) closest to \( \theta \), where \( Az = z\alpha \) and \( \norm{z}=1 \) then,
+    \begin{align*}
+        |\theta-\alpha| \leq \frac{\norm{r}}{\norm{y}}, && |\sin \angle (y,z) |\leq \frac{1}{\min_{\lambda_i\neq \alpha} | \lambda_i-\alpha|} \frac{\norm{r}}{\norm{y}}
+    \end{align*}
+    where \( \lambda_i \) is an eigenvalue of \( A \) and \( \norm{\cdot} \) is the Euclidian norm.
+
+    \hrulefill
+    
+    Derive similar estimates for the eigenvalue problem,
+    \begin{align*}
+        \left[\begin{array}{cc}K & B \\ B^T & 0\end{array}\right] x = \lambda \left[\begin{array}{cc}M & 0 \\ 0 & 0\end{array}\right] x
+    \end{align*}
+    where the matrices \( K \) and \( M \) belong to \( \RR^{n\times n} \) and are symmetric positive definite. The matrix \( B \) belongs to \( \RR^{n\times p} \), (\( p<n \)) and is full rank.
+
+\end{problem}
+
+\begin{solution}[Solution]
+\note{Not really sure what they mean ``similar bounds''. I don't think I've understood the problem} 
+\end{solution}
+
+
+
+\begin{problem}[Winter 2017, Day 3, Problem 1]
+Let \( A = \{a_{ij}\} \) be a real \( n \) by \( n \) matrix.
+\begin{enumerate}[label=(\alph*)]
+    \item Suppose,
+        \begin{align*}
+            \norm{A}_F \leq \norm{A+tI}_F ~~ \forall t\in \RR
+        \end{align*}
+        where \( \norm{\cdot}_F \) denotes the Frobenius norm: \( \norm{A} = \left( \sum_{i,j=1}^{n} a_{ij}^2 \right)^{1/2} \). Show that the trace of \( A \) is 0.
+        
+        If you don’t see how to do this, write a code to test the result numerically. Perhaps you can get some insight from your numerical experiments.
+    \item  Suppose,
+        \begin{align*}
+            \norm{A}_2 \leq \norm{A+tI}_2 ~~ \forall t\in \RR
+        \end{align*}
+        where \( \norm{\cdot}_2 \) is the spectral norm; i.e., the largest singular value. Show that the left and right singular vectors of A corresponding to the largest singular value are orthogonal to each other. 
+        
+        If you don’t see how to do this, write a code to test the result numerically. Perhaps you can get some insight from your numerical experiments.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}[Solution]
+\begin{enumerate}[label=(\alph*)]
+    \item 
+        Suppose that \( \norm{A}_F\leq \norm{A+tI}_F \) for all \( t \). Then \( \norm{A}_F^2 \leq \norm{A+tI}_F^2 \) for all \( t \).
+        
+        Define \( f(t) = \norm{A+tI}_F^2 - \norm{A}_F^2 \). Then \( f(t) \geq 0 \) for all \( t \) and since \( f(0) = 0 \) we must have \( f'(0) = 0 \)
+
+        Now note that,
+        \begin{align*}
+            f(t) := \norm{A+tI}_F^2 - \norm{A}_F^2 = \sum_{i=1}^{n} (a_{i,i}+t)^2 + \sum_{i=1}^{n} \sum_{j\neq i} a_{i,j}^2 - \sum_{i,j=1}^{n}a_{i,j}^2
+            = \sum_{i=1}^{n} (a_{i,i}+t)^2 - a_{i,i}^2
+        \end{align*}
+        
+        Therefore,
+        \begin{align*}
+            0 = f'(0) = \left[\sum_{i=1}^{n} 2(a_{i,i}+t)\right]_{t=0} = \sum_{i=1}^{n}2 a_{i,i} = 2\operatorname{tr}(A)
+        \end{align*}
+        
+        This proves the result. \qed
+
+    \item
+        Suppose that \( \norm{A}_2\leq \norm{A+tI}_2 \) for all \( t \). Then \( \norm{A}_2^2 \leq \norm{A+tI}_2^2 \) for all \( t \).
+        
+        Let \( v_t \) be a unit vector such that \( \norm{(A+tI)v_t}_2 = \norm{A+tI}_2 \), i.e. \( v_t \) is the first right singular vector of \( A+tI \). Note that \( v_0 = v \), the first right singular vector of \( A \).
+
+        Then,
+        \begin{align*}
+            \norm{A+tI}_2^2 = \norm{(A+tI)v_t}_2^2  \geq \norm{A}_2^2 \geq \norm{Av_t}_2^2
+        \end{align*}
+        
+        Define, 
+        \begin{align*}
+            g(t) &= \norm{(A+tI)v_t}_t^2 - \norm{Av_t}_2^2 
+            \\&= \ip{Av_t,Av_t} + 2t \ip{Av_t,v_t} + t^2\ip{v_t,v_t} - \ip{Av_t,Av_t}
+            \\&= 2 t \ip{Av_t,v_t} + t^2
+        \end{align*}
+
+        As in (a), by hypothesis we have \( g(t) \geq 0 \), and since \( g(0) = 0 \) we have \( g'(0) = 0 \). That is,
+        \begin{align*}
+            g'(0) = \left[2\ip{Av_t,v_t} + 2t \dd{}{t} \ip{Av_t,v_t} + 2t \right]_{t=0} = 2\ip{A v_0,v_0} = 0
+        \end{align*}
+
+        Again, \( v_0 = v \), the first right singular vector, and \( Av = u \), the first left singular vector. Therefore we have \( \ip{Av,v} = \ip{\sigma u, v} = \sigma\ip{u,v} \), where \( \sigma \) is the largest singular value of \( A \). 
+        
+        This proves the result. \qed 
 
 
 \end{enumerate}
+
+\end{solution}
+
+
+\begin{problem}[Practice 2010, Day 1, Problem 3]
+Consider the ordinary differential equation
+\begin{align*}
+    \dd{y}{t} = -100 y
+\end{align*}
+    Your unsophisticated friend is using the forward Euler method to solve this equation over the time interval \( [0, 5] \). He observes a discrete approximation to the solution \( y(t) \) whose absolute value increases over time. Is this possible? If so, characterize the time step that he is using. Now answer the same question using the backward Euler method.
+\end{problem}
+
+\begin{solution}[Solution]
+Forward Euler gives,
+\begin{align*}
+    U_{n+1} = U_n + k f(U_n) = U_n + k (-100 U_n) = (1-100k)U_n
+\end{align*}
+
+The absolute value of the solution will increase in time if \( |1-100k| > 1 \). This happens if \( k\in(0,1/50) \).
+
+
+Backward Euler gives,
+\begin{align*}
+    U_{n+1} = U_n + k f(U_{n+1}) = U_n + k(-100 U_{n+1}) = (1+100k)^{-1} U_n
+\end{align*}
+
+    The absolute value of the solution will increase in time if \( |1+100k|^{-1} > 1 \). This never happens for a positive time step, and we do not care about negative timesteps.
+\end{solution}
+
+
+\begin{problem}[Winter 2012, Day 2, Problem 3]
+For this question: make sure to attempt all parts, even if you’re stuck on an earlier part. Not all parts depend on all previous parts. Please make sure to indicate which part is answered where.
+
+Consider the scheme,
+\begin{align*}
+    u_{n+1} = u_n + h f(t_n + (1-\theta) h, \theta u_n + (1-\theta)u_{n+1})
+\end{align*}
+    for solving the ODE \( u' = f(t,u) \). Here \( u_n \) and \( u_{n+1} \) are meant to approximate \( u(t_n) \) and \( u(t_{n+1}) = u(t_n+h) \), rrespectively.
+\begin{enumerate}[nolistsep,label=(\alph*)]
+    \item For all \( \theta\in[0,1] \), find the order of this scheme.
+    \item Determine for which \( \theta\in[0,1] \) the scheme is convergent.
+    \item For \( \theta_0 = 0 \) and \( \theta_1 = 1 \) determine the stability domain of the scheme.
+    \item Consider the system
+        \begin{align*}
+            \dd{}{t} \left[\begin{array}{c}u_1 \\ u_1\end{array}\right]
+                = 
+            \left[\begin{array}{rr}0 & -2 \\ 2 & 0\end{array}\right]
+            \left[\begin{array}{c} u_1 \\ u_2\end{array}\right]
+            +
+            \left[\begin{array}{rr} \epsilon^2 u_1(u_1^2+u_2^2) \\ -u_2(u_1^2+u_2^2)\end{array}\right],
+        \end{align*}
+        where \( \epsilon>0 \) is a parameter. Let \( \epsilon=0.5 \). Find the equilibrium points of this system and determine their linear stability. Draw a phase portrait that is qualitatively consistent with your findings. This plot should be big and approximately to scale.
+    \item Choose a suitable value of \( \theta \) and using the scheme above, produce a plot of the curve \( (u_1(t), u_2(t))^T \) with initial conditions \( (-1,-1)^T \) in the phase plane. If this initial condition is in the basin of attraction of one of the equilibrium points, run the scheme until you get ``reasonably'' close to that equilibrium point.
+    \item Discuss how your numerical results from (e) agree or disagree with your linear stability results from (d).
+\end{enumerate}
+\end{problem}
+
+\begin{solution}[Solution]
+\begin{enumerate}[label=(\alph*)]
+    \item
+    \item
+    \item
+    \item
+\end{enumerate}
+
+\end{solution}
+
+
+\begin{problem}[Summer 2017, Day 2, Problem 4]
+On Day 1,  you should have found that the finite difference scheme,
+\begin{align*}
+    u_j^{n+1} = \frac{1}{2} \left( u_{j+1}^n - u_{j-1}^n \right) - \frac{ak}{2h} \left( u_{j+1}^n - u_{j-1}^n \right)
+\end{align*}
+is a consistent and stable method for the advection equation
+\begin{align*}
+    u_t + au_x = 0, && -\infty < x < \infty, && t>0
+\end{align*}
+provided \( k/h \) and \( h/k \) remain bounded as \( k,h\to 0 \).
+\begin{enumerate}[nolistsep,label=(\alph*)]
+    \item Show that this difference scheme is a second-order in space and first-order in
+time approximation for the advection-diffusion equation,
+\begin{align*}
+    u_t + au_x = \epsilon u_{xx}, && \epsilon = \frac{h^2}{2k}
+\end{align*}
+    \item nstead of an infinite domain, assume a finite domain \( -1 \leq x\leq 1 \) with periodic boundary condtions \( u(-1,t) = u(1,t) \). how that the above difference scheme is the forward Euler method applied to the system of ODEs resulting from discretizing equation (1) in space. Write out the system of ODEs in the form \( U'(t) = A_{\epsilon} U(t) \) and show that the eigenvalues of \( A_{\epsilon} \) line in the left half-plane. [Hint: It may help to recall that all \( n \) by \( n \) circulant matrices have the same eigenvectors: \( v_j = (1, \omega_j , \omega_j^2 , \ldots , \omega_h^{n-1})^T\), \(j = 0, 1, \ldots , n-1\) , where \( \omega_j = \exp(2\pi ij/n) \).]
+\end{enumerate}
+\end{problem}
+
+\begin{solution}[Solution]
+\begin{enumerate}[label=(\alph*)]
+    \item
+    \item
+\end{enumerate}
+
+
 \end{solution}
 
 
