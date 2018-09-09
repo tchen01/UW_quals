@@ -742,13 +742,42 @@ A stable L stable etc
 \section{PDEs}
 \subsection{Method of Lines}
 
-\subsubsection{Von Neumann Analysis}
+\subsection{Von Neumann Analysis}
 
 \begin{enumerate}[nolistsep]
     \item Replace \( U_j^n \) with \( g(\xi)^n e^{i\xi j \Delta x} \)
     \item Solve for \( g(\xi) \) and compute \( |g(\xi)| \)
     \item Method is stable if and only if for all \( \xi \), \( |g(\xi)| \leq 1+\cO(\Delta x) \)
 \end{enumerate}
+
+
+\subsubsection{Von Neumann Analysis Using Mathematica}
+We illustrate how to apply Von Neumann Analysis to the Lax--Wendroff method using Mathematica.
+
+Define our replacement,
+\begin{lstlisting}
+U[n_, j_] := g[\[Xi]]^n Exp[I \[Xi] j h]
+\end{lstlisting}
+
+Now solve for \( g(\xi) \) after replacement in the method.
+\begin{lstlisting}
+gxi = FullSimplify[ Solve[U[1, 0] ==  U[0, 0] - a k (U[0, 1] - U[0, -1])/(2 h) + (a^2 k^2)/2 (U[0, -1] - 2 U[0, 0] + U[0, 1])/h^2, g[\[Xi]]]]
+\end{lstlisting}
+
+We would like to figure out what values of \( \nu \) give \( |g(\xi)|\leq 1 \). To do this we will replace \( ak/h \) with \( \nu \) and \( h\xi \) with a continuous parameter \( t \) and plot in the complex plane. If the entire parametric plot is contained in the unit circle, then each \( |g(\xi)| \) will have modulus at most one.
+\begin{lstlisting}
+g[\[Nu]_, t_] :=  ReplaceRepeated[g[\[Xi]] /. gxi[[1]], {a -> (h \[Nu])/k, h \[Xi] -> t}]
+\end{lstlisting}
+
+\begin{lstlisting}
+Manipulate[ParametricPlot[ReIm[g[\[Nu], t]], {t, 0, 2 \[Pi]}, PlotRange -> {-1, 1}], {\[Nu], -2, 2}]
+\end{lstlisting}
+
+This reveals we need \( |\nu| \leq 1 \). This agrees with the CFL condition. We now prove this symbollically by,
+\begin{lstlisting}
+FullSimplify[Conjugate[g[\[Nu], t]] g[\[Nu], t] <= 1, Assumptions -> {0 <= t <= 2 \[Pi], -1 <= \[Nu] <= 1}]
+\end{lstlisting}
+
 
 
 
