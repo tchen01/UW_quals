@@ -236,6 +236,7 @@ how to get density from gen function
 
 \subsection{Mean Recurence Time}
 In general find stationary distribution and invert \( i \)-th entry to find mean recurrence time to state \( i \).
+
 \textit{Sample Problems}: 
 \begin{itemize}[nolistsep]
     \item \hyperref[Exercise 4.4]{Exercise 4.4}: Find expected visits to a state given some properties
@@ -292,6 +293,7 @@ In general find stationary distribution and invert \( i \)-th entry to find mean
     \item \hyperref[Exercise 5.1]{Exercise 5.1}: Find invariant distribution and conditions for existence
     \item \hyperref[Exercise 5.2]{Exercise 5.2}: Show two processes have the same stationary distribution 
     \item \hyperref[Exercise 5.3]{Exercise 5.3}: Indirectly find stationary distribution by solving KFE, finding generating function for the chain, and computing the distribution of \( X_t \) as \( t\to\infty \)
+    \item \hyperref[Practice Exam 7, Problem 1]{Practice Exam 7, Problem 1}: Find stationary distribution given given mean wait time
 \end{itemize}
 
 \subsection{Generator}
@@ -300,6 +302,7 @@ In general find stationary distribution and invert \( i \)-th entry to find mean
     \item \hyperref[Exercise 5.1]{Exercise 5.1}: Write down generator
     \item \hyperref[Exercise 5.3]{Exercise 5.3}: Given generator find Generating function
     \item \hyperref[Exercise 5.4]{Exercise 5.4}: Write down generator and solve KFE/KBE
+    \item \hyperref[Practice Exam 7, Problem 1]{Practice Exam 7, Problem 1}: Write down generator given mean wait time
 \end{itemize}
 
 \subsection{KFE AND KBE}
@@ -680,7 +683,7 @@ and satisfies,
 \end{align*}
 
 
-\subsubsection{Computing Transition Density}
+\subsubsection{Computing Transition Density (of 1d process)}
 \begin{enumerate}[nolistsep]
     \item Write down infinitesimal generator \( \cA \)
     \item Write down speed density \( m(x) \) and scale density \( s(x) \)
@@ -749,7 +752,69 @@ where \( \cA \) is the \hyperref[sec:infgen]{infinitesimal generator} of \( X \)
 \end{itemize}
 
 
-\note{ADD ASSOCIATED PDEs}
+\subsection{Table of SDEs with Explicit Solutions}
+\subsubsection{Geometric Brownian Motion}
+\textit{SDE}:
+\begin{align*}
+    \d X_t = \mu_t \d t + \sigma_t X_t \d W_t
+\end{align*}
+
+\textit{Solution}:
+\begin{align*}
+    X_T = X_t  \exp\left( \int_t^T \left( \mu_s - \frac{1}{2}\sigma_s^2\right)\d s + \int_t^T\sigma_s \d W_s \right)
+\end{align*}
+
+\textit{Statistics}:
+\note{WHAT DO WE KNOW IF MU AND SIGMA ARE NOT CONSTANT???}
+\begin{align*}
+    \EE[X_t] = X_0 e^{\mu t} 
+    ,&&
+    \bV[X_t] = X_0^2 e^{2\mu t} \left( e^{\sigma^2 t}-1 \right)
+\end{align*}
+
+
+\subsubsection{Ornstein--Uhlenbeck (OU) process}
+\textit{SDE}:
+\begin{align*}
+    \d X_t = \kappa(\theta-X_t)\d t + \sigma \d W_t
+\end{align*}
+
+\textit{Solution}:
+\begin{align*}
+    X_t = \theta + e^{-\kappa t}(X_0-\theta) + \int_0^t e^{-\kappa(t-s)}\sigma \d W_s
+\end{align*}
+
+\textit{Statistics}:
+\begin{align*}
+    \EE[X_t] =  \theta + e^{-\kappa t}(X_0 - \theta)
+    ,&&
+    \bV[X_t] = -\frac{\sigma ^2 \left(e^{-2 \kappa  t}-1\right)}{2 \kappa } 
+\end{align*}
+
+\note{double check variance}
+
+\subsubsection{\note{WHAT IS THIS CALLED??}}
+This was solved in \hyperref[Exercise 8.2]{Exercise 8.2}.
+
+\note{CAN I HAVE R AND ALPHA DEPEND ON t???}
+
+\textit{SDE}:
+\begin{align*}
+    \d X_t = r \d t + \alpha X_t \d W_t
+\end{align*}
+
+\textit{Solution}:
+\begin{align*}
+    X_t &= Y_0 e^{\alpha W_t - (1/2)\alpha^2 t} + r \int_{0}^{t} e^{\alpha(W_t-W_s)-(1/2)\alpha^2(t-s)} \d s
+\end{align*}
+
+\textit{Statistics}:
+\begin{align*}
+    \EE[X_t] = Y_0 e^{\alpha W_t - (1/2) \alpha^2 t}
+    ,&&
+    \bV[X_t] = ??? 
+\end{align*}
+
 
 \subsection{Table of Known Transition Densities}
 \subsubsection{Brownian Motion}
@@ -796,36 +861,6 @@ where \( \cA \) is the \hyperref[sec:infgen]{infinitesimal generator} of \( X \)
     ?
 \end{align*}
 
-
-\subsection{Table of Known Solutions to SDEs}
-\subsubsection{Geometric Brownian Motion}
-\textit{SDE}:
-\begin{align*}
-    \d X_t = \mu(t) \d t + \sigma(t) X_t \d W_t
-\end{align*}
-
-\textit{Solution}:
-\begin{align*}
-    X_T = X_t  \exp\left( \int_t^T \left( \mu(s) - \frac{1}{2}\sigma^2(s)\right)\d s + \int_t^T\sigma(s)\d W_s \right)
-\end{align*}
-
-
-\subsubsection{Ornstein--Uhlenbeck (OU) process}
-\textit{SDE}:
-\begin{align*}
-    \d X_t = \kappa(\theta-X_t)\d t + \sigma \d W_t
-\end{align*}
-
-\textit{Solution}:
-\begin{align*}
-    X_t = \theta + e^{-\kappa t}(X_0-\theta) + \int_0^t e^{-\kappa(t-s)}\sigma \d W_s
-\end{align*}
-
-\textit{Mean}:
-
-
-\textit{Transition Density}:
-\note{TODO}
 
 
 
