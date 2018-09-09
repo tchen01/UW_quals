@@ -1040,8 +1040,73 @@ Consider a game which is played on a network with nodes numbered \( 1, 2, 3, 4 \
 
 \begin{solution}[Solution]
 \begin{enumerate}[label=(\alph*)]
-    \item 
-    \item 
+    \item Note that,
+        \begin{align*}
+            X_T - X_t = \int_t^T \sigma_t \d W_t
+            , && 
+            X_t - X_T = -\int_t^T \sigma_t \d W_t = \int_t^T \sigma_t \d (-W_t)
+        \end{align*}
+        Since \( W_t \) and \( -W_t \) are both Brownian motions distributed in the same way, then \( X_T-X_t \) and \( X_t - X_T \) are distributed in the same way. Therefore,
+        \begin{align*}
+            \EE[G(X_T-X_t) | \cF_t ] = \EE[G(X_t-X_T) | \cF_t]
+        \end{align*}
+        
+    \item
+        Recall that \( S_t \) has explicit representation, 
+        \begin{align*}
+            S_t = S_0 \exp\left(\int_0^t \left( -\frac{1}{2}\sigma_s^2 \right) \d s + \int_0^t \sigma_s\d W_s \right)
+        \end{align*}
+
+        
+        Define \( Z_T = S_T/S_t \) and note that since \( S_t \) is a martingale,
+        \begin{align*}
+            \EE[Z_T] = \EE[\EE[Z_T | \cF_t]] = \EE[\EE[S_T/S_t | \cF_t]] = \EE[(1/S_t) \EE[S_T|\cF_t]] = \EE[S_t/S_t] = 1
+        \end{align*}
+        
+        Therefore \( Z_T \) is a Radon--Nikod\'ym derivative process. By theorem, for \( Y \in \cF_T \) we have,
+        \begin{align*}
+            \tilde{\EE}[Y  |\cF_t] = \frac{1}{Z_t} \EE[Z_T Y | \cF_t] = \EE[Z_T Y | \cF_t]
+        \end{align*}
+        
+        Note that \( Z_T \) has explicit representation,
+        \begin{align*}
+            Z_T = S_T/S_t = \exp \left( \int_t^T \left( -\frac{1}{2}\sigma_s^2 \right)\d s + \int_t^T \sigma_s \d W_s \right)
+        \end{align*}
+
+        Therefore, by Girsanov's theorem, \( \tilde{W}_t \) given by,
+        \begin{align*}
+            \d \tilde{W}_t = -\sigma_t \d t + \d W_t, && \tilde{W}_0 = 0
+        \end{align*}
+        is a Brownian motion under the tilde measure.
+        
+        Rewriting \( W_t \) in term sof \( \tilde{W}_t \) we find,
+        \begin{align*}
+%            S_t &= S_0 \exp \left( \int_{0}^{t} \left( -\frac{1}{2}\sigma_s^2 \right)\d s + \int_{0}^{t} \sigma_s \d W_s \right)
+ %           = S_0 \exp \left( \int_{0}^{t} \frac{1}{2}\sigma_s^2  \d s + \int_0^t \sigma_s \d \tilde{W}_s \right)
+  %          \\
+            Z_T &= \exp \left( \int_{t}^{T} \left( -\frac{1}{2}\sigma_s^2 \right)\d s + \int_{t}^{T} \sigma_s \d W_s \right)
+            = \exp \left( \int_{t}^{T} \frac{1}{2}\sigma_s^2 \d s + \int_{t}^{T} \sigma_s \d \tilde{W}_s \right)
+        \end{align*}
+
+        Now define,
+        \begin{align*}
+            \tilde{S}_T = S_t/Z_T &= S_t \exp \left( \int_{t}^{T} \left( -\frac{1}{2}\sigma_s^2 \right)\d s + \int_{t}^{T} \sigma_s \d (-\tilde{W}_s) \right)
+        \end{align*}
+       
+        Since \( -\tilde{W}_t \) is a Brownian motion under the tilde measure, \( \tilde{S}_T \) is distributed the same as \( S_T \) under their respective measures. 
+        Therefore,
+        \begin{align*}
+            \EE[(S_T/S_t) G(S_t^2/S_T) | \cF_t] 
+            &= \EE[Z_T G(S_t/Z_T) | \cF_t] 
+            \\&= \tilde{\EE}[ G(S_t/Z_t) | \cF_t] 
+            \\&= \tilde{\EE}[G(\tilde{S}_T) | \cF_t]
+            \\&= \EE[G(S_T)|\cF_t]
+        \end{align*}
+        
+                
+
+
+
 \end{enumerate}
 \end{solution}
 

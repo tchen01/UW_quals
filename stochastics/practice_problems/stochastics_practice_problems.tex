@@ -167,6 +167,37 @@ Describes times between events in a Poisson point process.
 \end{tabular}
 \end{center}
 
+\subsection{Normal}
+\begin{center}
+\def\arraystretch{1.5}
+\begin{tabular}{|r|l|} \hline
+    Parameters & \( \mu\in\RR, \sigma^2 > 0 \) \\ \hline
+    Support & \( (-\infty,\infty) \) \\ \hline
+    PDF & \( \frac{1}{\sqrt{2\pi \sigma^2} \exp \left( - \frac{(x-\mu)^2}{2\sigma^2} \right)} \) \\ \hline 
+    CDF & \( \frac{1}{2} \left( 1+\operatorname{erf} \left( \frac{x-\mu}{\sigma\sqrt{2}} \right) \right) \) \\ \hline
+    Mean & \( \mu \) \\ \hline
+    Variance & \( \sigma^2 \) \\ \hline
+    CF & \( \exp \left( i \mu t  - \sigma^2 t^2/2 \right) \)\\ \hline
+\end{tabular}
+\end{center}
+
+\subsection{Log Normal}
+The logarithm of a log normal random variable is normally distributed.
+\begin{center}
+\def\arraystretch{1.5}
+\begin{tabular}{|r|l|} \hline
+    Parameters & \( \mu\in\RR, \sigma^2 > 0 \) \\ \hline
+    Support & \( [0,\infty) \) \\ \hline
+    PDF & \( \frac{1}{x\sigma\sqrt{2\pi } \exp \left( - \frac{(\ln(x)-\mu)^2}{\sqrt{2}\sigma} \right)} \) \\ \hline 
+    CDF & \( \frac{1}{2} \left( 1+\operatorname{erf} \left( \frac{\ln(x)-\mu}{\sigma\sqrt{2}} \right) \right) \) \\ \hline
+    Mean & \( \exp(\mu + \sigma^2/2) \) \\ \hline
+    Variance & \( \left( \exp(\sigma^2)-1 \right)\exp(2\mu+\sigma^2) \) \\ \hline
+    CF & \( \sum_{n=0}^{\infty} \frac{(it)^n}{n!}\exp(n \mu +n^2\sigma^2/2) \)\\ \hline
+\end{tabular}
+\end{center}
+
+
+
 
 \pagebreak
 \section{Table of Random (COUNTING??????) Processes}
@@ -765,6 +796,7 @@ where \( \cA \) is the \hyperref[sec:infgen]{infinitesimal generator} of \( X \)
 \end{align*}
 
 \textit{Statistics}:
+The solution is a log normally distributed random variable
 \note{WHAT DO WE KNOW IF MU AND SIGMA ARE NOT CONSTANT???}
 \begin{align*}
     \EE[X_t] = X_0 e^{\mu t} 
@@ -869,6 +901,55 @@ This was solved in \hyperref[Exercise 8.2]{Exercise 8.2}.
 %%%%%%%%%%%%%%%%%%%%%
 \pagebreak
 \section{Jump Diffusions}
+
+\subsection{Poisson Random Measure, L\'evy Measure, and Compensated Poisson Random Measure}
+
+The process \( (N(t,U))_{t\geq 0} \) is a Poisson process with intensity \( \nu(U) \).
+
+\textit{Sample Problems}:
+\begin{itemize}[nolistsep]
+    \item \hyperref[Exercise 10.1]{Exercise 10.1}: Compute L'evy measure of Poisson process
+\end{itemize}
+
+
+
+\subsection{L\'evy--Kintchine Formula}
+This gives us the characteristic function 
+Let,
+\begin{align*}
+    eta_t = 
+\end{align*}
+
+\subsection{L\'evy It\^o Formula}
+\begin{align*}
+    \d X_t = \mu_t \d t + \sigma_t\d W_t + \int_\RR \gamma_{t^-}(z) \tilde{N}(\d t,\d z) 
+\end{align*}
+
+
+\begin{align*}
+    \d f(X_t) = \left( \mu_t f'(X_t) + \frac{1}{2} \sigma_t^2 f''(X_t) \right) \d t + \sigma_t f'(X_t) \d W_t
+    + \int_\RR \left( f(X_{t^-}+\gamma_t(z)) - f(X_{t^-}) \right) \tilde{N}(\d t, \d z)
+    + \int_\RR \left( f(X_{t^-}+\gamma_t(z)) - f(X_{t^-}) - \gamma_t(z) f'(X_t) \right)\nu(\d z)\d t
+\end{align*}
+
+\textit{Sample Problems}:
+\begin{itemize}[nolistsep]
+    \item \hyperref[Exercise 10.3]{Exercise 10.3}: Compute differential given processes.
+    \item \hyperref[Exercise 10.3]{Exercise 10.3}: Find explicit solution for OU like process
+    \item \hyperref[Exercise 10.5]{Exercise 10.5}: Compute infinitesimal generator \( \cA(t) \) for a process.
+\end{itemize}
+
+
+
+
+\subsection{SDEs and PDEs}
+
+
+\textit{Sample Problems}:
+\begin{itemize}[nolistsep]
+    \item \hyperref[Exercise 10.1]{Exercise 10.1}: Show \( u(x,t) = \EE[\varphi(X_T)|X_t=x] \) satisfies KBE.
+    \item \hyperref[Exercise 10.5]{Exercise 10.5}: Compute infinitesimal generator \( \cA(t) \) for a process.
+\end{itemize}
 
 
 

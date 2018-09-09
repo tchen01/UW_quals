@@ -1,0 +1,373 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     13717,        365]
+NotebookOptionsPosition[     11575,        332]
+NotebookOutlinePosition[     11912,        347]
+CellTagsIndexPosition[     11869,        344]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[TextData[StyleBox["Stability Analysis for Lax-Wendroff Method", \
+"Title"]], "Text",
+ CellChangeTimes->{{3.745520378348177*^9, 
+  3.745520387548169*^9}},ExpressionUUID->"9cc8b25a-6c40-4210-865d-\
+0ad9759aa221"],
+
+Cell[TextData[StyleBox["Add assumptions for advection equation", \
+"Subsubsection"]], "Text",
+ CellChangeTimes->{{3.745517994113615*^9, 
+  3.7455180022630663`*^9}},ExpressionUUID->"124cc5e7-0757-4a26-b97d-\
+83975750c979"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"adv", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"D", "[", 
+      RowBox[{
+       RowBox[{"u", "[", 
+        RowBox[{"t", ",", "x"}], "]"}], ",", "t"}], "]"}], "+", 
+     RowBox[{"a", " ", 
+      RowBox[{"D", "[", 
+       RowBox[{
+        RowBox[{"u", "[", 
+         RowBox[{"t", ",", "x"}], "]"}], ",", "x"}], "]"}]}]}], "\[Equal]", 
+    "0"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"asm", "=", 
+   RowBox[{"{", 
+    RowBox[{"adv", ",", 
+     RowBox[{"D", "[", 
+      RowBox[{"adv", ",", "x"}], "]"}], ",", 
+     RowBox[{"D", "[", 
+      RowBox[{"adv", ",", "t"}], "]"}]}], "}"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.7455118862330847`*^9, 3.7455120904523373`*^9}, 
+   3.7455121433208857`*^9, {3.745512347229171*^9, 3.7455123512592783`*^9}, {
+   3.745512403617414*^9, 3.7455124417095137`*^9}, 3.745512524918468*^9, {
+   3.7455128721135883`*^9, 3.745512893298196*^9}, 3.745513201517763*^9, 
+   3.745517983024167*^9, {3.745520289193606*^9, 3.745520352617285*^9}},
+ CellLabel->"In[98]:=",ExpressionUUID->"e873eece-483e-4774-90fb-fffa9de806ab"],
+
+Cell[TextData[StyleBox["Define expansion of u(t + n k, x + j h) about  u(t,x) \
+to third order ", "Subsubsection"]], "Text",
+ CellChangeTimes->{{3.745518045598117*^9, 3.745518092800002*^9}, {
+  3.745520702398939*^9, 
+  3.7455207185346823`*^9}},ExpressionUUID->"3b5eff3d-b491-4d7a-a3b5-\
+3dd84924dfc1"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"U", "[", 
+   RowBox[{"n_", ",", "j_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"Normal", "[", 
+    RowBox[{"Series", "[", 
+     RowBox[{
+      RowBox[{"u", "[", 
+       RowBox[{
+        RowBox[{"t", "+", 
+         RowBox[{"n", " ", "k", " ", "z"}]}], ",", 
+        RowBox[{"x", " ", "+", 
+         RowBox[{"j", " ", "h", " ", "z"}]}]}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"z", ",", "0", ",", "3"}], "}"}]}], "]"}], "]"}], "/.", 
+   RowBox[{"{", 
+    RowBox[{"z", "\[Rule]", "1"}], "}"}]}]}]], "Input",
+ CellChangeTimes->{{3.7455121862715693`*^9, 3.745512228730893*^9}, 
+   3.745512461078586*^9},
+ CellLabel->
+  "In[100]:=",ExpressionUUID->"886f6d79-a73c-4031-8985-bcbcf5065e72"],
+
+Cell[TextData[StyleBox["Compute LTE", "Subsubsection"]], "Text",
+ CellChangeTimes->{{3.745518097743648*^9, 3.745518099973465*^9}, 
+   3.745520722215375*^9},ExpressionUUID->"11f5b2e7-73d4-40dc-971a-\
+47c870ddc1f9"],
+
+Cell[BoxData[
+ RowBox[{"FullSimplify", "[", 
+  RowBox[{
+   RowBox[{
+    FractionBox[
+     RowBox[{
+      RowBox[{"U", "[", 
+       RowBox[{"1", ",", "0"}], "]"}], "-", 
+      RowBox[{"U", "[", 
+       RowBox[{"0", ",", "0"}], "]"}]}], "k"], "+", 
+    RowBox[{"a", 
+     FractionBox[
+      RowBox[{
+       RowBox[{"U", "[", 
+        RowBox[{"0", ",", "1"}], "]"}], "-", 
+       RowBox[{"U", "[", 
+        RowBox[{"0", ",", 
+         RowBox[{"-", "1"}]}], "]"}]}], 
+      RowBox[{"2", "h"}]]}], "-", 
+    RowBox[{
+     FractionBox[
+      RowBox[{
+       SuperscriptBox["a", "2"], "k"}], "2"], " ", 
+     FractionBox[
+      RowBox[{
+       RowBox[{"U", "[", 
+        RowBox[{"0", ",", 
+         RowBox[{"-", "1"}]}], "]"}], "-", 
+       RowBox[{"2", 
+        RowBox[{"U", "[", 
+         RowBox[{"0", ",", "0"}], "]"}]}], "+", 
+       RowBox[{"U", "[", 
+        RowBox[{"0", ",", "1"}], "]"}]}], 
+      SuperscriptBox["h", "2"]]}]}], ",", 
+   RowBox[{"Assumptions", "\[Rule]", "asm"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.745512234710697*^9, 3.7455123115343313`*^9}, {
+  3.745517912304037*^9, 3.745517942812821*^9}},
+ CellLabel->
+  "In[101]:=",ExpressionUUID->"e84e07c1-87c3-40a9-879c-3d1385f8948d"],
+
+Cell[TextData[StyleBox["Redefine U for Von Neumann Analysis", \
+"Subsubsection"]], "Text",
+ CellChangeTimes->{{3.745518127524582*^9, 
+  3.7455181330398207`*^9}},ExpressionUUID->"4194f1d1-725b-4e30-9e0f-\
+7c431b1e5f8e"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"U", "[", 
+   RowBox[{"n_", ",", "j_"}], "]"}], ":=", 
+  RowBox[{
+   SuperscriptBox[
+    RowBox[{"g", "[", "\[Xi]", "]"}], "n"], 
+   RowBox[{"Exp", "[", 
+    RowBox[{"I", " ", "\[Xi]", " ", "j", " ", "h"}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.745515393769623*^9, 3.745515395111849*^9}, {
+  3.7455156034545*^9, 3.745515653644346*^9}, {3.745523763420679*^9, 
+  3.7455237658797007`*^9}},
+ CellLabel->
+  "In[102]:=",ExpressionUUID->"2d21d6a0-b513-4eea-8f3f-6516ec0eedcd"],
+
+Cell[TextData[StyleBox["Solve for g[\[Xi]] in terms of ak/h and h\[Xi]", \
+"Subsubsection"]], "Text",
+ CellChangeTimes->{{3.7455186970979347`*^9, 
+  3.745518721593956*^9}},ExpressionUUID->"a73d50ed-700d-403c-a7c7-\
+ce0b99f3e881"],
+
+Cell[BoxData[
+ RowBox[{"gxi", "=", 
+  RowBox[{"FullSimplify", "[", 
+   RowBox[{"Solve", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"U", "[", 
+       RowBox[{"1", ",", "0"}], "]"}], "==", 
+      RowBox[{
+       RowBox[{"U", "[", 
+        RowBox[{"0", ",", "0"}], "]"}], "-", 
+       RowBox[{"a", " ", "k", 
+        FractionBox[
+         RowBox[{
+          RowBox[{"U", "[", 
+           RowBox[{"0", ",", "1"}], "]"}], "-", 
+          RowBox[{"U", "[", 
+           RowBox[{"0", ",", 
+            RowBox[{"-", "1"}]}], "]"}]}], 
+         RowBox[{"2", "h"}]]}], "+", 
+       RowBox[{
+        FractionBox[
+         RowBox[{
+          SuperscriptBox["a", "2"], 
+          SuperscriptBox["k", "2"]}], "2"], " ", 
+        FractionBox[
+         RowBox[{
+          RowBox[{"U", "[", 
+           RowBox[{"0", ",", 
+            RowBox[{"-", "1"}]}], "]"}], "-", 
+          RowBox[{"2", 
+           RowBox[{"U", "[", 
+            RowBox[{"0", ",", "0"}], "]"}]}], "+", 
+          RowBox[{"U", "[", 
+           RowBox[{"0", ",", "1"}], "]"}]}], 
+         SuperscriptBox["h", "2"]]}]}]}], ",", 
+     RowBox[{"g", "[", "\[Xi]", "]"}]}], "]"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.7455151622292547`*^9, 3.745515262975788*^9}, {
+   3.745515378980187*^9, 3.745515455013145*^9}, {3.745515598115634*^9, 
+   3.745515600790668*^9}, {3.745518155761668*^9, 3.74551817653584*^9}, {
+   3.7455182371235933`*^9, 3.745518295149042*^9}, {3.74551834163098*^9, 
+   3.7455183882760143`*^9}, {3.7455186000816936`*^9, 3.7455186009979973`*^9}, 
+   3.745520740460917*^9},
+ CellLabel->
+  "In[103]:=",ExpressionUUID->"6347e1a8-cf17-4480-a4f4-2f1ccef83f59"],
+
+Cell["\<\
+Expand in more convenient form to write a nice expression for g[\[Xi]]\
+\>", "Text",
+ CellChangeTimes->{{3.745520767188513*^9, 
+  3.745520790461605*^9}},ExpressionUUID->"cecb955c-6802-428f-ba9e-\
+58e7683947fd"],
+
+Cell[BoxData[
+ RowBox[{"ExpandAll", "[", "gxi", "]"}]], "Input",
+ CellChangeTimes->{{3.745520754216359*^9, 3.745520759326172*^9}},
+ CellLabel->
+  "In[104]:=",ExpressionUUID->"e467b0fc-6289-49b4-a6ad-ddf18f8f2c57"],
+
+Cell[TextData[StyleBox["Replace ak/h with \[Nu] and h\[Xi] with continuous \
+parameter t", "Subsubsection"]], "Text",
+ CellChangeTimes->{{3.745518726673471*^9, 
+  3.745518743919647*^9}},ExpressionUUID->"d0a1a71d-476f-4163-b498-\
+fdc393a5f3b5"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"g", "[", 
+   RowBox[{"\[Nu]_", ",", "t_"}], "]"}], ":=", 
+  RowBox[{"ReplaceRepeated", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"g", "[", "\[Xi]", "]"}], "/.", 
+     RowBox[{"gxi", "[", 
+      RowBox[{"[", "1", "]"}], "]"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"a", "\[Rule]", 
+       FractionBox[
+        RowBox[{"h", " ", "\[Nu]"}], "k"]}], ",", 
+      RowBox[{
+       RowBox[{"h", " ", "\[Xi]"}], "\[Rule]", "t"}]}], "}"}]}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.745518488470684*^9, 3.745518665732057*^9}, {
+   3.7455193958657837`*^9, 3.7455193963985786`*^9}, 3.745519618190837*^9, {
+   3.7455198185704937`*^9, 3.745519844822822*^9}},
+ CellLabel->
+  "In[105]:=",ExpressionUUID->"6d3aa8c2-76de-424c-9223-0fdfcae9644d"],
+
+Cell[TextData[StyleBox["Plot Value of g[\[Xi]] on complex plane for various \
+\[Nu].", "Subsubsection"]], "Text",
+ CellChangeTimes->{{3.745519631929099*^9, 3.7455196511368237`*^9}, 
+   3.745520136258326*^9},ExpressionUUID->"fbab6720-d7d4-4fa4-b97b-\
+9ac23f94d7a9"],
+
+Cell[TextData[{
+ "This can help to quickly get some intuition for what values of \[Nu] will \
+have |g[\[Xi]]|\[LessEqual]1. For instance, in this case it is clear that we \
+need ",
+ StyleBox["-1<\[Nu]<1", "InlineFormula"]
+}], "Text",
+ CellChangeTimes->{{3.745520202359303*^9, 3.74552025560668*^9}, 
+   3.7455204336385202`*^9},ExpressionUUID->"3df73d7c-2c49-42f0-8c52-\
+d3277fbdf903"],
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"ParametricPlot", "[", 
+    RowBox[{
+     RowBox[{"ReIm", "[", 
+      RowBox[{"g", "[", 
+       RowBox[{"\[Nu]", ",", "t"}], "]"}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"t", ",", "0", ",", 
+       RowBox[{"2", "\[Pi]"}]}], "}"}], ",", 
+     RowBox[{"PlotRange", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "1"}], ",", "1"}], "}"}]}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\[Nu]", ",", 
+     RowBox[{"-", "2"}], ",", "2"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.745514589342226*^9, 3.745514672060748*^9}, {
+  3.745514719936387*^9, 3.7455147416910143`*^9}, {3.7455186707289667`*^9, 
+  3.745518676283761*^9}, {3.745520630076041*^9, 3.745520633112764*^9}},
+ CellLabel->
+  "In[106]:=",ExpressionUUID->"2ca08d56-fe24-4a22-9f5a-12c094c3772b"],
+
+Cell[TextData[StyleBox["Check that |g[\[Xi]]| \[LessEqual] 1 if |\[Nu]|\
+\[LessEqual]1", "Subsubsection"]], "Text",
+ CellChangeTimes->{{3.74551998143538*^9, 3.745520023267295*^9}, {
+  3.745520095818103*^9, 3.745520132970769*^9}, {3.745520241094863*^9, 
+  3.745520241267983*^9}},ExpressionUUID->"f6d74a70-0afc-4ab2-8c4e-\
+86e1ef612d5a"],
+
+Cell["\<\
+If this is true for all t\[Element][0,2\[Pi]), then it is certainly true for \
+h\[Xi]\
+\>", "Text",
+ CellChangeTimes->{{3.74552043847532*^9, 
+  3.745520470530774*^9}},ExpressionUUID->"f0cb6fb0-84d4-48ea-832d-\
+9584ab0bd7ed"],
+
+Cell[BoxData[
+ RowBox[{"FullSimplify", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"Conjugate", "[", 
+      RowBox[{"g", "[", 
+       RowBox[{"\[Nu]", ",", "t"}], "]"}], "]"}], 
+     RowBox[{"g", "[", 
+      RowBox[{"\[Nu]", ",", "t"}], "]"}]}], "\[LessEqual]", "1"}], ",", 
+   RowBox[{"Assumptions", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"0", "\[LessEqual]", "t", "\[LessEqual]", 
+       RowBox[{"2", "\[Pi]"}]}], ",", 
+      RowBox[{
+       RowBox[{"-", "1"}], "\[LessEqual]", "\[Nu]", "\[LessEqual]", "1"}]}], 
+     "}"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.74551966587675*^9, 3.7455197286309547`*^9}, {
+  3.745519788827004*^9, 3.745519837989929*^9}, {3.7455200090411367`*^9, 
+  3.745520009179797*^9}, {3.745520105358136*^9, 3.7455201130902042`*^9}},
+ CellLabel->
+  "In[107]:=",ExpressionUUID->"b750e2cd-07c9-461f-bb0d-eee663f88970"]
+},
+WindowSize->{1139, 911},
+WindowMargins->{{Automatic, 925}, {275, Automatic}},
+FrontEndVersion->"11.3 for Linux x86 (64-bit) (March 6, 2018)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 215, 4, 74, "Text",ExpressionUUID->"9cc8b25a-6c40-4210-865d-0ad9759aa221"],
+Cell[776, 26, 221, 4, 42, "Text",ExpressionUUID->"124cc5e7-0757-4a26-b97d-83975750c979"],
+Cell[1000, 32, 1098, 28, 57, "Input",ExpressionUUID->"e873eece-483e-4774-90fb-fffa9de806ab"],
+Cell[2101, 62, 301, 5, 42, "Text",ExpressionUUID->"3b5eff3d-b491-4d7a-a3b5-3dd84924dfc1"],
+Cell[2405, 69, 723, 21, 32, "Input",ExpressionUUID->"886f6d79-a73c-4031-8985-bcbcf5065e72"],
+Cell[3131, 92, 213, 3, 42, "Text",ExpressionUUID->"11f5b2e7-73d4-40dc-971a-47c870ddc1f9"],
+Cell[3347, 97, 1200, 38, 64, "Input",ExpressionUUID->"e84e07c1-87c3-40a9-879c-3d1385f8948d"],
+Cell[4550, 137, 218, 4, 42, "Text",ExpressionUUID->"4194f1d1-725b-4e30-9e0f-7c431b1e5f8e"],
+Cell[4771, 143, 508, 13, 32, "Input",ExpressionUUID->"2d21d6a0-b513-4eea-8f3f-6516ec0eedcd"],
+Cell[5282, 158, 229, 4, 42, "Text",ExpressionUUID->"a73d50ed-700d-403c-a7c7-ce0b99f3e881"],
+Cell[5514, 164, 1625, 44, 64, "Input",ExpressionUUID->"6347e1a8-cf17-4480-a4f4-2f1ccef83f59"],
+Cell[7142, 210, 220, 5, 37, "Text",ExpressionUUID->"cecb955c-6802-428f-ba9e-58e7683947fd"],
+Cell[7365, 217, 213, 4, 32, "Input",ExpressionUUID->"e467b0fc-6289-49b4-a6ad-ddf18f8f2c57"],
+Cell[7581, 223, 243, 4, 42, "Text",ExpressionUUID->"d0a1a71d-476f-4163-b498-fdc393a5f3b5"],
+Cell[7827, 229, 784, 22, 57, "Input",ExpressionUUID->"6d3aa8c2-76de-424c-9223-0fdfcae9644d"],
+Cell[8614, 253, 264, 4, 42, "Text",ExpressionUUID->"fbab6720-d7d4-4fa4-b97b-9ac23f94d7a9"],
+Cell[8881, 259, 383, 8, 37, "Text",ExpressionUUID->"3df73d7c-2c49-42f0-8c52-d3277fbdf903"],
+Cell[9267, 269, 851, 22, 32, "Input",ExpressionUUID->"2ca08d56-fe24-4a22-9f5a-12c094c3772b"],
+Cell[10121, 293, 335, 5, 42, "Text",ExpressionUUID->"f6d74a70-0afc-4ab2-8c4e-86e1ef612d5a"],
+Cell[10459, 300, 234, 6, 37, "Text",ExpressionUUID->"f0cb6fb0-84d4-48ea-832d-9584ab0bd7ed"],
+Cell[10696, 308, 875, 22, 32, "Input",ExpressionUUID->"b750e2cd-07c9-461f-bb0d-eee663f88970"]
+}
+]
+*)
+
