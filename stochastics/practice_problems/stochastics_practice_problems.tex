@@ -582,22 +582,6 @@ This has mean,
 \end{itemize}
 
 
-\subsubsection{Geometric Brownian Motion}
-
-\subsubsection{Ornstein--Uhlenbeck (OU) process}
-\textit{SDE}:
-\begin{align*}
-    \d X_t = \kappa(\theta-X_t)\d t + \sigma \d W_t
-\end{align*}
-
-\textit{Solution}:
-\begin{align*}
-    X_t = \theta + e^{-\kappa t}(X_0-\theta) + \int_0^t e^{-\kappa(t-s)}\sigma \d W_s
-\end{align*}
-
-\textit{Transition Density}:
-\note{TODO}
-
 
 \note{ALSO ADD DIFFERENT BOUNDARY CONDITIONS}
 
@@ -636,7 +620,7 @@ Let \( X = (X_t)_{t\geq 0} \) be the solution of an SDE of the form,
     \d X_t = \mu(t,X_t)\d t + \sigma(t,X_t)\d W_t
 \end{align*}
 where \( \mu:\RR_+\times\RR \to\RR^d  \) and \( \sigma:\RR_+\times\RR \to \RR^{d\times d} \).
-For some suitible function \( \varphi \), define,
+For some suitable function \( \varphi \), define,
 \begin{align*}
     u(t,X_t):= \EE[\varphi(X_T)|\cF_t]
 \end{align*}
@@ -666,7 +650,7 @@ If \( m \) is normalizable then \( m \) is a time-homogeneous solution to the KF
 
 \subsubsection{Computing Solution to KBE for 1d Time Homogeneous Process}
 \begin{enumerate}[nolistsep]
-    \item Write down infinitesimal generatorea\( \cA \)
+    \item Write down infinitesimal generator \( \cA \)
     \item Write down speed density \( m(x) \)
     \item Find complete set of eigenfunctions, \( \{ \psi_n \} \) of \( \cA \) satisfying, \( \cA \psi_n = \lambda_n\psi_n \)
     \item Normalize eigenvectors wrt. \( m \) so that \( \ip{\psi_n,\psi_n}_m = 1 \).
@@ -766,6 +750,82 @@ where \( \cA \) is the \hyperref[sec:infgen]{infinitesimal generator} of \( X \)
 
 
 \note{ADD ASSOCIATED PDEs}
+
+\subsection{Table of Known Transition Densities}
+\subsubsection{Brownian Motion}
+\textit{SDE}:
+\begin{align*}
+    \d X_t = \sigma \d W_t, && X_t\in(l,r)
+\end{align*}
+
+\textit{PDE}:
+\begin{align*}
+    (\partial_t + \cA) \Gamma(t,x;T,y) = 0,&& \cA = \frac{1}{2}\sigma^2 \partial_x^2 ,&& \Gamma(T,x;T,y) = \delta_y(x)
+\end{align*}
+
+\textit{Eigenfunctions}:
+\begin{align*}
+    \text{killing:} &&  \sin \left( n \pi \left( \frac{x-l}{r-l} \right) \right)\\
+    \text{reflecting:} &&  \cos \left( n \pi \left( \frac{x-l}{r-l} \right) \right)
+\end{align*}
+
+\textit{Eigenvalues}:
+\begin{align*}
+    - \frac{1}{2} \frac{\sigma^2 n^2 \pi^2}{(r-l)^2}
+\end{align*}
+
+
+\subsubsection{Constant Coefficient}
+\textit{SDE}:
+\begin{align*}
+    \d X_t = \mu \d t + \sigma \d W_t
+\end{align*}
+
+\textit{PDE}:
+\begin{align*}
+    (\partial_t + \cA) \Gamma(t,x;T,y) = 0,&& \cA = \mu \partial_x + \frac{1}{2}\sigma^2 \partial_x^2 ,&& \Gamma(T,x;T,y) = \delta_y(x)
+\end{align*}
+
+\textit{Eigenfunctions}:
+\begin{align*}
+    ?
+\end{align*}
+
+\textit{Eigenvalues}:
+\begin{align*}
+    ?
+\end{align*}
+
+
+\subsection{Table of Known Solutions to SDEs}
+\subsubsection{Geometric Brownian Motion}
+\textit{SDE}:
+\begin{align*}
+    \d X_t = \mu(t) \d t + \sigma(t) X_t \d W_t
+\end{align*}
+
+\textit{Solution}:
+\begin{align*}
+    X_T = X_t  \exp\left( \int_t^T \left( \mu(s) - \frac{1}{2}\sigma^2(s)\right)\d s + \int_t^T\sigma(s)\d W_s \right)
+\end{align*}
+
+
+\subsubsection{Ornstein--Uhlenbeck (OU) process}
+\textit{SDE}:
+\begin{align*}
+    \d X_t = \kappa(\theta-X_t)\d t + \sigma \d W_t
+\end{align*}
+
+\textit{Solution}:
+\begin{align*}
+    X_t = \theta + e^{-\kappa t}(X_0-\theta) + \int_0^t e^{-\kappa(t-s)}\sigma \d W_s
+\end{align*}
+
+\textit{Mean}:
+
+
+\textit{Transition Density}:
+\note{TODO}
 
 
 
