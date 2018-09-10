@@ -2049,13 +2049,12 @@ Consider the advection equation \( u_t + au_x = 0 \) with periodic bounday condi
         \begin{align*}
             \dd{}{t}\left[\begin{array}{c}U_1\\U_2 \\ \vdots \\ U_n\end{array}\right]
             = -\frac{a}{h}\left[\begin{array}{cccc}
-            1 & \\
+                1 & & & -1 \\
             -1 & 1 \\
             & \ddots & \ddots \\
-            & & -1 & 1\end{array}\right]
+            & & -1 & 1
+            \end{array}\right]
             \left[\begin{array}{c}U_1\\U_2 \\ \vdots \\ U_n\end{array}\right]
-            +
-            \left[\begin{array}{c}a/h \\ 0 \\ \vdots \\ 0\end{array}\right]
         \end{align*}
         
     \item Since forward Euler is first order in time, and our backward difference is first order in space the method is first order accurate in time and space. 
