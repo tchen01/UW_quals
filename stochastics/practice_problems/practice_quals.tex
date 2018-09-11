@@ -1123,8 +1123,47 @@ A bakery uses a two-step process to make chocolate cakes. The first step involve
 
 \begin{solution}[Solution]
 \begin{enumerate}[label=(\alph*)]
-    \item 
-    \item 
+    \item Note that there will never be 2 cakes in the system since cakes only arrive if there are no cackes in the oven or froster.
+
+        Then let \( S = \{\text{no cakes}, \text{cake in oven}, \text{cake in froster}\} \) be the state space.
+
+    \item
+
+        Our picture is a cycle,
+        \begin{align*}
+            \text{no cakes} &\rightarrow \text{cake in oven}
+            \\
+            \text{cake in oven} &\rightarrow \text{cake in froster} 
+            \\
+            \text{cake in froster} &\rightarrow \text{no cakes}
+        \end{align*} 
+
+        We have generator,
+        \begin{align*}
+            G = \left[\begin{array}{rrr}-\lambda & \lambda \\ & - \mu_1 & \mu_1 \\ \mu_2 & & -\mu_2\end{array}\right]
+        \end{align*}
+
+    \item
+        Solving \( \pi G = 0 \) subject to \( \norm{\pi}_\infty = 1 \) gives,
+        \begin{align*}
+            \pi = \frac{1}{ \mu_1\mu_2 + \lambda(\mu_1+\mu_2)} [\mu_1\mu_2, \lambda \mu_2, \lambda \mu_2]
+        \end{align*}
+        
+    \item The chain is irreducible so the stationary distribution above is unique. 
+
+        The expected number of cakes in this distribution is \( 0 \cdot \pi(0) + 1 \cdot \pi(2) + 1 \cdot \pi(3) \). Expliciltly,
+        \begin{align*}
+            \frac{\lambda (\mu_1+\mu_2)}{\mu_1\mu_2 + \lambda(\mu_1+\mu_2)}
+        \end{align*}
+
+        As \( \lambda\to \infty \) the expected number of cakes becomes one (cakes arrive immediatley). Similarly, if \( \lambda \to 0 \), the expected number of cakes becomes 0 (cakes never arrive). 
+
+        If \( \mu_1\to 0 \) or \( \mu_2\to 0 \), the expected number of cakes becaomes one (cakes always in oven or always in froster). 
+        
+        If \( \mu_1,\mu_2\to\infty \), the expected number of cakes becomes 0 (really quickly making cakes).
+
+        Therefore, our result matches our intuition for these limiting cases.
+
 \end{enumerate}
 \end{solution}
 
@@ -1142,10 +1181,37 @@ A bakery uses a two-step process to make chocolate cakes. The first step involve
 \end{problem}
 
 \begin{solution}[Solution]
-\begin{enumerate}[label=(\alph*)]
-    \item 
-    \item 
-\end{enumerate}
+
+    In Theorem 9.4.1 Take \( t=0 \), \( \varphi=1 \), and \( g = 0 \). Then for \( x\in(a,b) \), \( L \) satisfies,
+    \begin{align*}
+        (\cA - \lambda) L = 0, && \cA = \mu \partial_ + \frac{1}{2}\sigma^2\partial_x^2
+    \end{align*}
+    and on the boundary,
+    \begin{align*}
+        L(a,\lambda) = L(b,\lambda) = 1
+    \end{align*}
+    
+
+This has general form,
+\begin{align*}
+    L(x,\lambda) = C e^{x z_1} + D e^{x z_2}
+\end{align*}
+where,
+\begin{align*}
+    z_1 = \frac{-\mu - \sqrt{\mu^2+2\lambda \sigma^2}}{\sigma^2}
+    ,&&
+    z_2 = \frac{-\mu + \sqrt{\mu^2+2\lambda \sigma^2}}{\sigma^2}
+\end{align*}
+
+We solve for \( C \) and \( D \) using the boundary conditions and find,
+\begin{align*}
+    C = \frac{e^{a z_2} - e^{b z_2}}{e^{bz_1+az_2}-e^{az_1+bz_2}}
+    ,&&
+    D = \frac{e^{a z_1} - e^{b z_1}}{e^{az_1+bz_2}-e^{bz_1+az_2}}
+\end{align*}
+
+
+
 \end{solution}
 
 

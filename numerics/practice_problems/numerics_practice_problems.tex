@@ -3616,32 +3616,32 @@ Minimizing \( \norm{A-Q}_F \) means we want to ``cancel off'' as much of the str
 
 
     
-Since the Frobenius norm is unitarily invariant, calling \( Q' = U^TQV \) we have,
+    Since the Frobenius norm is unitarily invariant, calling \( \tilde{Q} = U^TQV \) we have,
 \begin{align*}
-    \norm{A-Q}_F = \norm{U(\Sigma-U^TQV)V^T}_F = \norm{\Sigma-Q'}_F 
+    \norm{A-Q}_F = \norm{U(\Sigma-U^TQV)V^T}_F = \norm{\Sigma-\tilde{Q}}_F 
 \end{align*}
 
-Note that if we can solve the new minimization problem for some unitary \( Q' \) then we can obtain \( Q = UQ'V^T \), the solution to the original problem.
+    Note that if we can solve the new minimization problem for some unitary \( \tilde{Q} \) then we can obtain \( Q = U\tilde{Q}V^T \), the solution to the original problem.
 
 We therefore look to solve,
 \begin{align*}
-    \arg\min_{Q^TQ=I} \norm{\Sigma-Q}_F^2 = \sum_{i=1}^{n} (\sigma_i - q_{i,i})^2 + \sum_{i=1}^{n} \sum_{j\neq i} q_{i,j}^2 
-    = \sum_{i=1}^{n} \sigma_i^2 -2\sigma q_{i,i} + \sum_{i=1}^{n}\sum_{j=1}^n q_{i,j}^2
+    \arg\min_{\tilde{Q}^T\tilde{Q}=I} \norm{\Sigma-\tilde{Q}}_F^2 = \sum_{i=1}^{n} (\sigma_i - \tilde{q}_{i,i})^2 + \sum_{i=1}^{n} \sum_{j\neq i} \tilde{q}_{i,j}^2 
+    = \sum_{i=1}^{n} \sigma_i^2 -2\sigma \tilde{q}_{i,i} + \sum_{i=1}^{n}\sum_{j=1}^n \tilde{q}_{i,j}^2
 \end{align*}
 
 Now note that,
 \begin{align*}
-    \sum_{i=1}^{n} \sum_{j=1}^{n} q_{i,j}^2 = \norm{Q}_F^2 = n
+    \sum_{i=1}^{n} \sum_{j=1}^{n} \tilde{q}_{i,j}^2 = \norm{\tilde{Q}}_F^2 = n
 \end{align*}
 
-Therefore we seek \( q_{i,i} \) minimizing,
+Therefore we seek \( \tilde{q}_{i,i} \) minimizing,
 \begin{align*}
-    \sum_{i=1}^{n} \sigma_i^2 - 2\sigma_i q_i
+    \sum_{i=1}^{n} \sigma_i^2 - 2\sigma_i \tilde{q}_i
 \end{align*}
 
-Since \( Q \) is unitary, \( |q_{i,j}| \leq 1 \). Therefore, since \( \sigma_i \geq 0 \), we pick \( q_{i,i} = 1 \) to minimize the above sum. This forces \( q_{i,j} = 0 \) for all \( i\neq j \).
+    Since \( \tilde{Q} \) is unitary, \( |\tilde{q}_{i,j}| \leq 1 \). Therefore, since \( \sigma_i \geq 0 \), we pick \( \tilde{q}_{i,i} = 1 \) to minimize the above sum. This forces \( \tilde{q}_{i,j} = 0 \) for all \( i\neq j \).
 
-Therefore \( Q = I \) minimizes \( \norm{\Sigma-Q}_F \). Returning to the original notation, \( Q = UQ'V^T = UIV^T = UV^T \) minimizes the original problem.
+    Therefore \( \tilde{Q} = I \) minimizes \( \norm{\Sigma-\tilde{Q}}_F \). Then \( Q = U\tilde{Q}V^T = UIV^T = UV^T \) minimizes the original problem.
 
 The uniequness of the nearest orthogonal matrix is the same as the uniquness of \( UV^T \). In particular, this means that if all the singular values are distinct then the solution is unique. If there are repeat singular values, then we can move around the columns of \( U \) and \( V \) a bit, and so the solution may not be unique.
 
@@ -3668,6 +3668,11 @@ Let \( A \) denote a real sequence with \( m \) rows.
     \item
     \item 
     \item Derive another expression for the matrix exponential by applying the forward Euler method to the equation \( y'(t) = Ay\), \(y(0) = y_0 \), whose solution at time \( t = 1 \) is \( y(1) = e^Ay_0\). That is, using step size \( h = 1/N\), write the approximate solution \( y_N \) as an \(N\)-th degree polynomial in \( A \) times the initial vector \( y0 \) and show that as \( N \to \infty \), \( y_N \to e^Ay_0 \).
+    \item Suppose the 2-step method,
+        \begin{align*}
+            y_{n+2} = y_{n+1} + \frac{k}{2}(3Ay_{n+1}-Ay_n)
+        \end{align*}
+            with step size \( k \) is applied to the equation \( y'(t) = A y \), \( y(0) = y_0 \). Determine if the method is convergent and find the order of accuracy and the leading term in the local truncaiton error.
 \end{enumerate}
 \end{problem}
 
@@ -3709,7 +3714,24 @@ Consider the family of 2-stage Runge-Kutta methods of the form
 
 \begin{solution}[Solution]
 \begin{enumerate}[label=(\alph*)]
-    \item This is a Runge-Kutta method of the form,
+    \item 
+        Note that,
+        \begin{align*}
+            Y_1 = U^n + \cO(k)
+        \end{align*}
+        
+        Making the substitution \( f(u(t)) = u'(t) \), the local truncation error for the method is,
+        \begin{align*}
+            \frac{u(t+h)-u(t)}{k} - \gamma f(u(t)+\cO(k)) = u'(t) + \cO(k) - \gamma u'(t) + \cO(k)
+        \end{align*}
+        
+        Therefore, the method is consistent when \( \gamma = 1 + \cO(k) \).
+
+        \hrulefill
+
+        \note{alternate method}
+        
+        This is a Runge-Kutta method of the form,
         \begin{align*}
             U^{n+1} = U^n + k \sum_{j=1}^{r}b_j f(Y_j)
             ,&&
@@ -3780,11 +3802,60 @@ Consider the family of 2-stage Runge-Kutta methods of the form
 
     \item Clearly if the ODE is stiff we want to pick \( \beta \neq 0 \) so that the method is implicit. If the ODE is simple I would use backward Euler for simplicity. Otherwise, chosing \( \alpha = \beta = 1/2 \) means the first equation is the midpoint method, and then the seconde quation is forward Euler applied to that. That might be decent since the midpoint method is decent. If the ODE is really simple, then we can take \( \beta = 0 \) and get an explicit method so we do not need to use root finders.
         
-
-
 \end{enumerate}
-
-
 \end{solution}
+
+\begin{problem}[Summer 2012, Day 3, Problem 1]
+    Let \( P \) be an orthogonal projection operator in \( \RR^n\), \( n > 1 \). In other words, every \( u\in \RR^n \) can be written uniquely as \( u = v + w\), where \( v \) is in \( R_P \), the range of \( P \), and \( w \) is in the null space of \( P \) which is the orthogonal complement of \( R_P \). Thus \( Pu = v\), \( (I - P)u = w \) and \( Pv = v \). Let \( P \)and \( Q \) be two orthogonal projections in \( \RR^n \). What can you say about the 2-norm of \( P - Q\)?
+\end{problem}
+
+\begin{solution}[Solution]
+
+Trivially we have,
+\begin{align*}
+    0 \leq \norm{P-Q} \leq 2
+\end{align*}
+since both \( P \) and \( Q \) have norm 1.
+
+However, it is clear that the upper bound cannot be attained, since this would require \( P \) and \( Q \) point in opposite directions. This only happens when they act on a vector which is in the null space of both of them, which clearly would not be the vector in the direction of max stretch.
+
+We claim that,
+\begin{align*}
+    0\leq \norm{P-Q}\leq 1
+\end{align*}
+
+Clearly this upper bound can be attained with \( Q = 0 \).
+
+Fix \( P \). Suppose \( R_Q \) is orthogonal to \( R_P \).
+For any unit vector \( v \), the distance between \( Pv \) and \( Qv \) is one.
+    
+A slight perturbation of \( R_Q \) knocking it out of orthogonality with \( R_P \) will decrease \( \norm{P-Q} \) as now \( Qv \) has a bit in the direction of \( P \).
+
+Therefore having \( R_Q \) orthogonal to \( R_P \) at least gives a local minimum to \( \norm{P_Q} \). 
+
+\note{GLOBAL because convexity or something?}
+
+Let \( u=v+w \) as above. Then,
+\begin{align*}
+    \norm{(P-Q)u}^2 &= \ip{Pu,Pu} + \ip{Qu,Qu} - 2\ip{Pu,Qu}
+    \\&= \ip{v,v} + (\ip{Qv,Qv} + \ip{Qw,Qw} + 2\ip{Qv,Qw}) - 2\ip{v,Q u}
+    \\&= \ip{v,v} + (\ip{Qv,Qv} + \ip{Qw,Qw} + 2\ip{Qv,Qw}) - 2\ip{v,Q v} - 2\ip{v,Qw}
+\end{align*}
+
+Since \( Q \) is orthogonal, \( \ip{Qw,Qv} = \ip{v,Qw} \) and \( \ip{Qv,Qv} = \ip{v,Qv} \). Therefore,
+\begin{align*}
+    \norm{(P-Q)u}^2 = \ip{v,v} - \ip{Qv,Qv} + \ip{Qw,Qw}
+\end{align*}
+
+    We seek \( Q \) and \( u \) maximizing \( \norm{(P-Q)u} \) such that \( \norm{u}=1 \).
+
+Its obvious that with \( Qw=w \) and \( Qv = 0 \) and \( u=w \) that we can reach 1.
+
+\note{STILL STUCK ON HIGHER}
+
+
+    
+\end{solution}
+
 
 \end{document}
