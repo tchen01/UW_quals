@@ -3667,15 +3667,26 @@ Let \( A \) denote a real sequence with \( m \) rows.
     \begin{enumerate}[nolistsep,label=(\alph*)]
     \item
     \item 
-    \item Derive another expression for the matrix exponential by applying the forward Euler method to the equation \( y_0(t) = Ay\), \(y(0) = y_0 \), whose solution at time \( t = 1 \) is \( y(1) = e^Ay_0\). That is, using step size \( h = 1/N\), write the approximate solution \( y_N \) as an \(N\)-th degree polynomial in \( A \) times the initial vector \( y0 \) and show that as \( N \to \infty \), \( y_N \to e^Ay_0 \).
+    \item Derive another expression for the matrix exponential by applying the forward Euler method to the equation \( y'(t) = Ay\), \(y(0) = y_0 \), whose solution at time \( t = 1 \) is \( y(1) = e^Ay_0\). That is, using step size \( h = 1/N\), write the approximate solution \( y_N \) as an \(N\)-th degree polynomial in \( A \) times the initial vector \( y0 \) and show that as \( N \to \infty \), \( y_N \to e^Ay_0 \).
 \end{enumerate}
 \end{problem}
 
 \begin{solution}[Solution]
 \begin{enumerate}[label=(\alph*)]
-    \item
-    \item
     \item 
+        
+    \item 
+    \item Forward Euler gives,
+        \begin{align*}
+            y^{[k+1]} = y^{[k]} + h A y^{[k]} = (I + hA)y^{[k]} = (I+A)^{[k+1]} y^{[0]}
+        \end{align*}
+        Therefore,
+        \begin{align*}
+            y(1) \approx y^{[N]} = (I+h A)^N y^{[0]} = \left(I+\frac{1}{N}A\right)^N y(0)
+        \end{align*}
+        
+        Forward Euler is convergent, so as \( N\to\infty \), \( y^{[N]} \to e^A y_0 \), the exact solution at \( hN=1 \).
+
 \end{enumerate}
 
 \end{solution}
@@ -3698,10 +3709,79 @@ Consider the family of 2-stage Runge-Kutta methods of the form
 
 \begin{solution}[Solution]
 \begin{enumerate}[label=(\alph*)]
+    \item This is a Runge-Kutta method of the form,
+        \begin{align*}
+            U^{n+1} = U^n + k \sum_{j=1}^{r}b_j f(Y_j)
+            ,&&
+            Y_i = U^n + k \sum_{j=1}^{r} a_{i,j} f(Y_j)
+        \end{align*}
+
+        For convenience define \( c_i = \sum_{j=1}^{r} a_{i,j} \).
+        In our case we have,
+        \begin{align*}
+            r=2, && 
+            \left[\begin{array}{c}b_1\\b_2\end{array}\right]
+                =
+            \left[\begin{array}{c}0\\\gamma\end{array}\right]
+            ,&&
+            \left[\begin{array}{cc}a_{1,1} & a_{1,2} \\ a_{2,1} & a_{2,2}\end{array}\right]
+            =
+            \left[\begin{array}{cc}0 & 0 \\ \alpha & \beta \end{array}\right]
+        \end{align*}
+
+        
+        The condition for consistency is that,
+        \begin{align*}
+            \gamma = b_1 + b_2 = 1
+        \end{align*}
+        
+        The condition for second order convergence is,
+        \begin{align*}
+            \alpha + \beta = \gamma(\alpha+\beta) = b_1c_1 + b_2c_2 = \frac{1}{2}
+        \end{align*}
+        
+        The condition for third order convergence is,
+        \begin{align*}
+        much longer    
+        \end{align*}
+ 
+        We have,
+        \begin{align*}
+            Y_1 = U^n + \alpha k \lambda U^n + \beta k \lambda Y_1 = \frac{1+k \lambda  \alpha}{1- k \lambda \beta }U^n
+        \end{align*}
+        
+        \begin{align*}
+            U^{n+1} = U^n + k \gamma \lambda Y_1 = \left( 1 + k \lambda \gamma \frac{1+ k \lambda \alpha}{1 - k \lambda \beta} \right) U^n
+        \end{align*}
+
+        Taking \( z = k \lambda \), this is in the form, \( U^{n+1} = R(z)U^n \) where,
+        \begin{align*}
+            R(z) = 1 + \gamma z \frac{1+\alpha z}{ 1- \beta z}
+        \end{align*}
+
+        The stability region is points \( z = k \lambda \) such that \( |R(z)| \leq 1 \).
+
+        Clearly \( z=0 \) is such a point so the method is zero stable and therefore convergent when it is consistent.
+        
     \item
-    \item
-    \item
-    \item
+        \note{Why do this by applying to that ode instead of just the conditions for RK methods?}
+
+        The first equation has LTE,
+        \begin{align*}
+            \frac{y(t_n+h) - y(t_n)}{k} - \alpha y'(t_n) - \beta y'(t_n+h)
+        \end{align*}
+        
+        When applied to the test equation we have,
+        \begin{align*}
+        \end{align*}
+        
+
+    \item When \( \alpha=0 \), \( \beta = 1 \), \( \gamma=1 \) this is backward Euler, a method which is ok a solving stiff equations. In some sense this is the ``most implcit'' method of the given form. However, Since it is always implicit  if \( \beta \neq 0 \) it will probably be ok for stiff equations (or about as good as a 2nd order method can be).
+
+    \item Clearly if the ODE is stiff we want to pick \( \beta \neq 0 \) so that the method is implicit. If the ODE is simple I would use backward Euler for simplicity. Otherwise, chosing \( \alpha = \beta = 1/2 \) means the first equation is the midpoint method, and then the seconde quation is forward Euler applied to that. That might be decent since the midpoint method is decent. If the ODE is really simple, then we can take \( \beta = 0 \) and get an explicit method so we do not need to use root finders.
+        
+
+
 \end{enumerate}
 
 
