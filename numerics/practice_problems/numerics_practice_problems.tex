@@ -2918,7 +2918,7 @@ Consider the following difference scheme:
 \end{solution}
 
 
-\begin{problem}[Summer 2015, Day 2, Problem 2]
+\begin{problem}[Summer 2015, Day 2, Problem 1]
 Let \( A \) be a complex square matrix. A coneigenvalue of \( A \) is a number \( \lambda\in\CC \) such that,
 \begin{align*}
     A \overline{x}  = \lambda x
@@ -3453,9 +3453,258 @@ time approximation for the advection-diffusion equation,
     \item
 \end{enumerate}
 
+\end{solution}
+
+
+\begin{problem}[Summer 2015, Day 2, Problem 3]
+Let \( A \) be a \( n\times n \) matrix of the form,
+\begin{align*}
+    A = \frac{1}{4}
+    \left[\begin{array}{cccccc}
+        2 & 1 & & & & 1 \\
+        1 & 2 & 1 \\
+        & 1 & 2 & 1 \\
+        & & 1 & 2 & 1 \\
+        & & & 1 & 2 & 1 \\
+        1 & & & & 1 & 2 \\
+    \end{array}\right]
+\end{align*}
+Note that the diagonal entries are \( +2 \), not \( -2 \), so this is not a difference operator, but has similar eigenstructure.
+
+    Supopse we chose starting vector \( y^{[0]} \in \RR^n \) and we define \( y^{[k+1]} = A y^{[k]} \) for \( k=0,1,2, \ldots \).
+\begin{enumerate}[nolistsep,label=(\alph*)]
+    \item Do you expect this to converge to a limit as \( k\to 0 \) in general? How does it depend on the starting vector \( y^{[0]} \)?
+    \item In cases when it does converge, what can you say about the rate of convergence in general?
+    \item Take \( n=10 \) and \( y^{[0]} = [1,2,\ldots, 10]^T \). What is the limit \( \hat{y} \) in this case? Estimate by analysis if possible, not (only) experimentation, how many iterations \( m \) would be needed to guarantee \( \norm{y^{[m]} - \hat{u}}_\infty < 10^{-8} \).
+    \item Now let \( B \) be the \( n\times n \) matrix of the form,
+    \begin{align*}
+    B = \frac{1}{2}
+    \left[\begin{array}{cccccc}
+        0 & 1 & & & & 1 \\
+        1 & 0 & 1 \\
+        & 1 & 0 & 1 \\
+        & & 1 & 0 & 1 \\
+        & & & 1 & 0 & 1 \\
+        1 & & & & 1 & 0 \\
+    \end{array}\right]
+    \end{align*}
+        What can you say about the convergence of the iteration \( y^{[k+1]} = B y^{[k]} \) for \( k=0,1,2\ldots  \)? In particular, why are the cases \( n \) even and \( n \) odd different?
+\end{enumerate}
+\end{problem}
+
+\begin{solution}[Solution]
+\begin{enumerate}[label=(\alph*)]
+    \item For \( j=1,2,\ldots, 10 \), the eigenvectors for \( A \) are,
+        \begin{align*}
+            v_i^j = \exp \left( 2 \pi i j k / n \right), && k=1,2,\ldots, n
+        \end{align*}
+        and the corresponding eigenvalues are,
+        \begin{align*}
+            \lambda_j = \cos \left( 2 \pi j / n \right)/2+1/2
+        \end{align*}
+
+        Therefore the spectral radius of \( A \) is 1, and there are no noreal eigenvalues with modulus 1. This means we expect convergence.
+
+        Let \( v = v^n\) be the eigenvector corresopnding to an eigenvalue of \( 1 \). We expect the solution to converge to \( (\ip{y,v} / \ip{v,v} )v \). If \( \ip{y,v} = 0 \) then this will be zero. Otherwise it will be nonzero. 
+        
+    \item The rate of convergence is governed by the second largest eigenvalue. In each step all components of \( y^{[k]} \) in directions other than the dominant eigenvector will be decreased by at lest the second largest eigenvalue.
+
+    \item We have \( v = v^n = [1,1,\ldots, 1]^T \) so \( \hat{y} \ip{v,y^{[0]}}/\ip{v,v} v = 55/10 v = 11/2 v \).
+
+        Note that \( A^k y^{[0]} \) projected onto \( v \) is always equal to \( \hat{y} \). The next largest stretch direction is \( v^{n-1} \) which is decreased by a factor of \( \lambda_{n-1} \) each iteration.
+
+        Therefore, lazily bounding the projection of \( y^{[0]} \) onto any eigenvector by \( \norm{y^[0]}_\infty = 10 \),
+        \begin{align*}
+            \norm{y^{[k]} - \hat{y}}_\infty 
+            &= \norm{ \sum_{\ell \neq n} \lambda_\ell^k \frac{\ip{y^{[0]},v_\ell}}{\ip{v_\ell,v_\ell}}v_\ell }_\infty
+            \\&\leq \sum_{\ell \neq n} |\lambda_\ell|^k \left| \frac{\ip{y^{[0]},v_\ell}}{\ip{v_\ell,v_\ell}} \right| \norm{v_\ell}_\infty
+            \\&\leq n |\lambda_{n-1}|^k \norm{y^{[0]}}_\infty
+            \\&= 10 n \left( \frac{1}{2} \left(\frac{1}{4} \left(\sqrt{5}+1\right)+1\right) \right)^k
+        \end{align*}
+        
+        This is below \( 10^{-8} \) in about \( k = \log_{10} (10^{-8}/100) / \log_{10}( 100\lambda_{n-1}) \approx 138 \) iterations.
+        
+    \item 
+        The eigenvalues are now,
+        \begin{align*}
+            \lambda_j = \cos(2\pi j /n)
+        \end{align*}
+        
+        Again the spectral radius is 1. However, if \( n \) is even, then \( \pm 1 \) are both eigenvalues, so if \( y^{[0]} \) has non-zero projection onto the eigenvector correspoding to eigenvalue \( -1 \) the method will not converge. However, if \( n \) is even, there is no eigenvalue \( -1 \) so the method will always converge.
+
+\end{enumerate}
+\end{solution}
+
+
+\begin{problem}[Summer 2016, Day 1. Problem 1]
+Let,
+\begin{align*}
+    A = \left[\begin{array}{cccc}0 & 1 & 0 & 0 \\ 0 & 2 & 3 & 0 \\ 0 & 4 & 5 & 6 \\ 7 & 8 & 9 & 10\end{array}\right]
+    ,&&
+    b = \left[\begin{array}{c}1 \\ ) \\ 0 \\ 0\end{array}\right]
+\end{align*}
+\begin{enumerate}[nolistsep,label=(\alph*)]
+    \item Find the orthogonal projection of \( b \) onto the span of \( \{Ab,A^2b,A^3b\} \).
+    \item Find a 4 by 4 matrix \( M \) whose eigenvalues are all ones such that \( b\perp\operatorname{span}(\{Mb,M^2b,M^3b\}) \).
+        [Hint: You might want to use a companion matrix, which has the form,
+        \begin{align*}
+            \left[\begin{array}{cccc}0 & 1 & 0 & 0 \\ 0&0&1&0\\0&0&0&1\\ *&*&*&*\end{array}\right]
+        \end{align*}
+        where the \( * \)'s can be nonzero.] Could such a matrix be diagonalizable? Explain why or why not.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}[Solution]
+\begin{enumerate}[label=(\alph*)]
+    \item We compute,
+        \begin{align*}
+            Ab = \left[\begin{array}{c}0\\0\\0\\7\end{array}\right] 
+            ,&&
+            A^2b = \left[\begin{array}{c}0\\0\\42\\70\end{array}\right] 
+            ,&&
+            A^3b = \left[\begin{array}{c}0\\126\\630\\1078\end{array}\right] 
+        \end{align*}
+        Then clearly \( b\notin \operatorname{span}(\{Ab,A^2b,A^3b\}) \). Therefore the orthogonal projection to this space is \( 0 \).
+    \item
+        Note that,
+        \begin{align*}
+            (x-1)^4 = x^4-4x^3+6x^2-4x+1
+        \end{align*}
+        Define,
+        \begin{align*}
+            M = \left[\begin{array}{rrrr}0 & 1 & 0 & 0 \\ 0&0&1&0\\0&0&0&1\\-1&4&-6&4\end{array}\right]
+        \end{align*}
+        
+%        Then,
+%        \begin{align*}
+ %           p(\lambda) = \det(I-\lambda M) = (x-1)^4
+  %      \end{align*}
+        Then \( M \) has all eigenvalues equal to 1.
+        
+        Finally,
+        \begin{align*}
+            Mb = \left[\begin{array}{r}0\\0\\0\\-1\end{array}\right]
+            ,&&
+            M^2b = \left[\begin{array}{r}0\\0\\-1\\-4\end{array}\right]
+            ,&&
+            M^3b = \left[\begin{array}{r}0\\-1\\-4\\-10\end{array}\right]
+        \end{align*}
+        
+        Then clearly \( b\perp\operatorname{span}(\{Mb,M^2b,M^3b\}) \).
+
+        If a matrix has all 1s as eigenvaues and is diagonalizable it is the identity as \( X I X^{-1} = I \). Clearly \( b \) is in the span of \( Mb \) so this is not possible.
+
+
+\end{enumerate}
+\end{solution}
+
+
+\begin{problem}[Summer 2016, Day 2, Problem 1]
+    Let \( A\in\RR^{m\times m} \) be a given matrix whose real singular value decomposition is \( A= U\Sigma V^T \). Show that \( Q = UV^T \) is the nearest orthogonal matrix to \( A \) in the Frobenius norm:
+    \begin{align*}
+        \arg\min_{Q^TQ=I}\norm{A-Q}_F=UV^T
+    \end{align*}
+    Discuss circumstances in which the nearest orthogonal matrix is or is not unique. In particular, consider the case where the singular values of \( A \) are all positive and distinct.
+\end{problem}
+
+\begin{solution}[Solution]
+Recall that the Frobenius norm of a matrix is the square root of the sum of the squares of the singular values.
+
+Recall also that a unitary linear transform does not stretch any vectors (wrt. Euclidian distance). 
+
+Minimizing \( \norm{A-Q}_F \) means we want to ``cancel off'' as much of the stretching which A does. However, in each direction we can ``cancel off'' the stretching from \( A \) and the unitary transform from \( Q \) as much as possible. By the triangle inequality we want the directions of the images of the right singular vectors of \( A \) to line up with those of \( Q \). In this case we will have \( Q = UV^T \).
+
+
+    
+Since the Frobenius norm is unitarily invariant, calling \( Q' = U^TQV \) we have,
+\begin{align*}
+    \norm{A-Q}_F = \norm{U(\Sigma-U^TQV)V^T}_F = \norm{\Sigma-Q'}_F 
+\end{align*}
+
+Note that if we can solve the new minimization problem for some unitary \( Q' \) then we can obtain \( Q = UQ'V^T \), the solution to the original problem.
+
+We therefore look to solve,
+\begin{align*}
+    \arg\min_{Q^TQ=I} \norm{\Sigma-Q}_F^2 = \sum_{i=1}^{n} (\sigma_i - q_{i,i})^2 + \sum_{i=1}^{n} \sum_{j\neq i} q_{i,j}^2 
+    = \sum_{i=1}^{n} \sigma_i^2 -2\sigma q_{i,i} + \sum_{i=1}^{n}\sum_{j=1}^n q_{i,j}^2
+\end{align*}
+
+Now note that,
+\begin{align*}
+    \sum_{i=1}^{n} \sum_{j=1}^{n} q_{i,j}^2 = \norm{Q}_F^2 = n
+\end{align*}
+
+Therefore we seek \( q_{i,i} \) minimizing,
+\begin{align*}
+    \sum_{i=1}^{n} \sigma_i^2 - 2\sigma_i q_i
+\end{align*}
+
+Since \( Q \) is unitary, \( |q_{i,j}| \leq 1 \). Therefore, since \( \sigma_i \geq 0 \), we pick \( q_{i,i} = 1 \) to minimize the above sum. This forces \( q_{i,j} = 0 \) for all \( i\neq j \).
+
+Therefore \( Q = I \) minimizes \( \norm{\Sigma-Q}_F \). Returning to the original notation, \( Q = UQ'V^T = UIV^T = UV^T \) minimizes the original problem.
+
+The uniequness of the nearest orthogonal matrix is the same as the uniquness of \( UV^T \). In particular, this means that if all the singular values are distinct then the solution is unique. If there are repeat singular values, then we can move around the columns of \( U \) and \( V \) a bit, and so the solution may not be unique.
 
 \end{solution}
 
 
+
+\begin{problem}[Summer 2015, Day 3, Problem 1]
+Consider the ODE BVP from Day 1 with a particular choice of \( \epsilon \):
+\begin{align*}
+    \epsilon x^2 y'' = y, && y(0)\text{ bounded}, &&y(1)=1,\epsilon=0.1
+\end{align*}
+    Implement a finite difference method using \( N = 50 \) grid points (your choice how to distribute them across the computational domain) for solving this problem and show that your numerical solution at least visually matches the exact solution (which has the form \( y(x) = xp \) for some \( p \)). Discuss how your method enforces the boundary condition at \( x = 0 \) as stated in the problem. [Note that it would be easier to solve the problem numerically if the boundary condition were \( y(0) = 0 \). You could instead solve this modified problem for partial credit.]
+\end{problem}
+
+\begin{solution}[Solution]
+
+\end{solution}
+
+
+\begin{problem}[Summer 2015, Day 1, Problem 2]
+Let \( A \) denote a real sequence with \( m \) rows.
+    \begin{enumerate}[nolistsep,label=(\alph*)]
+    \item
+    \item 
+    \item Derive another expression for the matrix exponential by applying the forward Euler method to the equation \( y_0(t) = Ay\), \(y(0) = y_0 \), whose solution at time \( t = 1 \) is \( y(1) = e^Ay_0\). That is, using step size \( h = 1/N\), write the approximate solution \( y_N \) as an \(N\)-th degree polynomial in \( A \) times the initial vector \( y0 \) and show that as \( N \to \infty \), \( y_N \to e^Ay_0 \).
+\end{enumerate}
+\end{problem}
+
+\begin{solution}[Solution]
+\begin{enumerate}[label=(\alph*)]
+    \item
+    \item
+    \item 
+\end{enumerate}
+
+\end{solution}
+
+
+\begin{problem}[Summer 2015, Day 2, Problem 4]
+Consider the family of 2-stage Runge-Kutta methods of the form
+\begin{align*}
+    Y_1 &= U^n + \alpha k f(U^n) + \beta k f(Y_1) \\
+    U^{n+1} &= U^n + \gamma k f(Y_1)
+\end{align*}
+    for solving the ODE initial value problem \( u'(t) = f(u(t)) \) with step size \( k \). A particular method is obtained by choosing \( \alpha, \beta,\gamma \in \RR \).
+\begin{enumerate}[nolistsep, label=(\alph*)]
+    \item What can you say about the consistency, stability, and covergence of methods from this family (for various values of the parameters \( \alpha,\beta,\gamma \))?
+    \item By considering the behavior of these methods on the test problem \( y_0 = \lambda y \), what can you say about the order of accuracy for various choices of the parameters?
+    \item Are there methods from this family that would be reasonable methods to use for solving stiff ODEs? Justify your answer.
+    \item If you were forced to use one of these methods to solve an ODE, what choice of \( \alpha, \beta,\gamma \) would you use and why? (Your answer might depend on what sort of ODE it is.)
+\end{enumerate}
+\end{problem}
+
+\begin{solution}[Solution]
+\begin{enumerate}[label=(\alph*)]
+    \item
+    \item
+    \item
+    \item
+\end{enumerate}
+
+
+\end{solution}
 
 \end{document}
