@@ -911,7 +911,10 @@ Consider a game which is played on a network with nodes numbered \( 1, 2, 3, 4 \
 \end{problem}
 
 \begin{solution}[Solution]
-    We first compute eigenvalues and eigenfunctions of \( \cQ(t,T) \) defined by \( \cQ(t,T)f(y) =  \EE[f(X_T)|X_t = x] \).
+    We first compute eigenvalues and eigenfunctions of \( \cQ(t,T) \) defined by,
+    \begin{align*}
+        \cQ(t,T)f(y) =  \EE[f(X_T)|X_t = x] 
+    \end{align*}
 
     We know that \( X \) has transition density,
     \begin{align*}
@@ -957,14 +960,26 @@ Consider a game which is played on a network with nodes numbered \( 1, 2, 3, 4 \
         = \EE[\cQ(S_t,S_T) H_n(y) | X_{S_t} = y]
         = \EE[e^{\lambda_n (S_T-S_t)} H_n(y) | X_{S_t} = y]
     \end{align*}
-    
-    Let \( \phi(s) = \EE[e^{isZ_{T-t}}] \) where \( Z_{T-t} = -i S_{T-t} \). Then, using the stationary increments property of \( S \) and the fact that \( S_0 = 0 \),
+
+    Now note that \( H_n(y) \) is deterministic, and that \( e^{\lambda_n(S_T-S_t)} \) does not depend on \( X_{S_t} \). Therefore,
     \begin{align*}
-        \cP(t,T)H_n(y) = \EE[e^{i \lambda_n S_{T-t}} H_n(y) | X_0 = y] = \phi(\lambda_n) H_n(y)
+        \cP(t,T)H_n(y) = \EE[e^{\lambda_n(S_T-S_t)}]H_n(y)
     \end{align*}
 
-    \note{DID SOME SKETCHY SHIT HERE}
+    That is, \( H_n \) is an eigenfunction of \( \cP(t,T) \) with corresponding eigenvalue \( \EE[e^{\lambda_n(S_T-S_t)}] \).
+
+    We now use the L\'evy-Kintchine formula and the stationary incriments of \( \eta \) to write,
+    \begin{align*}
+        \EE[e^{\lambda(S_T-S_t)}] 
+        =\EE[e^{\lambda(S_{T-t})}] 
+        = \EE[e^{i(-i \lambda S_{T-t})}] 
+        = e^{(T-t)\psi(-i \lambda)} 
+        = \phi_{\eta_{T-t}}(-i \lambda)
+    \end{align*}
+    where \( \psi \) is the characteristic exponent of \( \eta \), and \( \phi_{\eta_{T-t}} \) is the characteristic function of \( S_{T-t} \) (and \( S_T-S_t \)).
     
+    
+   
     
 
 

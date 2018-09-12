@@ -3548,7 +3548,7 @@ Let,
     \item Find a 4 by 4 matrix \( M \) whose eigenvalues are all ones such that \( b\perp\operatorname{span}(\{Mb,M^2b,M^3b\}) \).
         [Hint: You might want to use a companion matrix, which has the form,
         \begin{align*}
-            \left[\begin{array}{cccc}0 & 1 & 0 & 0 \\ 0&0&1&0\\0&0&0&1\\ *&*&*&*\end{array}\right]
+            \left[\begin{array}{cccc}0 & 1 & 0 & 0 \\ 0&0&1&0\\0&0&0&1\\ * & * & * & *\end{array}\right]
         \end{align*}
         where the \( * \)'s can be nonzero.] Could such a matrix be diagonalizable? Explain why or why not.
 \end{enumerate}
@@ -3612,24 +3612,22 @@ Recall that the Frobenius norm of a matrix is the square root of the sum of the 
 
 Recall also that a unitary linear transform does not stretch any vectors (wrt. Euclidian distance). 
 
-Minimizing \( \norm{A-Q}_F \) means we want to ``cancel off'' as much of the stretching which A does. However, in each direction we can ``cancel off'' the stretching from \( A \) and the unitary transform from \( Q \) as much as possible. By the triangle inequality we want the directions of the images of the right singular vectors of \( A \) to line up with those of \( Q \). In this case we will have \( Q = UV^T \).
-
+Our intuition is roughly: Minimizing \( \norm{A-Q}_F \) means we want to ``cancel off'' as much of the stretching which A does. However, in each direction we can ``cancel off'' the stretching from \( A \) and the unitary transform from \( Q \) as much as possible. By the triangle inequality we want the directions of the images of the right singular vectors of \( A \) to line up with those of \( Q \). In this case we will have \( Q = UV^T \).
 
     
-    Since the Frobenius norm is unitarily invariant, calling \( \tilde{Q} = U^TQV \) we have,
+Since the Frobenius norm is unitarily invariant, calling \( \tilde{Q} = U^TQV \) we have,
 \begin{align*}
     \norm{A-Q}_F = \norm{U(\Sigma-U^TQV)V^T}_F = \norm{\Sigma-\tilde{Q}}_F 
 \end{align*}
 
-    Note that if we can solve the new minimization problem for some unitary \( \tilde{Q} \) then we can obtain \( Q = U\tilde{Q}V^T \), the solution to the original problem.
-
-We therefore look to solve,
+Note that if we can solve the new minimization problem for some unitary \( \tilde{Q} \) then we can obtain \( Q = U\tilde{Q}V^T \), the solution to the original problem.
+We therefore look to solve the simpler problem,
 \begin{align*}
     \arg\min_{\tilde{Q}^T\tilde{Q}=I} \norm{\Sigma-\tilde{Q}}_F^2 = \sum_{i=1}^{n} (\sigma_i - \tilde{q}_{i,i})^2 + \sum_{i=1}^{n} \sum_{j\neq i} \tilde{q}_{i,j}^2 
     = \sum_{i=1}^{n} \sigma_i^2 -2\sigma \tilde{q}_{i,i} + \sum_{i=1}^{n}\sum_{j=1}^n \tilde{q}_{i,j}^2
 \end{align*}
 
-Now note that,
+Now note that for any unitary matrix,
 \begin{align*}
     \sum_{i=1}^{n} \sum_{j=1}^{n} \tilde{q}_{i,j}^2 = \norm{\tilde{Q}}_F^2 = n
 \end{align*}
@@ -3639,9 +3637,9 @@ Therefore we seek \( \tilde{q}_{i,i} \) minimizing,
     \sum_{i=1}^{n} \sigma_i^2 - 2\sigma_i \tilde{q}_i
 \end{align*}
 
-    Since \( \tilde{Q} \) is unitary, \( |\tilde{q}_{i,j}| \leq 1 \). Therefore, since \( \sigma_i \geq 0 \), we pick \( \tilde{q}_{i,i} = 1 \) to minimize the above sum. This forces \( \tilde{q}_{i,j} = 0 \) for all \( i\neq j \).
+    Since \( \tilde{Q} \) is unitary the columns are normal. This means \( |\tilde{q}_{i,j}| \leq 1 \) for all \( i,j \). Since \( \sigma_i \geq 0 \), we pick \( \tilde{q}_{i,i} = 1 \) to minimize the above sum. This forces \( \tilde{q}_{i,j} = 0 \) for all \( i\neq j \).
 
-    Therefore \( \tilde{Q} = I \) minimizes \( \norm{\Sigma-\tilde{Q}}_F \). Then \( Q = U\tilde{Q}V^T = UIV^T = UV^T \) minimizes the original problem.
+    Now note that this choice of \( \tilde{Q} = I \) is in fact unitary. Therefore \( \tilde{Q} = I \) minimizes \( \norm{\Sigma-\tilde{Q}}_F \) over unitary \( \tilde{Q} \). Then \( Q = U\tilde{Q}V^T = UIV^T = UV^T \) minimizes the original problem.
 
 The uniequness of the nearest orthogonal matrix is the same as the uniquness of \( UV^T \). In particular, this means that if all the singular values are distinct then the solution is unique. If there are repeat singular values, then we can move around the columns of \( U \) and \( V \) a bit, and so the solution may not be unique.
 
@@ -3692,8 +3690,21 @@ Let \( A \) denote a real sequence with \( m \) rows.
         
         Forward Euler is convergent, so as \( N\to\infty \), \( y^{[N]} \to e^A y_0 \), the exact solution at \( hN=1 \).
 
-\end{enumerate}
+    \item This is a linear multistep method. However we will just use Mathematica. The local truncation error is of the form,
+        \begin{align*}
+            \tau 
+            = \frac{y(t+2h)-y(t+h)}{k} - \frac{3f(y(t+h))-f(y(t))}{2}
+            = \frac{y(t+2h)-y(t+h)}{k} - \frac{3y'(t+h)-y'(t)}{2}
+        \end{align*}
 
+        We expand about \( t \) to find,
+        \begin{align*}
+            \tau = \frac{5}{12} y'''(t) h^2 + \cO(h^3) 
+        \end{align*}
+        
+        Therefore the method is convergent, is second order accurate, and has leading term \( (5/12)y'''(t) h^2 \).       
+
+\end{enumerate}
 \end{solution}
 
 
@@ -3729,7 +3740,7 @@ Consider the family of 2-stage Runge-Kutta methods of the form
 
         \hrulefill
 
-        \note{alternate method}
+        \textbf{Alternate method for convergence using general RK method facts}
         
         This is a Runge-Kutta method of the form,
         \begin{align*}
@@ -3761,12 +3772,9 @@ Consider the family of 2-stage Runge-Kutta methods of the form
         \begin{align*}
             \alpha + \beta = \gamma(\alpha+\beta) = b_1c_1 + b_2c_2 = \frac{1}{2}
         \end{align*}
-        
-        The condition for third order convergence is,
-        \begin{align*}
-        much longer    
-        \end{align*}
  
+        \hrulefill
+
         We have,
         \begin{align*}
             Y_1 = U^n + \alpha k \lambda U^n + \beta k \lambda Y_1 = \frac{1+k \lambda  \alpha}{1- k \lambda \beta }U^n
@@ -3786,19 +3794,34 @@ Consider the family of 2-stage Runge-Kutta methods of the form
         Clearly \( z=0 \) is such a point so the method is zero stable and therefore convergent when it is consistent.
         
     \item
-        \note{Why do this by applying to that ode instead of just the conditions for RK methods?}
 
-        The first equation has LTE,
+        From above we have computed,
         \begin{align*}
-            \frac{y(t_n+h) - y(t_n)}{k} - \alpha y'(t_n) - \beta y'(t_n+h)
+            U^{n+1} = U^n + k \lambda \gamma \frac{1+k \lambda \alpha}{1 - k \lambda \beta}U^n
         \end{align*}
+
+        The local truncation error is then,
+        \begin{align*}
+            \tau = \frac{u(t+k) - u(t)}{k} - \lambda \gamma \frac{1+k \lambda \alpha}{1-k \lambda \beta}u(t)
+        \end{align*}
+         
+        We expand this in Mathematica using,
+        \begin{lstlisting}
+            FullSimplify[ ReplaceRepeated[ Series[(u[t + k] - u[t])/k - \[Lambda] \[Gamma] ((1 + k \[Lambda] \[Alpha])/(1 - k \[Lambda] \[Beta])) u[t], {k, 0, 3}], {u'[t] -> \[Lambda] u[t], D[u'[t] -> \[Lambda] u[t], t], D[u'[t] -> \[Lambda] u[t], {t, 2}], D[u'[t] -> \[Lambda] u[t], {t, 3}]}]]
+        \end{lstlisting}
         
-        When applied to the test equation we have,
+		This gives the result,
         \begin{align*}
+            \tau &= (\gamma-1) \lambda u(t) 
+            \\ & \hspace{3em}+ \frac{1}{2}(1-2(\alpha + \beta)\gamma) \lambda^2 u(t) k 
+            \\ & \hspace{8em}+ \frac{1}{6}(1-6(\beta(\alpha+\beta)\gamma)\lambda^3u(t) k^2 
+            \\ & \hspace{13em} + \frac{1}{24}(1-24 \beta^2(\alpha+\beta)\gamma)\lambda^4u(t)k^3+ \cO(k^4)
         \end{align*}
+       
+        We therefore see that we require \( \gamma = 1 \) for consistency, \( (\alpha+\beta)\gamma = 1/2 \) for second order convergence, and \( \beta(\alpha + \beta)\gamma = 1/6 \) for third order convergence.
         
 
-    \item When \( \alpha=0 \), \( \beta = 1 \), \( \gamma=1 \) this is backward Euler, a method which is ok a solving stiff equations. In some sense this is the ``most implcit'' method of the given form. However, Since it is always implicit  if \( \beta \neq 0 \) it will probably be ok for stiff equations (or about as good as a 2nd order method can be).
+    \item When \( \alpha=0 \), \( \beta = 1 \), \( \gamma=1 \) this is close to backward Euler, a method which is ok a solving stiff equations. In some sense this is the ``most implcit'' method of the given form. However, Since it is always implicit  if \( \beta \neq 0 \) it will probably be ok for stiff equations (or about as good as a 2nd order method can be).
 
     \item Clearly if the ODE is stiff we want to pick \( \beta \neq 0 \) so that the method is implicit. If the ODE is simple I would use backward Euler for simplicity. Otherwise, chosing \( \alpha = \beta = 1/2 \) means the first equation is the midpoint method, and then the seconde quation is forward Euler applied to that. That might be decent since the midpoint method is decent. If the ODE is really simple, then we can take \( \beta = 0 \) and get an explicit method so we do not need to use root finders.
         
