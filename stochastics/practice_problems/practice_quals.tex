@@ -1067,6 +1067,44 @@ Consider a game which is played on a network with nodes numbered \( 1, 2, 3, 4 \
         \end{align*}
         
     \item
+        Let \( Y_T = \log(S_T) \). Then, conditioning on \( \{ \sigma_s\}_{s\leq T} \) and \( S_t \), \( Y_T \) is normallly distributed. In particular, defining \( a = \int_t^T \sigma_s^2/2\d s\), \( Y_T \) respectively has mean and variance,
+        \begin{align*}
+            Y_t - \int_t^T \frac{\sigma_s^2}{2}\d s = Y_T-a
+            , &&
+            \int_t^T\sigma_s^2\d s = 2 a
+        \end{align*}
+        
+        Using the density of a normal random variable, we then have,
+        \begin{align*}
+            \EE[e^{Y_T-Y_t} G(e^{2Y_t-Y_T}) | \cF_t, \sigma_{s\leq T}]
+            &=\int e^{y-Y_t} g(e^{2Y_t-y}) \frac{1}{4\pi a^2} \exp\left( - \frac{(y-Y_t+a)^2}{4a}\right)\d y
+            \\&=\int g(e^{2Y_t-y}) \frac{1}{4\pi a^2} \exp\left( - \frac{(y-Y_t-a)^2}{4a}\right)\d y
+        \end{align*}
+        where we have used the fact that,
+        \begin{align*}
+            4a b - (b+a)^2 = -(b-a)^2
+        \end{align*}
+       
+        We now make a change of variables \( z = 2Y_t-y \) to obtain,
+        \begin{align*}
+            \EE[e^{Y_T-Y_t} G(e^{2Y_t-Y_T}) | \cF_t,\sigma_{s\leq T}]
+            &=\int_\infty^{-\infty} g(e^z) \exp \left( -\frac{(Y_t-z-a)^2}{4a} \right) \d(-z)
+            \\&= \int g(e^z) \exp \left( -\frac{(z-Y_t+a)^2}{4a} \right) \d z
+            \\&=\EE[ G(e^{Y_T}) | \cF_t, \sigma_{s\leq T}]
+        \end{align*}
+        
+        Then, by iterated conditioning,
+        \begin{align*}
+            \EE[G(S_T)|\cF_t] = \EE[(S_T/S_t) G(S_t^2/S_T) | \cF_t]
+        \end{align*}
+          
+       
+
+
+        \hrulefill
+
+        \textbf{Using Girsanov}
+
         Recall that \( S_t \) has explicit representation, 
         \begin{align*}
             S_t = S_0 \exp\left(\int_0^t \left( -\frac{1}{2}\sigma_s^2 \right) \d s + \int_0^t \sigma_s\d W_s \right)
@@ -1094,7 +1132,7 @@ Consider a game which is played on a network with nodes numbered \( 1, 2, 3, 4 \
         \end{align*}
         is a Brownian motion under the tilde measure.
         
-        Rewriting \( W_t \) in term sof \( \tilde{W}_t \) we find,
+        Rewriting \( W_t \) in terms of \( \tilde{W}_t \) we find,
         \begin{align*}
 %            S_t &= S_0 \exp \left( \int_{0}^{t} \left( -\frac{1}{2}\sigma_s^2 \right)\d s + \int_{0}^{t} \sigma_s \d W_s \right)
  %           = S_0 \exp \left( \int_{0}^{t} \frac{1}{2}\sigma_s^2  \d s + \int_0^t \sigma_s \d \tilde{W}_s \right)
