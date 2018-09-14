@@ -240,7 +240,74 @@ The distance between two consecutive points will be an exponential random variab
 \pagebreak
 \section{Generating and Characteristic functions}
 
-how to get density from gen function
+\subsection{Generating Functions}
+The probability generating function of a non-negative discrete random variable \( X \) is defined as,
+\begin{align*}
+    G_X(z) = \EE[z^X] = \sum_{k=0}^{\infty} z^k p_X(k)
+\end{align*}
+
+We can obtain the probability mass function by,
+\begin{align*}
+    p_X(k) = \frac{1}{k!} \left[ \dd[k]{}{z} G(z) \right]_{z=0}
+\end{align*}
+
+We can compute the mean and variance,
+\begin{align*}
+    \EE[X] = G_X'(1)
+    , && 
+    \bV[X] = G_X''(1) - (G_X'(1))^2+G_X'(1)
+\end{align*}
+
+If \( X \) and \( Y \) are independent,
+\begin{align*}
+    G_{X+Y}(z) = G_X(z)G_Y(z)
+\end{align*}
+
+If \( X_i \) are iid then \( S_n = X_1 +X_2 + \cdots +X_n \) has probability generating function,
+\begin{align*}
+    G_{S_n} = (G_X(z))^n
+\end{align*}
+
+If \( N \) is independent of the \( X_i \) then,
+\begin{align*}
+    G_{S_N}(z) = G(_N(G_X(z))
+\end{align*}
+
+\textit{Sample Problems}:
+\begin{itemize}[nolistsep]
+    \item \hyperref[Exercise 3.1]{Exercise 3.1}: Compute probability generating function of random variable, and probability mass function
+\end{itemize}
+
+\subsubsection{Branching Processes}
+
+Let \( Z_n \) be the size of the \( n \)-th generation. Then the number of members in the \( (n+1) \)-th generation is given by,
+\begin{align*}
+    Z_{n+1} = X_{n,1} + X_{n,2} + \cdots + X_{n,Z_n}
+\end{align*}
+
+
+\note{ADD MORE}
+
+
+
+\textit{Sample Problems}:
+\begin{itemize}[nolistsep]
+    \item \hyperref[Exercise 3.2]{Exercise 3.2}: Find correlation coefficient of branching process
+    \item \hyperref[Exercise 3.3]{Exercise 3.3}: Find probability of first common ancestor happening in given generation
+    \item \hyperref[Exercise 3.4]{Exercise 3.4}: Find correlation coefficient of branching process
+    \item \hyperref[Exercise 4.6]{Exercise 4.6}: Write down generating function for branching type process.
+\end{itemize}
+
+
+\subsection{Characteristic Functions}
+
+
+\textit{Sample Problems}:
+\begin{itemize}[nolistsep]
+    \item \hyperref[Exercise 3.5]{Exercise 3.5}: Find characteristic function of square of normal variable
+    \item \hyperref[Exercise 3.6]{Exercise 3.6}: Find density function given distribution function. Show that distribution function converges but density does not.
+    \item \hyperref[Exercise 3.7]{Exercise 3.7}: Show given random variable converges to gamma distribution using L\'evy's continuity theorem.
+\end{itemize}
 
 
 

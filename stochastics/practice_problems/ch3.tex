@@ -123,7 +123,9 @@ Then this is the sum of iid random variables so,
 \end{solution}
 
 \begin{problem}[Exercise 3.3]
+    Consider a branching process with generation sizes \( Z_n \) satisfying \( Z_0 = 1 \) and \( P(Z_1 = 0) = 0 \). Pick two individuals as random with replacementfrom the \( n \)th generation and let \( L \) be the intex of the generation which contains their most recent common ancestor. Show that 
 
+    \note{WHAT DO WE SHOW???}
 \end{problem}
 
 \begin{solution}[Solution]
@@ -300,11 +302,12 @@ Then \( N=\sum_{i=1}^{k} X_i \) so, since the \( X_i \) are iid,
     =\EE[\exp(2itpX)]^k 
 \end{align*}
 Therefore, since \( |e^{2itp}(1-p)|<1 \) if \( p\in(0,1) \),
+
 \begin{align*}
     \EE[\exp(2itpX)]^k 
-    = \left[ \sum_{m=1}^{\infty} e^{2itpm}p(1-p)^{m-1} \right]^k 
-    = \left[ pe^{2itp}\sum_{m=1}^{\infty}\left(e^{2itp}(1-p)\right)^{m-1} \right]^k 
-    = \left[ \dfrac{pe^{2itp}}{1-(1-p)e^{2itp}} \right]^k
+    &= \left[ \sum_{m=1}^{\infty} e^{2itpm}p(1-p)^{m-1} \right]^k 
+    \\&= \left[ pe^{2itp}\sum_{m=1}^{\infty}\left(e^{2itp}(1-p)\right)^{m-1} \right]^k 
+    \\&= \left[ \dfrac{pe^{2itp}}{1-(1-p)e^{2itp}} \right]^k
 \end{align*}
 
 With Mathematica we evaluate,
