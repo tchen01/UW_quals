@@ -145,6 +145,31 @@ Therefore,
 \pagebreak
 \section{Basic Linear Algebra}
 
+\subsection{Useful Inequalities}
+
+\textit{Triangle Inequality}:
+\begin{align*}
+    \norm{x+y} \leq \norm{x} + \norm{y}
+\end{align*}
+
+\textit{Reverse Triangle Inequality}:
+\begin{align*}
+    |\norm{x}-\norm{y}| \leq \norm{x-y}
+\end{align*}
+
+\textit{H\"older's Inequality}:
+\begin{align*}
+    \norm{fg}_1 \leq \norm{f}_p\norm{g}_q, && 1/p+1/q=1, &&p,q>\geq 1
+\end{align*}
+
+\textit{Cauchy-Schwarz Inequality}:
+\begin{align*}
+    |\ip{u,v}|^2 \leq \ip{u,u}\ip{v,v} = \norm{u}\norm{v}
+\end{align*}
+
+Note that this is the H\"older Inequality with \( p=q=2 \).
+
+
 \subsection{Invertible Matrix Theorem}
 The following are equivalent:
 \begin{itemize}[nolistsep]

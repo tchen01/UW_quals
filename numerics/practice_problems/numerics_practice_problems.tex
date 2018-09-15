@@ -1928,7 +1928,7 @@ Consider the advection equation \( u_t + au_x = 0 \) with periodic bounday condi
     \item 
     Define,
     \begin{lstlisting}
-        U[j_, n_] := Series[Series[u[x + j h, t + n k], {k, 0, 4}], {h, 0, 4}]
+    U[j_, n_] := Normal[Series[u[x + j h z, t + n k z], {z, 0, 4}]] /. {z -> 1}
     \end{lstlisting}
     
     Now compute,
@@ -1951,7 +1951,25 @@ Consider the advection equation \( u_t + au_x = 0 \) with periodic bounday condi
         
 
 
-    \item 
+    \item
+        In mathematica we find the LTE for this method and the advection equation is,
+        \begin{align*}
+            \tau = \frac{1}{6} u_{ttt}(x,t) k^2  - \frac{1}{6}ah^2 u_{xxx}(x,t) + \cO(h^3+k^3) 
+            = \frac{1}{6}(-a^3k^2 + a h^2)u_{xxx}
+        \end{align*}
+        
+        Suppose \( v \) satisfies,
+        \begin{align*}
+            v_t + av_x + \frac{1}{6}(-a^3k^2 + ah^2) v_{xxx} = 0
+        \end{align*}
+
+        Then the unsimplified expression for the LTE will be the same as above. However, the \( \cO(1) \) terms will cancell with the LTE term to \( \cO(h^3+k^3) \). Similarly, the \( \cO(h+k) \) terms will cancel with the advection equation to \( \cO(h^2+k^2) \).
+
+
+
+        
+
+        \iffalse
         Note that we suppress some of the dependences of \( v \). Observe,
         \begin{align*}
             &\phantom{=} \left( \frac{v(t+k)-v(t)}{k} \right) + a \left( \frac{u(x+h)-u(x-h)}{2h} \right) + \frac{a^2k}{2} \left( \frac{u(x+h)-2u(x)+u(x-h)}{h^2} \right) 
@@ -2015,12 +2033,13 @@ Consider the advection equation \( u_t + au_x = 0 \) with periodic bounday condi
             v_t + av_x + \frac{a}{3!}\left( h^2-a^2k^2\right)v_{xxx} = \cO(k^3)
         \end{align*}
         
-        Therefore, to third order, \( v \) satisfies,
+
+        \fi
+        Therefore, the Lax-Wendroff method is a third order method for the PDE,
         \begin{align*}
             v_t + av_x = \frac{ah^2}{6} \left( \left( \frac{ak}{h} \right)^2 - 1  \right)v_{xxx}
         \end{align*}
 
-        Therefore Lax-Wendroff is a 3rd order method when applied to this equation.
         
         This is dispersive because there is an odd space derivative
 
@@ -2138,7 +2157,7 @@ and finite difference schemes of the form,
 \begin{solution}[Solution]
 \begin{enumerate}[label=(\alph*)]
     \item
-        We expand,
+        We expand the one step error,
         \begin{align*}
             &u(x,t+k) - \alpha u(x-h,t) - \beta u(x+h,t)
             \\&\hspace{2em}= (1-\alpha-\beta) u(x,t) + u_t(x,t) k + \cO(k^2) 
@@ -2532,7 +2551,7 @@ Near the singularity \( x = 0 \) we can write \( f(x) = x^{-1/4} g(x) \) where \
 \end{solution}
 
 
-\begin{problem}[Winter 2013 Day 1, Problem 3]
+\begin{problem}[Winter 2013, Day 1, Problem 3]
 Consider the advection equation \( u_t + au_x = 0 \) and the ``skewed'' upwind method,
 \begin{align*}
     U_j^{n+1} = U_{j+1}^n - \left( \frac{a\Delta t}{\Delta x}+1 \right)(U_{j+2}^n - U_{j+1}^n).
@@ -2575,9 +2594,12 @@ Consider the advection equation \( u_t + au_x = 0 \) and the ``skewed'' upwind m
     \item The exact solution satisfies \( u(x,t+k) = u(x-ak,t) \). 
         
 
-        Suppose \( ak/h = -2 \). Then \( u(x_j,t_{n+1}) = u(x_j-ak,t_n) = u(x_j+2h,t_n) = u(x_{j+2},t_n) = U_{j+2}^n = U_j+^{n+1} \).
+        Suppose \( ak/h = -1 \). Then \( u(x_j,t_{n+1}) = u(x_j-ak,t_n) = u(x_j+h,t_n) = u(x_{j+1},t_n) \).
+        In our equation we will have \( U_j^{n+1} = U_{j+1}^n \) so the method is exact.
         
-        Similarly, suppose \( ak/h = -1 \). Then \( u(x_j,t_{n+1}) = u(x_j-ak,t_n) = u(x_j+h,t_n) = u(x_{j+1},t_n) = U_{j+1}^n = U_j^{n+1} \).
+        Similarly, suppose \( ak/h = -2 \). Then \( u(x_j,t_{n+1}) = u(x_j-ak,t_n) = u(x_j+2h,t_n) = u(x_{j+2},t_n) \).
+                In our equation we will have \( U_j^{n+1} = U_{j+2}^n \) so the method is exact.
+        
 
         Therefore, if \( ak/h = \pm 1 \) then the method is exact.
 
@@ -2925,7 +2947,7 @@ Let \( A \) be a complex square matrix. A coneigenvalue of \( A \) is a number \
 \end{align*}
     for some nonzero vector \( x \), where \( \overline{x} \) denotes the complex conjugate of \( x \). The vector \( x \) is called a coneigenvector.
     \begin{enumerate}[label=(\alph*),nolistsep]
-        \item Show that if \( \lambda \) is a coneigenvalue of \( A \) then so is \( e^{i \theta} \) for any \( \theta \in [0,2\pi) \). (Here \( i = \sqrt{-1} \).)
+        \item Show that if \( \lambda \) is a coneigenvalue of \( A \) then so is \( e^{i \theta} \lambda \) for any \( \theta \in [0,2\pi) \). (Here \( i = \sqrt{-1} \).)
         \item Show that if \( \lambda \) is a coneignevalue of \( A \) then \( |\lambda|^2 \) is an eigenvalue of \( \overline{A}A \).
         \item Write down a 2 by 2 matrix that has no coneigenvalues and explain how you know this.
     \end{enumerate}
@@ -3849,36 +3871,23 @@ We claim that,
 
 Clearly this upper bound can be attained with \( Q = 0 \).
 
-Fix \( P \). Suppose \( R_Q \) is orthogonal to \( R_P \).
-For any unit vector \( v \), the distance between \( Pv \) and \( Qv \) is one.
-    
-A slight perturbation of \( R_Q \) knocking it out of orthogonality with \( R_P \) will decrease \( \norm{P-Q} \) as now \( Qv \) has a bit in the direction of \( P \).
+    Let \( u = v+w \) where \( Pv = v \) and \( Pu=0 \). Now let \( v = a+b \) where \( Qa = a \) and \( Qb =0 \), and let \( w = c+d \) where \( Qc = c \) and \( Qd = 0 \). Since all of these decompositions are unqiue as \( P \) and \( Q \) are orthogonal projectors, this means we have a unique decomposition \( u = a+b+c+d \) and \( P u = a+b \) and \( Qu = a+c \). Moreover, \( a \) and \( b \) are orthogonal, and \( c \) and \( d \) are orthogonal.
 
-Therefore having \( R_Q \) orthogonal to \( R_P \) at least gives a local minimum to \( \norm{P_Q} \). 
-
-\note{GLOBAL because convexity or something?}
-
-Let \( u=v+w \) as above. Then,
+Then,
 \begin{align*}
-    \norm{(P-Q)u}^2 &= \ip{Pu,Pu} + \ip{Qu,Qu} - 2\ip{Pu,Qu}
-    \\&= \ip{v,v} + (\ip{Qv,Qv} + \ip{Qw,Qw} + 2\ip{Qv,Qw}) - 2\ip{v,Q u}
-    \\&= \ip{v,v} + (\ip{Qv,Qv} + \ip{Qw,Qw} + 2\ip{Qv,Qw}) - 2\ip{v,Q v} - 2\ip{v,Qw}
+    (P-Q) u = (a+b) - (a+c) = b-c
 \end{align*}
 
-Since \( Q \) is orthogonal, \( \ip{Qw,Qv} = \ip{v,Qw} \) and \( \ip{Qv,Qv} = \ip{v,Qv} \). Therefore,
+Using the fact that \( v \) and \( w \) are orthogonal we have,
 \begin{align*}
-    \norm{(P-Q)u}^2 = \ip{v,v} - \ip{Qv,Qv} + \ip{Qw,Qw}
+    \norm{b-c} \leq \norm{b}+\norm{c} 
+    \leq \norm{u}+\norm{v}
+    = \norm{v+w}
+    \leq \norm{u}
 \end{align*}
 
-    We seek \( Q \) and \( u \) maximizing \( \norm{(P-Q)u} \) such that \( \norm{u}=1 \).
-
-Its obvious that with \( Qw=w \) and \( Qv = 0 \) and \( u=w \) that we can reach 1.
-
-\note{STILL STUCK ON HIGHER}
-
-
+This proves \( \norm{P-Q} \leq 1 \). \qed
     
 \end{solution}
-
 
 \end{document}

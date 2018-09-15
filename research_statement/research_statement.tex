@@ -4,7 +4,7 @@
 \newcommand{\CLASS}{Research Statement}
 \newcommand{\assigmentnum}{}
 
-\usepackage[margin=1.2in]{geometry}
+\usepackage[margin=1.4in]{geometry}
 \input{../TeX_headers/title.tex} % Title Styling
 \input{../TeX_headers/styling.tex} % General Styling
 
@@ -29,7 +29,7 @@
 \textbf{Broadly, I intend to incorporate parallelism and randomness into existing algorithms for difficult linear algebra problems.}
 Approximating a hard problem with a simpler linear problem is a standard approach in engineering, computer science, and the physical sciences. As computing power has increased so has the need for algorithms to which are well suited to take advantage of high performance hardware.
 
-I came to UW due to the strong computing community within the university, as well as the close proximity to the tech industry. Over the past year I have I have been primarily focused on building the foundation necessary for the research I want to do. This has been primarily through a reading with Anne Greenbaum, and through my coursework.
+I came to UW due to the strong computing community within the university, as well as the close proximity to the tech industry. Over the past year I have I have been building the foundation necessary for the research I want to do. This has been primarily through a reading with Anne Greenbaum, and through my coursework. In the near future I will continue to take relevant courses, and do a reading with Ioana Dumitriu 
 
 \textbf{Current Research:}
 For the last two quarters I have I have been working with Anne Greenbaum on understanding the behavior of variants of the conjugate gradient. 
@@ -46,7 +46,7 @@ It is of obvious interest to understand why different variants behave differentl
 Understanding how algorithms behave in reduced precision arithmetic can help understand the sources of instabilities. It is also of interest since computations in reduced precision are faster. Traditionally GPUs use half precision arithmetic, so if GPUs are to be used for parallelization, it is important that the algorithms still give reasonable results. To help understand the effect of reduced precision arithmetic I have written a python library which allows for the simulation BLAS functions on matrices of floating point numbers with any number of mantissa and exponent digits. By implementing conjugate gradients on top of this library, we will be able to explore how convergence scales with machine precision.
 
 
-In \cite{perturbed_lanczos}, Greenbaum showed that under the right conditions, finite precision Lanczos iteration applied to a given matrix could be viewed as exact Lanczos applied to a larger matrix whose eigenvalues are clustered near those of the original smaller matrix. By writing the terms of the three term recurrence in the Lanczos algorithm using quantities from a conjugate gradient algorithm the bounds from Anne's previous work can be applied.
+Another approach to understanding the convergence of these methods In \cite{perturbed_lanczos}, Greenbaum showed that under the right conditions, finite precision Lanczos iteration applied to a given matrix could be viewed as exact Lanczos applied to a larger matrix whose eigenvalues are clustered near those of the original smaller matrix. By writing the terms of the three term recurrence in the Lanczos algorithm using quantities from a conjugate gradient algorithm the bounds from Anne's previous work can be applied.
 
 %Of interest are 1. how orthogonal successive residual vectors are, 2. , and 3. \textbf{fill out}.
 
@@ -63,12 +63,11 @@ I intend to make all of my teaching materials and research output during my time
 
 
 \textbf{Upcoming plans:}
-There are a couple near future plans in place to continue building the groundwork for my research. First, I will be doing a reading with Ioana Dumitriu during the fall quarter.
+There are a couple near future plans in place to continue building the groundwork for my future research. First, I will be doing a reading with Ioana Dumitriu during the fall quarter.
 During this reading I will study random linear algebra in order to start to understand how non-determinism can be used in algorithms. 
+Over the next year I will take the rest of the optimization sequence (AMATH 515/516) and relevant MATH courses on linear algebra.
+I will also attend the SIAM CSE conference in Spokane next spring. Anne has organized a small symposium surrounding conjugate gradient methods, so this will be a good chance to talk with the authors of many of the papers we have been reading.
 
-\textbf{EXPAND MORE AFTER TALKING TO IOANA}
-
-I also intend to continue to take courses, particularly optimization courses such as AMATH 515/516 and.
 
 During the last few months I have had to put aside research work in order to prepare for the qualifying exams. I look forward to being able to return my mental focus to these projects in the near future. In the fall I will continue to work with Anne and start my reading with Ioana. By winter I will choose an advisor, likely Anne, which will allow me to start building a more detailed timeline for the rest of my PhD.
 
