@@ -4,7 +4,7 @@
 \newcommand{\CLASS}{Research Statement}
 \newcommand{\assigmentnum}{}
 
-\usepackage[margin=1.4in]{geometry}
+\usepackage[margin=1.4in,bottom=1.1in]{geometry}
 \input{../TeX_headers/title.tex} % Title Styling
 \input{../TeX_headers/styling.tex} % General Styling
 
@@ -27,28 +27,26 @@
 \vspace{2em}
 
 \textbf{Broadly, I intend to incorporate parallelism and randomness into existing algorithms for difficult linear algebra problems.}
-Approximating a hard problem with a simpler linear problem is a standard approach in engineering, computer science, and the physical sciences. As computing power has increased so has the need for algorithms to which are well suited to take advantage of high performance hardware.
+Approximating hard problems with a simpler linear problems is a standard approach in the applied sciences. As a result, there is a large demand for algorithms to solve linear algebra problems. Moreover, as computing power increases so does the need for algorithms to which are well suited to take advantage of high performance hardware.
 
-I came to UW due to the strong computing community within the university, as well as the close proximity to the tech industry. Over the past year I have I have been building the foundation necessary for the research I want to do. This has been primarily through a reading with Anne Greenbaum, and through my coursework. In the near future I will continue to take relevant courses, and do a reading with Ioana Dumitriu 
+I came to UW due to the strong computing community here as well as the close proximity to tech industry. Over the past year I have I have been building the foundation necessary for my research goals. This has been primarily through a reading with Anne Greenbaum and through my coursework. In the near future I will continue my work with Anne, take relevant courses, and begin reading with Ioana Dumitriu. 
 
 \textbf{Current Research:}
-For the last two quarters I have I have been working with Anne Greenbaum on understanding the behavior of variants of the conjugate gradient. 
+For the last two quarters I have been working with Anne Greenbaum on understanding the behavior of variants of the conjugate gradient. 
 Conjugate gradient is a standard method for solving Hermitian positive definite linear systems, and is frequently used for problems involving discretizations of physical systems. In exact arithmetic, like most Krylov space methods, the conjugate gradient algorithm will solve a \( n\times n \) system at most \( n \) steps. However, when implemented in floating point arithmetic, this is no longer the case.
 
-Recently there has been interest in parallelizeable algorithms for conjugate gradient. In a single iteration of conjugate gradient, two inner products, and one (often sparse) matrix vector multiplication must be computed. Modern algorithms aim to overlap these computations as much as possible in order to reduce the runtime of a single iteration.
+Recently there has been growing interest in parallelizeable algorithms for conjugate gradient. In a single iteration of conjugate gradient, two inner products, and one (often sparse) matrix vector multiplication must be computed. Modern algorithms such as \cite{CGCG, pCG} aim to overlap these computations in order to reduce the runtime of a single iteration.
 While all such variants are equivalent in exact arithmetic, they often behave very differently in floating point arithmetic. Of particular interest are how many iterations are required to reach a given level of accuracy and what level of accuracy can eventually be attained.
 
 When applied to many systems, the parallel variants have significantly worse convergence properties than the standard (Hestenes and Stiefel) implementation. 
 This means that even if a single iteration can be made faster, the total time needed to compute the solution, and the eventual solution itself may not be improved. The problems for which this is the case are not limited to pathological examples, but include systems commonly occurring in engineering and the physical sciences.
 
-It is of obvious interest to understand why different variants behave differently, and our eventual hope is to develop a parallelizeable algorithm which is not as susceptible to numerical instabilities as the current algorithms. At the moment we are approaching the problem from a number of angles. First, we are implementing algorithms in reduced precision arithmetic, to exaggerate the effect of rounding errors, and to attempt to isolate which parts of various algorithms causes instability. Second, we are attempting to apply the analysis from \cite{perturbed_lanczos} to the new algoirthms.
+It is of obvious interest to understand why different variants behave differently, and our eventual hope is to develop a parallelizeable algorithm with has better numerical properties than current parallel algorithms. At the moment we are approaching the problem from a number of angles. First, we are implementing algorithms in reduced precision arithmetic, to exaggerate the effect of rounding errors, and to attempt to isolate which parts of various algorithms causes instability. Additionally, we are attempting to reframe these problems in a way so that a previous result \cite{perturbed_lanczos} of Greenbaum can be applied.
 
-Understanding how algorithms behave in reduced precision arithmetic can help understand the sources of instabilities. It is also of interest since computations in reduced precision are faster. Traditionally GPUs use half precision arithmetic, so if GPUs are to be used for parallelization, it is important that the algorithms still give reasonable results. To help understand the effect of reduced precision arithmetic I have written a python library which allows for the simulation BLAS functions on matrices of floating point numbers with any number of mantissa and exponent digits. By implementing conjugate gradients on top of this library, we will be able to explore how convergence scales with machine precision.
+There are a variety of practical reasons why understanding how algorithms behave in reduced precision arithmetic is useful. First, it can help highlight the sources of instabilities in algorithms. Second, it is faster to compute in half precision arithmetic. Moreover, GPUs traditionally use half precision arithmetic, so if GPUs are to be used for parallelization, it is important to understand how the algorithms will behave in half precision. To help understand the effect of reduced precision arithmetic I have written a python library which allows for the simulation BLAS functions on matrices of floating point numbers with any number of mantissa and exponent digits. By implementing conjugate gradients on top of this library, we will be able to explore how convergence scales with machine precision.
 
 
 Another approach to understanding the convergence of these methods In \cite{perturbed_lanczos}, Greenbaum showed that under the right conditions, finite precision Lanczos iteration applied to a given matrix could be viewed as exact Lanczos applied to a larger matrix whose eigenvalues are clustered near those of the original smaller matrix. By writing the terms of the three term recurrence in the Lanczos algorithm using quantities from a conjugate gradient algorithm the bounds from Anne's previous work can be applied.
-
-%Of interest are 1. how orthogonal successive residual vectors are, 2. , and 3. \textbf{fill out}.
 
 
 \textbf{Coursework in relation to research:}
@@ -63,13 +61,14 @@ I intend to make all of my teaching materials and research output during my time
 
 
 \textbf{Upcoming plans:}
-There are a couple near future plans in place to continue building the groundwork for my future research. First, I will be doing a reading with Ioana Dumitriu during the fall quarter.
+There are near future plans in place to continue building the groundwork for my future research. First, I will be continuing my work with Anne on conjugate gradient methods. Much of this project aligns very well with my research interests. Anne has organized a small symposium on this topic at the SIAM CSE conference in the spring which I plan to attend. I will also be applying to the NSF GRFP, using this project as the topic of my application.
+Second, I will be doing a reading with Ioana Dumitriu during the fall quarter.
 During this reading I will study random linear algebra in order to start to understand how non-determinism can be used in algorithms. 
-Over the next year I will take the rest of the optimization sequence (AMATH 515/516) and relevant MATH courses on linear algebra.
-I will also attend the SIAM CSE conference in Spokane next spring. Anne has organized a small symposium surrounding conjugate gradient methods, so this will be a good chance to talk with the authors of many of the papers we have been reading.
+Finally, I will continue coursework. I plant to take the rest of the optimization sequence (AMATH 515/516) and relevant MATH courses on linear algebra.
 
 
-During the last few months I have had to put aside research work in order to prepare for the qualifying exams. I look forward to being able to return my mental focus to these projects in the near future. In the fall I will continue to work with Anne and start my reading with Ioana. By winter I will choose an advisor, likely Anne, which will allow me to start building a more detailed timeline for the rest of my PhD.
+During the last few months I have had to put aside research work in order to prepare for the qualifying exams. I look forward to being able to return my mental focus to these projects in the near future. 
+By winter I will choose an advisor, likely Anne Greenbaum, which will allow me to start building a more detailed timeline for the rest of my PhD.
 
 
 
