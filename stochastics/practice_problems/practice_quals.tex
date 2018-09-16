@@ -348,8 +348,8 @@ Recall that \( X_t = x \) so,
     Therefore,
     \begin{align*}
         \d P_t &= \d \Phi(Y_t) = \phi(Y_t)\d Y_t + \frac{1}{2} \phi'(Y_t)\d[Y,Y]_t 
-        \\&= \phi(Y_t) \frac{Y_t}{2(T-t)}\d t - \phi(Y_t) \frac{1}{\sqrt{T-t}}\d W_t + \frac{1}{2}\phi'(Y_t) \frac{1}{T-t}\d t
-        \\&= \left(\phi(Y_t) \frac{Y_t}{2(T-t)} + \frac{1}{2}\phi'(Y_t) \frac{1}{T-t} \right)\d t  - \frac{\phi(Y_t)}{\sqrt{T-t}}\d W_t 
+        \\&= -\phi(Y_t) \frac{Y_t}{2(T-t)}\d t - \phi(Y_t) \frac{1}{\sqrt{T-t}}\d W_t + \frac{1}{2}\phi'(Y_t) \frac{1}{T-t}\d t
+        \\&= \left(-\phi(Y_t) \frac{Y_t}{2(T-t)} + \frac{1}{2}\phi'(Y_t) \frac{1}{T-t} \right)\d t  - \frac{\phi(Y_t)}{\sqrt{T-t}}\d W_t 
     \end{align*}
     We know that \( \phi'(z) = z\phi(z) \).
     (alternative argument: As \( P_t \) is a martingale we know the \( \d t \) term is zero.) 
@@ -417,17 +417,27 @@ where \( W \) is a \( (\PP,\bF) \)-Brownian motion. Suppose that \( X_0 \in (L,R
 \begin{solution}[Solution]
 \begin{enumerate}[label=(\alph*)]
     \item We have scale and speed densities,
+
         \begin{align*}
-            s(x) &= \exp \left( -2\int_L^R \frac{b}{a^2}\d x \right)
-            = \exp \left( -2 \frac{b}{a^2} (R-L) \right)
+            s(x) &= \exp \left( -2\int \frac{b}{a^2}\d x \right)
+            = \exp \left( -\frac{2b}{a^2} x \right)
             \\
-            m(x) &= \frac{1}{a^2}\exp \left( 2\int_L^R \frac{b}{\sigma^2(x)}\d x \right)
-            = \frac{1}{a^2} \exp \left( 2 \frac{b}{a^2} (R-L) \right)
+            m(x) &= \frac{1}{a^2}\exp \left( 2\int \frac{b}{\sigma^2(x)}\d x \right)
+            = \frac{1}{a^2} \exp \left( \frac{2b}{a^2} x \right)
         \end{align*}
 
-        Since \( m(x) \) is constant on a finite interval it can me normalized (for \( a\neq 0 \)) as \( m(x) = 1/(R-L) \), which is therefore the invariant distribution of \( X \). 
+        The invariant distribution is found by normalizing \( m(x) \). We have,
+        \begin{align*}
+            \int_L^R m(x) \d x =
+            \frac{1}{2b} \left( e^{2bR/a^2} - e^{2bL/a^2} \right)
+        \end{align*}
+        
+        Therefore, the invariant distribution is,
+        \begin{align*}
+            \pi(x) = \frac{2b}{a^2} \left( e^{2bR/a^2} - e^{2bL/a^2} \right)^{-1} \exp \left( \frac{2b}{a^2}x \right) 
+        \end{align*}
+        
 
-        This makes sense since as time evolves, the Brownian motion term will dominate, and the reflecting boundary condition means that the process becomes constant.
 
         
         
@@ -498,12 +508,12 @@ where \( W \) is a \( (\PP,\bF) \)-Brownian motion. Suppose that \( X_0 \in (L,R
     \item We have probability transition matrix,
         \begin{align*}
             P = \left[\begin{array}{cccccc}
-                & 1/2 &&&& 1/2 \\
-                1/2 & &1/2 \\
-                &1/2 & &1/2 \\
-                &&1/2 &  &\ddots \\
-                &&&\ddots &&1/2 \\ 
-                1/2 &&&&1/2 & 
+                & a &&&& 1-a \\
+                1-a & & a \\
+                &1-a & & a \\
+                &&1-a &  &\ddots \\
+                &&&\ddots &&a \\ 
+                a &&&&1-a & 
             \end{array}\right]
         \end{align*}
        
@@ -737,7 +747,7 @@ where \( W \) is a \( (\PP,\bF) \)-Brownian motion. Suppose that \( X_0 \in (L,R
         \begin{align*}
             \Gamma(t,x,T,y)\d y = \PP(X_t\in\d y | X_t = x) = \phi(y)\d y
         \end{align*}
-        where \( \phi(y) \) is the density of a normal random variable with the above mean and variance \( m(T,t,x) \) and \( v(T,t,x) \) respectively.
+        where \( \phi(y) \) is the density of a normal random variable with mean and variance \( m(T,t,x) \) and \( v(T,t,x) \) respectively.
         
         Explicitly,
         \begin{align*}
@@ -764,7 +774,7 @@ where \( W \) is a \( (\PP,\bF) \)-Brownian motion. Suppose that \( X_0 \in (L,R
             \Gamma(t,x,T,y) = m(y) \sum_{n} e^{(T-t)\lambda_n}\psi_n(y) \psi_n(x)
         \end{align*}
         
-        We now funch such eigenfunctions. Indeed, 
+        We now find such eigenfunctions. Indeed, 
         
         \note{Use forward equation to find eigenfunctions, then convert to eigenfunctions of backward equation}
 
