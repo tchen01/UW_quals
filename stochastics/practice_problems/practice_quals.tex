@@ -1087,8 +1087,8 @@ Consider a game which is played on a network with nodes numbered \( 1, 2, 3, 4 \
         Using the density of a normal random variable, we then have,
         \begin{align*}
             \EE[e^{Y_T-Y_t} G(e^{2Y_t-Y_T}) | \cF_t, \sigma_{s\leq T}]
-            &=\int e^{y-Y_t} g(e^{2Y_t-y}) \frac{1}{4\pi a^2} \exp\left( - \frac{(y-Y_t+a)^2}{4a}\right)\d y
-            \\&=\int g(e^{2Y_t-y}) \frac{1}{4\pi a^2} \exp\left( - \frac{(y-Y_t-a)^2}{4a}\right)\d y
+            &=\int_\RR e^{y-Y_t} g(e^{2Y_t-y}) \frac{1}{4\pi a^2} \exp\left( - \frac{(y-Y_t+a)^2}{4a}\right)\d y
+            \\&=\int_\RR g(e^{2Y_t-y}) \frac{1}{4\pi a^2} \exp\left( - \frac{(y-Y_t-a)^2}{4a}\right)\d y
         \end{align*}
         where we have used the fact that,
         \begin{align*}
@@ -1099,7 +1099,7 @@ Consider a game which is played on a network with nodes numbered \( 1, 2, 3, 4 \
         \begin{align*}
             \EE[e^{Y_T-Y_t} G(e^{2Y_t-Y_T}) | \cF_t,\sigma_{s\leq T}]
             &=\int_\infty^{-\infty} g(e^z) \exp \left( -\frac{(Y_t-z-a)^2}{4a} \right) \d(-z)
-            \\&= \int g(e^z) \exp \left( -\frac{(z-Y_t+a)^2}{4a} \right) \d z
+            \\&= \int_\RR g(e^z) \exp \left( -\frac{(z-Y_t+a)^2}{4a} \right) \d z
             \\&=\EE[ G(e^{Y_T}) | \cF_t, \sigma_{s\leq T}]
         \end{align*}
         
